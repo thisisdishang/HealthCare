@@ -683,11 +683,13 @@ class _Profile_pageState extends State<Profile_page> {
                       Container(
                         width: size.width * 0.8,
                         margin: EdgeInsets.all(10),
-                        child: RaisedButton(
-                          shape: StadiumBorder(),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 15),
-                          color: kPrimaryColor,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            backgroundColor: kPrimaryColor,
+                          ),
                           onPressed: () async {
                             var url;
                             if(status == false){

@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
 import '../../models/doctor.dart';
 
 final _firestore = FirebaseFirestore.instance;
 //FirebaseUser currentUser = mAuth.getCurrentUser();
-
 
 class ChatScreen extends StatefulWidget {
   var pid;
@@ -20,7 +18,12 @@ class ChatScreen extends StatefulWidget {
   var did;
   var phone;
 
-  ChatScreen({required this.pid, required this.p_name,required this.last_name,required this.did,required this.phone});
+  ChatScreen(
+      {required this.pid,
+      required this.p_name,
+      required this.last_name,
+      required this.did,
+      required this.phone});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -58,107 +61,116 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-     //   leading: null,
+        //   leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.call),
-              onPressed: () async {
-                launch("tel://${widget.phone}");
-              },),
+            icon: Icon(Icons.call),
+            onPressed: () async {
+              launch("tel://${widget.phone}");
+            },
+          ),
         ],
-        title: Text(widget.p_name + " "+widget.last_name +widget.did.toString().substring(0,5)),
-
+        title: Text(widget.p_name +
+            " " +
+            widget.last_name +
+            widget.did.toString().substring(0, 5)),
       ),
       body: isLoading == true
           ? Center(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Loading(),
-            ],
-          ),
-        ),
-      )
-          :SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            MessagesStream(widget.pid, widget.did/*loggedInUser.uid.toString()*/),
-            Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Loading(),
+                  ],
+                ),
+              ),
+            )
+          : SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: messageTextController,
-                      onChanged: (value) {
-                        setState(() {});
-                        messageText = value;
-                      },
-                      decoration: kMessageTextFieldDecoration,
-                    ),
-                  ),
-                  FlatButton(
-
-                    onPressed: messageText != null
-                        ? () {
-                            print("Doctor Uid = "+loggedInUser.uid.toString());
-                            messageTextController.clear();
-                            _firestore.collection('messages/'+ widget.did /*loggedInUser.uid.toString()*/+ '/text').add({
-                              'text': messageText,
-                              'sender': widget.did,//loggedInUser.uid,
-                              'date': DateTime.now(),
-                              'time': time,
-                              'receiver': widget.pid
-                            });
-                            setState(() {
-                              messageText = null;
-                            });
-                          }
-                        : null,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        //     width: MediaQuery.of(context).size.width*0.2,
-
-                        decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                          BoxShadow(
-                              color: kPrimaryColor, //edite
-                              blurRadius: 6 //edited
-                          )
-                        ]),
-                      child: ClipOval(
-                        child: Material(
-                          color: kPrimaryColor, // Button color
+                  MessagesStream(
+                      widget.pid, widget.did /*loggedInUser.uid.toString()*/),
+                  Container(
+                    decoration: kMessageContainerDecoration,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            controller: messageTextController,
+                            onChanged: (value) {
+                              setState(() {});
+                              messageText = value;
+                            },
+                            decoration: kMessageTextFieldDecoration,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: messageText != null
+                              ? () {
+                                  print("Doctor Uid = " +
+                                      loggedInUser.uid.toString());
+                                  messageTextController.clear();
+                                  _firestore
+                                      .collection('messages/' +
+                                          widget
+                                              .did /*loggedInUser.uid.toString()*/ +
+                                          '/text')
+                                      .add({
+                                    'text': messageText,
+                                    'sender': widget.did, //loggedInUser.uid,
+                                    'date': DateTime.now(),
+                                    'time': time,
+                                    'receiver': widget.pid
+                                  });
+                                  setState(() {
+                                    messageText = null;
+                                  });
+                                }
+                              : null,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.send,
-                              color: Colors.white,
+                            child: Container(
+                              //     width: MediaQuery.of(context).size.width*0.2,
+
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: kPrimaryColor, //edite
+                                        blurRadius: 6 //edited
+                                        )
+                                  ]),
+                              child: ClipOval(
+                                child: Material(
+                                  color: kPrimaryColor, // Button color
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.send,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -166,19 +178,22 @@ class _ChatScreenState extends State<ChatScreen> {
 class MessagesStream extends StatelessWidget {
   var pid;
   var did;
-  MessagesStream(this.pid,  this.did);
+
+  MessagesStream(this.pid, this.did);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('messages').doc(did).collection('text')
+          .collection('messages')
+          .doc(did)
+          .collection('text')
           // .where('sender', isEqualTo:  [Demo.user!.uid, pid])
-          .where('receiver', isEqualTo:  pid )
+          .where('receiver', isEqualTo: pid)
           // .where('receiver', isEqualTo: [loggedInUser.uid, pid] )
           //where('sender', isEqualTo: pid)
           // .where('receiver', whereIn:  [loggedInUser.uid, pid])
-       // .where('receiver', isEqualTo: pid)
+          // .where('receiver', isEqualTo: pid)
           .orderBy('date', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -222,7 +237,11 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({required this.sender, required this.text, required this.isMe,required this.time});
+  MessageBubble(
+      {required this.sender,
+      required this.text,
+      required this.isMe,
+      required this.time});
 
   final String sender;
   final String text;
@@ -237,7 +256,7 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
-        /*  Text(
+          /*  Text(
             sender,
             style: TextStyle(
               fontSize: 12.0,
@@ -259,35 +278,34 @@ class MessageBubble extends StatelessWidget {
             color: isMe ? kPrimaryColor : Colors.white,
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width-80,
+                maxWidth: MediaQuery.of(context).size.width - 80,
               ),
-
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Stack(
                   children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 60,bottom: 15),
-                    child: Text(
-                          text,
-                          style: TextStyle(
-                            color: isMe ? Colors.white : Colors.black54,
-                            fontSize: 16.0,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 60, bottom: 15),
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          color: isMe ? Colors.white : Colors.black54,
+                          fontSize: 16.0,
                         ),
-                  ),
+                      ),
+                    ),
                     Positioned(
                       bottom: 0,
                       right: 10,
                       child: Row(
                         children: [
                           Text(
-                                    time,
-                                    style: TextStyle(
-                                      color: isMe ? Colors.white : Colors.black54,
-                                      fontSize: 13.0,
-                                    ),
-                                  ),
+                            time,
+                            style: TextStyle(
+                              color: isMe ? Colors.white : Colors.black54,
+                              fontSize: 13.0,
+                            ),
+                          ),
                         ],
                       ),
                     )

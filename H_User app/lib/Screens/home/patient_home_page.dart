@@ -1357,11 +1357,12 @@ dialog(BuildContext context) => showDialog(
                       SizedBox(
                         height: 10,
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        color: kPrimaryColor,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: kPrimaryColor),
                         child: Text(
                           'Okay',
                           style: TextStyle(

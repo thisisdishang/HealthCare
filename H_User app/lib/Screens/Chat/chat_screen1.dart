@@ -83,7 +83,7 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: messageText != null
                         ? () {
                             messageTextController.clear();

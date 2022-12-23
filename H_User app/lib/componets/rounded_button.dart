@@ -19,10 +19,12 @@ class RoundedButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.8,
-      child: RaisedButton(
-        shape: StadiumBorder(),
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-        color: b_coler,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            shape: StadiumBorder(),
+            padding: EdgeInsets.symmetric(
+                horizontal: 40, vertical: 15),
+            backgroundColor: b_coler),
         onPressed: (){},
         child: Text(text,style: TextStyle(color: t_coler, fontSize: 18, fontWeight: FontWeight.w500),),
       ),

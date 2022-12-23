@@ -752,11 +752,12 @@ class _RegistrationState extends State<Registration> {
                           children: [
                             Container(
                               width: size.width * 0.8,
-                              child: RaisedButton(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 40, vertical: 15),
-                                color: kPrimaryColor,
+                                backgroundColor: kPrimaryColor),
                                 onPressed: () async {
                                   //  signUp(t_email.text,t_password.text);
                                   if (status == false) {

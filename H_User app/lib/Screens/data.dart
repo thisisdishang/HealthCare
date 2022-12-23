@@ -10,13 +10,16 @@ class Dataclass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: RaisedButton(
-        shape: StadiumBorder(),
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-        color: kPrimaryColor,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            shape: StadiumBorder(),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+            backgroundColor: kPrimaryColor),
         onPressed: () {
-          patient.add({'name': 'utsav', 'age': '20'}).then(
-              (value) => print("user add")).catchError((error)=>print("add user:$error"));
+          patient
+              .add({'name': 'utsav', 'age': '20'})
+              .then((value) => print("user add"))
+              .catchError((error) => print("add user:$error"));
           /*({}));*/
 
           /*  if (_formkey.currentState!.validate()) {

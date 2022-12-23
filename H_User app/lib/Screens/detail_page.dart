@@ -36,7 +36,8 @@ class DetailPage extends StatefulWidget {
     required this.specialist,
     required this.profileImage,
     required this.description,
-    required this.phone, required doctor,
+    required this.phone,
+    required doctor,
   });
 
   @override
@@ -103,32 +104,29 @@ class _DetailPageState extends State<DetailPage> {
     setState(() {});
     SizedBox(
         child: FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection('doctor')
-              .doc(widget.uid)
-              .collection('rating')
-              .where('pid', isEqualTo: loggedInUser.uid)
-              .get()
-              .then((myDocuments) {
-            setState(() {
-              rating_len = myDocuments.docs.length;
-            });
-            print(
-                "${"lenght rating_len = " + myDocuments.docs.length.toString()}");
-            return myDocuments;
-          }),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return SizedBox();
-            }
+      future: FirebaseFirestore.instance
+          .collection('doctor')
+          .doc(widget.uid)
+          .collection('rating')
+          .where('pid', isEqualTo: loggedInUser.uid)
+          .get()
+          .then((myDocuments) {
+        setState(() {
+          rating_len = myDocuments.docs.length;
+        });
+        print("${"lenght rating_len = " + myDocuments.docs.length.toString()}");
+        return myDocuments;
+      }),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return SizedBox();
+        }
 
-            return SizedBox();
+        return SizedBox();
 
-            /*Text(rating.toString());*/
-          },
-        )
-    );
+        /*Text(rating.toString());*/
+      },
+    ));
     return Scaffold(
       appBar: _buildAppBar(size),
       body: isLoading == true
@@ -166,11 +164,13 @@ class _DetailPageState extends State<DetailPage> {
                                 if (index < today_app2) {
                                   sum = sum + element.toDouble();
                                   print("element = " + element.toString());
-                                  print("rating_no" + rating_no.length.toString());
+                                  print("rating_no" +
+                                      rating_no.length.toString());
                                 }
                               });
 
-                              print("=========================================");
+                              print(
+                                  "=========================================");
                               print("Sum=" + sum.toString());
                               rating = sum / today_app2;
                               print("rating=" + rating.toString());
@@ -238,7 +238,7 @@ class _DetailPageState extends State<DetailPage> {
                       },
                     )),*/
 
-                   /*    SizedBox(
+                    /*    SizedBox(
                         child: FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection('doctor')
@@ -279,8 +279,7 @@ class _DetailPageState extends State<DetailPage> {
                         });
                         print(
                             "${"lenght = " + myDocuments.docs.length.toString()}");
-                        print("rating count = " +
-                            rating_len);
+                        print("rating count = " + rating_len);
                         return myDocuments;
                       }),
                       builder: (BuildContext context,
@@ -415,54 +414,52 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         rating_len == 0
                             ? InkWell(
-                                onTap: (){
+                                onTap: () {
                                   dialog();
                                 },
-                              child: Container(
-                                margin: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1.0,
-                                      color: Colors.grey),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          10.0) //                 <--- border radius here
+                                child: Container(
+                                  margin: EdgeInsets.only(bottom: 5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1.0, color: Colors.grey),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            10.0) //                 <--- border radius here
+                                        ),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Write a Review",
-                                        style: TextStyle(color: Colors.green),
-                                      ),
-                                      Row(
-                                        children: [
-
-                                          for (int i=0; i<5; i++)
-
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 8.0,top: 8.0,bottom: 8.0),
-                                              child: Icon(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Write a Review",
+                                          style: TextStyle(color: Colors.green),
+                                        ),
+                                        Row(
+                                          children: [
+                                            for (int i = 0; i < 5; i++)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0,
+                                                    top: 8.0,
+                                                    bottom: 8.0),
+                                                child: Icon(
                                                   Icons.star,
                                                   color: Colors.grey,
                                                   size: 30,
                                                 ),
-                                            ),
-
-                                        ],
-                                      )
-                                    ],
+                                              ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
+                              )
                             : Text(
                                 'Update Review',
                                 style: TextStyle(color: Colors.green),
@@ -888,9 +885,19 @@ class _DetailPageState extends State<DetailPage> {
 
         Container(
           child: IconButton(
-            icon: ImageIcon(AssetImage("assets/images/chat.png"), size: 25,color: Colors.white,),
-            onPressed: ()  {
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>ChatScreen1(did:widget.uid,doctor_name:widget.name,phone:widget.phone)) );
+            icon: ImageIcon(
+              AssetImage("assets/images/chat.png"),
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChatScreen1(
+                          did: widget.uid,
+                          doctor_name: widget.name,
+                          phone: widget.phone)));
             },
           ),
         ),
@@ -1056,9 +1063,9 @@ class _DetailPageState extends State<DetailPage> {
           return AlertDialog(
             title: Text('Select Star and giving Review '),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.green,
-                textColor: Colors.white,
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.green, primary: Colors.white),
                 child: Text('OK'),
                 onPressed: () {
                   setState(() {
@@ -1124,11 +1131,12 @@ class _DetailPageState extends State<DetailPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RaisedButton(
+                                ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  color: Colors.red,
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
                                   child: Text(
                                     'CANCEL',
                                     style: TextStyle(
@@ -1136,7 +1144,7 @@ class _DetailPageState extends State<DetailPage> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                RaisedButton(
+                                ElevatedButton(
                                   onPressed: () {
                                     if (rating1 != 0.0 &&
                                         reviewController != null) {
@@ -1158,7 +1166,8 @@ class _DetailPageState extends State<DetailPage> {
                                       _displayTextInputDialog(context);
                                     }
                                   },
-                                  color: kPrimaryColor,
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor),
                                   child: Text(
                                     'Ok',
                                     style: TextStyle(
@@ -1193,7 +1202,7 @@ class _DetailPageState extends State<DetailPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0)),
             child: Stack(
-           //   overflow: Overflow.visible,
+              //   overflow: Overflow.visible,
               alignment: Alignment.topCenter,
               children: [
                 Container(
@@ -1254,11 +1263,12 @@ class _DetailPageState extends State<DetailPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RaisedButton(
+                                ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  color: Colors.red,
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
                                   child: Text(
                                     'CANCEL',
                                     style: TextStyle(
@@ -1266,7 +1276,7 @@ class _DetailPageState extends State<DetailPage> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                RaisedButton(
+                                ElevatedButton(
                                   onPressed: () {
                                     if (rating_s != 0.0 &&
                                         reviewController != null) {
@@ -1284,7 +1294,8 @@ class _DetailPageState extends State<DetailPage> {
                                       _displayTextInputDialog(context);
                                     }
                                   },
-                                  color: kPrimaryColor,
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor),
                                   child: Text(
                                     'Ok',
                                     style: TextStyle(

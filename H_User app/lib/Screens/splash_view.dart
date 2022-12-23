@@ -24,23 +24,22 @@ class SplashViewState extends State<SplashView> {
             MaterialPageRoute<dynamic>(
               builder: (BuildContext context) => HomePage(),
             ),
-                (route) => false, //if you want to disable back feature set to false
+            (route) => false, //if you want to disable back feature set to false
           );
         });
       } else if (value == 2) {
         return Timer(
-            Duration(seconds: 2),
-                () => Navigator.pushAndRemoveUntil<dynamic>(
-                    context,
-                    MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => HomePage()),
-                        (route) => false),
+          Duration(seconds: 2),
+          () => Navigator.pushAndRemoveUntil<dynamic>(
+              context,
+              MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => HomePage()),
+              (route) => false),
         );
       } else {
         return Timer(Duration(seconds: 2), () {
-
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (BuildContext context) => Loginas()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => Loginas()));
           //  Navigator.pop(context);
           //  Duration(seconds: 2);
         });
@@ -53,8 +52,8 @@ class SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Image.asset("assets/images/l2.png",
-              width: 200, height: 200),),
+        child: Image.asset("assets/images/l2.png", width: 200, height: 200),
+      ),
     );
   }
 }

@@ -14,8 +14,10 @@ class Appoin_time extends StatefulWidget {
   var uid;
   var name;
 
-
-  Appoin_time({this.uid, this.name, });
+  Appoin_time({
+    this.uid,
+    this.name,
+  });
 
   @override
   _Appoin_timeState createState() => _Appoin_timeState();
@@ -98,8 +100,7 @@ class _Appoin_timeState extends State<Appoin_time> {
           ),
           title: Text(
             "Appointment Time",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w400),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
           ),
         ),
         body: SingleChildScrollView(
@@ -130,7 +131,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                         c_date = DateFormat('dd-MM-yyyy').format(mydate);
                       });
                     },
-
                     child: Center(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,7 +153,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                         ],
                       ),
                     ),
-
                   ),
                 ),
 
@@ -499,50 +498,56 @@ class _Appoin_timeState extends State<Appoin_time> {
                   child: Container(
                     width: size.width * 0.8,
                     margin: EdgeInsets.all(10),
-                    child: RaisedButton(
-                      shape: StadiumBorder(),
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                      color: kPrimaryColor,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        backgroundColor: kPrimaryColor,
+                      ),
                       onPressed: isEnabled1
                           ? () {
-                        FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-                        firebaseFirestore
-                            .collection('pending')
-                            .add({
-                          'pid' :loggedInUser.uid.toString(),
-                          'name': loggedInUser.name.toString() +" "+ loggedInUser.last_name.toString(),
-                          'date': c_date,
-                          'time': time,
-                          'approve': false,
-                          'did':widget.uid,
-                          'phone':loggedInUser.phone,
-                          'doctor_name': widget.name.toString(),
-                          'visited':false,
-                          'rating':false,
-                          'status':false,
+                              FirebaseFirestore firebaseFirestore =
+                                  FirebaseFirestore.instance;
+                              firebaseFirestore
+                                  .collection('pending')
+                                  .add({
+                                    'pid': loggedInUser.uid.toString(),
+                                    'name': loggedInUser.name.toString() +
+                                        " " +
+                                        loggedInUser.last_name.toString(),
+                                    'date': c_date,
+                                    'time': time,
+                                    'approve': false,
+                                    'did': widget.uid,
+                                    'phone': loggedInUser.phone,
+                                    'doctor_name': widget.name.toString(),
+                                    'visited': false,
+                                    'rating': false,
+                                    'status': false,
+                                  })
+                                  .then((value) => Fluttertoast.showToast(
+                                      msg: "Pending Appointment",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: kPrimaryColor,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0))
+                                  .then((value) => showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) =>
+                                          AdvanceCustomAlert(
+                                              widget.name.toString())))
+                                  .catchError((e) {
+                                    print('Error Data2' + e.toString());
+                                  });
 
-                        })
-                            .then((value) => Fluttertoast.showToast(
-                            msg: "Pending Appointment",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: kPrimaryColor,
-                            textColor: Colors.white,
-                            fontSize: 16.0))
-                            .then((value) => showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) =>AdvanceCustomAlert(widget.name.toString())))
-                            .catchError((e) {
-                          print('Error Data2' + e.toString());
-                        });
-
-                        /*setState(() {
+                              /*setState(() {
                             print("Sleact Time" + time);
                           });*/
-                      }
+                            }
                           : null,
                       child: Text(
                         'Book Appointment',
@@ -613,7 +618,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 ),*/
                   ),
                 ),
-              /*  Container(
+                /*  Container(
                   width: 100,
                   height: 50,
                   child: AnimatedButton(
@@ -643,7 +648,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: morining[0])
                         .get()
@@ -664,7 +669,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: morining[1])
@@ -686,7 +691,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[0])
@@ -708,7 +713,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[1])
@@ -730,7 +735,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[2])
@@ -752,7 +757,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: evening[0])
@@ -780,7 +785,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
-                        .where('did',isEqualTo:widget.uid )
+                        .where('did', isEqualTo: widget.uid)
                         // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: evening[1])
@@ -799,7 +804,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                       }
                       return SizedBox();
                     })
-
               ],
             ),
           ),
@@ -858,7 +862,7 @@ class AdvanceCustomAlert extends StatelessWidget {
     return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
         child: Stack(
-         // overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           alignment: Alignment.topCenter,
           children: [
             Container(
@@ -883,17 +887,17 @@ class AdvanceCustomAlert extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         // Navigator.of(context).pop();
                         Navigator.pushAndRemoveUntil<dynamic>(
                             context,
                             MaterialPageRoute<dynamic>(
                                 builder: (BuildContext context) => HomePage()),
-                                (route) => false);
-
+                            (route) => false);
                       },
-                      color: kPrimaryColor,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor),
                       child: Text(
                         'Okay',
                         style: TextStyle(color: Colors.white),
