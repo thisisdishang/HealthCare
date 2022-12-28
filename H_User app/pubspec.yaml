@@ -30,25 +30,25 @@ dependencies:
   cupertino_icons: ^1.0.5
  # flutter_svg: ^0.19.1
   syncfusion_flutter_datepicker: ^20.2.40
-  intl: ^0.17.0
-  firebase_auth: ^3.4.2
-  firebase_core: ^1.19.1
-  flutter_local_notifications: ^9.6.1
-  firebase_messaging: ^11.4.2
+  intl: ^0.18.0
+  firebase_auth: ^4.2.2
+  firebase_core: ^2.4.0
+  flutter_local_notifications: ^13.0.0
+  firebase_messaging: ^14.2.0
   http: ^0.13.4
   shared_preferences: ^2.0.15
-  cloud_firestore: ^3.3.0
-  firebase_database: ^9.0.19
+  cloud_firestore: ^4.3.0
+  firebase_database: ^10.0.8
   fluttertoast: ^8.0.9
-  firebase_storage: ^10.3.4
+  firebase_storage: ^11.0.9
   image_picker: ^0.8.5+3
   path: ^1.8.1
   intl_phone_field: ^3.1.0
   loading_indicator: ^3.1.0
   dropdown_button2: ^1.7.1
-  awesome_dialog: ^2.2.1
-  connectivity_plus: ^2.3.6
-  internet_connection_checker: ^0.0.1+4
+  awesome_dialog: ^3.0.2
+  connectivity_plus: ^3.0.2
+  internet_connection_checker: ^1.0.0+1
   flutter_rating_bar: ^4.0.1
   url_launcher: ^6.1.5
   flutter_svg: ^1.1.1+1
@@ -56,14 +56,15 @@ dependencies:
 
   flutter_icons: ^1.1.0
   flutter_tabler_icons: ^1.1.1
-  provider: ^4.3.3
+  provider: ^6.0.5
   cool_alert: ^1.1.0
   google_nav_bar: ^5.0.6
-  font_awesome_flutter: ^8.12.0
-  carousel_slider: ^3.0.0
-  typicons_flutter: ^0.4.2
-  quick_actions: ^0.5.0
-  introduction_screen: ^2.0.0
+  font_awesome_flutter: ^10.3.0
+  carousel_slider: ^4.2.1
+  typicons_flutter: ^0.5.0
+  quick_actions: ^1.0.1
+  introduction_screen: ^3.1.1
+
 
 
 dev_dependencies:

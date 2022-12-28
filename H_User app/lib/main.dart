@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         // initialRoute: SplashRoute,
-        title: 'Mediplus+',
+        title: 'HealthCare',
         theme: ThemeData(
             primarySwatch: Colors.blue,
             appBarTheme: AppBarTheme(color: kPrimaryColor)),
