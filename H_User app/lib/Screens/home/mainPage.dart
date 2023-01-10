@@ -37,6 +37,7 @@ class _MainPageState extends State<MainPage> {
   bool status = false;
 
   var result;
+
   // final List<Map<String, dynamic>> _pages = [
   //   {'page': HomeScreen(), 'title':'Home Screen'},
   //   {'page': CategoriesScreen(), 'title':'Categories'},
@@ -44,18 +45,17 @@ class _MainPageState extends State<MainPage> {
   //   {'page': UserScreen(), 'title':'User'},
   // ];
 
-
-  getConnectivity()async{
+  getConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
 // I am connected to a mobile network.
-      status =true;
+      status = true;
       print("Mobile Data Connected !");
     } else if (connectivityResult == ConnectivityResult.wifi) {
       print("Wifi Connected !");
-      status =true;
+      status = true;
 // I am connected to a wifi network.
-    }else{
+    } else {
       print("No Internet !");
     }
   }
@@ -71,6 +71,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   var subscription;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -91,8 +92,7 @@ class _MainPageState extends State<MainPage> {
         setState(() {
           status = false;
         });
-      }
-      else {
+      } else {
         setState(() {
           status = true;
         });
@@ -111,6 +111,7 @@ class _MainPageState extends State<MainPage> {
       print("++++++++++++++++++++++++++++++++++++++++++" + user!.uid);
     });
   }
+
   // void initState() {
   //   super.initState();
   //   loggedInUser = UserModel();
@@ -131,7 +132,6 @@ class _MainPageState extends State<MainPage> {
   //     print("++++++++++++++++++++++++++++++++++++++++++" + user!.uid);
   //   });
   // }
-
 
   _navigate(Widget screen) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
@@ -184,9 +184,7 @@ class _MainPageState extends State<MainPage> {
                 tabBackgroundColor: Colors.indigo.shade600,
                 textStyle: TextStyle(
                   color: Colors.white,
-
                 ),
-
                 tabs: [
                   GButton(
                     iconSize: _selectedIndex != 0 ? 28 : 25,

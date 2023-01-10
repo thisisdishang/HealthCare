@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // initialRoute: SplashRoute,
         title: 'HealthCare',
         theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.indigo,
             appBarTheme: AppBarTheme(color: kPrimaryColor)),
         home: SplashView()
         // FirebaseAuth.instance.currentUser == null? Loginas(): number == 0 ?HomePage():,

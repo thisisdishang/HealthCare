@@ -27,7 +27,6 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import '../login/loginas.dart';
 
-
 late BuildContext context1;
 var uid;
 UserModel loggedInUser = UserModel();
@@ -80,6 +79,7 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
+
   // void initState() {
   //   // TODO: implement initState
   //
@@ -145,23 +146,23 @@ class _HomePageState extends State<HomePage> {
       Appointment(),
       Profile_page(),
     ];
-        // setState(
-        //       () {
-        //     if (hour >= 5 && hour < 12) {
-        //       _message = 'Good Morning';
-        //     } else if (hour >= 12 && hour <= 17) {
-        //       _message = 'Good Afternoon';
-        //     } else {
-        //       _message = 'Good Evening';
-        //     }
-        //   },
-        // );
+    // setState(
+    //       () {
+    //     if (hour >= 5 && hour < 12) {
+    //       _message = 'Good Morning';
+    //     } else if (hour >= 12 && hour <= 17) {
+    //       _message = 'Good Afternoon';
+    //     } else {
+    //       _message = 'Good Evening';
+    //     }
+    //   },
+    // );
     return Scaffold(
-        backgroundColor: Colors.white,
-        key: _scaffoldKey,
+      backgroundColor: Colors.white,
+      key: _scaffoldKey,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Mediplus+"),
+        title: Text("HealthCare"),
 
         // actions: [
         //   loggedInUser.uid == null
@@ -237,7 +238,6 @@ class _HomePageState extends State<HomePage> {
 //               ),
 //             ),
 
-
       // ************************************
       // Drawer
       //*************************************
@@ -275,10 +275,10 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       "Let's Find Your\nDoctor",
                       style: TextStyle(
-                      fontSize: 35,
+                        fontSize: 35,
                         color: kPrimaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   Container(
@@ -360,7 +360,6 @@ class _HomePageState extends State<HomePage> {
 //                     child: Carouselslider(),
 //                   ),
 
-
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: Row(
@@ -370,7 +369,7 @@ class _HomePageState extends State<HomePage> {
                         // _pages[_selectedIndex],
                         Text(
                           'Appointment',
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: kPrimaryColor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -414,7 +413,7 @@ class _HomePageState extends State<HomePage> {
                             if (!snapshot.hasData) {
                               print("snapshot =" + snapshot.toString());
                               return Container(
-                                margin: EdgeInsets.only(left: 10),
+                                  margin: EdgeInsets.only(left: 10),
                                   child: Text("Appointment not Available"));
                             } else {
                               ub() {
@@ -487,7 +486,7 @@ class _HomePageState extends State<HomePage> {
                                                       ),
                                               ),
                                             ) // child widget, replace with your own
-                                        ),
+                                            ),
                                       ],
                                     ),
                                   );
@@ -552,7 +551,8 @@ class _HomePageState extends State<HomePage> {
                                   specialist: doc['specialist'],
                                   profileImage: doc['profileImage'],
                                   description: doc['description'],
-                                  phone: doc['phone'], doctor: _doctorName,
+                                  phone: doc['phone'],
+                                  doctor: _doctorName,
                                 ),
                               ));
                         },
@@ -713,7 +713,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 )) // child widget, replace with your own
                 )
-      /*HDCell(
+            /*HDCell(
                   onTap: () {
                     Navigator.push(
                         context,
@@ -788,7 +788,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               'Categories',
-              style:  TextStyle(
+              style: TextStyle(
                 color: kPrimaryColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -817,7 +817,6 @@ class _HomePageState extends State<HomePage> {
         ),
 
 //box...
-
 
 //         Container(
 //           height: 150,
@@ -932,70 +931,69 @@ class _HomePageState extends State<HomePage> {
 
   //Top Rated
 
+  /// Top Rated Doctors Section
+  _trDoctorsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Top Rated ',
+              style: TextStyle(
+                color: kPrimaryColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 32,
+        ),
 
-          /// Top Rated Doctors Section
-          _trDoctorsSection() {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Top Rated ',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-
-                StreamBuilder<QuerySnapshot>(
-                    stream: firebase.orderBy('rating' ,descending: true).snapshots(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return new Text("Loding..");
-                      } else {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: 5,
-                          itemBuilder: (BuildContext context, int index) {
-                            final DocumentSnapshot doc = snapshot.data!.docs[index];
-                            return TrdCell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailPage(
-                                        uid: doc['uid'],
-                                        name: doc['name'],
-                                        //last_name: doc['last name'],
-                                        email: doc['email'],
-                                        address: doc['address'],
-                                        experience: doc['experience'],
-                                        specialist: doc['specialist'],
-                                        profileImage: doc['profileImage'],
-                                        description: doc['description'],
-                                        phone: doc['phone'],
-                                        doctor: null,
-                                      ),
-                                    ));
-                              },
-                              name: doc["name"].toString(),
-                              email: doc["email"].toString(),
-                              rating: doc["rating"],
-                              specialist: doc["specialist"].toString(),
-                              profileImage: doc['profileImage'],
-                            );
-                            /*Card(
+        StreamBuilder<QuerySnapshot>(
+            stream: firebase.orderBy('rating', descending: true).snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return new Text("Loding..");
+              } else {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    final DocumentSnapshot doc = snapshot.data!.docs[index];
+                    return TrdCell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                uid: doc['uid'],
+                                name: doc['name'],
+                                //last_name: doc['last name'],
+                                email: doc['email'],
+                                address: doc['address'],
+                                experience: doc['experience'],
+                                specialist: doc['specialist'],
+                                profileImage: doc['profileImage'],
+                                description: doc['description'],
+                                phone: doc['phone'],
+                                doctor: null,
+                              ),
+                            ));
+                      },
+                      name: doc["name"].toString(),
+                      email: doc["email"].toString(),
+                      rating: doc["rating"],
+                      specialist: doc["specialist"].toString(),
+                      profileImage: doc['profileImage'],
+                    );
+                    /*Card(
                                 margin: const EdgeInsets.all(10),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -1025,23 +1023,22 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ));*/
-                          },
-                        ); /*new ListView(
+                  },
+                ); /*new ListView(
                             primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             padding: EdgeInsets.symmetric(horizontal: 24),
                             children: getTrdCell(snapshot, context));*/
 
-                      }
+              }
+            }), // doctor
+        //*************************************
 
-                    }),// doctor
-                //*************************************
-
-                SizedBox(
-                  height: 0,
-                ),
-                /* ListView.separated(
+        SizedBox(
+          height: 0,
+        ),
+        /* ListView.separated(
                   primary: false,
                   shrinkWrap: true,
                   itemCount: _trDoctors.length,
@@ -1066,9 +1063,9 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 ),*/
-              ],
-            );
-          }
+      ],
+    );
+  }
 
   getTrdCell(
       AsyncSnapshot<QuerySnapshot<Object?>> snapshot, BuildContext context) {
@@ -1087,7 +1084,8 @@ class _HomePageState extends State<HomePage> {
                         specialist: doc['specialist'],
                         profileImage: doc['profileImage'],
                         description: doc['description'],
-                        phone: doc['phone'], doctor: _doctorName,
+                        phone: doc['phone'],
+                        doctor: _doctorName,
                       ),
                     ));
               },
@@ -1480,5 +1478,3 @@ dialog(BuildContext context) => showDialog(
 //         maxRating: 1,
 //       );
 // }
-
-

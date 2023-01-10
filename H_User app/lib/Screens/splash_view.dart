@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/home/mainPage.dart';
+import 'package:hospital_appointment/constants.dart';
 import '../services/shared_preferences_service.dart';
 import 'home/patient_home_page.dart';
 import 'login/loginas.dart';
@@ -52,8 +53,20 @@ class SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset("assets/images/l2.png", width: 200, height: 200),
-      ),
+          child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/Splash.png", width: 250, height: 250),
+          Text(
+            "HealthCare",
+            style: TextStyle(
+              fontSize: 30,
+              color: kPrimaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],
+      )),
     );
   }
 }

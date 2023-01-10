@@ -55,7 +55,7 @@ class _AppointmentState extends State<Appointment> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo[600],
+        backgroundColor: kPrimaryColor,
         iconTheme: IconThemeData(color: Colors.white),
         leading: IconButton(
           icon: Container(
