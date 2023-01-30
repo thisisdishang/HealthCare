@@ -76,7 +76,13 @@ class _Patient_ListState extends State<Patient_List> {
                           Future.delayed(Duration(seconds: 3));
                           return snapshot.hasError
                               ? Center(child: Text("patient Not Available"))
-                              : CustomCard(pid: doc['uid'],did:loggedInUser.uid,p_name :doc['name'],last_name :doc['last name'],phone:doc['phone']); /*Padding(
+                              : CustomCard(
+                                  pid: doc['uid'],
+                                  did: loggedInUser.uid,
+                                  p_name: doc['name'],
+                                  last_name: doc['last name'],
+                                  phone: doc[
+                                      'phone']); /*Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Center(
                                           child: Text(
@@ -104,17 +110,28 @@ class CustomCard extends StatelessWidget {
   var last_name;
   var phone;
 
-  CustomCard({required this.did, required this.pid, required this.p_name, required this.last_name,required this.phone});
+  CustomCard(
+      {required this.did,
+      required this.pid,
+      required this.p_name,
+      required this.last_name,
+      required this.phone});
 
- // CustomCard({});
+  // CustomCard({});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-         Navigator.push(
-             context,
-            MaterialPageRoute(builder: (contex) => ChatScreen(pid: pid,p_name: p_name,last_name:last_name, did: did,phone:phone)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (contex) => ChatScreen(
+                    pid: pid,
+                    p_name: p_name,
+                    last_name: last_name,
+                    did: did,
+                    phone: phone)));
       },
       child: Column(
         children: [
@@ -130,13 +147,14 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text(p_name + " "+ last_name,
+            title: Text(
+              p_name + " " + last_name,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          /*  subtitle: Row(
+            /*  subtitle: Row(
               children: [
             //    Icon(Icons.done_all),
                 SizedBox(

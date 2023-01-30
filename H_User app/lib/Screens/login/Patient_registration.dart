@@ -187,10 +187,10 @@ class _RegistrationState extends State<Registration> {
               child: Container(
                 width: size.width * 1,
                 decoration: BoxDecoration(
-                  // image: DecorationImage(
-                  // //     image: AssetImage("assets/images/white.jpg"),
-                  //     fit: BoxFit.cover),
-                ),
+                    // image: DecorationImage(
+                    // //     image: AssetImage("assets/images/white.jpg"),
+                    //     fit: BoxFit.cover),
+                    ),
                 child: Container(
                   // color: Colors.black26,
                   child: Column(
@@ -239,9 +239,8 @@ class _RegistrationState extends State<Registration> {
                                     },
                                     child: CircleAvatar(
                                       radius: 50.00,
-
-                                      backgroundImage:
-                                          AssetImage("assets/images/account.png"),
+                                      backgroundImage: AssetImage(
+                                          "assets/images/account.png"),
                                     ),
                                   )
                                 : CircleAvatar(
@@ -254,12 +253,11 @@ class _RegistrationState extends State<Registration> {
                             right: 0,
                             bottom: 5,
                             child: Container(
-                              width: 30,
+                                width: 30,
                                 height: 30,
                                 child: Image.asset(
-                              "assets/images/camera.png",
-                            )
-                            ))
+                                  "assets/images/camera.png",
+                                )))
                       ]),
 
                       SizedBox(
@@ -754,10 +752,10 @@ class _RegistrationState extends State<Registration> {
                               width: size.width * 0.8,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                shape: StadiumBorder(),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 15),
-                                backgroundColor: kPrimaryColor),
+                                    shape: StadiumBorder(),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 15),
+                                    backgroundColor: kPrimaryColor),
                                 onPressed: () async {
                                   //  signUp(t_email.text,t_password.text);
                                   if (status == false) {
@@ -987,7 +985,6 @@ class _RegistrationState extends State<Registration> {
 
                                   setState(() {});
                                 },
-
                                 child: Text(
                                   'Sign In',
                                   style: TextStyle(
@@ -1165,4 +1162,3 @@ class _RegistrationState extends State<Registration> {
     }
     return isSuccess;
   }*/
-

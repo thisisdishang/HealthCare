@@ -160,7 +160,8 @@ class _Docter_pageState extends State<Docter_page> {
                                           specialist: doc['specialist'],
                                           profileImage: doc['profileImage'],
                                           description: doc['description'],
-                                          phone: doc['phone'], doctor: _doctorName,
+                                          phone: doc['phone'],
+                                          doctor: _doctorName,
                                         ),
                                       ));
                                 },

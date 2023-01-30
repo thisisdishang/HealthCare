@@ -53,7 +53,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
         .orderBy('time', descending: false)
         .where("pid", isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: true)
-        .where('status', isEqualTo:  false)
+        .where('status', isEqualTo: false)
         .where('date', isGreaterThanOrEqualTo: today_date)
         .snapshots();
     return Scaffold(
@@ -64,8 +64,9 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Container(
-                    height: size.height*1,
-                    child: Center(child: Text("You Do Not Have An Appointment today.")));
+                    height: size.height * 1,
+                    child: Center(
+                        child: Text("You Do Not Have An Appointment today.")));
               } else {
                 return isLoading
                     ? Container(

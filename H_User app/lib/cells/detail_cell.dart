@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/constants.dart';
 
@@ -9,10 +8,9 @@ class DetailCell extends StatelessWidget {
   final String subTitle;
 
   const DetailCell({
-
     required this.title,
     required this.subTitle,
-  }) ;
+  });
 
   /// **********************************************
   /// LIFE CYCLE METHODS
@@ -29,7 +27,7 @@ class DetailCell extends StatelessWidget {
       ),
       child: Stack(
         children: [
-         /* Positioned(
+          /* Positioned(
             left: 0,
             bottom: 0,
             child:Container(

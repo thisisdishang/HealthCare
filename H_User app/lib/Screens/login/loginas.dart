@@ -18,27 +18,30 @@ class Loginas extends StatefulWidget {
 
 class _LoginasState extends State<Loginas> {
   var _isObscure = false;
- // var t_email, t_password;
+
+  // var t_email, t_password;
   var user = FirebaseFirestore.instance.collection("patient").snapshots();
 
   var auth = FirebaseAuth.instance;
   var result;
   var subscription;
   bool status = false;
-  getConnectivity()async{
+
+  getConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
 // I am connected to a mobile network.
-        status =true;
+      status = true;
       print("Mobile Data Connected !");
     } else if (connectivityResult == ConnectivityResult.wifi) {
       print("Wifi Connected !");
-      status =true;
+      status = true;
 // I am connected to a wifi network.
-    }else{
+    } else {
       print("No Internet !");
     }
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -51,14 +54,12 @@ class _LoginasState extends State<Loginas> {
         setState(() {
           status = false;
         });
-      }
-      else {
+      } else {
         setState(() {
           status = true;
         });
       }
     });
-
   }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
@@ -74,8 +75,8 @@ class _LoginasState extends State<Loginas> {
   @override
   void dispose() {
     // TODO: implement dispose
-   // t_password.dispose();
-   // t_email.dispose();
+    // t_password.dispose();
+    // t_email.dispose();
     subscription.cancel();
     super.dispose();
   }
@@ -164,18 +165,17 @@ class _LoginasState extends State<Loginas> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              onPressed:(){
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (contex) => login_page()));
-                            },
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (contex) => login_page()));
+                              },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
                                 primary: Colors.indigo[800],
                                 onPrimary: Colors.indigo[800],
                                 shape: RoundedRectangleBorder(
-
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),
                               ),
@@ -209,7 +209,6 @@ class _LoginasState extends State<Loginas> {
                                 primary: Colors.white,
                                 onPrimary: Colors.white,
                                 shape: RoundedRectangleBorder(
-
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),
                               ),
@@ -280,5 +279,3 @@ class _LoginasState extends State<Loginas> {
     }
   }
 }
-
-

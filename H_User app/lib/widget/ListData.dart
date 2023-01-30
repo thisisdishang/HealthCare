@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../constants.dart';
 
 class ListData extends StatelessWidget {
@@ -12,8 +11,16 @@ class ListData extends StatelessWidget {
   var doc;
   var b_text;
   final Function ontap;
-  ListData({required this.name, required this.time, required this.size, required this.doc,required this.b_text,required this.ontap});
-    // data.sort()
+
+  ListData(
+      {required this.name,
+      required this.time,
+      required this.size,
+      required this.doc,
+      required this.b_text,
+      required this.ontap});
+
+  // data.sort()
 
   @override
   Widget build(BuildContext context) {

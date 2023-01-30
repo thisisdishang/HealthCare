@@ -54,7 +54,7 @@ class SplashViewState extends State<SplashView> {
     return Scaffold(
       body: Center(
           child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("assets/images/Splash.png", width: 250, height: 250),
           Text(

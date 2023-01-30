@@ -20,6 +20,7 @@ class _PendingState extends State<Pending> {
   var user = FirebaseAuth.instance.currentUser;
   bool isLoading = true;
   var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -62,8 +63,9 @@ class _PendingState extends State<Pending> {
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Container(
-                  height: size.height*1,
-                    child: Center(child: Text("You Do Not Have An Appointment today.")));
+                    height: size.height * 1,
+                    child: Center(
+                        child: Text("You Do Not Have An Appointment today.")));
               } else {
                 return isLoading
                     ? Container(

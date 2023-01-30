@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:health_and_doctor_appointment/screens/doctorProfile.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
@@ -9,8 +10,8 @@ import '../services/shared_preferences_service.dart';
 
 class SearchList extends StatefulWidget {
   final String searchKey;
-  const SearchList({Key? key,required this.searchKey}) : super(key: key);
 
+  const SearchList({Key? key, required this.searchKey}) : super(key: key);
 
   @override
   _SearchListState createState() => _SearchListState();
@@ -21,7 +22,7 @@ class _SearchListState extends State<SearchList> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   final CollectionReference firebase =
-  FirebaseFirestore.instance.collection('doctor');
+      FirebaseFirestore.instance.collection('doctor');
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -73,7 +74,7 @@ class _SearchListState extends State<SearchList> {
                     ),
                   )
                 : Scrollbar(
-                  child: ListView.builder(
+                    child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       physics: ClampingScrollPhysics(),
                       shrinkWrap: true,
@@ -98,17 +99,18 @@ class _SearchListState extends State<SearchList> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>DetailPage(
-                                    uid: doc['uid'],
-                                    name: doc['name'],
-                                    email: doc['email'],
-                                    address: doc['address'],
-                                    experience: doc['experience'],
-                                    specialist: doc['specialist'],
-                                    profileImage: doc['profileImage'],
-                                    description: doc['description'],
-                                    phone: doc['phone'], doctor: _doctorName,
-                                  ),
+                                      builder: (context) => DetailPage(
+                                        uid: doc['uid'],
+                                        name: doc['name'],
+                                        email: doc['email'],
+                                        address: doc['address'],
+                                        experience: doc['experience'],
+                                        specialist: doc['specialist'],
+                                        profileImage: doc['profileImage'],
+                                        description: doc['description'],
+                                        phone: doc['phone'],
+                                        doctor: _doctorName,
+                                      ),
                                     ),
                                   );
                                 },
@@ -117,7 +119,8 @@ class _SearchListState extends State<SearchList> {
                                   //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     CircleAvatar(
-                                      backgroundImage: NetworkImage(doctor['image']),
+                                      backgroundImage:
+                                          NetworkImage(doctor['image']),
                                       //backgroundColor: Colors.blue,
                                       radius: 25,
                                     ),
@@ -127,7 +130,8 @@ class _SearchListState extends State<SearchList> {
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           doctor['name'],
@@ -185,7 +189,7 @@ class _SearchListState extends State<SearchList> {
                         );
                       },
                     ),
-                );
+                  );
           },
         ),
       ),

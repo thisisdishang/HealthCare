@@ -5,10 +5,10 @@ import '../constants.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   Function onChanged;
-   RoundedPasswordField({
 
+  RoundedPasswordField({
     required this.onChanged,
-  }) ;
+  });
 
   @override
   _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
@@ -23,18 +23,19 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         onChanged: (value) {
           print(value);
         },
-        obscureText: hidePassword,//show/hide password
+        obscureText: hidePassword, //show/hide password
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.lock),
           suffixIcon: IconButton(
-            icon: hidePassword ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+            icon: hidePassword
+                ? Icon(Icons.visibility_off)
+                : Icon(Icons.visibility),
             onPressed: () {
               setState(() {
                 hidePassword = !hidePassword;
               });
             },
           ),
-
         ),
       ),
     );

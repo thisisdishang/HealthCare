@@ -30,7 +30,8 @@ class AdvanceCustomAlert extends StatelessWidget {
                     ),
                     ElevatedButton(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0,bottom: 10,left: 15,right: 15),
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 15, right: 15),
                           child: Text("Okay", style: TextStyle(fontSize: 18)),
                         ),
                         style: ElevatedButton.styleFrom(

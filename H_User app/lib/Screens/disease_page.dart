@@ -12,7 +12,6 @@ class Disease extends StatefulWidget {
 
 class _DiseaseState extends State<Disease> {
   final myImageAndCaption = [
-
     ["assets/svg/b1.png", "Neuro"],
     ["assets/svg/e1.png", "Ear"],
     ["assets/svg/ey.png", "Eyes"],
@@ -29,7 +28,6 @@ class _DiseaseState extends State<Disease> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         appBar: AppBar(
           backgroundColor: Colors.indigo[600],
           leading: IconButton(
@@ -57,9 +55,13 @@ class _DiseaseState extends State<Disease> {
               children: [
                 ...myImageAndCaption.map(
                   (i) => GestureDetector(
-                    onTap: (){
-                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Docter_page()),);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Docter_page(i.last.toString())));
+                    onTap: () {
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Docter_page()),);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Docter_page(i.last.toString())));
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -85,7 +87,10 @@ class _DiseaseState extends State<Disease> {
                           child: Container(
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(3),
-                            child: Text(i.last,style: TextStyle(fontWeight: FontWeight.bold),),
+                            child: Text(
+                              i.last,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ],

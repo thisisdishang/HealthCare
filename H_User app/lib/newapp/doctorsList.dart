@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hospital_appointment/cells/category_cell.dart';
 import 'package:hospital_appointment/models/category.dart';
+
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
 import 'package:hospital_appointment/newapp/searchList.dart';
@@ -16,7 +17,7 @@ class DoctorsList extends StatefulWidget {
 
 class _DoctorsListState extends State<DoctorsList> {
   TextEditingController _textController = new TextEditingController();
-    late String search;
+  late String search;
   var _length = 0;
 
   @override

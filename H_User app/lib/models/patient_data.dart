@@ -23,7 +23,8 @@ class UserModel {
       this.gender,
       this.last_name,
       this.phone,
-      this.status,this.profileImage});
+      this.status,
+      this.profileImage});
 
 //reciving data from server
   factory UserModel.fromMap(map) {

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class DiseaseDetail extends StatefulWidget {
   final String disease;
+
   const DiseaseDetail({required this.disease});
+
   @override
   _DiseaseDetailState createState() => _DiseaseDetailState();
 }
@@ -19,10 +21,9 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
         elevation: 0,
         title: Text(
           widget.disease,
-          style:
-          TextStyle(
-              color: Colors.black,
-             ),
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
       ),
       body: StreamBuilder(
@@ -58,12 +59,10 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                             ),
                             child: Text(
                               document['Description'],
-                              style:TextStyle(
+                              style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 16,
-                                  fontWeight:
-                                  FontWeight
-                                      .bold),
+                                  fontWeight: FontWeight.bold),
                             )),
                         SizedBox(
                           height: 20,
@@ -84,9 +83,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                   style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 16,
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
+                                      fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left,
                                 ),
                                 SizedBox(
@@ -95,9 +92,9 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                 Text(
                                   document['Spread'],
                                   style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 18,
-                                      ),
+                                    color: Colors.black54,
+                                    fontSize: 18,
+                                  ),
                                 )
                               ],
                             )),
@@ -120,9 +117,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                   style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 20,
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
+                                      fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left,
                                 ),
                                 SizedBox(
@@ -131,9 +126,9 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                 Text(
                                   document['Symtomps'],
                                   style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 18,
-                                      ),
+                                    color: Colors.black54,
+                                    fontSize: 18,
+                                  ),
                                 )
                               ],
                             )),
@@ -156,9 +151,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                   style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 20,
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
+                                      fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left,
                                 ),
                                 SizedBox(
@@ -166,10 +159,10 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                 ),
                                 Text(
                                   document['Warning'],
-                                  style:TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 18,
-                                      ),
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 18,
+                                  ),
                                 )
                               ],
                             )),

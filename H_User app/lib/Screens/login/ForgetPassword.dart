@@ -12,7 +12,6 @@ import '../../widget/inputdecoration.dart';
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
-
   @override
   State<ForgetPassword> createState() => _ForgetPasswordState();
 }
@@ -111,12 +110,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Container(
                       child: Center(
                           child: Text(
-                            "Reset Password",
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: kPrimaryLightColor,
-                                fontWeight: FontWeight.bold),
-                          )),
+                        "Reset Password",
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: kPrimaryLightColor,
+                            fontWeight: FontWeight.bold),
+                      )),
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -135,7 +134,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: kPrimaryColor,
                         decoration:
-                        buildInputDecoration(Icons.email, "Your Email "),
+                            buildInputDecoration(Icons.email, "Your Email "),
                         onChanged: (email) {
                           t_email = email.trim();
                         },
@@ -153,21 +152,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Container(
                       width: size.width * 0.8,
                       margin: EdgeInsets.all(10),
-                      child:ElevatedButton(
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 15),
-                        backgroundColor: kPrimaryColor),
-                        onPressed: ()  async {
+                            shape: StadiumBorder(),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            backgroundColor: kPrimaryColor),
+                        onPressed: () async {
                           if (status == false) {
                             showDialog(
                                 context: context,
                                 barrierDismissible: false,
-                                builder: (BuildContext context) => AdvanceCustomAlert());
+                                builder: (BuildContext context) =>
+                                    AdvanceCustomAlert());
                           } else {
                             if (_formkey.currentState!.validate()) {
-                              FirebaseAuth.instance.sendPasswordResetEmail(email: t_email);
+                              FirebaseAuth.instance
+                                  .sendPasswordResetEmail(email: t_email);
                               Fluttertoast.showToast(
                                   msg: "Send E-Mail Your Account",
                                   toastLength: Toast.LENGTH_LONG,

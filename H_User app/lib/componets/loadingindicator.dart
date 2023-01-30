@@ -5,7 +5,6 @@ import 'package:loading_indicator/loading_indicator.dart';
 import '../constants.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-
 void showLoadingDialog({
   @required BuildContext? context,
 }) {
@@ -18,7 +17,7 @@ void showLoadingDialog({
           return Center(
             child: Material(
               color: Colors.white,
-              child:Center(
+              child: Center(
                 child: Container(
                   width: 50,
                   height: 50,
@@ -34,6 +33,7 @@ void showLoadingDialog({
         });
   });
 }
+
 List<Color> _kDefaultRainbowColors = const [
   kPrimaryColor,
   kPrimarydark,
@@ -42,8 +42,9 @@ List<Color> _kDefaultRainbowColors = const [
   kprimaryLightBlue,
   kPrimaryhinttext
 ];
+
 class Loading extends StatelessWidget {
-   /*List<Color> _kDefaultRainbowColors = const [
+  /*List<Color> _kDefaultRainbowColors = const [
     kPrimaryColor,
     kPrimarydark,
     kPrimaryLightColor,
@@ -55,16 +56,15 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-          width: 50,
-          height: 50,
-          child: LoadingIndicator(
-            indicatorType: Indicator.ballGridPulse,
-            colors: _kDefaultRainbowColors,
-            strokeWidth: 4.0,
-          ),
+      child: Container(
+        width: 50,
+        height: 50,
+        child: LoadingIndicator(
+          indicatorType: Indicator.ballGridPulse,
+          colors: _kDefaultRainbowColors,
+          strokeWidth: 4.0,
         ),
-
+      ),
     );
   }
 }
@@ -83,4 +83,3 @@ Future<bool> getInternetUsingInternetConnectivity() async {
    }
   return result;
 }*/
-

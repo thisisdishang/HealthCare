@@ -41,9 +41,7 @@ class _TrdCellState extends State<TrdCell> {
         // height: 50,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.only(left: 5),
-        decoration: BoxDecoration
-          (
-
+        decoration: BoxDecoration(
           color: kPrimarydark1,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -61,7 +59,6 @@ class _TrdCellState extends State<TrdCell> {
             SizedBox(
               width: 20,
             ),
-
             _detailsSection(),
           ],
         ),
@@ -104,19 +101,19 @@ class _TrdCellState extends State<TrdCell> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: 24,),
+            SizedBox(
+              height: 24,
+            ),
             Text(
-              'Dr. '+widget.name /* ' ' + widget.email*/,
+              'Dr. ' + widget.name /* ' ' + widget.email*/,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
-
             SizedBox(
               height: 8,
             ),

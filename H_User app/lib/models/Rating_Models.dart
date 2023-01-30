@@ -10,18 +10,18 @@ class RatingModel {
   String? time;
   String? visited;
 
-
-  RatingModel(
-      {this.visited,
-        this.name,
-        this.approve,
-        this.date,
-        this.did,
-        this.doctor_name,
-        this.pid,
-        this.rating,
-        this.time,
-        this.phone,});
+  RatingModel({
+    this.visited,
+    this.name,
+    this.approve,
+    this.date,
+    this.did,
+    this.doctor_name,
+    this.pid,
+    this.rating,
+    this.time,
+    this.phone,
+  });
 
 //reciving data from server
   factory RatingModel.fromMap(map) {
@@ -36,7 +36,6 @@ class RatingModel {
       rating: map['rating'],
       time: map['time'],
       phone: map['phone'],
-
     );
   }
 
@@ -53,7 +52,6 @@ class RatingModel {
       'rating': rating,
       'time': time,
       'phone': phone,
-
     };
   }
 }

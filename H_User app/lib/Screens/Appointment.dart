@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../constants.dart';
 import '../../models/doctor.dart';
 import '../../services/shared_preferences_service.dart';
@@ -12,7 +11,6 @@ import 'Pages/Patient/Confirm_Appointment.dart';
 import 'Pages/Patient/Patient_RecentList.dart';
 import 'Pages/Patient/Pending.dart';
 
-
 class Appointment extends StatefulWidget {
   const Appointment({Key? key}) : super(key: key);
 
@@ -20,7 +18,8 @@ class Appointment extends StatefulWidget {
   State<Appointment> createState() => _AppointmentState();
 }
 
-class _AppointmentState extends State<Appointment> with SingleTickerProviderStateMixin {
+class _AppointmentState extends State<Appointment>
+    with SingleTickerProviderStateMixin {
   UserModel loggedInUser = UserModel();
   final CollectionReference firebase =
       FirebaseFirestore.instance.collection('doctor');
@@ -65,35 +64,36 @@ class _AppointmentState extends State<Appointment> with SingleTickerProviderStat
               size: 35,
             ),
           ),
-
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Appointment', style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text(
+          'Appointment',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         actions: <Widget>[],
         bottom: TabBar(
           controller: tabController,
           labelStyle: TextStyle(fontSize: 18),
           indicatorColor: Colors.white,
           tabs: [
-
             Tab(
               text: 'Confirm',
             ),
-            Tab(text: 'Pending',),
-            Tab(text: 'Recent',),
+            Tab(
+              text: 'Pending',
+            ),
+            Tab(
+              text: 'Recent',
+            ),
           ],
         ),
       ),
       body: TabBarView(
         controller: tabController,
-        children: [
-          Confirm_Appointment(),
-          Pending(),
-          Patient_RecentList()
-
-        ],
+        children: [Confirm_Appointment(), Pending(), Patient_RecentList()],
       ),
       /*Padding(
         padding: const EdgeInsets.all(8.0),
@@ -158,6 +158,4 @@ class _AppointmentState extends State<Appointment> with SingleTickerProviderStat
       ),*/
     );
   }
-
-
 }

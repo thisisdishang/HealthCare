@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/newapp/diseasedetail.dart';
 
-
 class Disease1 extends StatefulWidget {
   @override
   _Disease1State createState() => _Disease1State();
@@ -18,9 +17,7 @@ class _Disease1State extends State<Disease1> {
           title: Text(
             'Disease',
             style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
           ),
           iconTheme: IconThemeData(
             color: Colors.black,
@@ -80,9 +77,9 @@ class _Disease1State extends State<Disease1> {
                                 Text(
                                   document['Symtomps'],
                                   style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 14,
-                                     ),
+                                    color: Colors.black54,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ],
                             ),

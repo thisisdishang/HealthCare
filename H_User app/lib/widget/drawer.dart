@@ -64,8 +64,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                   accountName: Text(loggedInUser.name.toString()),
                   accountEmail: Text(loggedInUser.email.toString()),
-                  currentAccountPicture:
-                  Container(
+                  currentAccountPicture: Container(
                     child: loggedInUser.profileImage == false
                         ? CircleAvatar(
                             backgroundImage:
@@ -80,13 +79,13 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
 
-   //profile
+                //profile
                 CustomList(Icons.person, "Profile", () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => UserProfile()));
                 }),
 
-  // Privacy Policy
+                // Privacy Policy
                 CustomList(Icons.announcement, "Privacy Policy", () async {
                   if (!await launch(
                     'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html',

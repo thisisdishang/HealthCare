@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-
 import '../constants.dart';
 
 class TextFieldContainer extends StatelessWidget {
-   Widget child;
-   TextFieldContainer({required this.child,});
+  Widget child;
+
+  TextFieldContainer({
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

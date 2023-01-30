@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-     var size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
       height: size.height,
       child: Stack(
-      //  alignment: Alignment.center,
+        //  alignment: Alignment.center,
         children: <Widget>[
           Positioned(
             top: 0,
@@ -19,7 +18,7 @@ class Background extends StatelessWidget {
               width: size.width * 0.35,
             ),
           ),
-         /* Positioned(
+          /* Positioned(
             bottom: 0,
             right: 0,
             child: Image.asset(

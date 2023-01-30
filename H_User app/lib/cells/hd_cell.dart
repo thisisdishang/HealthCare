@@ -6,18 +6,16 @@ import '../constants.dart';
 class HDCell extends StatefulWidget {
   final name;
   final email;
-  final  specialist;
-  final  profileImage;
+  final specialist;
+  final profileImage;
   final Function onTap;
 
   const HDCell({
-
     required this.name,
     required this.email,
     required this.specialist,
     required this.onTap,
     required this.profileImage,
-
   });
 
   @override
@@ -73,7 +71,7 @@ class _HDCellState extends State<HDCell> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-               /*   Text(
+                  /*   Text(
                     widget.last_name,
                     style: TextStyle(
                       color: Colors.white,
@@ -85,7 +83,7 @@ class _HDCellState extends State<HDCell> {
                     height: 16,
                   ),
                   Text(
-                    widget.specialist+ ' Specialist',
+                    widget.specialist + ' Specialist',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -114,24 +112,27 @@ class _HDCellState extends State<HDCell> {
               ),
             ),
             Positioned(
-              top:60,
+              top: 60,
               right: 10,
               bottom: 10,
               child: Container(
                 child: CircleAvatar(
                   radius: 65,
                   backgroundColor: Colors.white,
-                  child:widget.profileImage == false?CircleAvatar(
-                    radius: 60,
-                    backgroundImage: AssetImage('assets/images/account1.png'),
-                  ) : CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(widget.profileImage),
-                  ),
+                  child: widget.profileImage == false
+                      ? CircleAvatar(
+                          radius: 60,
+                          backgroundImage:
+                              AssetImage('assets/images/account1.png'),
+                        )
+                      : CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(widget.profileImage),
+                        ),
                 ),
               ),
             ),
-          /*  Positioned(
+            /*  Positioned(
 
               child: SizedBox(
                 width: 120,
