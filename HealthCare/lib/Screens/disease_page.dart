@@ -29,7 +29,7 @@ class _DiseaseState extends State<Disease> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.indigo[600],
+          backgroundColor:  kPrimaryColor,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
