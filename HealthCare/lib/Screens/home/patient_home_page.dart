@@ -534,7 +534,7 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: 3,
                     itemBuilder: (BuildContext context, int index) {
                       final DocumentSnapshot doc = snapshot.data!.docs[index];
                       return HDCell(
@@ -561,220 +561,45 @@ class _HomePageState extends State<HomePage> {
                         specialist: doc["specialist"].toString(),
                         profileImage: doc['profileImage'],
                       );
-                      /*Card(
-                        margin: const EdgeInsets.all(10),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Name:     ${documentSnapshot['name']}"),
-                              Text("Email:     ${documentSnapshot['email']}"),
-                              Text("address: ${documentSnapshot['address']}"),
-                              Text("phone:    ${documentSnapshot['phone']}"),
-                              Text("gender:   ${documentSnapshot['gender']}"),
-                            /*  Row(
-                                children: [
-                                  // Press this button to edit a single product
-                                  IconButton(
-                                      icon: const Icon(Icons.edit),
-                                      onPressed: () =>
-                                          _createOrUpdate(documentSnapshot)),
-                                  // This icon button is used to delete a single product
-                                  IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        _deleteProduct(documentSnapshot.id);
-                                      }),
-                                ],
-                              ),*/
-                            ],
-                          ),
-                        ));*/
+
                     },
-                  ); /*new ListView(
-                    primary: false,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    children: getTrdCell(snapshot, context));*/
+                  );
                 }
               })
-          /*StreamBuilder<QuerySnapshot>(
-         //   stream: firebase.snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return new Text("There is no expense");
-              } else {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final DocumentSnapshot doc =
-                    snapshot.data!.docs[index];
-                    return HDCell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                uid: doc['uid'],
-                                name: doc['name'],
-                                email: doc['email'],
-                                address: doc['address'],
-                                experience: doc['experience'],
-                                specialist: doc['specialist'],
-                              ),
-                            ));
-                      },
-                      name: doc["name"].toString(),
-                      email: doc["email"].toString(),
-                      specialist: doc["specialist"].toString(),
-                    );
-                    /*Card(
-                        margin: const EdgeInsets.all(10),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Name:     ${documentSnapshot['name']}"),
-                              Text("Email:     ${documentSnapshot['email']}"),
-                              Text("address: ${documentSnapshot['address']}"),
-                              Text("phone:    ${documentSnapshot['phone']}"),
-                              Text("gender:   ${documentSnapshot['gender']}"),
-                            /*  Row(
-                                children: [
-                                  // Press this button to edit a single product
-                                  IconButton(
-                                      icon: const Icon(Icons.edit),
-                                      onPressed: () =>
-                                          _createOrUpdate(documentSnapshot)),
-                                  // This icon button is used to delete a single product
-                                  IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        _deleteProduct(documentSnapshot.id);
-                                      }),
-                                ],
-                              ),*/
-                            ],
-                          ),
-                        ));*/
-                  },
-                );
-                /* ListView(
-                    primary: false,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    children: getExpenseItems(snapshot, context));*/
-              }
-            }),*/
+
           ),
-      /*ListView.separated(
-        primary: false,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        itemCount: _hDoctors.length,
-        separatorBuilder: (BuildContext context, int index) =>
-            Divider(indent: 16),
-        itemBuilder: (BuildContext context, int index) => HDCell(
-          doctor: _hDoctors[index],
-          onTap: () => _onCellTap(_hDoctors[index]),
-        ),
-      ),*/
-      //),
+
     );
   }
 
   getExpenseItems(AsyncSnapshot<QuerySnapshot> snapshot, BuildContext context) {
     return snapshot.data!.docs
         .map((doc) => Container(
-                width: double.infinity,
-                margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: kPrimaryColor,
-                ),
-                child: Center(
-                    child: Text(
-                  "Mr." +
-                      loggedInUser.name.toString() +
-                      " confirm appointmentpon with Dr." +
-                      doc['age'] +
-                      " on " +
-                      doc['date'] +
-                      " and  " +
-                      doc['time'].toString(),
-                  style: TextStyle(color: Colors.white),
-                )) // child widget, replace with your own
-                )
-            /*HDCell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailPage(
-                            uid: doc['uid'],
-                            name: doc['name'],
-                            email: doc['email'],
-                            address: doc['address'],
-                            experience: doc['experience'],
-                            specialist: doc['specialist'],
-                          ),
-                        ));
-                  },
-                  name: doc["name"].toString(),
-                  email: doc["email"].toString(),
-                  specialist: doc["specialist"].toString(),
-                )*/
-            /*Card(
-    elevation: 5,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-    ),
-    child: ListTile(
-      title: Text(doc["name"]),
-      subtitle: Text(doc.id),
-      onTap: () {},
-    ),
-  )*/
-            )
+            width: double.infinity,
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              color: kPrimaryColor,
+            ),
+            child: Center(
+                child: Text(
+              "Mr." +
+                  loggedInUser.name.toString() +
+                  " confirm appointmentpon with Dr." +
+                  doc['age'] +
+                  " on " +
+                  doc['date'] +
+                  " and  " +
+                  doc['time'].toString(),
+              style: TextStyle(color: Colors.white),
+            )) // child widget, replace with your own
+            ))
         .toList();
   }
 
   /// **********************************************
   /// WIDGETS
   /// **********************************************
-
-  /*AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      brightness: Brightness.light,
-      iconTheme: IconThemeData(color: HexColor('#150047')),
-      leading: IconButton(
-        icon: Icon(
-          Icons.menu,
-          size: 25,
-        ),
-        onPressed: () {},
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(
-            Icons.search,
-            size: 25,
-          ),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }*/
 
   /// Highlighted Doctors Section
 
@@ -815,90 +640,6 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-
-//box...
-
-//         Container(
-//           height: 150,
-//           padding: EdgeInsets.only(top: 14),
-//           child: ListView.builder(
-//             physics: ClampingScrollPhysics(),
-//             scrollDirection: Axis.horizontal,
-//             padding: EdgeInsets.symmetric(horizontal: 20.0),
-//             itemCount: cards.length,
-//             itemBuilder: (context, index) {
-//               //print("images path: ${cards[index].cardImage.toString()}");
-//               return Container(
-//                 margin: EdgeInsets.only(right: 14),
-//                 height: 150,
-//                 width: 140,
-//                 decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(20),
-//                     color: Color(cards[index].cardBackground),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Colors.grey,
-//                         blurRadius: 4.0,
-//                         spreadRadius: 0.0,
-//                         offset: Offset(3, 3),
-//                       ),
-//                     ]
-//                   // image: DecorationImage(
-//                   //   image: AssetImage(cards[index].cardImage),
-//                   //   fit: BoxFit.fill,
-//                   // ),
-//                 ),
-//                 // ignore: deprecated_member_use
-//                 child: FlatButton(
-//                   onPressed: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                           builder: (context) => Docter_page(
-//                               _categories[index].title.toString
-//                           )),
-//                     );
-//                   },
-//                   shape: new RoundedRectangleBorder(
-//                       borderRadius: new BorderRadius.circular(20)),
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       SizedBox(
-//                         height: 16,
-//                       ),
-//                       Container(
-//                         child: CircleAvatar(
-//                             backgroundColor: Colors.white,
-//                             radius: 29,
-//                             child: Icon(
-//                               cards[index].cardIcon,
-//                               size: 26,
-//                               color:
-//                               Color(cards[index].cardBackground),
-//                             )),
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       Container(
-//                         alignment: Alignment.bottomCenter,
-//                         child: Text(
-//                           cards[index].doctor,
-//                           style: TextStyle(
-//                             fontSize: 16,
-//                             color: Colors.white,
-//                             fontWeight: FontWeight.w600,
-//                           ),
-//                         ),
-//                       ),
-//                     ]
-//                   ),
-//                 ),
-//               );
-//             },
-//           ),
-//         ),
         SizedBox(
           height: 100,
           child: ListView.separated(
@@ -964,7 +705,7 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount: 5,
+                  itemCount: 3,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot doc = snapshot.data!.docs[index];
                     return TrdCell(
@@ -993,76 +734,14 @@ class _HomePageState extends State<HomePage> {
                       specialist: doc["specialist"].toString(),
                       profileImage: doc['profileImage'],
                     );
-                    /*Card(
-                                margin: const EdgeInsets.all(10),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Name:     ${documentSnapshot['name']}"),
-                                      Text("Email:     ${documentSnapshot['email']}"),
-                                      Text("address: ${documentSnapshot['address']}"),
-                                      Text("phone:    ${documentSnapshot['phone']}"),
-                                      Text("gender:   ${documentSnapshot['gender']}"),
-                                    /*  Row(
-                                        children: [
-                                          // Press this button to edit a single product
-                                          IconButton(
-                                              icon: const Icon(Icons.edit),
-                                              onPressed: () =>
-                                                  _createOrUpdate(documentSnapshot)),
-                                          // This icon button is used to delete a single product
-                                          IconButton(
-                                              icon: const Icon(Icons.delete),
-                                              onPressed: () {
-                                                _deleteProduct(documentSnapshot.id);
-                                              }),
-                                        ],
-                                      ),*/
-                                    ],
-                                  ),
-                                ));*/
                   },
-                ); /*new ListView(
-                            primary: false,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            children: getTrdCell(snapshot, context));*/
-
+                );
               }
             }), // doctor
-        //*************************************
 
         SizedBox(
           height: 0,
         ),
-        /* ListView.separated(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: _trDoctors.length,
-                  separatorBuilder: (BuildContext context, int index) => Divider(
-                    thickness: 16,
-                    color: Colors.transparent,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                    doctor: _hDoctors[1],
-                                  )),
-                        );
-                      },
-                      child: TrdCell(
-                        doctor: _trDoctors[index],
-                      ),
-                    );
-                  },
-                ),*/
       ],
     );
   }
@@ -1184,114 +863,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-/*
-
-class EventRepository {
-
-  static Future<List> getEvents() async {
-
-    List events = [];
-
-    if (await _shouldRefreshLocalEvents()) {
-      events = await _getEventsFromFirestore();
-      _setLastRefreshToNow();
-      _persistEventsInDatabase(events);
-    } else {
-      events = await _getEventsFromDatabase();
-    }
-
-    return events;
-  }
-
-  static Future<List> _getEventsFromFirestore() async {
-    final CollectionReference fir = FirebaseFirestore.instance.collection('docter');
-    //CollectionReference ref = fir.instance.collection('events');
-   /* QuerySnapshot eventsQuery = await ref
-        .where("time", isGreaterThan: new DateTime.now().millisecondsSinceEpoch)
-        .where("food", isEqualTo: true)
-        .getDocuments();*/
-
-    HashMap<String, DoctorModel> eventsHashMap = new HashMap<String, DoctorModel>();
-
-    fir.get(
-        forEach((document) {
-          eventsHashMap.putIfAbsent(document['id'], () => new DoctorModel(
-              name: document['name'];
-
-          })
-    );
-
-    return eventsHashMap.values.toList();
-  }
-
-  static Future<List<AustinFeedsMeEvent>> _getEventsFromDatabase() async {
-    Database dbClient = await EventsDatabase().db;
-    List<Map<String, dynamic>> eventRecords = await dbClient.query(EVENT_TABLE_NAME);
-    return eventRecords.map((record) => AustinFeedsMeEvent.fromMap(record)).toList();
-  }
-
-  static String _getEventPhotoUrl(Map<dynamic, dynamic> data) {
-    String defaultImage = "";
-    if (data == null) {
-      return defaultImage;
-    }
-
-    Map<dynamic, dynamic> groupPhotoObject = data['groupPhoto'];
-    if (groupPhotoObject == null) {
-      return defaultImage;
-    }
-
-    String photoUrl = groupPhotoObject['photoUrl'];
-    return photoUrl;
-  }
-
-  static LatLng _getLatLng(DocumentSnapshot data) {
-    LatLng defaultLocation = new LatLng(0.0, 0.0);
-    if (data == null) {
-      return defaultLocation;
-    }
-
-    Map<dynamic, dynamic> venueObject = data['venue'];
-    if (venueObject == null) {
-      return defaultLocation;
-    }
-
-    return new LatLng(
-        double.parse(venueObject['lat']), double.parse(venueObject['lon']));
-  }
-
-  static Future<bool> _shouldRefreshLocalEvents() async {
-    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-    SharedPreferences prefs = await _prefs;
-    int lastFetchTimeStamp = prefs.getInt(KEY_LAST_FETCH);
-
-    if (lastFetchTimeStamp == null) {
-      print("last timestamp is null");
-      return true;
-    }
-
-    return(new DateTime.now().millisecondsSinceEpoch - lastFetchTimeStamp) > (REFRESH_THRESHOLD);
-  }
-
-  static void _setLastRefreshToNow() async {
-    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-    SharedPreferences prefs = await _prefs;
-    prefs.setInt(KEY_LAST_FETCH, new DateTime.now().millisecondsSinceEpoch);
-  }
-
-  static void _persistEventsInDatabase(List<AustinFeedsMeEvent> events) async {
-    Database dbClient = await EventsDatabase().db;
-
-    dbClient.delete(EVENT_TABLE_NAME);
-
-    events.forEach((event) async {
-      int eventId = await dbClient.insert(EVENT_TABLE_NAME, event.toMap());
-      print(eventId.toString());
-    });
-  }
-
-}*/
-
 void initFeatureBuilder() {
   print("Feature Builder Calling");
   FutureBuilder(
@@ -1382,99 +953,3 @@ dialog(BuildContext context) => showDialog(
             ],
           ),
         ));
-//
-// class Alert extends StatefulWidget {
-//   var context;
-//
-//   Alert({this.context});
-//
-//   @override
-//   State<Alert> createState() => _AlertState();
-// }
-//
-// class _AlertState extends State<Alert> {
-//   var rating;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Text("Pratik"),
-//     );
-//     // return Dialog(
-//     //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-//     //     child: Stack(
-//     //       overflow: Overflow.visible,
-//     //       alignment: Alignment.topCenter,
-//     //       children: [
-//     //
-//     //         Container(
-//     //           height: 230,
-//     //           child: Padding(
-//     //             padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
-//     //             child: Column(
-//     //               children: [
-//     //                 Text(
-//     //                   'Dr. ',
-//     //                   style:
-//     //                   TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-//     //                 ),
-//     //                 SizedBox(
-//     //                   height: 5,
-//     //                 ),
-//     //                 Text(
-//     //                   'Pending till doctor confirm this appointment request.',
-//     //                   style: TextStyle(fontSize: 20),
-//     //                   textAlign: TextAlign.center,
-//     //                 ),
-//     //                 SizedBox(
-//     //                   height: 20,
-//     //                 ),
-//     //                 RaisedButton(
-//     //                   onPressed: () {
-//     //                     // Navigator.of(context).pop();
-//     //                     Navigator.pushAndRemoveUntil<dynamic>(
-//     //                         context,
-//     //                         MaterialPageRoute<dynamic>(
-//     //                             builder: (BuildContext context) => HomePage()),
-//     //                             (route) => false);
-//     //
-//     //                   },
-//     //                   color: kPrimaryColor,
-//     //                   child: Text(
-//     //                     'Okay',
-//     //                     style: TextStyle(color: Colors.white),
-//     //                   ),
-//     //                 )
-//     //               ],
-//     //             ),
-//     //           ),
-//     //         ),
-//     //         Positioned(
-//     //             top: -60,
-//     //             child: CircleAvatar(
-//     //               backgroundColor: Colors.grey,
-//     //               radius: 50,
-//     //               child: Image.asset('assets/images/logo.jpg'),
-//     //               // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
-//     //             )),
-//     //       ],
-//     //     ));
-//   }
-//
-//   Widget buildRating() => RatingBar.builder(
-//         itemBuilder: (context, _) => Icon(
-//           Icons.star,
-//           color: Colors.amber,
-//         ),
-//         initialRating: rating,
-//         itemSize: 40,
-//         itemPadding: EdgeInsets.symmetric(horizontal: 4),
-//         updateOnDrag: true,
-//         onRatingUpdate: (velue) {
-//           setState(() {
-//             rating = velue;
-//           });
-//         },
-//         maxRating: 1,
-//       );
-// }
