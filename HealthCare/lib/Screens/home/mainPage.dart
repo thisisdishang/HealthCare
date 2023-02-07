@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hospital_appointment/Screens/Appointment.dart';
 import 'package:hospital_appointment/Screens/home/patient_home_page.dart';
@@ -189,13 +188,13 @@ class _MainPageState extends State<MainPage> {
                   GButton(
                     iconSize: _selectedIndex != 0 ? 28 : 25,
                     icon: _selectedIndex == 0
-                        ? FlutterIcons.home_fou
-                        : FlutterIcons.home_variant_outline_mco,
+                        ? Icons.home
+                        : Icons.home_outlined,
                     text: 'Home',
                   ),
                   GButton(
                     iconSize: _selectedIndex == 1 ? 30 : 27,
-                    icon: FlutterIcons.medical_bag_mco,
+                    icon: Icons.medical_services,
                     text: 'Disease',
                   ),
                   GButton(

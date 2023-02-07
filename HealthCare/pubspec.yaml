@@ -53,8 +53,6 @@ dependencies:
   url_launcher: ^6.1.5
   flutter_svg: ^1.1.1+1
 
-
-  flutter_icons: ^1.1.0
   flutter_tabler_icons: ^1.1.1
   provider: ^6.0.5
   cool_alert: ^1.1.0

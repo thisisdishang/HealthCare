@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hospital_appointment/cells/category_cell.dart';
 import 'package:hospital_appointment/models/category.dart';
 
@@ -62,7 +61,7 @@ class _DoctorsListState extends State<DoctorsList> {
                     fontWeight: FontWeight.w800,
                   ),
                   prefixIcon: Icon(
-                    FlutterIcons.search1_ant,
+                   Icons.search,
                     size: 20,
                   ),
                   prefixStyle: TextStyle(
