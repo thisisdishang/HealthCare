@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/Profile/profile.dart';
+import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -102,7 +103,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   await FirebaseAuth.instance.signOut();
                   _prefService.removeCache("password");
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Loginas()));
+                      MaterialPageRoute(builder: (context) => login_page()));
                 }),
               ],
             ),

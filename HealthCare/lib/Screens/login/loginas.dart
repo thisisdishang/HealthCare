@@ -173,8 +173,8 @@ class _LoginasState extends State<Loginas> {
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
-                                primary: Colors.indigo[800],
-                                onPrimary: Colors.indigo[800],
+                                primary: Colors.deepPurple[600],
+                                onPrimary: Colors.deepPurple[600],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),

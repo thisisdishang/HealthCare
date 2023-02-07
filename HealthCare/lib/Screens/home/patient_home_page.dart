@@ -561,14 +561,10 @@ class _HomePageState extends State<HomePage> {
                         specialist: doc["specialist"].toString(),
                         profileImage: doc['profileImage'],
                       );
-
                     },
                   );
                 }
-              })
-
-          ),
-
+              })),
     );
   }
 

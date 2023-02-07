@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/home/mainPage.dart';
+import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import '../services/shared_preferences_service.dart';
 import 'home/patient_home_page.dart';
@@ -40,7 +41,7 @@ class SplashViewState extends State<SplashView> {
       } else {
         return Timer(Duration(seconds: 2), () {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => Loginas()));
+              MaterialPageRoute(builder: (BuildContext context) => login_page()));
           //  Navigator.pop(context);
           //  Duration(seconds: 2);
         });
