@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/Profile/profile.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
+import 'package:hospital_appointment/newapp/notificationList.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Screens/login/loginas.dart';
@@ -98,6 +99,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   )) {
                     throw 'Could not launch ';
                   }
+                }),
+                CustomList(Icons.notifications_active, "Notification", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NotificationList()));
                 }),
                 CustomList(Icons.lock, "Log Out", () async {
                   await FirebaseAuth.instance.signOut();

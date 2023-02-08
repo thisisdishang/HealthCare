@@ -22,7 +22,7 @@ class Carouselslider extends StatelessWidget {
             //alignment:  Alignment.centerLeft,
             //width: MediaQuery.of(context).size.width,
             height: 140,
-            margin: EdgeInsets.only(left: 0, right: 0, bottom: 20),
+            margin: EdgeInsets.only(left: 0, right: 0, bottom: 10),
             padding: EdgeInsets.only(left: 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

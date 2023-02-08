@@ -882,25 +882,25 @@ class _DetailPageState extends State<DetailPage> {
             },
           ),
         ),
-        //
-        // Container(
-        //   child: IconButton(
-        //     icon: ImageIcon(
-        //       AssetImage("assets/images/chat.png"),
-        //       size: 25,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {
-        //       Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //               builder: (context) => ChatScreen1(
-        //                   did: widget.uid,
-        //                   doctor_name: widget.name,
-        //                   phone: widget.phone)));
-        //     },
-        //   ),
-        // ),
+
+        Container(
+          child: IconButton(
+            icon: ImageIcon(
+              AssetImage("assets/images/chat.png"),
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChatScreen1(
+                          did: widget.uid,
+                          doctor_name: widget.name,
+                          phone: widget.phone)));
+            },
+          ),
+        ),
       ],
     );
   }

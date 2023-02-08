@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/constants.dart';
 
 class NotificationList extends StatefulWidget {
   @override
@@ -10,12 +11,12 @@ class _NotificationListState extends State<NotificationList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: kPrimaryColor,
         leading: IconButton(
             splashRadius: 20,
             icon: Icon(
               Icons.arrow_back_ios,
-              color: Colors.indigo,
+              color: Colors.white,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -23,7 +24,7 @@ class _NotificationListState extends State<NotificationList> {
         title: Text(
           'Notifications',
           style: TextStyle(
-            color: Colors.black54,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w400,
           ),

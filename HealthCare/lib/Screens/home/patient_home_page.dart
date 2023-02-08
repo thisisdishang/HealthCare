@@ -145,103 +145,66 @@ class _HomePageState extends State<HomePage> {
       Appointment(),
       Profile_page(),
     ];
-    // setState(
-    //       () {
-    //     if (hour >= 5 && hour < 12) {
-    //       _message = 'Good Morning';
-    //     } else if (hour >= 12 && hour <= 17) {
-    //       _message = 'Good Afternoon';
-    //     } else {
-    //       _message = 'Good Evening';
-    //     }
-    //   },
-    // );
+    setState(
+      () {
+        if (hour >= 5 && hour < 12) {
+          _message = 'Good Morning';
+        } else if (hour >= 12 && hour <= 17) {
+          _message = 'Good Afternoon';
+        } else {
+          _message = 'Good Evening';
+        }
+      },
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       key: _scaffoldKey,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text("HealthCare"),
-
-        // actions: [
-        //   loggedInUser.uid == null
-        //       ? IconButton(
-        //       onPressed: () async {
-        //         await FirebaseAuth.instance.signOut();
-        //         _prefService.removeCache("password");
-        //         Navigator.of(context).pushReplacement(
-        //             MaterialPageRoute(builder: (context) => Loginas()));
-        //       },
-        //       icon: SvgPicture.asset(
-        //         'assets/images/power.svg',
-        //         color: Colors.white,
-        //       ))
-        //       : SizedBox()
-        // ],
-      ),
-//         appBar: AppBar(
-//           automaticallyImplyLeading: false,
-//           actions: <Widget>[Container()],
-//           backgroundColor: Colors.white,
-//           elevation: 0,
-//           title: Container(
-//             padding: EdgeInsets.only(top: 5),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.end,
-//               children: [
-//                 Container(
-//                   //width: MediaQuery.of(context).size.width/1.3,
-//                   alignment: Alignment.center,
-//                   child: Text(
-//                     _message,
-//                     style: TextStyle(
-//                       color: Colors.black54,
-//                       fontSize: 20,
-//                       fontWeight: FontWeight.w400,
-//                     ),
-//                   ),
-//                   ),
-//                 SizedBox(
-//                   width: 55,
-//                 ),
-// // logout button
-//             IconButton(
-//                           onPressed: () async {
-//                             await FirebaseAuth.instance.signOut();
-//                             _prefService.removeCache("password");
-//                             Navigator.of(context).pushReplacement(
-//                                 MaterialPageRoute(builder: (context) => Loginas()));
-//                           },
-//                           icon: SvgPicture.asset(
-//                             'assets/images/power.svg',
-//                             color: Colors.black,
-//                           )
-//                          ),
-// //Notification icon
-//             IconButton(
-//                           splashRadius: 20,
-//                           icon: Icon(Icons.notifications_active),
-//                           onPressed: () {
-//                             Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                     builder: (contex) => NotificationList()));
-//                               },
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-// //Notification icon
-//               iconTheme: IconThemeData(
-//                 color: Colors.black,
-//               ),
-//             ),
-
-      // ************************************
-      // Drawer
-      //*************************************
       drawer: loggedInUser.uid == null ? SizedBox() : MyDrawer(),
-
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 78),
+          child: Text("HealthCare"),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        // automaticallyImplyLeading: false,
+        // actions: <Widget>[Container()],
+        // backgroundColor: kPrimaryColor,
+        // elevation: 0,
+        // title: Container(
+        //   padding: EdgeInsets.only(top: 5),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.end,
+        //     children: [
+        //       Container(
+        //         //width: MediaQuery.of(context).size.width/1.3,
+        //         alignment: Alignment.center,
+        //         child: Text(
+        //           _message,
+        //           style: TextStyle(
+        //             color: Colors.white,
+        //             fontSize: 20,
+        //             fontWeight: FontWeight.w400,
+        //           ),
+        //         ),
+        //       ),
+        //       SizedBox(
+        //         width: 55,
+        //       ),
+        //       //Notification icon
+        //       IconButton(
+        //         splashRadius: 20,
+        //         icon: Icon(Icons.notifications_active),
+        //         onPressed: () {
+        //           Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => NotificationList()));
+        //         },
+        //       ),
+        //     ],
+        //   ),
+        // ),
+      ),
       body: loggedInUser.uid == null
           ? Center(
               child: Text("Wait for few seconds"),
@@ -259,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      "Hello " + loggedInUser.name.toString(),
+                      "Hello " + loggedInUser.name.toString()+" "+_message,
                       style: TextStyle(
                         fontSize: 18,
                         color: kPrimaryColor,
@@ -270,7 +233,7 @@ class _HomePageState extends State<HomePage> {
 // les's find doctor
                   Container(
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 20, bottom: 25),
+                    padding: EdgeInsets.only(left: 20, bottom: 15),
                     child: Text(
                       "Let's Find Your\nDoctor",
                       style: TextStyle(
@@ -281,8 +244,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 16),
+                      margin: EdgeInsets.only(top: 5),
                       child: _hDoctorsSection()),
+
 // Search doctor
 //                   Container(
 //                     padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
@@ -342,22 +306,22 @@ class _HomePageState extends State<HomePage> {
 //                   ),
 
 //ads..
-//                   Container(
-//                     padding: EdgeInsets.only(left: 23, bottom: 10),
-//                     alignment: Alignment.centerLeft,
-//                     child: Text(
-//                       "We care for you",
-//                       textAlign: TextAlign.center,
-//                       style: TextStyle(
-//                           color: Colors.blue[800],
-//                           fontWeight: FontWeight.bold,
-//                           fontSize: 18),
-//                     ),
-//                   ),
-//                   Container(
-//                     width: MediaQuery.of(context).size.width,
-//                     child: Carouselslider(),
-//                   ),
+                  Container(
+                    padding: EdgeInsets.only(top: 18, left: 23, bottom: 15),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "We care for you",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Carouselslider(),
+                  ),
 
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),

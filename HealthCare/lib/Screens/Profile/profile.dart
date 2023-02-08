@@ -51,18 +51,17 @@ class _Profile_pageState extends State<Profile_page> {
 
   var result;
 
-
-  getConnectivity()async{
+  getConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
 // I am connected to a mobile network.
-      status =true;
+      status = true;
       print("Mobile Data Connected !");
     } else if (connectivityResult == ConnectivityResult.wifi) {
       print("Wifi Connected !");
-      status =true;
+      status = true;
 // I am connected to a wifi network.
-    }else{
+    } else {
       print("No Internet !");
     }
   }
@@ -97,8 +96,7 @@ class _Profile_pageState extends State<Profile_page> {
         setState(() {
           status = false;
         });
-      }
-      else {
+      } else {
         setState(() {
           status = true;
         });
@@ -692,12 +690,13 @@ class _Profile_pageState extends State<Profile_page> {
                           ),
                           onPressed: () async {
                             var url;
-                            if(status == false){
+                            if (status == false) {
                               showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (BuildContext context) =>AdvanceCustomAlert());
-                            }else{
+                                  builder: (BuildContext context) =>
+                                      AdvanceCustomAlert());
+                            } else {
                               showLoadingDialog(context: context);
                               if (file != null) {
                                 url = await uploadImage();
@@ -712,38 +711,39 @@ class _Profile_pageState extends State<Profile_page> {
                                     .collection('patient')
                                     .doc(loggedInUser.uid)
                                     .update({
-                                  'name':
-                                  name == null ? loggedInUser.name : name,
-                                  'last name': last_name == null
-                                      ? loggedInUser.last_name
-                                      : last_name,
-                                  'address': t_address == null
-                                      ? loggedInUser.address
-                                      : t_address,
-                                  'age': t_age == null
-                                      ? loggedInUser.age
-                                      : t_age,
-                                  'dob': t_date == null
-                                      ? loggedInUser.dob
-                                      : t_date,
-                                  'phone': phoneController == null
-                                      ? loggedInUser.phone
-                                      : phoneController,
-                                  'profileImage': url == null
-                                      ? loggedInUser.profileImage
-                                      : url,
-                                })
+                                      'name': name == null
+                                          ? loggedInUser.name
+                                          : name,
+                                      'last name': last_name == null
+                                          ? loggedInUser.last_name
+                                          : last_name,
+                                      'address': t_address == null
+                                          ? loggedInUser.address
+                                          : t_address,
+                                      'age': t_age == null
+                                          ? loggedInUser.age
+                                          : t_age,
+                                      'dob': t_date == null
+                                          ? loggedInUser.dob
+                                          : t_date,
+                                      'phone': phoneController == null
+                                          ? loggedInUser.phone
+                                          : phoneController,
+                                      'profileImage': url == null
+                                          ? loggedInUser.profileImage
+                                          : url,
+                                    })
                                     .then((value) => Loading())
-                                    .then((value) =>Navigator.pushAndRemoveUntil<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                        builder: (BuildContext context) =>
-                                            HomePage()),
-                                        (route) => false));
+                                    .then((value) =>
+                                        Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        HomePage()),
+                                            (route) => false));
                               }
                             }
-
-
                           },
                           child: Text(
                             'Update Profile',
@@ -800,5 +800,3 @@ class _Profile_pageState extends State<Profile_page> {
     return taskSnapshot.ref.getDownloadURL();
   }
 }
-
-

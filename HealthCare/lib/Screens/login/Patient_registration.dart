@@ -588,7 +588,7 @@ class _RegistrationState extends State<Registration> {
                                         onChanged: (val) {
                                           setSelectedstatus(val as int);
                                         }),
-                                    Text("married"),
+                                    Text("Married"),
                                   ],
                                 )
                               ],
