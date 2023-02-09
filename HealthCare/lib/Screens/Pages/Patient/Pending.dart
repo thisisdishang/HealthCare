@@ -17,7 +17,8 @@ class Pending extends StatefulWidget {
 class _PendingState extends State<Pending> {
   var appointment = FirebaseFirestore.instance;
   UserModel loggedInUser = UserModel();
-  var user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   bool isLoading = true;
   var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
@@ -32,6 +33,7 @@ class _PendingState extends State<Pending> {
         .doc(user!.uid)
         .get()
         .then((value) {
+      print(user!.uid);
       loggedInUser = UserModel.fromMap(value.data());
       Future<void>.delayed(const Duration(seconds: 2), () {
         if (mounted) {
@@ -44,16 +46,23 @@ class _PendingState extends State<Pending> {
     });
   }
 
+  // Stream<QuerySnapshot> pt = FirebaseFirestore.instance
+  //     .collection('pending')
+  //     .where("pid",
+  //         isEqualTo: /*user!.uid.toString()*/ "SZlIi4DRdyaFNT9G54ZMKBSCpzD2")
+  //     .snapshots();
+
   @override
   Widget build(BuildContext context) {
     var firebase = appointment
         .collection('pending')
         .orderBy('date', descending: false)
         .orderBy('time', descending: false)
-        .where("pid", isEqualTo: loggedInUser.uid)
+        .where('pid', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: false)
         .where('date', isGreaterThanOrEqualTo: today_date)
         .snapshots();
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -61,6 +70,14 @@ class _PendingState extends State<Pending> {
             stream: firebase,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              // final List ptdata = [];
+              // snapshot.data!.docs.map((DocumentSnapshot document) {
+              //   Map a = document.data() as Map<String, dynamic>;
+              //   ptdata.add(a);
+              //   print(ptdata);
+              //   print(pt);
+              // });
+
               if (!snapshot.hasData) {
                 return Container(
                     height: size.height * 1,

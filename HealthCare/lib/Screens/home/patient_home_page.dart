@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      "Hello " + loggedInUser.name.toString()+" "+_message,
+                      "Hello " + loggedInUser.name.toString() + " " + _message,
                       style: TextStyle(
                         fontSize: 18,
                         color: kPrimaryColor,
@@ -414,7 +414,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(10.0),
                                               child: Center(
                                                 child: doc['approve'] == false
                                                     ? Text(

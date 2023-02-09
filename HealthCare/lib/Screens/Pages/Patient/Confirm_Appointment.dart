@@ -51,7 +51,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
         .collection('pending')
         .orderBy('date', descending: true)
         .orderBy('time', descending: false)
-        .where("pid", isEqualTo: loggedInUser.uid)
+        .where('pid', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: true)
         .where('status', isEqualTo: false)
         .where('date', isGreaterThanOrEqualTo: today_date)

@@ -76,7 +76,9 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 10;
     final double itemWidth = size.width / 4;
 
@@ -138,13 +140,13 @@ class _Appoin_timeState extends State<Appoin_time> {
                         children: [
                           c_date == null
                               ? Text(
-                                  "Select Date",
-                                  style: TextStyle(color: Colors.white),
-                                )
+                            "Select Date",
+                            style: TextStyle(color: Colors.white),
+                          )
                               : Text(
-                                  c_date,
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                            c_date,
+                            style: TextStyle(color: Colors.white),
+                          ),
                           Icon(
                             Icons.calendar_today,
                             color: Colors.white,
@@ -185,21 +187,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                         child: today_app1 >= 2
                             ? time_Button(morining[0])
                             : Container(
-                                height: 50,
-                                width: 150,
-                                margin: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: time == morining[0]
-                                      ? Colors.green
-                                      : kPrimaryColor,
-                                ),
-                                child: Center(
-                                    child: Text(
+                            height: 50,
+                            width: 150,
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                              color: time == morining[0]
+                                  ? Colors.green
+                                  : kPrimaryColor,
+                            ),
+                            child: Center(
+                                child: Text(
                                   morining[0],
                                   style: TextStyle(color: Colors.white),
                                 )) // child widget, replace with your own
-                                ),
+                        ),
                         onTap: () {
                           if (today_app1 < 2) {
                             if (c_date == null) {
@@ -232,21 +234,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                       child: today_app2 >= 2
                           ? time_Button(morining[1])
                           : Container(
-                              height: 50,
-                              width: 150,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: time == morining[1]
-                                    ? Colors.green
-                                    : kPrimaryColor,
-                              ),
-                              child: Center(
-                                  child: Text(
+                          height: 50,
+                          width: 150,
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: time == morining[1]
+                                ? Colors.green
+                                : kPrimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
                                 morining[1],
                                 style: TextStyle(color: Colors.white),
                               )) // child widget, replace with your own
-                              ),
+                      ),
                     ),
                   ],
                 ),
@@ -290,21 +292,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                       child: today_app3 >= 2
                           ? time_Button(afternoon[0])
                           : Container(
-                              height: 50,
-                              width: 150,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: time == afternoon[0]
-                                    ? Colors.green
-                                    : kPrimaryColor,
-                              ),
-                              child: Center(
-                                  child: Text(
+                          height: 50,
+                          width: 150,
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: time == afternoon[0]
+                                ? Colors.green
+                                : kPrimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
                                 afternoon[0],
                                 style: TextStyle(color: Colors.white),
                               )) // child widget, replace with your own
-                              ),
+                      ),
                     ),
                     // AFTERNOON Button 2.......................................
                     GestureDetector(
@@ -324,21 +326,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                       child: today_app4 >= 2
                           ? time_Button(afternoon[1])
                           : Container(
-                              height: 50,
-                              width: 150,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: time == afternoon[1]
-                                    ? Colors.green
-                                    : kPrimaryColor,
-                              ),
-                              child: Center(
-                                  child: Text(
+                          height: 50,
+                          width: 150,
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: time == afternoon[1]
+                                ? Colors.green
+                                : kPrimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
                                 afternoon[1],
                                 style: TextStyle(color: Colors.white),
                               )) // child widget, replace with your own
-                              ),
+                      ),
                     ),
                   ],
                 ),
@@ -362,21 +364,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                     child: today_app5 >= 2
                         ? time_Button(afternoon[2])
                         : Container(
-                            height: 50,
-                            width: 150,
-                            margin: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: time == afternoon[2]
-                                  ? Colors.green
-                                  : kPrimaryColor,
-                            ),
-                            child: Center(
-                                child: Text(
+                        height: 50,
+                        width: 150,
+                        margin: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          color: time == afternoon[2]
+                              ? Colors.green
+                              : kPrimaryColor,
+                        ),
+                        child: Center(
+                            child: Text(
                               afternoon[2],
                               style: TextStyle(color: Colors.white),
                             )) // child widget, replace with your own
-                            ),
+                    ),
                   ),
                 ),
                 //************************************************
@@ -418,21 +420,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                       child: today_app6 >= 2
                           ? time_Button(evening[0])
                           : Container(
-                              height: 50,
-                              width: 150,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: time == evening[0]
-                                    ? Colors.green
-                                    : kPrimaryColor,
-                              ),
-                              child: Center(
-                                  child: Text(
+                          height: 50,
+                          width: 150,
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: time == evening[0]
+                                ? Colors.green
+                                : kPrimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
                                 evening[0],
                                 style: TextStyle(color: Colors.white),
                               )) // child widget, replace with your own
-                              ),
+                      ),
                     ),
                     // EVENING Button 2.........................................
                     GestureDetector(
@@ -452,21 +454,21 @@ class _Appoin_timeState extends State<Appoin_time> {
                       child: today_app7 >= 2
                           ? time_Button(evening[1])
                           : Container(
-                              height: 50,
-                              width: 150,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: time == evening[1]
-                                    ? Colors.green
-                                    : kPrimaryColor,
-                              ),
-                              child: Center(
-                                  child: Text(
+                          height: 50,
+                          width: 150,
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: time == evening[1]
+                                ? Colors.green
+                                : kPrimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
                                 evening[1],
                                 style: TextStyle(color: Colors.white),
                               )) // child widget, replace with your own
-                              ),
+                      ),
                     ),
                   ],
                 ),
@@ -502,52 +504,54 @@ class _Appoin_timeState extends State<Appoin_time> {
                       style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                         backgroundColor: kPrimaryColor,
                       ),
                       onPressed: isEnabled1
                           ? () {
-                              FirebaseFirestore firebaseFirestore =
-                                  FirebaseFirestore.instance;
-                              firebaseFirestore
-                                  .collection('pending')
-                                  .add({
-                                    'pid': loggedInUser.uid.toString(),
-                                    'name': loggedInUser.name.toString() +
-                                        " " +
-                                        loggedInUser.last_name.toString(),
-                                    'date': c_date,
-                                    'time': time,
-                                    'approve': false,
-                                    'did': widget.uid,
-                                    'phone': loggedInUser.phone,
-                                    'doctor_name': widget.name.toString(),
-                                    'visited': false,
-                                    'rating': false,
-                                    'status': false,
-                                  })
-                                  .then((value) => Fluttertoast.showToast(
-                                      msg: "Pending Appointment",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: kPrimaryColor,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0))
-                                  .then((value) => showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) =>
-                                          AdvanceCustomAlert(
-                                              widget.name.toString())))
-                                  .catchError((e) {
-                                    print('Error Data2' + e.toString());
-                                  });
+                        FirebaseFirestore firebaseFirestore =
+                            FirebaseFirestore.instance;
+                        firebaseFirestore
+                            .collection('pending')
+                            .add({
+                          'pid': loggedInUser.uid.toString(),
+                          'name': loggedInUser.name.toString() +
+                              " " +
+                              loggedInUser.last_name.toString(),
+                          'date': c_date,
+                          'time': time,
+                          'approve': false,
+                          'did': widget.uid,
+                          'phone': loggedInUser.phone,
+                          'doctor_name': widget.name.toString(),
+                          'visited': false,
+                          'rating': false,
+                          'status': false,
+                        })
+                            .then((value) =>
+                            Fluttertoast.showToast(
+                                msg: "Pending Appointment",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white,
+                                fontSize: 16.0))
+                            .then((value) =>
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) =>
+                                    AdvanceCustomAlert(
+                                        widget.name.toString())))
+                            .catchError((e) {
+                          print('Error Data2' + e.toString());
+                        });
 
-                              /*setState(() {
+                        /*setState(() {
                             print("Sleact Time" + time);
                           });*/
-                            }
+                      }
                           : null,
                       child: Text(
                         'Book Appointment',
@@ -670,7 +674,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: morining[1])
                         .get()
@@ -692,7 +696,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[0])
                         .get()
@@ -714,7 +718,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[1])
                         .get()
@@ -736,7 +740,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: afternoon[2])
                         .get()
@@ -758,7 +762,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: evening[0])
                         .get()
@@ -786,7 +790,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
+                    // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: evening[1])
                         .get()
@@ -823,16 +827,14 @@ class _Appoin_timeState extends State<Appoin_time> {
         ),
         child: Center(
             child: Text(
-          time,
-          style: TextStyle(color: Colors.white),
-        )) // child widget, replace with your own
-        );
+              time,
+              style: TextStyle(color: Colors.white),
+            )) // child widget, replace with your own
+    );
   }
 
-  Widget time_Button_active(
-    time,
-    button_time,
-  ) {
+  Widget time_Button_active(time,
+      button_time,) {
     return Container(
         height: 50,
         width: 150,
@@ -843,10 +845,10 @@ class _Appoin_timeState extends State<Appoin_time> {
         ),
         child: Center(
             child: Text(
-          time,
-          style: TextStyle(color: Colors.white),
-        )) // child widget, replace with your own
-        );
+              time,
+              style: TextStyle(color: Colors.white),
+            )) // child widget, replace with your own
+    );
   }
 }
 
@@ -874,7 +876,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                     Text(
                       'Dr. ' + name,
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(
                       height: 5,
@@ -894,7 +896,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                             context,
                             MaterialPageRoute<dynamic>(
                                 builder: (BuildContext context) => HomePage()),
-                            (route) => false);
+                                (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor),
