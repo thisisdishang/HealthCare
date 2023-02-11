@@ -85,41 +85,15 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                           itemBuilder: (BuildContext context, int index) {
                             final DocumentSnapshot doc =
                                 snapshot.data!.docs[index];
-                            // return Text("Popat");
-                            /*  return ListData(doc['name'], doc['time'], size, doc['phone'],"Confirm",(){
-                        FirebaseFirestore firebaseFirestore =
-                            FirebaseFirestore.instance;
-                        firebaseFirestore
-                            .collection('doctor/' + doc['did'] + '/user')
-                            .add({
-                          'name': doc['name'],
-                          'date': doc['date'],
-                          'time': doc['time'],
-                        }).catchError((e) {
-                          print("Error Data " + e.toString());
-                        });
-                        firebaseFirestore
-                            .collection('patient/' +doc['pid']+toString() +
-                            '/appointment')
-                            .add({
-                          'name':loggedInUser.name,
-                          'date': doc['date'],
-                          'time': doc['time']
-                        }).catchError((e) {
-                          print('Error Data2' + e.toString());
-                        });
-                      //  await Future.delayed(Duration(seconds: 2));
-                                  appointment.collection('pending').doc(doc.id).delete();
 
-                      });*/
                             Future.delayed(Duration(seconds: 3));
                             return snapshot.hasData == null
                                 ? Center(child: Text("Doctor Not Available"))
                                 : Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
+                                        horizontal: 8, vertical: 6),
                                     child: Container(
-                                      height: 110,
+                                      height: 104,
                                       child: Card(
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
@@ -131,21 +105,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                 BorderRadius.circular(8.0),
                                             color: Colors.green.shade400,
                                           ),
-
-                                          /*  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(8.0),
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.green,
-                                          Colors.green.shade400,
-                                          Colors.white,
-                                       //   Colors.yellow.shade300,
-                                        ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
-                                    ),*/
                                           child: Stack(
                                             children: [
                                               Column(
@@ -163,12 +122,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                         child: Text(
                                                           "Dr." +
                                                               doc['doctor_name'],
-                                                          /* "Your confirm appointment with Dr." +
-                                                        doc['doctor_name'] +
-                                                        " is Confirmed at  " +
-                                                        doc['date'] +
-                                                        " and  " +
-                                                        doc['time'].toString(),*/
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -193,12 +146,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                         child: Text(
                                                           "Date: " +
                                                               doc['date'],
-                                                          /* "Your confirm appointment with Dr." +
-                                                        doc['doctor_name'] +
-                                                        " is Confirmed at  " +
-                                                        doc['date'] +
-                                                        " and  " +
-                                                        doc['time'].toString(),*/
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -221,12 +168,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                         child: Text(
                                                           "Time: " +
                                                               doc['time'],
-                                                          /* "Your confirm appointment with Dr." +
-                                                        doc['doctor_name'] +
-                                                        " is Confirmed at  " +
-                                                        doc['date'] +
-                                                        " and  " +
-                                                        doc['time'].toString(),*/
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -304,35 +245,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                       ),
                                     ),
                                   );
-                            /*if(!snapshot.hasData){
-                              return Center(child: Text("Doctor Not Available"));
-                            }*/
-                            /*
-                            Card(
-                             child: Container(
-                                  width: double.infinity,
-                                  margin: EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: doc['approve'] == false ?Colors.orangeAccent:Colors.green//kPrimaryColor,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                        child: Text(
-                                          "Mr." +
-                                              loggedInUser.name.toString() +
-                                              " confirm appointmentpon with Dr." +
-                                              doc['doctor_name'] +
-                                              " on " +
-                                              doc['date'] +
-                                              " and  " +
-                                              doc['time'].toString(),
-                                          style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),
-                                        )),
-                                  ) // child widget, replace with your own
-                              ),
-                            );*/
                           },
                         ),
                       );

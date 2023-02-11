@@ -47,12 +47,12 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
       firebase = appointment
           .collection('pending')
           .orderBy('date', descending: true)
-          //.orderBy('time', descending: false)
+          .orderBy('time', descending: false)
           .where('pid', isEqualTo: loggedInUser.uid)
-          // .where('approve', isEqualTo: true)
+          .where('approve', isEqualTo: true)
           .where('date', isLessThan: today_date)
           //  .where("approve", isEqualTo: "not visited")
-          //  .where('approve', isEqualTo: "visited")
+          .where('visited', isEqualTo: true)
           .snapshots();
 
       setState(() {

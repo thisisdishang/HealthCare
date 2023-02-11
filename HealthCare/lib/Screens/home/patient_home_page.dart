@@ -101,25 +101,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // void initState() {
-  //   // TODO: implement initState
-  //
-  //   super.initState();
-  //
-  //   tabController = TabController(length: 3, initialIndex: 0, vsync: this);
-  //   loggedInUser = UserModel();
-  //   FirebaseFirestore.instance
-  //       .collection("patient")
-  //       .doc(user!.uid)
-  //       .get()
-  //       .then((value) {
-  //     loggedInUser = UserModel.fromMap(value.data());
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   });
-  // }
-
   @override
   void dispose() {
     _doctorName.dispose();
@@ -131,7 +112,7 @@ class _HomePageState extends State<HomePage> {
     context1 = context;
     var today_date =
         (new DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
-    // print("DialgUId: "+uid);
+
     sleep(Duration(seconds: 1));
     var _message;
     DateTime now = DateTime.now();
@@ -140,8 +121,6 @@ class _HomePageState extends State<HomePage> {
 
     List<Widget> _pages = [
       HomePage(),
-      // DoctorsList(),
-      //Center(child: Text('New Appointment')),
       Appointment(),
       Profile_page(),
     ];

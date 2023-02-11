@@ -95,67 +95,6 @@ class _AppointmentState extends State<Appointment>
         controller: tabController,
         children: [Confirm_Appointment(), Pending(), Patient_RecentList()],
       ),
-      /*Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: StreamBuilder<QuerySnapshot>(
-              stream: appointment
-                  .collection('pending')
-                  .where('pid', isEqualTo: loggedInUser.uid)
-                  .snapshots(),
-              /*.collection(
-                            'patient/' + loggedInUser.uid.toString() + '/appointment')
-                            .snapshots(),*/
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return new Text("There is no expense");
-                } else {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    // shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final DocumentSnapshot doc = snapshot.data!.docs[index];
-
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: kPrimaryColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(
-                                      child: Text(
-                                    "Mr." +
-                                        loggedInUser.name.toString() +
-                                        " confirm appointmentpon with Dr." +
-                                        doc['name'] +
-                                        " on " +
-                                        doc['date'] +
-                                        " and  " +
-                                        doc['time'].toString(),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 16),
-                                  )),
-                                ) // child widget, replace with your own
-                                ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                }
-              }),
-        ),
-      ),*/
     );
   }
 }
