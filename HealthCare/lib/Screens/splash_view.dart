@@ -43,7 +43,7 @@ class SplashViewState extends State<SplashView> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => login_page()));
+                  builder: (BuildContext context) => Loginas()));
           //  Navigator.pop(context);
           //  Duration(seconds: 2);
         });

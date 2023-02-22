@@ -476,7 +476,7 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
                       final DocumentSnapshot doc = snapshot.data!.docs[index];
                       return HDCell(
@@ -643,7 +643,7 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount: 3,
+                  itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot doc = snapshot.data!.docs[index];
                     return TrdCell(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../constants.dart';
@@ -96,15 +97,32 @@ class _LoginasState extends State<Loginas> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/1.jpeg",
+          Padding(
+            padding: const EdgeInsets.only(top: 140),
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/2.jpeg",
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: Center(
+                  child: Text(
+                "Select What You Are?",
+                style: TextStyle(
+                  fontSize: 23,
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
             ),
           ),
           // SafeArea(
@@ -135,6 +153,7 @@ class _LoginasState extends State<Loginas> {
           //     ),
           //   ),
           // ),
+
           SafeArea(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -158,7 +177,7 @@ class _LoginasState extends State<Loginas> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Sign in",
+                                "Doctor",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18.0,
@@ -169,7 +188,7 @@ class _LoginasState extends State<Loginas> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (contex) => login_page()));
+                                        builder: (contex) => doctor_page()));
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
@@ -191,9 +210,9 @@ class _LoginasState extends State<Loginas> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Create an Account",
+                                "Patient",
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -202,12 +221,12 @@ class _LoginasState extends State<Loginas> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (contex) => Registration()));
+                                        builder: (contex) => login_page()));
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
-                                primary: Colors.white,
-                                onPrimary: Colors.white,
+                                primary: Colors.deepPurple[600],
+                                onPrimary: Colors.deepPurple[600],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),
