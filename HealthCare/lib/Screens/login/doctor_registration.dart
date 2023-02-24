@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/componets/text_field_container.dart';
 import 'package:hospital_appointment/widget/inputdecoration.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,10 +31,6 @@ class DocRegistration extends StatefulWidget {
 late UserCredential userCredential1;
 
 class _DocRegistrationState extends State<DocRegistration> {
-  /* CollectionReference patient =
-      FirebaseFirestore.instance.collection("patient");*/
-
-  //final _firestore = FirebaseFirestore.instance;
   String dropdownvalue = 'Select Your Category';
   var items = [
     'Select Your Category',
@@ -52,11 +47,11 @@ class _DocRegistrationState extends State<DocRegistration> {
   ];
 
   var t_name,
-      desc,
-      t_lname,
+      t_desc,
       t_address,
       t_email,
-      t_age,
+      t_exp,
+      t_rating,
       t_phone,
       t_password,
       tc_password;
@@ -72,6 +67,7 @@ class _DocRegistrationState extends State<DocRegistration> {
   var c_data = false;
   var c_gender = false;
   var c_status = false;
+  var rating;
 
   DateTime selectedDate = DateTime.now();
 
@@ -164,17 +160,6 @@ class _DocRegistrationState extends State<DocRegistration> {
       RegExp regex = new RegExp(pattern);
       return regex.hasMatch(email);
     }
-
-    /* String validateMobile(String phone) {
-      var patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-      RegExp regex = new RegExp(patttern);
-    /*  if (value.length == 0) {
-        return 'Please enter mobile number';
-      } else if (!regExp.hasMatch(value)) {
-        return 'Please enter valid mobile number';
-      }*/
-      return regex.hasMatch(phone);
-    }*/
 
     var size = MediaQuery.of(context).size;
     var container_width = size.width * 0.9;
@@ -290,28 +275,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                           },
                         ),
                       ),
-                      // Container(
-                      //   width: container_width,
-                      //   child: TextFormField(
-                      //     keyboardType: TextInputType.emailAddress,
-                      //     cursorColor: kPrimaryColor,
-                      //     decoration:
-                      //     buildInputDecoration(Icons.person, "Last Name"),
-                      //     //onChanged: (){},
-                      //     validator: (var value) {
-                      //       if (value!.isEmpty) {
-                      //         return "Enter Your Last Name";
-                      //       }
-                      //       return null;
-                      //     },
-                      //     onSaved: (name) {
-                      //       t_lname = name.toString().trim();
-                      //     },
-                      //     onChanged: (var name) {
-                      //       t_lname = name.trim();
-                      //     },
-                      //   ),
-                      // ),
                       // ************************************
                       // Address Field
                       //*************************************
@@ -416,93 +379,68 @@ class _DocRegistrationState extends State<DocRegistration> {
                       // ************************************
                       // Date of Birth Field
                       //*************************************
-                      // TextFieldContainer(
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.end,
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: <Widget>[
-                      //       Row(
-                      //         children: <Widget>[
-                      //           Text(
-                      //             "Date Of Birth   ",
-                      //             style: TextStyle(
-                      //                 fontWeight: FontWeight.bold,
-                      //                 color: kPrimaryColor),
-                      //           ),
-                      //           Row(
-                      //             mainAxisAlignment:
-                      //             MainAxisAlignment.spaceBetween,
-                      //             //  crossAxisAlignment: CrossAxisAlignment.start,
-                      //             children: <Widget>[
-                      //               Center(
-                      //                 child: t_date == null
-                      //                     ? Text(
-                      //                   "Select Date",
-                      //                   style: TextStyle(
-                      //                       color: Colors.black54),
-                      //                 )
-                      //                     : Text(
-                      //                   t_date,
-                      //                   style: TextStyle(
-                      //                       color: Colors.black,
-                      //                       fontWeight: FontWeight.bold),
-                      //                 ),
-                      //               ),
-                      //               IconButton(
-                      //                   onPressed: () async {
-                      //                     mydate = await showDatePicker(
-                      //                         context: context,
-                      //                         initialDate: DateTime.now(),
-                      //                         firstDate: DateTime(1950),
-                      //                         lastDate: DateTime.now());
-                      //
-                      //                     setState(() {
-                      //                       final now = DateTime.now();
-                      //                       t_date = DateFormat('dd-MM-yyyy')
-                      //                           .format(mydate);
-                      //                     });
-                      //                   },
-                      //                   icon: Icon(
-                      //                     Icons.calendar_today,
-                      //                     color: kPrimaryColor,
-                      //                     size: 16,
-                      //                   ))
-                      //             ],
-                      //           ),
-                      //         ],
-                      //       ),
-                      //       c_data == true
-                      //           ? Text("*Select Data",
-                      //           style: TextStyle(
-                      //               color: Colors.red,
-                      //               fontWeight: FontWeight.w400))
-                      //           : SizedBox(),
-                      //     ],
-                      //   ),
-                      // ),
-                      // ************************************
-                      // Age Field
-                      //*************************************
-                      Container(
-                        width: container_width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          cursorColor: kPrimaryColor,
-                          decoration: buildInputDecoration(
-                              Icons.alarm_sharp, "Experience"),
-                          //onChanged: (){},
-                          validator: (var value) {
-                            if (value!.isEmpty) {
-                              return "Enter Your Experince";
-                            }
-                            return null;
-                          },
-                          onChanged: (age) {
-                            t_age = age;
-                          },
-                          onSaved: (var age) {
-                            t_age = age;
-                          },
+                      TextFieldContainer(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  "Date Of Birth   ",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: kPrimaryColor),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  //  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Center(
+                                      child: t_date == null
+                                          ? Text(
+                                              "Select Date",
+                                              style: TextStyle(
+                                                  color: Colors.black54),
+                                            )
+                                          : Text(
+                                              t_date,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                    ),
+                                    IconButton(
+                                        onPressed: () async {
+                                          mydate = await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(1950),
+                                              lastDate: DateTime.now());
+
+                                          setState(() {
+                                            final now = DateTime.now();
+                                            t_date = DateFormat('dd-MM-yyyy')
+                                                .format(mydate);
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.calendar_today,
+                                          color: kPrimaryColor,
+                                          size: 16,
+                                        ))
+                                  ],
+                                ),
+                              ],
+                            ),
+                            c_data == true
+                                ? Text("*Select Data",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w400))
+                                : SizedBox(),
+                          ],
                         ),
                       ),
                       // ************************************
@@ -659,6 +597,54 @@ class _DocRegistrationState extends State<DocRegistration> {
                           ],
                         ),
                       ),
+                      // Age Field
+                      //*************************************
+                      Container(
+                        width: container_width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          cursorColor: kPrimaryColor,
+                          decoration: buildInputDecoration(
+                              Icons.alarm_sharp, "Experience"),
+                          //onChanged: (){},
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Experince";
+                            }
+                            return null;
+                          },
+                          onChanged: (exp) {
+                            t_exp = exp;
+                          },
+                          onSaved: (var exp) {
+                            t_exp = exp;
+                          },
+                        ),
+                      ),
+                      // ************************************
+                      Container(
+                        width: container_width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          cursorColor: kPrimaryColor,
+                          decoration: buildInputDecoration(
+                              Icons.add_chart, "Rating Between 1 to 5"),
+                          //onChanged: (){},
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Rating";
+                            }
+                            return null;
+                          },
+                          onChanged: (rating) {
+                            t_rating = rating;
+                          },
+                          onSaved: (var rating) {
+                            t_rating = rating;
+                          },
+                        ),
+                      ),
+                      // ************************************
 
                       Container(
                         width: container_width,
@@ -675,10 +661,10 @@ class _DocRegistrationState extends State<DocRegistration> {
                             return null;
                           },
                           onSaved: (desc) {
-                            t_name = desc.toString().trim();
+                            t_desc = desc.toString().trim();
                           },
                           onChanged: (var desc) {
-                            t_name = desc.trim();
+                            t_desc = desc.trim();
                           },
                         ),
                       ),
@@ -893,14 +879,15 @@ class _DocRegistrationState extends State<DocRegistration> {
                                           .collection('doctor')
                                           .doc(userCredential1.user!.uid)
                                           .set({
-                                            'did': userCredential1.user!.uid,
+                                            'uid': userCredential1.user!.uid,
                                             'name': t_name,
-                                            'category': items,
-                                            'description': desc,
+                                            'specialist': dropdownvalue,
+                                            'rating': t_rating,
+                                            'description': t_desc,
                                             'address': t_address,
                                             'email':
                                                 userCredential1.user!.email,
-                                            'experience': t_age,
+                                            'experience': t_exp,
                                             'dob': t_date,
                                             'password': t_password,
                                             'gender':
@@ -935,124 +922,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                           .catchError((e) {
                                             print("+++++++++" + e);
                                           });
-                                    }
-                                    /*   if (_formKey.currentState!.validate() && t_date!=null && gender!=null && status!=null) {
-                                    try {
-                                      userCredential = await _auth.createUserWithEmailAndPassword(
-                                        email: t_email!,
-                                        password: t_password!,
-                                      );
-                                    } on FirebaseAuthException catch (error) {
-                                      print("FirebaseError: " + error.code);
-                                      switch (error.code) {
-                                        case "invalid-email":
-                                          errorMessage =
-                                              "Your email address appears to be malformed.";
-                                          break;
-                                        case "wrong-password":
-                                          errorMessage =
-                                              "Your password is wrong.";
-                                          break;
-                                        case "user-not-found":
-                                          errorMessage =
-                                              "User with this email doesn't exist.";
-                                          break;
-                                        case "user-disabled":
-                                          errorMessage =
-                                              "User with this email has been disabled.";
-                                          break;
-                                        case "too-many-requests":
-                                          errorMessage = "Too many requests";
-                                          break;
-                                        case "operation-not-allowed":
-                                          errorMessage =
-                                              "Signing in with Email and Password is not enabled.";
-                                          break;
-                                        case "email-already-in-use":
-                                          {
-                                            isEmailExist = false;
-                                            errorMessage =
-                                                "email already in use";
-                                            break;
-                                          }
-                                        default:
-                                          errorMessage =
-                                              "An undefined Error happened.";
-                                      }
-                                      Fluttertoast.showToast(msg: errorMessage!);
-                                      print(error.code);
-                                    }
-                                    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-                                    await firebaseFirestore
-                                        .collection('patient')
-                                        .doc(userCredential.user!.uid)
-                                        .set({
-                                          'uid': userCredential.user!.uid,
-                                          'name': t_name,
-                                          'last name':t_lname,
-                                          'address': t_address,
-                                          'email': userCredential.user!.email,
-                                          'age': t_age,
-                                          'dob': t_date,
-                                          'password': t_password,
-                                          'gender': gender == 1? "male" :"female",
-                                          'status': gender == 1? "unmarried" :"married",
-                                          'phone': phoneController
-                                        })
-                                        .then((value) => Fluttertoast.showToast(
-                                            msg: "Registration Successful",
-                                            toastLength: Toast.LENGTH_SHORT,
-                                            gravity: ToastGravity.BOTTOM,
-                                            timeInSecForIosWeb: 1,
-                                            backgroundColor: kPrimaryColor,
-                                            textColor: Colors.white,
-                                            fontSize: 16.0))
-                                        .then((value) => Navigator.pop(context))
-                                        .catchError((e) {
-                                          print(e);
-                                          Fluttertoast.showToast(
-                                              msg: e!.message);
-                                        });
-
-                                    //   User? user = _auth.currentUser;
-                                    /*  await /*_auth
-                                        .createUserWithEmailAndPassword(
-                                            email: t_email,
-                                            password: t_password)
-                                        .then((value) => {*/
-                                              firebaseFirestore
-                                                  .collection('patient')
-                                                  .doc(userCredential.user!.uid)
-                                                  .set({
-                                                   'uid': userCredential.user!.uid,
-                                                    'name': t_name,
-                                                    'address': t_address,
-                                                    'email': userCredential.user!.email,
-                                                    'age': t_age,
-                                                    'dob': c_date,
-                                                    'password': t_password
-                                                  }).then((value) =>
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                      "Registration Successful",
-                                                      toastLength: Toast
-                                                          .LENGTH_SHORT,
-                                                      gravity: ToastGravity
-                                                          .BOTTOM,
-                                                      timeInSecForIosWeb: 1,
-                                                      backgroundColor:
-                                                      kPrimaryColor,
-                                                      textColor:
-                                                      Colors.white,
-                                                      fontSize: 16.0))
-                                                  .then((value) => Navigator.pop(context))
-                                                  .catchError((e) {
-                                                    print(e);
-                                                Fluttertoast.showToast(msg: e!.message);
-                                    });*/
-                                  }*/
-                                    else {
+                                    } else {
                                       if (t_date == null) {
                                         c_data = true;
                                       }

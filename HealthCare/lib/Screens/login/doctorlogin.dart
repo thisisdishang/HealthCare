@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hospital_appointment/Screens/home/patient_home_page.dart';
+import 'package:hospital_appointment/Screens/home/doctor_home_page.dart';
 import 'package:hospital_appointment/Screens/login/Patient_registration.dart';
 import 'package:hospital_appointment/Screens/login/doctor_registration.dart';
 import 'package:hospital_appointment/widget/inputdecoration.dart';
@@ -377,7 +377,7 @@ class _doctor_pageState extends State<doctor_page> {
                                               break;
                                             case "user-not-found":
                                               errorMessage =
-                                                  "Patient with this email doesn't exist.";
+                                                  "Doctor with this email doesn't exist.";
                                               break;
                                             case "user-disabled":
                                               errorMessage =
@@ -405,12 +405,12 @@ class _doctor_pageState extends State<doctor_page> {
                                           Fluttertoast.showToast(
                                               msg: errorMessage);
                                           if (errorMessage ==
-                                              "Patient with this email doesn't exist.") {
+                                              "Doctor with this email doesn't exist.") {
                                             Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Registration()));
+                                                        DocRegistration()));
                                           } else {
                                             Navigator.pushReplacement(
                                                 context,
@@ -491,7 +491,7 @@ class _doctor_pageState extends State<doctor_page> {
                                                                 dynamic>(
                                                             builder: (BuildContext
                                                                     context) =>
-                                                                HomePage()),
+                                                                DocHomePage()),
                                                         (route) => false),
                                                   })
                                               .catchError((e) {
@@ -665,7 +665,7 @@ class _doctor_pageState extends State<doctor_page> {
                 print("Login Successful"),
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => DocHomePage()),
                 ),
               })
           .catchError((e) {

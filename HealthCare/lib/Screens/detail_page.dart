@@ -315,7 +315,7 @@ class _DetailPageState extends State<DetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Dr.' + widget.name,
+                          'Dr. ' + widget.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 22,
