@@ -29,7 +29,7 @@ import '../login/loginas.dart';
 
 late BuildContext context1;
 var uid;
-UserModel loggedInUser = UserModel();
+DoctorModel loggedInUser = DoctorModel();
 
 class DocHomePage extends StatefulWidget {
   @override
@@ -46,7 +46,7 @@ class _DocHomePageState extends State<DocHomePage> {
   TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-  FirebaseFirestore.instance.collection('doctor');
+  FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
@@ -54,7 +54,7 @@ class _DocHomePageState extends State<DocHomePage> {
   bool isLoading = true;
   double rating = 0.0;
   late TabController tabController;
-  UserModel loggedInUser = UserModel();
+  DoctorModel loggedInUser = DoctorModel();
 
   // DoctorModel loggedInUser = DoctorModel();
 
@@ -86,13 +86,13 @@ class _DocHomePageState extends State<DocHomePage> {
     _getUser();
     _doctorName = new TextEditingController();
     // tabController = TabController(length: 3, initialIndex: 0, vsync: this);
-    loggedInUser = UserModel();
+    loggedInUser = DoctorModel();
     FirebaseFirestore.instance
         .collection("doctor")
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
+      loggedInUser = DoctorModel.fromMap(value.data());
       setState(() {
         sleep(Duration(microseconds: 10));
         isLoading = false;

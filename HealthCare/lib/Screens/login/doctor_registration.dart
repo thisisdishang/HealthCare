@@ -610,6 +610,8 @@ class _DocRegistrationState extends State<DocRegistration> {
                           validator: (var value) {
                             if (value!.isEmpty) {
                               return "Enter Your Experince";
+                            } else if (value.length>2) {
+                              return "Experience must be in two digit";
                             }
                             return null;
                           },
@@ -630,9 +632,16 @@ class _DocRegistrationState extends State<DocRegistration> {
                           decoration: buildInputDecoration(
                               Icons.add_chart, "Rating Between 1 to 5"),
                           //onChanged: (){},
-                          validator: (var value) {
+                          validator: (value) {
                             if (value!.isEmpty) {
                               return "Enter Your Rating";
+                            } else if (value.length != 1 ||
+                                value.startsWith("0") ||
+                                value.startsWith("6") ||
+                                value.startsWith("7") ||
+                                value.startsWith("8") ||
+                                value.startsWith("9")) {
+                              return "Rating Must Be In 1 to 5";
                             }
                             return null;
                           },
@@ -656,7 +665,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
-                              return "Enter Your First Name";
+                              return "Enter Description";
                             }
                             return null;
                           },

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +6,11 @@ import 'package:hospital_appointment/Screens/Profile/profile.dart';
 import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
+import 'package:hospital_appointment/models/doctor.dart';
 import 'package:hospital_appointment/newapp/notificationList.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../Screens/login/loginas.dart';
 import '../models/patient_data.dart';
-import '../newapp/docuserProfile.dart';
 import '../newapp/userProfile.dart';
 import '../services/shared_preferences_service.dart';
 
@@ -23,7 +21,7 @@ class DocDrawer extends StatefulWidget {
 
 class _DocDrawerState extends State<DocDrawer> {
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  DoctorModel loggedInUser = DoctorModel();
   final PrefService _prefService = PrefService();
 
   bool isLoading = true;
@@ -31,13 +29,13 @@ class _DocDrawerState extends State<DocDrawer> {
   @override
   void initState() {
     super.initState();
-    loggedInUser = UserModel();
+    loggedInUser = DoctorModel();
     FirebaseFirestore.instance
-        .collection("Doctor")
+        .collection("doctor")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
+      this.loggedInUser = DoctorModel.fromMap(value.data());
       Future<void>.delayed(const Duration(microseconds: 1), () {
         if (mounted) {
           // Check that the widget is still mounted
@@ -56,64 +54,64 @@ class _DocDrawerState extends State<DocDrawer> {
       child: isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  kPrimaryColor,
-                  kPrimaryLightColor,
-                ],
-              ),
-            ),
-            accountName: Text(loggedInUser.name.toString()),
-            accountEmail: Text(loggedInUser.email.toString()),
-            currentAccountPicture: Container(
-              child: loggedInUser.profileImage == false
-                  ? CircleAvatar(
-                backgroundImage:
-                AssetImage('assets/images/account.png'),
-                radius: 50,
-              )
-                  : CircleAvatar(
-                backgroundImage:
-                NetworkImage(loggedInUser.profileImage),
-                backgroundColor: Colors.grey,
-              ),
-            ),
-          ),
+              children: <Widget>[
+                UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        kPrimaryColor,
+                        kPrimaryLightColor,
+                      ],
+                    ),
+                  ),
+                  accountName: Text(loggedInUser.name.toString()),
+                  accountEmail: Text(loggedInUser.email.toString()),
+                  currentAccountPicture: Container(
+                    child: loggedInUser.profileImage == false
+                        ? CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/account.png'),
+                            radius: 50,
+                          )
+                        : CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(loggedInUser.profileImage),
+                            backgroundColor: Colors.grey,
+                          ),
+                  ),
+                ),
 
-          //profile
-          // CustomList(Icons.person, "Profile", () {
-          //   Navigator.push(context,
-          //       MaterialPageRoute(builder: (context) => DocUserProfile()));
-          // }),
+                //profile
+                // CustomList(Icons.person, "Profile", () {
+                //   Navigator.push(context,
+                //       MaterialPageRoute(builder: (context) => DocUserProfile()));
+                // }),
 
-          // Privacy Policy
-          CustomList(Icons.announcement, "Privacy Policy", () async {
-            if (!await launch(
-              'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html',
-              forceSafariVC: false,
-              forceWebView: false,
-              headers: <String, String>{
-                HttpHeaders.authorizationHeader: 'my_header_value'
-              },
-            )) {
-              throw 'Could not launch ';
-            }
-          }),
-          // CustomList(Icons.notifications_active, "Notification", () {
-          //   Navigator.push(context,
-          //       MaterialPageRoute(builder: (context) => NotificationList()));
-          // }),
-          CustomList(Icons.lock, "Log Out", () async {
-            await FirebaseAuth.instance.signOut();
-            _prefService.removeCache("password");
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => doctor_page()));
-          }),
-        ],
-      ),
+                // Privacy Policy
+                CustomList(Icons.announcement, "Privacy Policy", () async {
+                  if (!await launch(
+                    'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html',
+                    forceSafariVC: false,
+                    forceWebView: false,
+                    headers: <String, String>{
+                      HttpHeaders.authorizationHeader: 'my_header_value'
+                    },
+                  )) {
+                    throw 'Could not launch ';
+                  }
+                }),
+                // CustomList(Icons.notifications_active, "Notification", () {
+                //   Navigator.push(context,
+                //       MaterialPageRoute(builder: (context) => NotificationList()));
+                // }),
+                CustomList(Icons.lock, "Log Out", () async {
+                  await FirebaseAuth.instance.signOut();
+                  _prefService.removeCache("password");
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => doctor_page()));
+                }),
+              ],
+            ),
     );
   }
 }

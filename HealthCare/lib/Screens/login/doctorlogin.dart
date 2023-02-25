@@ -33,61 +33,6 @@ class _doctor_pageState extends State<doctor_page> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool isLoading = false;
 
-/*  var subscription;
-  bool status = false;
-
-  var result;
-  getConnectivity()async{
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-// I am connected to a mobile network.
-      print("Mobile Data Connected !");
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      print("Wifi Connected !");
-// I am connected to a wifi network.
-    }else{
-      print("No Internet !");
-    }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      }
-      else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
-  }
-  Future<bool> getInternetUsingInternetConnectivity() async {
-    result = await InternetConnectionChecker().hasConnection;
-    if (result == true) {
-      print('YAY! Free cute dog pics!');
-    } else {
-      print('No internet :( Reason:');
-    }
-    return result;
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    t_password.dispose();
-    t_email.dispose();
-    subscription.cancel();
-    super.dispose();
-  }*/
-
   var result;
   var subscription;
   bool status = false;
@@ -333,7 +278,7 @@ class _doctor_pageState extends State<doctor_page> {
                                           isLoading = true;
                                         });
                                         try {
-                                          userCredential = await auth
+                                          userCredential1 = await auth
                                               .signInWithEmailAndPassword(
                                                   email: t_email,
                                                   password: t_password);
@@ -423,39 +368,7 @@ class _doctor_pageState extends State<doctor_page> {
                                           print("error data" + error.code);
                                           setState(() {});
                                         }
-                                        /*     await Future.delayed(Duration(seconds: 2));
-                                setState(() {
-                                  isLoading = false;
-                                });*/
-                                        //  setState(() {});
-                                        /* if(userCredential != null){
-                                  _prefService
-                                      .createCache(2)
-                                      .then((uid) => {
-                                    print("Login Successful"),
-                                    Fluttertoast.showToast(
-                                        msg: "Login Successful",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: kPrimaryColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0),
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => Demo()
-                                        // Docter_Home()
-                                      ),
-                                    ),
-                                  })
-                                      .catchError((e) {
-                                    print(e);
-                                  });
-                                }*/
-                                        /* await Future.delayed(Duration(seconds: 2));
-                                setState(() {
-                                  isLoading = false;
-                                });*/
+
                                         if (userCredential1 != null) {
                                           await auth
                                               .signInWithEmailAndPassword(
@@ -500,57 +413,6 @@ class _doctor_pageState extends State<doctor_page> {
                                         }
                                       }
                                     }
-                                    /*    if (_formkey.currentState!.validate()) {
-
-
-                                await auth.signInWithEmailAndPassword(email: t_email, password: t_password).then((value) =>_prefService.createCache(1))
-                                    .then((uid) => {
-                                          print("Login Successful"),
-
-                                         Fluttertoast.showToast(
-                                        msg:
-                                        "Login Successful",
-                                        toastLength: Toast
-                                            .LENGTH_SHORT,
-                                        gravity: ToastGravity
-                                            .BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor:
-                                        kPrimaryColor,
-                                        textColor:
-                                        Colors.white,
-                                        fontSize: 16.0),
-                                          _prefService.createCache(1),
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) => HomePage()),
-                                          ),
-                                        })
-                                    .catchError((e) {
-                                  print(e);
-                                });
-                              }*/
-                                    /* await Future.delayed(Duration(seconds: 2));
-                              setState(() {
-                                isLoading = false;
-                              });*/
-
-                                    //sigin(t_email.text,t_password.text);
-                                    /*    if (_formkey.currentState!.validate()) {
-                                    //  sigin(t_email,t_password);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()),
-                                      );
-                                    } else {
-                                      print("error founded");
-                                    }*/
-                                    /* Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()),
-                                      );*/
                                   },
                                   child: Text(
                                     'Login',
@@ -674,34 +536,3 @@ class _doctor_pageState extends State<doctor_page> {
     }
   }
 }
-
-/*
-InputDecoration buildInputDecoration(IconData icons, String hinttext) {
-  return InputDecoration(
-    hintText: hinttext,
-    prefixIcon: Icon(
-      icons,
-      color: kPrimaryColor,
-    ),
-    fillColor: kPrimaryLightColor,
-    filled: true,
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
-      borderSide: BorderSide(color: kPrimarydark, width: 2),
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
-      borderSide: BorderSide(
-        color: kPrimaryColor,
-        width: 2,
-      ),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
-      borderSide: BorderSide(
-        color: kPrimaryColor,
-        width: 2,
-      ),
-    ),
-  );
-}*/

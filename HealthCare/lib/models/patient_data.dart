@@ -12,19 +12,20 @@ class UserModel {
   String? status;
   var profileImage;
 
-  UserModel(
-      {this.uid,
-      this.name,
-      this.address,
-      this.email,
-      this.age,
-      this.dob,
-      this.password,
-      this.gender,
-      this.last_name,
-      this.phone,
-      this.status,
-      this.profileImage});
+  UserModel({
+    this.uid,
+    this.name,
+    this.address,
+    this.email,
+    this.age,
+    this.dob,
+    this.password,
+    this.gender,
+    this.last_name,
+    this.phone,
+    this.status,
+    this.profileImage,
+  });
 
 //reciving data from server
   factory UserModel.fromMap(map) {
