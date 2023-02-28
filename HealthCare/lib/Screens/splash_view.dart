@@ -40,10 +40,8 @@ class SplashViewState extends State<SplashView> {
         );
       } else {
         return Timer(Duration(seconds: 2), () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => Loginas()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => Loginas()));
           //  Navigator.pop(context);
           //  Duration(seconds: 2);
         });
@@ -57,34 +55,35 @@ class SplashViewState extends State<SplashView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 200,
-          ),
-          Image.asset("assets/images/Splash.png", width: 250, height: 250),
-          Text(
-            "HealthCare",
-            style: TextStyle(
-              fontSize: 31,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 200,
             ),
-          ),
-          SizedBox(
-            height: 230,
-          ),
-          Text(
-            "Powered By Rana Corporation®",
-            style: TextStyle(
-              fontSize: 16,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold
+            Image.asset("assets/images/Splash.png", width: 250, height: 250),
+            Text(
+              "HealthCare",
+              style: TextStyle(
+                fontSize: 31,
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
+            SizedBox(
+              height: 230,
+            ),
+            Text(
+              "Powered By Rana Corporation®",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
+            )
         ],
-      )),
+      ),
+          )),
     );
   }
 }

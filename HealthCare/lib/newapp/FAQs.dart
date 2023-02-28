@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/constants.dart';
 
-class NotificationList extends StatefulWidget {
+class faqs extends StatefulWidget {
   @override
-  _NotificationListState createState() => _NotificationListState();
+  _faqsState createState() => _faqsState();
 }
 
-class _NotificationListState extends State<NotificationList> {
+class _faqsState extends State<faqs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class _NotificationListState extends State<NotificationList> {
               Navigator.pop(context);
             }),
         title: Text(
-          'Notifications',
+          'FAQs',
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,

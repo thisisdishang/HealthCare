@@ -13,7 +13,7 @@ import 'package:hospital_appointment/models/doctor.dart';
 import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
 import '../../newapp/carouselSlider.dart';
-import '../../newapp/notificationList.dart';
+import '../../newapp/FAQs.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
 import '../../newapp/searchList.dart';
@@ -579,7 +579,7 @@ class _HomePageState extends State<HomePage> {
           height: 20,
         ),
         SizedBox(
-          height: 100,
+          height: 105,
           child: ListView.separated(
               primary: false,
               shrinkWrap: true,

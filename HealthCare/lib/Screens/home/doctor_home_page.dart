@@ -12,8 +12,9 @@ import 'package:hospital_appointment/models/category.dart';
 import 'package:hospital_appointment/models/doctor.dart';
 import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
+import '../../componets/loadingindicator.dart';
 import '../../newapp/carouselSlider.dart';
-import '../../newapp/notificationList.dart';
+import '../../newapp/FAQs.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
 import '../../newapp/searchList.dart';
@@ -39,20 +40,21 @@ class DocHomePage extends StatefulWidget {
 var myDoc;
 
 class _DocHomePageState extends State<DocHomePage> {
-  List<Category> _categories = <Category>[];
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
+  var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
   // UserModel loggedInUser = UserModel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-  FirebaseFirestore.instance.collection("doctor");
+      FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
   final PrefService _prefService = PrefService();
   bool isLoading = true;
-  double rating = 0.0;
   late TabController tabController;
   DoctorModel loggedInUser = DoctorModel();
 
@@ -109,9 +111,18 @@ class _DocHomePageState extends State<DocHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var firebase = appointment
+        .collection('pending')
+        .orderBy('date', descending: false)
+        .orderBy('time', descending: false)
+        //.where('pid', isEqualTo: loggedInUser.uid)
+        .where('approve', isEqualTo: false)
+        .where('date', isGreaterThanOrEqualTo: today_date)
+        .snapshots();
+
+    var size = MediaQuery.of(context).size;
+
     context1 = context;
-    var today_date =
-    (new DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
     sleep(Duration(seconds: 1));
     var _message;
@@ -123,7 +134,7 @@ class _DocHomePageState extends State<DocHomePage> {
       DocHomePage(),
     ];
     setState(
-          () {
+      () {
         if (hour >= 5 && hour < 12) {
           _message = 'Good Morning';
         } else if (hour >= 12 && hour <= 17) {
@@ -182,11 +193,7 @@ class _DocHomePageState extends State<DocHomePage> {
         //   ),
         // ),
       ),
-      body: loggedInUser.uid == null
-          ? Center(
-        child: Text("Wait for few seconds"),
-      )
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,19 +201,268 @@ class _DocHomePageState extends State<DocHomePage> {
             SizedBox(
               height: 30,
             ),
-// Hello
+            // Hello
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20, bottom: 10),
               child: Text(
                 "Hello \nDr. " + loggedInUser.name.toString() + "\n" + _message,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 32,
                   color: kPrimaryColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(
+                "Your's Today Appointment :",
+                style: TextStyle(
+                  fontSize: 25,
+                  color:Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            StreamBuilder<QuerySnapshot>(
+                stream: firebase,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                        height: size.height * 1,
+                        child: Center(
+                            child:
+                                Text("You Do Not Have An Appointment today.")));
+                  } else {
+                    return isLoading
+                        ? Container(
+                            margin: EdgeInsets.only(top: size.height * 0.4),
+                            child: Center(
+                              child: Loading(),
+                            ),
+                          )
+                        : SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
+                            child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final DocumentSnapshot doc =
+                                    snapshot.data!.docs[index];
+
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 6),
+                                  child: Container(
+                                    height: 108,
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8.0)),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          color: kPrimaryLightColor,
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0,
+                                                              top: 8.0),
+                                                      child: Text(
+                                                        doc['doctor_name'],
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ) // child widget, replace with your own
+                                                    ),
+                                                Container(
+                                                    width: double.infinity,
+                                                    margin:
+                                                        EdgeInsets.only(top: 3),
+                                                    decoration: BoxDecoration(),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Text(
+                                                        "Date: " + doc['date'],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black87,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    ) // child widget, replace with your own
+                                                    ),
+                                                Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Text(
+                                                        "Time: " + doc['time'],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black87,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    ) // child widget, replace with your own
+                                                    ),
+                                              ],
+                                            ),
+                                            Positioned(
+                                              bottom: 5,
+                                              left: 8,
+                                              child: Text(
+                                                "Status : Pending",
+                                                style: TextStyle(
+                                                    color: Colors.black87,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 4,
+                                              right: 10,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.green,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12), // <-- Radius
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          alertdialog(
+                                                              id: doc.id));
+                                                  // alertdialog(doc.id);
+
+                                                  //   Navigator.pop(context);
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 5, right: 5),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10.0,
+                                                            bottom: 10),
+                                                    child: Text(
+                                                      "Confirm ",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              bottom: 4,
+                                              right: 10,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.red,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        12), // <-- Radius
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (BuildContext
+                                                      context) =>
+                                                          alertdialog(
+                                                              id: doc.id));
+                                                  // alertdialog(doc.id);
+
+                                                  //   Navigator.pop(context);
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 5, right: 5),
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets.only(
+                                                        top: 10.0,
+                                                        bottom: 10),
+                                                    child: Text(
+                                                      "Cancel ",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                  }
+                }),
+          ],
+        ),
+      ),
+    );
+  }
+}
+//         Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             SizedBox(
+//               height: 30,
+//             ),
 // les's find doctor
 //             Container(
 //               alignment: Alignment.centerLeft,
@@ -300,12 +556,107 @@ class _DocHomePageState extends State<DocHomePage> {
 //               child: Carouselslider(),
 //             ),
 
+class alertdialog extends StatelessWidget {
+  var id;
 
-          ],
-        ),
+  alertdialog({required this.id});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Stack(
+        //overflow: Overflow.visible,
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.27,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+              child: Column(
+                children: [
+                  Text(
+                    'are you sure you want to cancel this Appointment?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //child: ),
+
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'NO',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8), // <-- Radius
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Container(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              FirebaseFirestore.instance
+                                  .collection('pending')
+                                  .doc(id)
+                                  .delete();
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 19),
+                              child: Text(
+                                'YES',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(8), // <-- Radius
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+              top: -50,
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                radius: 50,
+                child: Image.asset('assets/images/logo.jpg'),
+              )),
+        ],
       ),
     );
   }
 }
-
-

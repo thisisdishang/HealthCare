@@ -7,7 +7,7 @@ import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
-import 'package:hospital_appointment/newapp/notificationList.dart';
+import 'package:hospital_appointment/newapp/FAQs.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Screens/login/loginas.dart';
 import '../models/patient_data.dart';
