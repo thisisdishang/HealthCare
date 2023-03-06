@@ -160,6 +160,7 @@ class _login_pageState extends State<login_page> {
 //    var bottom = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Form(
           key: _formkey,

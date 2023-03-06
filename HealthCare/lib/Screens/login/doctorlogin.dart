@@ -106,6 +106,7 @@ class _doctor_pageState extends State<doctor_page> {
 //    var bottom = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Form(
           key: _formkey,

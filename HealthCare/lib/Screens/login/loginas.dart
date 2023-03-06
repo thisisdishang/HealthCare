@@ -95,6 +95,7 @@ class _LoginasState extends State<Loginas> {
 
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Padding(

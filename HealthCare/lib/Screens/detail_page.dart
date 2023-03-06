@@ -1188,7 +1188,10 @@ class _DetailPageState extends State<DetailPage> {
                     child: CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 50,
-                      child: Image.asset('assets/images/logo.jpg'),
+                      child: Image.asset(
+                        'assets/images/account.png',
+                        fit: BoxFit.fill,
+                      ),
                       // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),
               ],
@@ -1316,7 +1319,10 @@ class _DetailPageState extends State<DetailPage> {
                     child: CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 50,
-                      child: Image.asset('assets/images/logo.jpg'),
+                      child: Image.asset(
+                        'assets/images/account.jpg',
+                        fit: BoxFit.fill,
+                      ),
                       // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),
               ],

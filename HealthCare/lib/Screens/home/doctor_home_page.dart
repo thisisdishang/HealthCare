@@ -3,34 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:hospital_appointment/Screens/detail_page.dart';
-import 'package:hospital_appointment/cells/category_cell.dart';
-import 'package:hospital_appointment/cells/hd_cell.dart';
-import 'package:hospital_appointment/cells/trd_cell.dart';
-import 'package:hospital_appointment/models/category.dart';
 import 'package:hospital_appointment/models/doctor.dart';
-import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
 import '../../componets/loadingindicator.dart';
-import '../../newapp/carouselSlider.dart';
-import '../../newapp/FAQs.dart';
 import '../../constants.dart';
-import '../../models/patient_data.dart';
-import '../../newapp/searchList.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../widget/DoctorDrawer.dart';
-import '../Appointment.dart';
-import '../Profile/profile.dart';
-import '../disease_page.dart';
-import '../docter_page.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
-import '../login/loginas.dart';
 
 late BuildContext context1;
 var uid;
-DoctorModel loggedInUser = DoctorModel();
 
 class DocHomePage extends StatefulWidget {
   @override
@@ -44,7 +27,6 @@ class _DocHomePageState extends State<DocHomePage> {
 
   var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
-  // UserModel loggedInUser = UserModel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -57,8 +39,6 @@ class _DocHomePageState extends State<DocHomePage> {
   bool isLoading = true;
   late TabController tabController;
   DoctorModel loggedInUser = DoctorModel();
-
-  // DoctorModel loggedInUser = DoctorModel();
 
   /// **********************************************
   /// ACTIONS
@@ -115,7 +95,7 @@ class _DocHomePageState extends State<DocHomePage> {
         .collection('pending')
         .orderBy('date', descending: false)
         .orderBy('time', descending: false)
-        //.where('pid', isEqualTo: loggedInUser.uid)
+        .where('did', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: false)
         .where('date', isGreaterThanOrEqualTo: today_date)
         .snapshots();
@@ -154,44 +134,6 @@ class _DocHomePageState extends State<DocHomePage> {
           child: Text("HealthCare"),
         ),
         iconTheme: IconThemeData(color: Colors.white),
-        // automaticallyImplyLeading: false,
-        // actions: <Widget>[Container()],
-        // backgroundColor: kPrimaryColor,
-        // elevation: 0,
-        // title: Container(
-        //   padding: EdgeInsets.only(top: 5),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.end,
-        //     children: [
-        //       Container(
-        //         //width: MediaQuery.of(context).size.width/1.3,
-        //         alignment: Alignment.center,
-        //         child: Text(
-        //           _message,
-        //           style: TextStyle(
-        //             color: Colors.white,
-        //             fontSize: 20,
-        //             fontWeight: FontWeight.w400,
-        //           ),
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         width: 55,
-        //       ),
-        //       //Notification icon
-        //       IconButton(
-        //         splashRadius: 20,
-        //         icon: Icon(Icons.notifications_active),
-        //         onPressed: () {
-        //           Navigator.push(
-        //               context,
-        //               MaterialPageRoute(
-        //                   builder: (context) => NotificationList()));
-        //         },
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -224,7 +166,7 @@ class _DocHomePageState extends State<DocHomePage> {
                 "Your's Today Appointment :",
                 style: TextStyle(
                   fontSize: 25,
-                  color:Colors.black,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -239,9 +181,12 @@ class _DocHomePageState extends State<DocHomePage> {
                   if (!snapshot.hasData) {
                     return Container(
                         height: size.height * 1,
-                        child: Center(
-                            child:
-                                Text("You Do Not Have An Appointment today.")));
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 300),
+                          child: Center(
+                              child: Text(
+                                  "You Do Not Have An Appointment today.")),
+                        ));
                   } else {
                     return isLoading
                         ? Container(
@@ -290,7 +235,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                               left: 8.0,
                                                               top: 8.0),
                                                       child: Text(
-                                                        doc['doctor_name'],
+                                                        doc['name'],
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 20,
@@ -405,8 +350,8 @@ class _DocHomePageState extends State<DocHomePage> {
                                                   primary: Colors.red,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        12), // <-- Radius
+                                                        BorderRadius.circular(
+                                                            12), // <-- Radius
                                                   ),
                                                 ),
                                                 onPressed: () {
@@ -414,7 +359,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                       context: context,
                                                       barrierDismissible: false,
                                                       builder: (BuildContext
-                                                      context) =>
+                                                              context) =>
                                                           alertdialog(
                                                               id: doc.id));
                                                   // alertdialog(doc.id);
@@ -426,15 +371,15 @@ class _DocHomePageState extends State<DocHomePage> {
                                                       left: 5, right: 5),
                                                   child: Padding(
                                                     padding:
-                                                    const EdgeInsets.only(
-                                                        top: 10.0,
-                                                        bottom: 10),
+                                                        const EdgeInsets.only(
+                                                            top: 10.0,
+                                                            bottom: 10),
                                                     child: Text(
                                                       "Cancel ",
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                     ),
                                                   ),
                                                 ),
@@ -457,104 +402,6 @@ class _DocHomePageState extends State<DocHomePage> {
     );
   }
 }
-//         Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             SizedBox(
-//               height: 30,
-//             ),
-// les's find doctor
-//             Container(
-//               alignment: Alignment.centerLeft,
-//               padding: EdgeInsets.only(left: 20, bottom: 15),
-//               child: Text(
-//                 "Let's Find Your\nDoctor",
-//                 style: TextStyle(
-//                   fontSize: 35,
-//                   color: kPrimaryColor,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//             ),
-//             Container(
-//                 margin: EdgeInsets.only(top: 5),
-//                 child: _hDoctorsSection()),
-
-// Search doctor
-//                   Container(
-//                     padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
-//                     child: TextFormField(
-//                       textInputAction: TextInputAction.search,
-//                       controller: _doctorName,
-//                       decoration: InputDecoration(
-//                         contentPadding:
-//                         EdgeInsets.only(left: 20, top: 10, bottom: 10),
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.all(Radius.circular(15.0)),
-//                           borderSide: BorderSide.none,
-//                         ),
-//                         filled: true,
-//                         fillColor: Colors.grey[200],
-//                         hintText: 'Search doctor',
-//                         hintStyle: TextStyle(
-//                           color: Colors.black26,
-//                           fontSize: 18,
-//                           fontWeight: FontWeight.w800,
-//                         ),
-//                         suffixIcon: Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.blue[900]?.withOpacity(0.9),
-//                             borderRadius: BorderRadius.circular(20),
-//                           ),
-//                           child: IconButton(
-//                             iconSize: 20,
-//                             splashRadius: 20,
-//                             color: Colors.white,
-//                             icon: Icon(FlutterIcons.search1_ant),
-//                             onPressed: () {},
-//                           ),
-//                         ),
-//                       ),
-//                       style: TextStyle(
-//                         fontSize: 18,
-//                         fontWeight: FontWeight.w800,
-//                       ),
-//                       onFieldSubmitted: (String value) {
-//                         setState(
-//                               () {
-//                             value.length == 0
-//                                 ? Container()
-//                                 : Navigator.push(
-//                               context,
-//                               MaterialPageRoute(
-//                                 builder: (context) => SearchList(
-//                                   searchKey: value,
-//                                 ),
-//                               ),
-//                             );
-//                           },
-//                         );
-//                       },
-//                     ),
-//                   ),
-
-//ads..
-//             Container(
-//               padding: EdgeInsets.only(top: 18, left: 23, bottom: 15),
-//               alignment: Alignment.centerLeft,
-//               child: Text(
-//                 "We care for you",
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                     color: kPrimaryColor,
-//                     fontWeight: FontWeight.bold,
-//                     fontSize: 18),
-//               ),
-//             ),
-//             Container(
-//               width: MediaQuery.of(context).size.width,
-//               child: Carouselslider(),
-//             ),
 
 class alertdialog extends StatelessWidget {
   var id;
@@ -576,7 +423,7 @@ class alertdialog extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'are you sure you want to cancel this Appointment?',
+                    'Are you sure you want to cancel this Appointment?',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -598,7 +445,7 @@ class alertdialog extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                           child: Text(
-                            'NO',
+                            'No',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
@@ -626,7 +473,7 @@ class alertdialog extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 19),
                               child: Text(
-                                'YES',
+                                'Yes',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),

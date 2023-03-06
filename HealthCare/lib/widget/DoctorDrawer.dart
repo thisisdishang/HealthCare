@@ -7,7 +7,7 @@ import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
-import 'package:hospital_appointment/newapp/FAQs.dart';
+import 'package:hospital_appointment/Screens/FAQs.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Screens/login/loginas.dart';
 import '../models/patient_data.dart';
@@ -104,6 +104,10 @@ class _DocDrawerState extends State<DocDrawer> {
                 //   Navigator.push(context,
                 //       MaterialPageRoute(builder: (context) => NotificationList()));
                 // }),
+                CustomList(Icons.question_mark, "FAQs", () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => faqs()));
+                }),
                 CustomList(Icons.lock, "Log Out", () async {
                   await FirebaseAuth.instance.signOut();
                   _prefService.removeCache("password");

@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/Screens/home/mainPage.dart';
-import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import '../services/shared_preferences_service.dart';
 import 'home/patient_home_page.dart';
@@ -56,9 +54,9 @@ class SplashViewState extends State<SplashView> {
       backgroundColor: Colors.white,
       body: Center(
           child: SingleChildScrollView(
-            child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             SizedBox(
               height: 200,
             ),
@@ -80,10 +78,10 @@ class SplashViewState extends State<SplashView> {
                   fontSize: 16,
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold),
-            )
-        ],
-      ),
-          )),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

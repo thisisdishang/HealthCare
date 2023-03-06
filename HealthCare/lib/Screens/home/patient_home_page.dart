@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hospital_appointment/Screens/detail_page.dart';
 import 'package:hospital_appointment/cells/category_cell.dart';
 import 'package:hospital_appointment/cells/hd_cell.dart';
@@ -13,10 +12,8 @@ import 'package:hospital_appointment/models/doctor.dart';
 import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
 import '../../newapp/carouselSlider.dart';
-import '../../newapp/FAQs.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
-import '../../newapp/searchList.dart';
 import '../../services/shared_preferences_service.dart';
 import '../Appointment.dart';
 import '../Profile/profile.dart';
@@ -24,7 +21,6 @@ import '../disease_page.dart';
 import '../docter_page.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
-import '../login/loginas.dart';
 
 late BuildContext context1;
 var uid;
@@ -40,7 +36,6 @@ var myDoc;
 class _HomePageState extends State<HomePage> {
   List<Category> _categories = <Category>[];
 
-  // UserModel loggedInUser = UserModel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -54,8 +49,6 @@ class _HomePageState extends State<HomePage> {
   double rating = 0.0;
   late TabController tabController;
   UserModel loggedInUser = UserModel();
-
-  // DoctorModel loggedInUser = DoctorModel();
 
   /// **********************************************
   /// ACTIONS
@@ -716,32 +709,6 @@ class _HomePageState extends State<HomePage> {
         .toList();
   }
 
-  /// **********************************************
-  /// DUMMY DATA
-  /// **********************************************
-
-  /// Get Highlighted Doctors List
-  List<Doctor> _getHDoctors() {
-    List<Doctor> hDoctors = <Doctor>[];
-
-    hDoctors.add(Doctor(
-      firstName: 'Elisa',
-      lastName: 'Alexander',
-      image: 'albert.png',
-      type: 'Kidney',
-      rating: 4.5,
-    ));
-    hDoctors.add(Doctor(
-      firstName: 'Elisa',
-      lastName: 'Rose',
-      image: 'albert.png',
-      type: 'Kidney',
-      rating: 4.5,
-    ));
-
-    return hDoctors;
-  }
-
   /// Get Categories
   List<Category> _getCategories() {
     List<Category> categories = <Category>[];
@@ -762,42 +729,6 @@ class _HomePageState extends State<HomePage> {
       title: 'Hair',
     ));
     return categories;
-  }
-
-  /// Get Top Rated Doctors List
-  List<Doctor> _getTRDoctors() {
-    final CollectionReference firebase =
-        FirebaseFirestore.instance.collection('doctor');
-
-    List<Doctor> trDoctors = <Doctor>[];
-
-    trDoctors.add(Doctor(
-      firstName: 'Mathew',
-      lastName: 'Chambers',
-      image: 'mathew.png',
-      type: 'Bone',
-      rating: 4.3,
-    ));
-    trDoctors.add(Doctor(
-        firstName: 'Cherly',
-        lastName: 'Bishop',
-        image: 'cherly.png',
-        type: 'Kidney',
-        rating: 4.7));
-    trDoctors.add(Doctor(
-        firstName: 'Albert',
-        lastName: 'Alexander',
-        image: 'albert.png',
-        type: 'Kidney',
-        rating: 4.3));
-    trDoctors.add(Doctor(
-      firstName: 'Elisa',
-      lastName: 'Rose',
-      image: 'albert.png',
-      type: 'Kidney',
-      rating: 4.5,
-    ));
-    return trDoctors;
   }
 }
 
@@ -881,13 +812,20 @@ dialog(BuildContext context) => showDialog(
                 ),
               ),
               Positioned(
-                  top: -50,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 50,
-                    child: Image.asset('assets/images/logo.jpg'),
-                    // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
-                  )),
+                child: loggedInUser.profileImage == false
+                    ? CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/account1.png'),
+                        backgroundColor: Colors.transparent,
+                        radius: 30,
+                      )
+                    : CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(loggedInUser.profileImage),
+                        backgroundColor: Colors.transparent,
+                        radius: 30,
+                      ),
+              ),
             ],
           ),
         ));

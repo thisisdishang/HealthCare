@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/Profile/profile.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
-import 'package:hospital_appointment/newapp/FAQs.dart';
+import 'package:hospital_appointment/Screens/FAQs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Screens/login/loginas.dart';
