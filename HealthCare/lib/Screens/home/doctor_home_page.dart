@@ -317,8 +317,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                       barrierDismissible: false,
                                                       builder: (BuildContext
                                                               context) =>
-                                                          alertdialog(
-                                                              id: doc.id));
+                                                          confirm(id: doc.id));
                                                   // alertdialog(doc.id);
 
                                                   //   Navigator.pop(context);
@@ -417,22 +416,23 @@ class alertdialog extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.27,
+            height: MediaQuery.of(context).size.height * 0.30,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
               child: Column(
                 children: [
-                  Text(
-                    'Are you sure you want to cancel this Appointment?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Text(
+                      'Are you sure you want to cancel this Appointment?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   //child: ),
 
                   Container(
@@ -495,13 +495,127 @@ class alertdialog extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-              top: -50,
-              child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 50,
-                child: Image.asset('assets/images/logo.jpg'),
-              )),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Positioned(
+                top: -50,
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  radius: 50,
+                  child: Image.asset('assets/images/account.png'),
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class confirm extends StatelessWidget {
+  var id;
+
+  confirm({required this.id});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Stack(
+        //overflow: Overflow.visible,
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.30,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Text(
+                      'Are you sure you want to confirm this Appointment?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+
+                  //child: ),
+
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8), // <-- Radius
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Container(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              FirebaseFirestore.instance
+                                  .collection('pending')
+                                  .doc(id)
+                                  .update({
+                                'approve': true,
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 19),
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(8), // <-- Radius
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Positioned(
+                top: -50,
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  radius: 50,
+                  child: Image.asset('assets/images/account.png'),
+                )),
+          ),
         ],
       ),
     );
