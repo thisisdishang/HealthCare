@@ -205,7 +205,12 @@ class _Appoin_timeState extends State<Appoin_time> {
                             if (c_date == null) {
                               Fluttertoast.showToast(
                                   msg: " Please Select Date First");
-                            } else {
+                            } 
+                            else if ( DateTime.now().toString() == c_date // verifying date
+                                      //&& DateFormat("HH:mm").format(DateTime.now()).toString().compareTo(morining[0].substring(10,14)>0)) // verifying current time with the string time
+                                      && DateFormat("HH:mm").format(DateTime.now()).toString() > morining[0].substring(10,14)) // verifying current time with the string time
+                                    { null; }
+                            else {
                               time = morining[0];
                               timeslot = 1;
                               isEnabled1 = true;
