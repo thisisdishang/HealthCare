@@ -208,7 +208,7 @@ class _DocHomePageState extends State<DocHomePage> {
 
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 6),
+                                      horizontal: 8, vertical: 3),
                                   child: Container(
                                     height: 108,
                                     child: Card(
@@ -304,7 +304,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                               right: 10,
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  primary: Colors.green,
+                                                  primary: kPrimarydark,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -331,9 +331,9 @@ class _DocHomePageState extends State<DocHomePage> {
                                                             top: 10.0,
                                                             bottom: 10),
                                                     child: Text(
-                                                      "Confirm ",
+                                                      "✅",
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: Colors.green,
                                                           fontWeight:
                                                               FontWeight.w600),
                                                     ),
@@ -346,7 +346,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                               right: 10,
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  primary: Colors.red,
+                                                  primary: kPrimarydark,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -374,7 +374,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                             top: 10.0,
                                                             bottom: 10),
                                                     child: Text(
-                                                      "Cancel ",
+                                                      "❌",
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
@@ -451,7 +451,7 @@ class alertdialog extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            primary: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -480,7 +480,7 @@ class alertdialog extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              primary: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius
@@ -560,7 +560,7 @@ class confirm extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            primary: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -591,7 +591,7 @@ class confirm extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              primary: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:health_and_doctor_appointment/model/bannerModel.dart';
-// import 'package:health_and_doctor_appointment/screens/disease.dart';
-// import 'package:health_and_doctor_appointment/screens/diseasedetail.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../Screens/disease_page.dart';
 import 'diseasedetail.dart';
 import 'model/bannerModel.dart';
@@ -35,15 +31,20 @@ class Carouselslider extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                index == 0
-                    ? Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return Disease();
-                      }))
-                    : Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return DiseaseDetail(disease: 'Covid-19');
-                      }));
+                if (index == 0) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return Disease();
+                  }));
+                }
+                if (index == 1) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return DiseaseDetail(disease: 'Covid-19');
+                  }));
+                } else {
+                  Fluttertoast.showToast(msg: " Coming Soon...");
+                }
               },
               child: Stack(
                 children: [

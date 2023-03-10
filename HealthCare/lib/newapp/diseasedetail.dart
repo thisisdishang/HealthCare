@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class DiseaseDetail extends StatefulWidget {
   final String disease;
 
@@ -16,13 +18,13 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: kPrimaryColor,
         elevation: 0,
         title: Text(
           widget.disease,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
@@ -46,9 +48,6 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                     margin: EdgeInsets.only(top: 10),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
-                          height: 20,
-                        ),
                         Container(
                             margin: EdgeInsets.only(left: 15, right: 15),
                             padding: EdgeInsets.only(left: 20, right: 20),
@@ -57,12 +56,16 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.blueGrey[50],
                             ),
-                            child: Text(
-                              document['Description'],
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 15.0, bottom: 15.0),
+                              child: Text(
+                                document['Description'],
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             )),
                         SizedBox(
                           height: 20,
@@ -78,22 +81,28 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'How does it spread?',
-                                  style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    'How does it spread?',
+                                    style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.left,
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 10,
                                 ),
-                                Text(
-                                  document['Spread'],
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 18,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Text(
+                                    document['Spread'],
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 )
                               ],
@@ -112,22 +121,28 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Symtomps',
-                                  style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    'Symtomps',
+                                    style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.left,
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 10,
                                 ),
-                                Text(
-                                  document['Symtomps'],
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 18,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Text(
+                                    document['Symtomps'],
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 )
                               ],
@@ -146,26 +161,35 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Warning Signs - Seek medical attention',
-                                  style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    'Warning Signs - Seek medical attention',
+                                    style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.left,
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 10,
                                 ),
-                                Text(
-                                  document['Warning'],
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 18,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Text(
+                                    document['Warning'],
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 )
                               ],
                             )),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   );

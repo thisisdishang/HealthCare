@@ -25,17 +25,17 @@ class Appoin_time extends StatefulWidget {
 
 class _Appoin_timeState extends State<Appoin_time> {
   final morining = [
-    "09:00am - 10:00am",
-    "10:30am - 12:00am",
+    "09:00AM - 10:00AM",
+    "10:30AM - 12:00PM",
   ];
   final afternoon = [
-    "12:00pm - 1:00pm",
-    "3:00pm - 4:00pm",
-    "4:30pm - 6:00pm",
+    "12:00PM - 1:00PM",
+    "3:00PM - 4:00PM",
+    "4:30PM - 6:00PM",
   ];
   final evening = [
-    "6:00pm - 7:00pm",
-    "7:30pm - 9:00pm",
+    "6:00PM - 7:00PM",
+    "7:30PM - 9:00PM",
   ];
   bool isEnabled1 = false;
   bool sloact_book = false;
@@ -205,12 +205,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                             if (c_date == null) {
                               Fluttertoast.showToast(
                                   msg: " Please Select Date First");
-                            } 
-                            else if ( DateTime.now().toString() == c_date // verifying date
-                                      //&& DateFormat("HH:mm").format(DateTime.now()).toString().compareTo(morining[0].substring(10,14)>0)) // verifying current time with the string time
-                                      && (DateFormat("HH:mm").format(DateTime.now()).toString().compareTo(morining[0].substring(10,14))>0) // verifying current time with the string time
-                                    { null; }
-                            else {
+                            } else {
                               time = morining[0];
                               timeslot = 1;
                               isEnabled1 = true;
