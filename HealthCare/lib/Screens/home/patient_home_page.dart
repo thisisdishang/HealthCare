@@ -469,7 +469,7 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
+                    itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
                       final DocumentSnapshot doc = snapshot.data!.docs[index];
                       return HDCell(
@@ -624,7 +624,6 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 32,
         ),
-
         StreamBuilder<QuerySnapshot>(
             stream: firebase.orderBy('rating', descending: true).snapshots(),
             builder:
@@ -636,7 +635,7 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount: 4,
+                  itemCount: snapshot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot doc = snapshot.data!.docs[index];
                     return TrdCell(

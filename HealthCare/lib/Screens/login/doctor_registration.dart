@@ -51,7 +51,6 @@ class _DocRegistrationState extends State<DocRegistration> {
       t_address,
       t_email,
       t_exp,
-      t_rating,
       t_phone,
       t_password,
       tc_password;
@@ -610,7 +609,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                           validator: (var value) {
                             if (value!.isEmpty) {
                               return "Enter Your Experince";
-                            } else if (value.length>2) {
+                            } else if (value.length > 2) {
                               return "Experience must be in two digit";
                             }
                             return null;
@@ -620,36 +619,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                           },
                           onSaved: (var exp) {
                             t_exp = exp;
-                          },
-                        ),
-                      ),
-                      // ************************************
-                      Container(
-                        width: container_width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          cursorColor: kPrimaryColor,
-                          decoration: buildInputDecoration(
-                              Icons.add_chart, "Rating Between 1 to 5"),
-                          //onChanged: (){},
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Enter Your Rating";
-                            } else if (value.length != 1 ||
-                                value.startsWith("0") ||
-                                value.startsWith("6") ||
-                                value.startsWith("7") ||
-                                value.startsWith("8") ||
-                                value.startsWith("9")) {
-                              return "Rating Must Be In 1 to 5";
-                            }
-                            return null;
-                          },
-                          onChanged: (rating) {
-                            t_rating = rating;
-                          },
-                          onSaved: (var rating) {
-                            t_rating = rating;
                           },
                         ),
                       ),
@@ -891,7 +860,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                             'uid': userCredential1.user!.uid,
                                             'name': t_name,
                                             'specialist': dropdownvalue,
-                                            'rating': t_rating,
+                                            'rating': '0',
                                             'description': t_desc,
                                             'address': t_address,
                                             'email':

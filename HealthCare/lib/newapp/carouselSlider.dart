@@ -42,8 +42,12 @@ class Carouselslider extends StatelessWidget {
                       MaterialPageRoute(builder: (BuildContext context) {
                     return DiseaseDetail(disease: 'Covid-19');
                   }));
-                } else {
-                  Fluttertoast.showToast(msg: " Coming Soon...");
+                }
+                if (index == 2) {
+                  Fluttertoast.showToast(msg: "Insurance Coming Soon...");
+                }
+                if (index == 3) {
+                  Fluttertoast.showToast(msg: "Diet Plan Coming Soon...");
                 }
               },
               child: Stack(

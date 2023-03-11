@@ -53,8 +53,7 @@ class SplashViewState extends State<SplashView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: SingleChildScrollView(
-        child: Column(
+          child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
@@ -70,7 +69,7 @@ class SplashViewState extends State<SplashView> {
               ),
             ),
             SizedBox(
-              height: 230,
+              height: 210,
             ),
             Text(
               "Powered By Rana Corporation®",
@@ -81,7 +80,7 @@ class SplashViewState extends State<SplashView> {
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

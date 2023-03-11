@@ -1186,11 +1186,11 @@ class _DetailPageState extends State<DetailPage> {
                 Positioned(
                     top: 10,
                     child: CircleAvatar(
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Colors.white,
                       radius: 50,
                       child: Image.asset(
                         'assets/images/account.png',
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                       // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),
@@ -1209,9 +1209,9 @@ class _DetailPageState extends State<DetailPage> {
               alignment: Alignment.topCenter,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.45,
+                  height: MediaQuery.of(context).size.height * 0.50,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 90, 10, 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -1222,7 +1222,7 @@ class _DetailPageState extends State<DetailPage> {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         RatingBar.builder(
                           itemBuilder: (context, _) => Icon(
@@ -1315,13 +1315,13 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 Positioned(
-                    top: -50,
+                    top: 10,
                     child: CircleAvatar(
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Colors.white,
                       radius: 50,
                       child: Image.asset(
-                        'assets/images/account.jpg',
-                        fit: BoxFit.fill,
+                        'assets/images/account.png',
+                        fit: BoxFit.cover,
                       ),
                       // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),

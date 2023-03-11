@@ -30,4 +30,11 @@ List<BannerModel> bannerCards = [
         Color(0xffcfe3fc),
       ],
       "assets/images/covid-bg.png"),
+  new BannerModel(
+      "Diet Plan",
+      [
+        Color(0xffb6d4fa),
+        Color(0xffcfe3fc),
+      ],
+      "assets/images/dietplan2.png"),
 ];

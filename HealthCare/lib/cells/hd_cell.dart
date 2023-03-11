@@ -123,7 +123,7 @@ class _HDCellState extends State<HDCell> {
                       ? CircleAvatar(
                           radius: 60,
                           backgroundImage:
-                              AssetImage('assets/images/account1.png'),
+                              AssetImage('assets/images/account.png'),
                         )
                       : CircleAvatar(
                           radius: 60,
