@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/cells/detail_cell.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hospital_appointment/Screens/home/patient_home_page.dart';
@@ -26,6 +27,7 @@ class DetailPage extends StatefulWidget {
   var profileImage;
   var description;
   var phone;
+  var available;
 
   DetailPage({
     required this.uid,
@@ -37,6 +39,7 @@ class DetailPage extends StatefulWidget {
     required this.profileImage,
     required this.description,
     required this.phone,
+    required this.available,
     required doctor,
   });
 
@@ -147,6 +150,14 @@ class _DetailPageState extends State<DetailPage> {
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (widget.available == false) {
+                              Fluttertoast.showToast(
+                                  msg: "Dr. " +
+                                      widget.name +
+                                      " is not available...Visit later",
+                                  textColor: Colors.white,
+                                  backgroundColor: kPrimaryColor);
+                            }
                             if (!snapshot.hasData) {
                               return SizedBox();
                             } else {
@@ -756,7 +767,7 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 8),
-                              child: ElevatedButton(
+                              child: widget.available==true?ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: kPrimaryColor,
                                   shape: RoundedRectangleBorder(
@@ -773,6 +784,29 @@ class _DetailPageState extends State<DetailPage> {
                                               name: widget.name,
                                             )),
                                   );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 5, right: 5),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "Appointment",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ),
+                              ):ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(12), // <-- Radius
+                                  ),
+                                ),
+                                onPressed: () {
+                                 null;
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(left: 5, right: 5),

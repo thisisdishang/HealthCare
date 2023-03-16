@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Screens/disease_page.dart';
+import '../constants.dart';
 import 'diseasedetail.dart';
 import 'model/bannerModel.dart';
 
@@ -44,10 +45,10 @@ class Carouselslider extends StatelessWidget {
                   }));
                 }
                 if (index == 2) {
-                  Fluttertoast.showToast(msg: "Insurance Coming Soon...");
+                  Fluttertoast.showToast(msg: "Insurance Coming Soon...",textColor: Colors.white,backgroundColor: kPrimaryColor);
                 }
                 if (index == 3) {
-                  Fluttertoast.showToast(msg: "Diet Plan Coming Soon...");
+                  Fluttertoast.showToast(msg: "Diet Plan Coming Soon...",textColor: Colors.white,backgroundColor: kPrimaryColor);
                 }
               },
               child: Stack(

@@ -192,7 +192,7 @@ class _RegistrationState extends State<Registration> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            "Registration",
+                            "Patient Registration",
                             style: TextStyle(
                                 fontSize: 32,
                                 color: Colors.black,
@@ -553,7 +553,7 @@ class _RegistrationState extends State<Registration> {
                                   alignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Status:",
+                                      "Marital\nStatus:",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: kPrimaryColor),

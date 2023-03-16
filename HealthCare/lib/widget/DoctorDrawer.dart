@@ -23,7 +23,6 @@ class _DocDrawerState extends State<DocDrawer> {
   User? user = FirebaseAuth.instance.currentUser;
   DoctorModel loggedInUser = DoctorModel();
   final PrefService _prefService = PrefService();
-
   bool isLoading = true;
 
   @override
@@ -114,6 +113,37 @@ class _DocDrawerState extends State<DocDrawer> {
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => doctor_page()));
                 }),
+                ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'Available:',
+                      textScaleFactor: 1.5,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                  trailing: Switch(
+                      activeColor: kPrimaryColor,
+                      value: loggedInUser.available,
+                      onChanged: (check) {
+                        FirebaseFirestore.instance
+                            .collection('doctor')
+                            .doc(user!.uid)
+                            .update({
+                          'available': check,
+                        });
+                        setState(() {
+                          loggedInUser.available = check;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 1,
+                  width: 10,
+                  color: kPrimaryLightColor,
+                ),
               ],
             ),
     );

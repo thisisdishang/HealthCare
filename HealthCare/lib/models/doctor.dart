@@ -25,6 +25,7 @@ class DoctorModel {
   String? description;
   String? phone;
   String? rating;
+  var available;
   var profileImage;
 
   DoctorModel({
@@ -38,6 +39,7 @@ class DoctorModel {
     this.description,
     this.phone,
     this.rating,
+    this.available,
     this.profileImage,
   });
 
@@ -55,6 +57,7 @@ class DoctorModel {
       phone: map['phone'],
       profileImage: map['profileImage'],
       rating: map['rating'],
+      available:map['available'],
     );
   }
 
@@ -72,6 +75,7 @@ class DoctorModel {
       'phone': phone,
       'profileImage': profileImage,
       'rating': rating,
+      'available':available
     };
   }
 }

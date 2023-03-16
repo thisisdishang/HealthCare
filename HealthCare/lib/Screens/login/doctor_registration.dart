@@ -257,8 +257,8 @@ class _DocRegistrationState extends State<DocRegistration> {
                         child: TextFormField(
                           keyboardType: TextInputType.name,
                           cursorColor: kPrimaryColor,
-                          decoration:
-                              buildInputDecoration(Icons.person, "Doctor Name"),
+                          decoration: buildInputDecoration(
+                              Icons.person, "Doctor Full Name"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -283,8 +283,8 @@ class _DocRegistrationState extends State<DocRegistration> {
                         child: TextFormField(
                           keyboardType: TextInputType.text,
                           cursorColor: kPrimaryColor,
-                          decoration: buildInputDecoration(
-                              Icons.add_location, "Doctor Address"),
+                          decoration: buildInputDecoration(Icons.add_location,
+                              "Hospital or Clinic Name & Address"),
                           onChanged: (address) {
                             t_address = address;
                           },
@@ -506,7 +506,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                   alignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Status:",
+                                      "Marital\nStatus:",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: kPrimaryColor),
@@ -860,7 +860,8 @@ class _DocRegistrationState extends State<DocRegistration> {
                                             'uid': userCredential1.user!.uid,
                                             'name': t_name,
                                             'specialist': dropdownvalue,
-                                            'rating': '0',
+                                            'rating': 0,
+                                            'available': false,
                                             'description': t_desc,
                                             'address': t_address,
                                             'email':

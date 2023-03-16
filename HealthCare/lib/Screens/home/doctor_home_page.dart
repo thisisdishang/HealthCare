@@ -272,7 +272,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 8.0),
+                                                              left: 8.0,top: 4),
                                                       child: Text(
                                                         "Time: " + doc['time'],
                                                         style: TextStyle(

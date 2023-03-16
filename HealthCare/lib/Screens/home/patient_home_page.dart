@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/Screens/detail_page.dart';
 import 'package:hospital_appointment/cells/category_cell.dart';
 import 'package:hospital_appointment/cells/hd_cell.dart';
@@ -390,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                                               child: Center(
                                                 child: doc['approve'] == false
                                                     ? Text(
-                                                        "Your appointment with Dr." +
+                                                        "Your appointment with Dr. " +
                                                             doc['doctor_name'] +
                                                             " is Pending at  " +
                                                             doc['date'] +
@@ -405,7 +406,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .bold),
                                                       )
                                                     : Text(
-                                                        " Your confirm appointment with Dr." +
+                                                        " Your confirm appointment with Dr. " +
                                                             doc['doctor_name'] +
                                                             " is Confirmed at " +
                                                             doc['date'] +
@@ -487,6 +488,7 @@ class _HomePageState extends State<HomePage> {
                                   profileImage: doc['profileImage'],
                                   description: doc['description'],
                                   phone: doc['phone'],
+                                  available: doc['available'],
                                   doctor: _doctorName,
                                 ),
                               ));
@@ -653,6 +655,7 @@ class _HomePageState extends State<HomePage> {
                                 specialist: doc['specialist'],
                                 profileImage: doc['profileImage'],
                                 description: doc['description'],
+                                available: doc['available'],
                                 phone: doc['phone'],
                                 doctor: null,
                               ),
@@ -681,6 +684,12 @@ class _HomePageState extends State<HomePage> {
     return snapshot.data!.docs
         .map((doc) => TrdCell(
               onTap: () {
+                if (doc['available'].toString() == false) {
+                  Fluttertoast.showToast(
+                      msg: "Dr. " + doc['name'] + " is not available",
+                      textColor: Colors.white,
+                      backgroundColor: kPrimaryColor);
+                }
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -694,6 +703,7 @@ class _HomePageState extends State<HomePage> {
                         profileImage: doc['profileImage'],
                         description: doc['description'],
                         phone: doc['phone'],
+                        available: doc['available'],
                         doctor: _doctorName,
                       ),
                     ));

@@ -161,6 +161,7 @@ class _Docter_pageState extends State<Docter_page> {
                                           profileImage: doc['profileImage'],
                                           description: doc['description'],
                                           phone: doc['phone'],
+                                          available: doc['available'],
                                           doctor: _doctorName,
                                         ),
                                       ));

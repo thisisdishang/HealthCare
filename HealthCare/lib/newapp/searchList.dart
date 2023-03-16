@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:health_and_doctor_appointment/screens/doctorProfile.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 import '../Screens/detail_page.dart';
 import '../services/shared_preferences_service.dart';
@@ -18,7 +15,6 @@ class SearchList extends StatefulWidget {
 }
 
 class _SearchListState extends State<SearchList> {
-  // get doc => null;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   final CollectionReference firebase =
@@ -109,6 +105,7 @@ class _SearchListState extends State<SearchList> {
                                         profileImage: doc['profileImage'],
                                         description: doc['description'],
                                         phone: doc['phone'],
+                                        available: doc['available'],
                                         doctor: _doctorName,
                                       ),
                                     ),
