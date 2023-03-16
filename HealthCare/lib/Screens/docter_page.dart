@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/componets/loadingindicator.dart';
-import 'package:hospital_appointment/models/doctor.dart';
-
 import '../cells/Doctor_card.dart';
 import 'detail_page.dart';
 
@@ -16,7 +14,6 @@ class Docter_page extends StatefulWidget {
 }
 
 class _Docter_pageState extends State<Docter_page> {
-  List<Doctor> _hDoctors = <Doctor>[];
   TextEditingController _doctorName = TextEditingController();
   final myImageAndCaption = [
     ["assets/images/albert.png", "albert", "3.5"],
@@ -31,32 +28,11 @@ class _Docter_pageState extends State<Docter_page> {
   ];
   bool isLoading = true;
 
-  List<Doctor> _getHDoctors() {
-    List<Doctor> hDoctors = <Doctor>[];
-
-    hDoctors.add(Doctor(
-      firstName: 'Albert',
-      lastName: 'Alexander',
-      image: 'albert.png',
-      type: 'Kidney',
-      rating: 4.5,
-    ));
-    hDoctors.add(Doctor(
-      firstName: 'Elisa',
-      lastName: 'Rose',
-      image: 'albert.png',
-      type: 'Kidney',
-      rating: 4.5,
-    ));
-
-    return hDoctors;
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _hDoctors = _getHDoctors();
+
     setState(() {
       isLoading = false;
     });
@@ -64,9 +40,6 @@ class _Docter_pageState extends State<Docter_page> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
-    final double itemWidth = size.width / 2;
     print("Doc_cate: " + widget.cotegory_name);
     var firebase = FirebaseFirestore.instance
         .collection('doctor')
@@ -95,25 +68,6 @@ class _Docter_pageState extends State<Docter_page> {
             ? Column(
                 children: [
                   Loading(),
-
-                  /*SizedBox(
-                  child:StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('pending').where('did',isEqualTo: widget.u)
-                      /*.doc(widget.uid)
-                            .collection('/rating')*/
-                          .snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(child: CircularProgressIndicator());
-                        } else {
-
-
-                          return SizedBox();
-                        }
-                      }) ,
-                ),*/
                 ],
               )
             : Padding(
@@ -122,14 +76,6 @@ class _Docter_pageState extends State<Docter_page> {
                     stream: firebase.snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      //    print("Snapshot: " + snapshot.hasData.toString());
-
-                      // if(!snapshot.hasData){
-                      //   return Text("NO DATA");
-                      // }else{
-                      //   return Text("Fetching Data...");
-                      // }
-                      //   Future.delayed(Duration(seconds: 2));
                       if (!snapshot.hasData) {
                         return Center(child: Text("Doctor Not Available"));
                       } else {

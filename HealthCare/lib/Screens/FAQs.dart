@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class faqs extends StatefulWidget {
@@ -60,9 +59,6 @@ class _faqsState extends State<faqs> {
                         child: Text(data['answer'].toString()),
                       ),
                     ],
-                    // subtitle: Text(data['answer'].toString(),
-                    //     style:
-                    //         new TextStyle(fontSize: 12.0, color: Colors.amber)),
                   );
                 }),
           ),

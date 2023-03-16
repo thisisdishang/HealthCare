@@ -6,24 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/Appointment.dart';
 import '../Screens/Profile/profile.dart';
 import '../constants.dart';
-import '../models/category.dart';
 import '../models/patient_data.dart';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:hospital_appointment/constants.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:intl/intl.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:path/path.dart';
-import '../../componets/loadingindicator.dart';
-import '../../models/patient_data.dart';
-import '../../widget/Alert_Dialog.dart';
 
 late BuildContext context1;
 var uid;
@@ -36,30 +21,14 @@ class UserProfile extends StatefulWidget {
   _UserProfileState createState() => _UserProfileState();
 }
 
-// List<Category> _categories = <Category>[];
-//
-// final CollectionReference firebase =
-// FirebaseFirestore.instance.collection('doctor');
-// var appointment = FirebaseFirestore.instance;
 User? user = FirebaseAuth.instance.currentUser;
 var file;
 
 class _UserProfileState extends State<UserProfile> {
-  //
-  // final CollectionReference firebase =
-  // FirebaseFirestore.instance.collection('doctor');
-  // var appointment = FirebaseFirestore.instance;
-  // User? user = FirebaseAuth.instance.currentUser;
-  // FirebaseAuth _auth = FirebaseAuth.instance;
-  //
-  //
-  // Future<void> _getUser() async {
-  //   user = _auth.currentUser;
-  // }
   User? user = FirebaseAuth.instance.currentUser;
 
   bool isLoading = true;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   var t_address;
   var mydate;
   var t_date;
@@ -139,35 +108,10 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
-  // void initState() {
-  //   super.initState();
-  //
-  //   // _categories = _getCategories();
-  //
-  //   loggedInUser = UserModel();
-  //   FirebaseFirestore.instance
-  //       .collection("patient")
-  //       .doc(user!.uid)
-  //       .get()
-  //       .then((value) {
-  //     loggedInUser = UserModel.fromMap(value.data());
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    // var margin_left = size.width * 0.07;
-    // var margin_top = size.width * 0.03;
-    // var margin_right = size.width * 0.07;
-    // var boder = size.width * 0.6;
     return Scaffold(
       body: SafeArea(
-        // child: NotificationListener<OverscrollIndicatorNotification>(
-        //   onNotification: (OverscrollIndicatorNotification overscroll) {
-        //     overscroll.disallowGlow();
-        //
-        //   },
         child: ListView(
           physics: ClampingScrollPhysics(),
           shrinkWrap: true,
@@ -214,26 +158,6 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ],
                 ),
-
-                // Container(
-                //   child: CircleAvatar(
-                //     radius: 80,
-                //     backgroundColor: Colors.white,
-                //     backgroundImage: AssetImage(
-                //         'assets/images/account.png'),
-                //     // backgroundImage:
-                //     // NetworkImage(
-                //     //     loggedInUser
-                //     //         .profileImage),
-                //                   ),
-                //
-                //   decoration: BoxDecoration(
-                //       border: Border.all(
-                //         color: Color(0xD5E0F3EE),
-                //         width: 5,
-                //       ),
-                //       shape: BoxShape.circle),
-                // ),
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -246,24 +170,10 @@ class _UserProfileState extends State<UserProfile> {
                   accountName: Text(loggedInUser.name.toString()),
                   accountEmail: Text(loggedInUser.email.toString()),
                   currentAccountPicture: Container(
-                    // child: loggedInUser.profileImage == false
-                    //     ? CircleAvatar(
-                    //   backgroundImage:
-                    //   AssetImage('assets/images/account.png'),
-                    //   radius: 50,
-                    // )
-                    //     : CircleAvatar(
-                    //   backgroundImage:
-                    //   NetworkImage(loggedInUser.profileImage),
-                    //   backgroundColor: Colors.grey,
                     child: CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.white, // ),
                       backgroundImage: AssetImage('assets/images/person.jpg'),
-                      // backgroundImage:
-                      // NetworkImage(
-                      //     loggedInUser
-                      //         .profileImage),
                     ),
                   ),
                 ),
@@ -349,36 +259,6 @@ class _UserProfileState extends State<UserProfile> {
                 ],
               ),
             ),
-            // Container(
-            //   margin:
-            //   EdgeInsets.only(left: margin_left, top: margin_top),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: <Widget>[
-            //       Text(
-            //         "Email",
-            //         style: TextStyle(
-            //             color: kPrimaryColor,
-            //             fontWeight: FontWeight.w600),
-            //       ),
-            //       Container(
-            //         margin: EdgeInsets.only(
-            //             left: margin_left, right: margin_right),
-            //         width: boder,
-            //         decoration: BoxDecoration(
-            //           border: Border.all(
-            //               width: 1.0, color: Colors.black12),
-            //           borderRadius: BorderRadius.all(
-            //               Radius.circular(5.0)
-            //             //                 <--- border radius here
-            //           ),
-            //         ),
-            //         padding: EdgeInsets.all(8),
-            //         child: Text("${loggedInUser.email}".toString()),
-            //       )
-            //     ],
-            //   ),
-            // ),
             Container(
               margin: EdgeInsets.only(left: 15, right: 15, top: 20),
               padding: EdgeInsets.only(left: 20, top: 20),
@@ -513,7 +393,7 @@ class _UserProfileState extends State<UserProfile> {
           return Center(
             child: CircularProgressIndicator(),
           );
-        var userData = snapshot.data;
+
         return Container(
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.only(top: 10, left: 40),

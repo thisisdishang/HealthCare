@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/constants.dart';
-
 import '../../componets/loadingindicator.dart';
 import '../../models/doctor.dart';
 import 'chat_screen.dart';
@@ -82,18 +80,7 @@ class _Patient_ListState extends State<Patient_List> {
                                   p_name: doc['name'],
                                   last_name: doc['last name'],
                                   phone: doc[
-                                      'phone']); /*Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Center(
-                                          child: Text(
-                                            doc['name'],
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      )*/ // child widget, replace with your own
+                                      'phone']); // child widget, replace with your own
                         },
                       ),
                     );
@@ -154,32 +141,6 @@ class CustomCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            /*  subtitle: Row(
-              children: [
-            //    Icon(Icons.done_all),
-                SizedBox(
-                  width: 3,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "Doctor id "+did,
-                      style: TextStyle(
-                        fontSize: 10,
-                      ),
-                    ),
-                    Text(
-                      "patient id"+pid,
-                      style: TextStyle(
-                        fontSize: 10,
-                      ),
-                    ),
-                  ],
-                )
-
-              ],
-            ),
-            trailing: Text("08:00"),*/
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 80),

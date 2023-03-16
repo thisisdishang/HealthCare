@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../../componets/loadingindicator.dart';
 import '../../../constants.dart';
 import '../../../models/patient_data.dart';
@@ -46,12 +45,6 @@ class _PendingState extends State<Pending> {
     });
   }
 
-  // Stream<QuerySnapshot> pt = FirebaseFirestore.instance
-  //     .collection('pending')
-  //     .where("pid",
-  //         isEqualTo: /*user!.uid.toString()*/ "SZlIi4DRdyaFNT9G54ZMKBSCpzD2")
-  //     .snapshots();
-
   @override
   Widget build(BuildContext context) {
     var firebase = appointment
@@ -70,14 +63,6 @@ class _PendingState extends State<Pending> {
             stream: firebase,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              // final List ptdata = [];
-              // snapshot.data!.docs.map((DocumentSnapshot document) {
-              //   Map a = document.data() as Map<String, dynamic>;
-              //   ptdata.add(a);
-              //   print(ptdata);
-              //   print(pt);
-              // });
-
               if (!snapshot.hasData) {
                 return Container(
                     height: size.height * 1,
@@ -213,7 +198,7 @@ class _PendingState extends State<Pending> {
                                                 child: ElevatedButton(
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: Colors.red,
+                                                    backgroundColor: Colors.red,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -230,9 +215,6 @@ class _PendingState extends State<Pending> {
                                                                 context) =>
                                                             alertdialog(
                                                                 id: doc.id));
-                                                    // alertdialog(doc.id);
-
-                                                    //   Navigator.pop(context);
                                                   },
                                                   child: Container(
                                                     margin: EdgeInsets.only(
@@ -280,7 +262,6 @@ class alertdialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Stack(
-        //overflow: Overflow.visible,
         alignment: Alignment.topCenter,
         children: [
           Container(
@@ -300,8 +281,6 @@ class alertdialog extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  //child: ),
-
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Row(
@@ -318,7 +297,7 @@ class alertdialog extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            backgroundColor: Colors.green,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -347,7 +326,7 @@ class alertdialog extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              backgroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius

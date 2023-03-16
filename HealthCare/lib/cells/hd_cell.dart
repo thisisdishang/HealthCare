@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/models/doctor.dart';
-
 import '../constants.dart';
 
 class HDCell extends StatefulWidget {
@@ -71,14 +69,6 @@ class _HDCellState extends State<HDCell> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  /*   Text(
-                    widget.last_name,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),*/
                   SizedBox(
                     height: 16,
                   ),
@@ -132,20 +122,6 @@ class _HDCellState extends State<HDCell> {
                 ),
               ),
             ),
-            /*  Positioned(
-
-              child: SizedBox(
-                width: 120,
-                height: 173,
-                child: Hero(
-                  tag: widget.name + widget.email,
-                  child: Image(
-                    filterQuality: FilterQuality.high,
-                    image: NetworkImage(widget.profileImage),
-                  ),
-                ),
-              ),
-            ),*/
           ],
         ),
       ),

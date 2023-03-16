@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/Screens/home/doctor_home_page.dart';
-import 'package:hospital_appointment/Screens/login/Patient_registration.dart';
 import 'package:hospital_appointment/Screens/login/doctor_registration.dart';
 import 'package:hospital_appointment/widget/inputdecoration.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -93,8 +92,6 @@ class _doctor_pageState extends State<doctor_page> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPasswordValid(String password) => password.length == 6;
-
     bool isEmailValid(String email) {
       var pattern =
           r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -103,7 +100,6 @@ class _doctor_pageState extends State<doctor_page> {
     }
 
     var size = MediaQuery.of(context).size;
-//    var bottom = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -122,17 +118,8 @@ class _doctor_pageState extends State<doctor_page> {
                     ),
                     child: Container(
                       child: Column(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // Positioned(
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(top: size.height * 0.09),
-                          //     child: Image.asset("assets/images/logo.jpg",
-                          //         width: size.width * 0.5,
-                          //         height: size.height * 0.20),
-                          //   ),
-                          // ),
                           SizedBox(
                             height: size.height * 0.39,
                           ),
@@ -284,32 +271,6 @@ class _doctor_pageState extends State<doctor_page> {
                                                   email: t_email,
                                                   password: t_password);
                                           showLoadingDialog(context: context);
-                                          /*    await auth
-                                      .signInWithEmailAndPassword(
-                                      email: t_email, password: t_password)
-
-                                      .then((value) => _prefService.createCache(2))
-                                      .then((uid) => {
-                                    print("Login Successful"),
-                                    Fluttertoast.showToast(
-                                        msg: "Login Successful",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: kPrimaryColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0),
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>Demo()
-                                        // Docter_Home()
-                                      ),
-                                    ),
-                                  })
-                                      .catchError((e) {
-                                       hideLoadingDialog(context: context);
-                                    print("utsav====="+e);
-                                  });*/
                                         } on FirebaseAuthException catch (error) {
                                           print("FirebaseError: " + error.code);
                                           switch (error.code) {
@@ -363,7 +324,6 @@ class _doctor_pageState extends State<doctor_page> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         doctor_page()));
-                                            // hideLoadingDialog(context: context);
                                           }
 
                                           print("error data" + error.code);
@@ -390,14 +350,6 @@ class _doctor_pageState extends State<doctor_page> {
                                                             kPrimaryColor,
                                                         textColor: Colors.white,
                                                         fontSize: 16.0),
-                                                    /* Navigator.of(context)
-                                                        .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              HomePage()
-                                                          // Docter_Home()
-                                                          ),
-                                                    ),*/
                                                     Navigator.pushAndRemoveUntil<
                                                             dynamic>(
                                                         context,

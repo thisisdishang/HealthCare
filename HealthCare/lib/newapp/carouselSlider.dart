@@ -16,8 +16,6 @@ class Carouselslider extends StatelessWidget {
         itemCount: bannerCards.length,
         itemBuilder: (context, index, realIndex) {
           return Container(
-            //alignment:  Alignment.centerLeft,
-            //width: MediaQuery.of(context).size.width,
             height: 140,
             margin: EdgeInsets.only(left: 0, right: 0, bottom: 10),
             padding: EdgeInsets.only(left: 0),
@@ -45,17 +43,22 @@ class Carouselslider extends StatelessWidget {
                   }));
                 }
                 if (index == 2) {
-                  Fluttertoast.showToast(msg: "Insurance Coming Soon...",textColor: Colors.white,backgroundColor: kPrimaryColor);
+                  Fluttertoast.showToast(
+                      msg: "Insurance Coming Soon...",
+                      textColor: Colors.white,
+                      backgroundColor: kPrimaryColor);
                 }
                 if (index == 3) {
-                  Fluttertoast.showToast(msg: "Diet Plan Coming Soon...",textColor: Colors.white,backgroundColor: kPrimaryColor);
+                  Fluttertoast.showToast(
+                      msg: "Diet Plan Coming Soon...",
+                      textColor: Colors.white,
+                      backgroundColor: kPrimaryColor);
                 }
               },
               child: Stack(
                 children: [
                   Image.asset(
                     bannerCards[index].image,
-                    //'assets/414.jpg',
                     fit: BoxFit.fitHeight,
                   ),
                   Container(
@@ -67,7 +70,6 @@ class Carouselslider extends StatelessWidget {
                       children: [
                         Text(
                           bannerCards[index].text,
-                          //'Check Disease',
                           style: TextStyle(
                             color: Colors.lightBlue[900],
                             fontWeight: FontWeight.bold,

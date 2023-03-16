@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class SelectCard extends StatefulWidget {
@@ -61,11 +60,9 @@ class _SelectCardState extends State<SelectCard> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
-      // onTap: ()=>onTap,
       child: Container(
         width: size.width * 1,
         height: 200,
-        // margin: EdgeInsets.only(left: 10),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: kPrimaryColor,
@@ -105,14 +102,6 @@ class _SelectCardState extends State<SelectCard> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  /*   Text(
-                    widget.last_name,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),*/
                   SizedBox(
                     height: 16,
                   ),
@@ -170,7 +159,6 @@ class _SelectCardState extends State<SelectCard> {
             Positioned(
               top: 15,
               left: 20,
-              //bottom: 10,
               child: Container(
                 child: CircleAvatar(
                   radius: 65,
@@ -218,67 +206,3 @@ class _SelectCardState extends State<SelectCard> {
     return icon;
   }
 }
-
-/*Card(
-        color: kprimaryLightBlue,
-        child: Column(
-          //  mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            /*  Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: size.height * 0.08,
-                  width: size.width * 0.08,
-                  child: Image.asset(
-                    choice[0],
-                  ),
-                ),
-              ),
-            ),*/
-            /*  Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: size.height * 0.10,
-                  width: size.width * 0.2,
-                  child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 2, color: kPrimaryColor),
-                      ),
-                      child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/albert.png'),
-                        radius: 100,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                child: CircleAvatar(
-                  radius: 65,
-                  backgroundColor: kPrimaryColor,
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(profileImage),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 10, top: 5), child: Text("Dr."+name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
-            Container(
-                margin: EdgeInsets.only(left: 10, top: 5), child: Text(email)),
-            Container(
-                margin: EdgeInsets.only(left: 10, top: 5),
-                child: Text(specialist+" specialist" )),
-          ],
-        ),
-      ),*/

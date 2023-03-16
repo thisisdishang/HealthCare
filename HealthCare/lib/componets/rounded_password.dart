@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/componets/text_field_container.dart';
 
-import '../constants.dart';
-
 class RoundedPasswordField extends StatefulWidget {
   Function onChanged;
 
@@ -27,9 +25,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.lock),
           suffixIcon: IconButton(
-            icon: hidePassword
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
+            icon: Icon(Icons.visibility_off),
             onPressed: () {
               setState(() {
                 hidePassword = !hidePassword;

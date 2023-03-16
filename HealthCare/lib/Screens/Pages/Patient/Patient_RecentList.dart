@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../../componets/loadingindicator.dart';
 import '../../../constants.dart';
 import '../../../models/doctor.dart';
@@ -21,7 +19,6 @@ class Patient_RecentList extends StatefulWidget {
 var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
 class _Patient_RecentListState extends State<Patient_RecentList> {
-  var _prefService;
   var appointment = FirebaseFirestore.instance;
   DoctorModel loggedInUser = DoctorModel();
   var user = FirebaseAuth.instance.currentUser;
@@ -51,7 +48,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
           .where('pid', isEqualTo: loggedInUser.uid)
           .where('approve', isEqualTo: true)
           .where('date', isLessThan: today_date)
-          //  .where("approve", isEqualTo: "not visited")
           .where('visited', isEqualTo: true)
           .snapshots();
 
@@ -102,7 +98,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                   if (data == 'All') {
                     setState(() {
                       t_date = null;
-// Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Doctor_RecentList()));
                     });
                   } else {
                     mydate = await showDatePicker(
@@ -112,7 +107,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                         lastDate: DateTime.now());
 
                     setState(() {
-                      final now = DateTime.now();
                       t_date = DateFormat('dd-MM-yyyy').format(mydate);
                     });
                   }
@@ -121,30 +115,10 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                   DropdownMenuItem(
                     value: 'All',
                     child: Text('All'),
-// child: GestureDetector(
-//     onTap: () {
-//     },
-//     child: Text('All')
-// ),
                   ),
                   DropdownMenuItem(
                     value: 'Custom Date',
                     child: Text('Custom Date'),
-// child: GestureDetector(
-//     onTap: () async {
-//       mydate = await showDatePicker(
-//           context: context,
-//           initialDate: DateTime.now(),
-//           firstDate: DateTime(1950),
-//           lastDate: DateTime.now());
-//
-//       setState(() {
-//         final now = DateTime.now();
-//         t_date = DateFormat('dd-MM-yyyy').format(mydate);
-//       });
-//     },
-//     child: Text('Custom Date')
-// ),
                   ),
                 ],
               ),
@@ -169,16 +143,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                         .where('date', isEqualTo: t_date)
                         .where('status', isEqualTo: true)
                         .snapshots(),
-                    /*appointment
-                        .collection('pending')
-                        .orderBy('date', descending: true)
-                        //.orderBy('time', descending: false)
-                        .where('did', isEqualTo: loggedInUser.uid)
-                        // .where('approve', isEqualTo: true)
-                        .where('date', isLessThan: today_date)
-                        //  .where("approve", isEqualTo: "not visited")
-                        //  .where('approve', isEqualTo: "visited")
-                        .snapshots(),*/
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
@@ -206,7 +170,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                       (BuildContext context, int index) {
                                     final DocumentSnapshot doc =
                                         snapshot.data!.docs[index];
-                                    // return Text("Popat");
+
                                     return Container(
                                         width: double.infinity,
                                         margin: EdgeInsets.all(3),
@@ -237,12 +201,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Dr." +
                                                                 doc['doctor_name'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -263,12 +221,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Date: " +
                                                                 doc['date'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -286,12 +238,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Time: " +
                                                                 doc['time'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -337,12 +283,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Dr." +
                                                                 doc['doctor_name'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -363,12 +303,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Date: " +
                                                                 doc['date'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -386,12 +320,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           child: Text(
                                                             "Time: " +
                                                                 doc['time'],
-                                                            /* "Your confirm appointment with Dr." +
-                                                              doc['doctor_name'] +
-                                                              " is Confirmed at  " +
-                                                              doc['date'] +
-                                                              " and  " +
-                                                              doc['time'].toString(),*/
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,

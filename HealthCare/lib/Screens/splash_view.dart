@@ -40,8 +40,6 @@ class SplashViewState extends State<SplashView> {
         return Timer(Duration(seconds: 2), () {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (BuildContext context) => Loginas()));
-          //  Navigator.pop(context);
-          //  Duration(seconds: 2);
         });
       }
     });
@@ -53,13 +51,14 @@ class SplashViewState extends State<SplashView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child:  Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 200,
+            Padding(
+              padding: const EdgeInsets.only(top: 200),
+              child: Image.asset("assets/images/Splash.png",
+                  width: 250, height: 250),
             ),
-            Image.asset("assets/images/Splash.png", width: 250, height: 250),
             Text(
               "HealthCare",
               style: TextStyle(
@@ -69,14 +68,17 @@ class SplashViewState extends State<SplashView> {
               ),
             ),
             SizedBox(
-              height: 210,
+              height: 240,
             ),
-            Text(
-              "Powered By Rana Corporation®",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Powered By Rana Corporation®",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),

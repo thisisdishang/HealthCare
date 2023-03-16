@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 import '../he_color.dart';
 
@@ -34,11 +33,8 @@ class _TrdCellState extends State<TrdCell> {
     return GestureDetector(
       onTap: () => widget.onTap(),
       child: Container(
-        // padding: EdgeInsets.all(8),
         margin: EdgeInsets.only(bottom: 10),
-        // width: double.infinity,
         alignment: Alignment.centerLeft,
-        // height: 50,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.only(left: 5),
         decoration: BoxDecoration(
@@ -127,34 +123,6 @@ class _TrdCellState extends State<TrdCell> {
             ),
           ],
         ),
-
-        // SizedBox(
-        //   width : 10,
-        // ),
-        // Container(
-        //   width: 50,
-        //   child: Row(
-        //     children: [
-        //       SizedBox(height: 10,),
-        //       Text(
-        //         widget.rating.toString(),
-        //         style: TextStyle(
-        //           color: Colors.indigoAccent,
-        //           fontSize: 14,
-        //           fontWeight: FontWeight.w600,
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         width: 4,
-        //       ),
-        //       Icon(
-        //         Icons.star_rounded,
-        //         color: Colors.indigoAccent,
-        //         size: 25,
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }

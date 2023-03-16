@@ -79,8 +79,6 @@ class _Profile_pageState extends State<Profile_page> {
   @override
   void dispose() {
     // TODO: implement dispose
-    // t_password.dispose();
-    // t_email.dispose();
     subscription.cancel();
     super.dispose();
   }
@@ -148,35 +146,6 @@ class _Profile_pageState extends State<Profile_page> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      /*  Container(
-                        margin: EdgeInsets.only(top: size.height * 0.01),
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 3, color: Colors.black12),
-                            ),
-                            child:loggedInUser.profileImage== false?CircleAvatar(
-                              backgroundImage:AssetImage('assets/images/account.png'),
-                              radius: 50,
-                            ):Container(
-                              child: InkWell(
-                                onTap: () {
-                                  chooseImage();
-                                },
-                                child:file == null? CircleAvatar(
-                                  backgroundImage: NetworkImage(loggedInUser.profileImage),
-                                  backgroundColor: Colors.grey,
-                                  radius: 50,
-                                ) : CircleAvatar(
-                                  radius: 50.00,
-                                  backgroundImage: FileImage(file),
-                                ),
-                              ),
-                            )
-                          ),
-                        ),
-                      ),*/
                       Container(
                         margin: EdgeInsets.only(top: size.height * 0.01),
                         child: Center(
@@ -232,16 +201,6 @@ class _Profile_pageState extends State<Profile_page> {
                       // ************************************
                       // Name Field
                       //*************************************
-                      /*    Container(
-                        margin: EdgeInsets.only(top: size.height * 0.01),
-                        child: Text(
-                          "${loggedInUser.name.toString() + " " + loggedInUser.last_name.toString()}"
-                              .toString()
-                              .toUpperCase(),
-                          style: TextStyle(
-                              color: kPrimaryColor, fontWeight: FontWeight.bold),
-                        ),
-                      ),*/
                       Container(
                         margin: EdgeInsets.only(
                             left: size.width * 0.06, top: margin_top),
@@ -284,7 +243,6 @@ class _Profile_pageState extends State<Profile_page> {
                                   name = name;
                                 },
                               ),
-                              //  child: Text("${loggedInUser.address}".toString()),
                             )
                           ],
                         ),
@@ -331,7 +289,6 @@ class _Profile_pageState extends State<Profile_page> {
                                   last_name = last_name;
                                 },
                               ),
-                              //  child: Text("${loggedInUser.address}".toString()),
                             )
                           ],
                         ),
@@ -417,34 +374,11 @@ class _Profile_pageState extends State<Profile_page> {
                                   t_address = address;
                                 },
                               ),
-                              //  child: Text("${loggedInUser.address}".toString()),
                             )
                           ],
                         ),
                       ),
 
-                      /*   Container(
-                        width: container_width,
-                        //    margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          cursorColor: kPrimaryColor,
-                          decoration: buildInputDecoration(
-                              Icons.add_location, "Address"),
-                          onChanged: (address) {
-                            t_address = address;
-                          },
-                          validator: (var value) {
-                            if (value!.isEmpty) {
-                              return "Enter Your Address";
-                            }
-                            return null;
-                          },
-                          onSaved: (var address) {
-                            t_address = address;
-                          },
-                        ),
-                      ),*/
                       // ************************************
                       // Date of Birth Field
                       //*************************************
@@ -500,7 +434,6 @@ class _Profile_pageState extends State<Profile_page> {
                                             lastDate: DateTime.now());
 
                                         setState(() {
-                                          final now = DateTime.now();
                                           t_date = DateFormat('dd-MM-yyyy')
                                               .format(mydate);
                                         });
@@ -512,7 +445,6 @@ class _Profile_pageState extends State<Profile_page> {
                                       ))
                                 ],
                               ),
-                              // child: Text("${loggedInUser.dob}".toString()),
                             )
                           ],
                         ),
@@ -562,7 +494,6 @@ class _Profile_pageState extends State<Profile_page> {
                                   t_age = age;
                                 },
                               ),
-                              //   child: Text("${loggedInUser.age}".toString()),
                             )
                           ],
                         ),
@@ -701,7 +632,6 @@ class _Profile_pageState extends State<Profile_page> {
                               if (file != null) {
                                 url = await uploadImage();
                                 print("URL ===== " + url.toString());
-                                //map['profileImage'] = url;
                               }
                               if (_formKey.currentState!.validate()) {
                                 print("Done");
@@ -767,26 +697,16 @@ class _Profile_pageState extends State<Profile_page> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
-    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    file = File(xfile.path);
-    setState(() {});*/
   }
 
   updateProfile(BuildContext context) async {
     var url;
-    Map<String, dynamic> map = Map();
+
     if (file != null) {
       url = await uploadImage();
       print("URL ===== " + url.toString());
-      //map['profileImage'] = url;
     }
     print("uid =====" + user!.uid.toString());
-    /*await FirebaseFirestore.instance
-        .collection("patient")
-        .doc(user?.uid)
-        .set({'profileImage': url});
-    Navigator.pop(context);*/
   }
 
   Future<String> uploadImage() async {

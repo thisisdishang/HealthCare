@@ -7,7 +7,6 @@ class AdvanceCustomAlert extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Stack(
-          //overflow: Overflow.visible,
           alignment: Alignment.topCenter,
           children: [
             Container(
@@ -17,7 +16,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Text(
                       'Turn on Internet Connection.',
@@ -35,7 +34,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                           child: Text("Okay", style: TextStyle(fontSize: 18)),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
+                          backgroundColor: Colors.red,
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(12), // <-- Radius
@@ -49,12 +48,11 @@ class AdvanceCustomAlert extends StatelessWidget {
               ),
             ),
             Positioned(
-                top: -40,
+                top: -15,
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 50,
                   child: Image.asset('assets/images/network.png'),
-                  // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                 )),
           ],
         ));

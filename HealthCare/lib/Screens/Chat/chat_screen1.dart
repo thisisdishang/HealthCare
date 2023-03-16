@@ -3,12 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../constants.dart';
 import '../../models/patient_data.dart';
 
 final _firestore = FirebaseFirestore.instance;
-//FirebaseUser currentUser = mAuth.getCurrentUser();
+
 UserModel loggedInUser = UserModel();
 
 class ChatScreen1 extends StatefulWidget {
@@ -25,7 +24,7 @@ class ChatScreen1 extends StatefulWidget {
 
 class _ChatScreen1State extends State<ChatScreen1> {
   final messageTextController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
+
   var today = (new DateFormat.yMd().add_jms()).format(DateTime.now());
   var time = (new DateFormat.jm()).format(DateTime.now());
   User? user = FirebaseAuth.instance.currentUser;
@@ -56,7 +55,11 @@ class _ChatScreen1State extends State<ChatScreen1> {
           IconButton(
             icon: Icon(Icons.call),
             onPressed: () async {
-              launch("tel://${widget.phone}");
+              final Uri _teleLaunchUri = Uri(
+                scheme: 'tel',
+                path: widget.phone, // your number
+              );
+              launchUrl(_teleLaunchUri);
             },
           ),
         ],
@@ -104,8 +107,6 @@ class _ChatScreen1State extends State<ChatScreen1> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        //     width: MediaQuery.of(context).size.width*0.2,
-
                         decoration:
                             BoxDecoration(shape: BoxShape.circle, boxShadow: [
                           BoxShadow(
@@ -217,13 +218,6 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
-          /* Text(
-            sender,
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.black54,
-            ),
-          ),*/
           Material(
             borderRadius: isMe
                 ? BorderRadius.only(

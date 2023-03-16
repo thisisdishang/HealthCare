@@ -1,12 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/cells/category_cell.dart';
-import 'package:hospital_appointment/models/category.dart';
-
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
 import 'package:hospital_appointment/newapp/searchList.dart';
-
 import '../Screens/disease_page.dart';
 
 class DoctorsList extends StatefulWidget {
@@ -61,7 +55,7 @@ class _DoctorsListState extends State<DoctorsList> {
                     fontWeight: FontWeight.w800,
                   ),
                   prefixIcon: Icon(
-                   Icons.search,
+                    Icons.search,
                     size: 20,
                   ),
                   prefixStyle: TextStyle(
@@ -82,14 +76,6 @@ class _DoctorsListState extends State<DoctorsList> {
                         )
                       : SizedBox(),
                 ),
-                // onFieldSubmitted: (String _searchKey) {
-                //   setState(
-                //     () {
-                //       print('>>>' + _searchKey);
-                //       search = _searchKey;
-                //     },
-                //   );
-                // },
                 onChanged: (String _searchKey) {
                   setState(
                     () {

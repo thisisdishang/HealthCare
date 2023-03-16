@@ -6,16 +6,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/cells/detail_cell.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hospital_appointment/Screens/home/patient_home_page.dart';
-
 import '../componets/loadingindicator.dart';
 import '../constants.dart';
 import '../he_color.dart';
 import '../models/patient_data.dart';
-import 'Chat/chat_screen.dart';
 import 'Chat/chat_screen1.dart';
 import 'Rating_Review.dart';
 import 'appointment_time_page.dart';
-import 'home/patient_home_page.dart';
 
 class DetailPage extends StatefulWidget {
   var uid;
@@ -86,9 +83,6 @@ class _DetailPageState extends State<DetailPage> {
         .then((value) {
       this.loggedInUser = UserModel.fromMap(value.data());
 
-      /*   setState(() {
-        isLoading = false;
-      });*/
       Future<void>.delayed(const Duration(seconds: 1), () {
         if (mounted) {
           // Check that the widget is still mounted
@@ -126,8 +120,6 @@ class _DetailPageState extends State<DetailPage> {
         }
 
         return SizedBox();
-
-        /*Text(rating.toString());*/
       },
     ));
     return Scaffold(
@@ -145,8 +137,6 @@ class _DetailPageState extends State<DetailPage> {
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('doctor/' + widget.uid + '/rating')
-                              /*.doc(widget.uid)
-                            .collection('/rating')*/
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -165,7 +155,6 @@ class _DetailPageState extends State<DetailPage> {
 
                               print("snapshot: " + snapshot.hasData.toString());
                               snapshot.data?.docs.asMap().forEach((index, doc) {
-                                //  sum = sum + int.parse(doc["rating"]);
                                 if (today_app2 > index) {
                                   rating_no.add(double.parse(doc['rating_s']));
                                 }
@@ -197,86 +186,6 @@ class _DetailPageState extends State<DetailPage> {
                             }
                           }),
                     ),
-                    /*SizedBox(
-                        child: FutureBuilder(
-                      future: FirebaseFirestore.instance
-                          .collection('doctor/' + widget.uid + '/rating')
-                          /*.doc(widget.uid)
-                            .collection('/rating')*/
-                          .get()
-                          .then((myDocuments) {
-                        setState(() {
-                          today_app2 = myDocuments.docs.length;
-                        });
-                        print("${"lenght = " + myDocuments.docs.length.toString()}");
-                        print("${"Uid ====== " + widget.uid}");
-                        return myDocuments;
-                      }),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        print("snapshot: " + snapshot.hasData.toString());
-                        snapshot.data?.docs.asMap().forEach((index, doc) {
-                          //  sum = sum + int.parse(doc["rating"]);
-                          if (today_app2 > index) {
-                            rating_no.add(double.parse(doc['rating_s']));
-                          }
-                        });
-                        sum = 0;
-                        rating_no.asMap().forEach((index, element) {
-                          if (index < today_app2) {
-                            sum = sum + element.toDouble();
-                            print("element = " + element.toString());
-                            print("rating_no" + rating_no.length.toString());
-                          }
-                        });
-
-
-
-                        print("=========================================");
-                        print("Sum="+sum.toString());
-                        rating =  sum / today_app2;
-                        print("rating="+rating.toString());
-                      /*  FirebaseFirestore.instance
-                            .collection("doctor")
-                            .doc(widget.uid)
-                            .update({'rating': rating.toStringAsFixed(1).toString()});*/
-                        return SizedBox();
-
-                        /*Text(rating.toString());*/
-                      },
-                    )),*/
-
-                    /*    SizedBox(
-                        child: FutureBuilder(
-                      future: FirebaseFirestore.instance
-                          .collection('doctor')
-                          .doc(widget.uid)
-                          .collection('rating')
-                          .where('pid', isEqualTo: loggedInUser.uid)
-                          .get()
-                          .then((myDocuments) {
-                        setState(() {
-                          rating_len = myDocuments.docs.length;
-                        });
-                        print(
-                            "${"lenght rating_len = " + myDocuments.docs.length.toString()}");
-                        return myDocuments;
-                      }),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          return SizedBox();
-                        }
-
-                        return SizedBox();
-
-                        /*Text(rating.toString());*/
-                      },
-                    )
-                    ),*/
                     SizedBox(
                         child: FutureBuilder(
                       future: FirebaseFirestore.instance
@@ -300,8 +209,6 @@ class _DetailPageState extends State<DetailPage> {
                         }
 
                         return SizedBox();
-
-                        /*Text(rating.toString());*/
                       },
                     )),
                   ],
@@ -314,8 +221,6 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // sleep(Duration(seconds:  1)),
-
                   _titleSection(size),
                   SizedBox(
                     height: 8,
@@ -381,45 +286,6 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ],
                         ),
-
-                        /* Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: HexColor('#FFF9EA'),
-                            border: Border.all(
-                                color: HexColor('#FFEDBE'), width: 1),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            widget.specialist + ' Specialist',
-                            style: TextStyle(
-                              color: HexColor('#FFBF11'),
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),*/
-
-                        //    buildRating(),
-                        /*   IconTheme(data: IconThemeData(
-                    color: Colors.amber,
-                    size: 48,
-                  ), child: StarDisplay(value: 3.5),),*/
-
-                        /*    RatingBar.builder(
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    itemSize: 40,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                    updateOnDrag: false,
-                    onRatingUpdate: (velue) {
-                   //   rating=4.2;
-                    },
-                    maxRating: 1,
-                  ),*/
                         SizedBox(
                           height: 10,
                         ),
@@ -475,7 +341,6 @@ class _DetailPageState extends State<DetailPage> {
                                 'Update Review',
                                 style: TextStyle(color: Colors.green),
                               ),
-
                         SizedBox(
                           height: 10,
                         ),
@@ -571,7 +436,6 @@ class _DetailPageState extends State<DetailPage> {
                                 }
                               }),
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -604,7 +468,6 @@ class _DetailPageState extends State<DetailPage> {
                             )
                           ],
                         ),
-
                         Container(
                           child: StreamBuilder<QuerySnapshot>(
                               stream: appointment
@@ -740,7 +603,7 @@ class _DetailPageState extends State<DetailPage> {
                               padding: EdgeInsets.all(10),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFFFBB23),
+                                  backgroundColor: Color(0xFFFFBB23),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12)),
                                 ),
@@ -767,91 +630,73 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 8),
-                              child: widget.available==true?ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: kPrimaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(12), // <-- Radius
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Appoin_time(
-                                              uid: widget.uid,
-                                              name: widget.name,
-                                            )),
-                                  );
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 5, right: 5),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "Appointment",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
+                              child: widget.available == true
+                                  ? ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: kPrimaryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12), // <-- Radius
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Appoin_time(
+                                                    uid: widget.uid,
+                                                    name: widget.name,
+                                                  )),
+                                        );
+                                      },
+                                      child: Container(
+                                        margin:
+                                            EdgeInsets.only(left: 5, right: 5),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            "Appointment",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12), // <-- Radius
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Fluttertoast.showToast(
+                                            msg: "Dr. " +
+                                                widget.name +
+                                                " is not available...Visit later",
+                                            textColor: Colors.white,
+                                            backgroundColor: kPrimaryColor);
+                                        ;
+                                      },
+                                      child: Container(
+                                        margin:
+                                            EdgeInsets.only(left: 5, right: 5),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            "Appointment",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ):ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.grey,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                                  ),
-                                ),
-                                onPressed: () {
-                                 null;
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 5, right: 5),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "Appointment",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ),
                           ],
                         )
-                        /*
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-
-                          borderRadius: BorderRadius.circular(12), // <-- Radius
-                        ),
-                      ),
-
-                      onPressed: () {},
-
-                      child: Container(
-                        margin: EdgeInsets.only(left: 5,right: 5),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Appointment",
-                            style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )*/
                       ],
                     ),
                   ),
@@ -870,53 +715,24 @@ class _DetailPageState extends State<DetailPage> {
     return AppBar(
       backgroundColor: kPrimaryColor,
       elevation: 0,
-      brightness: Brightness.dark,
       iconTheme: IconThemeData(color: Colors.white),
       leading: IconButton(
         icon: Icon(Icons.arrow_back, size: 25),
         onPressed: () => Navigator.pop(context),
       ),
       actions: [
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Container(
-        //     //     width: MediaQuery.of(context).size.width*0.2,
-        //
-        //     decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-        //       BoxShadow(
-        //           color: Colors.white, //edite
-        //           blurRadius: 6 //edited
-        //           )
-        //     ]),
-        //     // margin: EdgeInsets.all(25),
-        //
-        //     child: ClipOval(
-        //       child: Material(
-        //         color: Colors.green, // Button color
-        //         child: InkWell(
-        //           splashColor: Color(0xff3b2e65), // Splash color
-        //
-        //           child: Padding(
-        //             padding: const EdgeInsets.all(8.0),
-        //             child: Icon(
-        //               Icons.call,
-        //               color: Colors.white,
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
         Container(
           child: IconButton(
             icon: Icon(Icons.call, size: 25),
             onPressed: () async {
-              launch("tel://${widget.phone}");
+              final Uri _teleLaunchUri = Uri(
+                scheme: 'tel',
+                path: widget.phone, // your number
+              );
+              launchUrl(_teleLaunchUri);
             },
           ),
         ),
-
         Container(
           child: IconButton(
             icon: ImageIcon(
@@ -981,12 +797,7 @@ class _DetailPageState extends State<DetailPage> {
                               backgroundImage:
                                   NetworkImage(widget.profileImage),
                             ),
-                    ) /*Image(
-                    filterQuality: FilterQuality.high,
-                    fit: BoxFit.fitHeight,
-                    image: NetworkImage(profileImage),
-                  ),*/
-                    ),
+                    )),
               ),
             ),
           ),
@@ -1030,44 +841,6 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
           ),
-
-          /* FutureBuilder(
-              future: FirebaseFirestore.instance
-                  .collection('doctor').doc(widget.uid).collection('rating').where('rating', isGreaterThan: 0).get(),
-                  /*.then((allFeedbackDocs) => {
-                allFeedbackDocs.documents.forEach((feedbackDoc) {
-                  var feedData = feedbackDoc.data;
-                })
-              }),*/
-              // .orderBy('Created', descending: true | false)
-                /*.then((myDocuments) {
-                setState(() {
-                  today_app2 = myDocuments.docs.length;
-
-                });
-                print("${myDocuments.docs.length}");
-                return myDocuments;
-              }),*/
-              builder: (context, snapshot) {
-
-                  setState(() {
-                  //  sum =  snapshot.data!['rating'];
-                  });
-                if (snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return Container(
-                    child: ListView.builder(
-                        itemCount: today_app2.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Text('${myDocuments['rating'].title}');
-                        }
-                    )
-                );
-              }),*/
         ],
       ),
     );
@@ -1099,7 +872,8 @@ class _DetailPageState extends State<DetailPage> {
             actions: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.green, primary: Colors.white),
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white),
                 child: Text('OK'),
                 onPressed: () {
                   setState(() {
@@ -1119,7 +893,6 @@ class _DetailPageState extends State<DetailPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0)),
             child: Stack(
-              //overflow: Overflow.visible,
               alignment: Alignment.topCenter,
               children: [
                 Container(
@@ -1226,7 +999,6 @@ class _DetailPageState extends State<DetailPage> {
                         'assets/images/account.png',
                         fit: BoxFit.cover,
                       ),
-                      // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),
               ],
             ),
@@ -1239,7 +1011,6 @@ class _DetailPageState extends State<DetailPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0)),
             child: Stack(
-              //   overflow: Overflow.visible,
               alignment: Alignment.topCenter,
               children: [
                 Container(
@@ -1273,7 +1044,7 @@ class _DetailPageState extends State<DetailPage> {
                             });
                           },
                           maxRating: 1,
-                        ), //child: ),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -1292,7 +1063,6 @@ class _DetailPageState extends State<DetailPage> {
                             },
                           ),
                         ),
-
                         Container(
                           margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                           child: Center(
@@ -1357,7 +1127,6 @@ class _DetailPageState extends State<DetailPage> {
                         'assets/images/account.png',
                         fit: BoxFit.cover,
                       ),
-                      // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                     )),
               ],
             ),

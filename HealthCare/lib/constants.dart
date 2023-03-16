@@ -7,7 +7,6 @@ const kPrimaryLightColor = Color(0xCDDBC2F8);
 const kprimaryLightBlue = Color(0x59771DA5);
 const kPrimaryLightdark = Color(0xD7EBD4F8);
 const kPrimaryhinttext = Color(0xB93B2647);
-// const  var size = MediaQuery.of(context).size;
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(

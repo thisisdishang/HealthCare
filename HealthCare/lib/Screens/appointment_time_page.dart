@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:intl/intl.dart';
-
 import '../models/patient_data.dart';
 import 'home/patient_home_page.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 class Appoin_time extends StatefulWidget {
   var uid;
@@ -77,13 +75,6 @@ class _Appoin_timeState extends State<Appoin_time> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 10;
-    final double itemWidth = size.width / 4;
-
-    /*   firestoreInstance.collection('docter/' + widget.uid + '/user').where('date', isEqualTo: c_date)
-        .snapshots().listen(
-            (data) => print()
-    );*/
 
     return SafeArea(
       child: Scaffold(
@@ -115,7 +106,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: kPrimaryColor,
+                        backgroundColor: kPrimaryColor,
                         fixedSize: Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
@@ -127,7 +118,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                           lastDate: DateTime.now().add(Duration(days: 2)));
 
                       setState(() {
-                        final now = DateTime.now();
                         c_date = DateFormat('dd-MM-yyyy').format(mydate);
                       });
                     },
@@ -470,27 +460,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                     ),
                   ],
                 ),
-                /* Center(
-                  child: Container(
-                    width: size.width * 0.8,
-                    margin: EdgeInsets.all(10),
-                    child: RaisedButton(
-                      shape: StadiumBorder(),
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                      color: kPrimaryColor,
-                      onPressed: today_app1 <=2
-                          ?() {}: null,
-                      child: Text(
-                        'Confirm',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
 
-                ),*/
                 SizedBox(
                   height: size.height * 0.25,
                 ),
@@ -543,10 +513,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                                   .catchError((e) {
                                     print('Error Data2' + e.toString());
                                   });
-
-                              /*setState(() {
-                            print("Sleact Time" + time);
-                          });*/
                             }
                           : null,
                       child: Text(
@@ -557,93 +523,8 @@ class _Appoin_timeState extends State<Appoin_time> {
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-                    /*RaisedButton(
-                  shape: StadiumBorder(),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  color: kPrimaryColor,
-                  onPressed: isEnabled1
-                      ? () {
-                          FirebaseFirestore firebaseFirestore =
-                              FirebaseFirestore.instance;
-                          firebaseFirestore
-                              .collection('doctor/' + widget.uid + '/user')
-                              .add({
-                            'name': loggedInUser.name,
-                            'date': c_date,
-                            'time': time,
-                            'timeslot': timeslot,
-                          }).catchError((e) {
-                            print("Error Data " + e.toString());
-                          });
-                          firebaseFirestore
-                              .collection('patient/' +
-                                  loggedInUser.uid.toString() +
-                                  '/appointment')
-                              .add({
-                                'name': widget.name,
-                                'date': c_date,
-                                'time': time
-                              })
-                              .then((value) => Fluttertoast.showToast(
-                                  msg: "Confirm Appointment",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: kPrimaryColor,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0))
-                              .then((value) => showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (BuildContext context) =>
-                                      AdvanceCustomAlert(
-                                          widget.name.toString())))
-                              .catchError((e) {
-                                print('Error Data2' + e.toString());
-                              });
-
-                          /*setState(() {
-                            print("Sleact Time" + time);
-                          });*/
-                        }
-                      : null,
-                  child: Text(
-                    'Book Appointment',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),*/
                   ),
                 ),
-                /*  Container(
-                  width: 100,
-                  height: 50,
-                  child: AnimatedButton(
-                    text: 'Warning Dialog',
-                    color: Colors.orange,
-                    pressEvent: () {
-                      AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.WARNING,
-                          headerAnimationLoop: false,
-                          animType: AnimType.TOPSLIDE,
-                          showCloseIcon: true,
-                          closeIcon: Icon(Icons.close_fullscreen_outlined),
-                          title: 'Warning',
-                          desc:
-                          'Dialog description here..................................................',
-                          btnCancelOnPress: () {},
-                          onDissmissCallback: (type) {
-                            debugPrint('Dialog Dissmiss from callback $type');
-                          },
-                          btnOkOnPress: () {})
-                          .show();
-                    },
-                  ),
-                ),*/
 
                 FutureBuilder(
                     future: FirebaseFirestore.instance
@@ -774,19 +655,12 @@ class _Appoin_timeState extends State<Appoin_time> {
                       } else if (snapshot.hasError) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      return SizedBox(); /*Text(
-                        today_app6.toString(),
-                        style: const TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );*/
+                      return SizedBox();
                     }),
                 FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('pending')
                         .where('did', isEqualTo: widget.uid)
-                        // .orderBy('Created', descending: true | false)
                         .where("date", isEqualTo: c_date)
                         .where("time", isEqualTo: evening[1])
                         .get()
@@ -889,7 +763,6 @@ class AdvanceCustomAlert extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Navigator.of(context).pop();
                         Navigator.pushAndRemoveUntil<dynamic>(
                             context,
                             MaterialPageRoute<dynamic>(
@@ -913,7 +786,6 @@ class AdvanceCustomAlert extends StatelessWidget {
                   backgroundColor: Colors.grey,
                   radius: 45,
                   child: Image.asset('assets/images/account.png'),
-                  // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                 )),
           ],
         ));

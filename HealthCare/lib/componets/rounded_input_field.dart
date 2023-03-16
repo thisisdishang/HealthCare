@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/componets/text_field_container.dart';
-
 import '../constants.dart';
 
 class RoundedInputField extends StatelessWidget {
@@ -20,7 +19,6 @@ class RoundedInputField extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         onChanged: onChanged(),
-        //   validator: ,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-
 import '../constants.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 void showLoadingDialog({
   @required BuildContext? context,
@@ -44,15 +41,6 @@ List<Color> _kDefaultRainbowColors = const [
 ];
 
 class Loading extends StatelessWidget {
-  /*List<Color> _kDefaultRainbowColors = const [
-    kPrimaryColor,
-    kPrimarydark,
-    kPrimaryLightColor,
-    kPrimaryLightdark,
-    kprimaryLightBlue,
-    kPrimaryhinttext
-  ];*/
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -72,14 +60,3 @@ class Loading extends StatelessWidget {
 void hideLoadingDialog({@required BuildContext? context}) {
   Navigator.pop(context!, false);
 }
-/*
-
-Future<bool> getInternetUsingInternetConnectivity() async {
-  bool result = await InternetConnectionChecker().hasConnection;
-   if (result == true) {
-     print('YAY! Free cute dog pics!');
-   } else {
-     print('No internet :( Reason:');
-   }
-  return result;
-}*/

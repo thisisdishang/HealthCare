@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../../componets/loadingindicator.dart';
 import '../../../models/patient_data.dart';
 import 'Pending.dart';
@@ -198,7 +197,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                 child: ElevatedButton(
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: Colors.red,
+                                                    backgroundColor: Colors.red,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -215,9 +214,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                                 context) =>
                                                             alertdialog(
                                                                 id: doc.id));
-                                                    // alertdialog(doc.id);
-
-                                                    //   Navigator.pop(context);
                                                   },
                                                   child: Container(
                                                     margin: EdgeInsets.only(

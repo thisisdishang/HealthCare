@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hospital_appointment/Screens/Appointment.dart';
 import 'package:hospital_appointment/Screens/home/patient_home_page.dart';
-
-import 'package:hospital_appointment/newapp/doctorsList.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 import '../../models/patient_data.dart';
@@ -30,19 +28,12 @@ class _MainPageState extends State<MainPage> {
     UserProfile(),
   ];
   User? user = FirebaseAuth.instance.currentUser;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+
   UserModel loggedInUser = UserModel();
   bool isLoading = true;
   bool status = false;
 
   var result;
-
-  // final List<Map<String, dynamic>> _pages = [
-  //   {'page': HomeScreen(), 'title':'Home Screen'},
-  //   {'page': CategoriesScreen(), 'title':'Categories'},
-  //   {'page': CartScreen(), 'title':'Cart'},
-  //   {'page': UserScreen(), 'title':'User'},
-  // ];
 
   getConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -74,8 +65,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    // t_password.dispose();
-    // t_email.dispose();
+
     subscription.cancel();
     super.dispose();
   }
@@ -109,31 +99,6 @@ class _MainPageState extends State<MainPage> {
       });
       print("++++++++++++++++++++++++++++++++++++++++++" + user!.uid);
     });
-  }
-
-  // void initState() {
-  //   super.initState();
-  //   loggedInUser = UserModel();
-  //   FirebaseFirestore.instance
-  //       .collection("patient")
-  //       .doc(user!.uid)
-  //       .get()
-  //       .then((value) {
-  //     this.loggedInUser = UserModel.fromMap(value.data());
-  //     Future<void>.delayed(const Duration(microseconds: 1), () {
-  //       if (mounted) {
-  //         // Check that the widget is still mounted
-  //         setState(() {
-  //           isLoading = false;
-  //         });
-  //       }
-  //     });
-  //     print("++++++++++++++++++++++++++++++++++++++++++" + user!.uid);
-  //   });
-  // }
-
-  _navigate(Widget screen) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
   }
 
   String shortcut = "no action set";
@@ -187,9 +152,8 @@ class _MainPageState extends State<MainPage> {
                 tabs: [
                   GButton(
                     iconSize: _selectedIndex != 0 ? 28 : 25,
-                    icon: _selectedIndex == 0
-                        ? Icons.home
-                        : Icons.home_outlined,
+                    icon:
+                        _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
                     text: 'Home',
                   ),
                   GButton(

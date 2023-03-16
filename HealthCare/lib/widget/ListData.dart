@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class ListData extends StatelessWidget {
-  // const ListData({Key? key}) : super(key: key);
-
   var name;
   var time;
   var size;
@@ -20,8 +17,6 @@ class ListData extends StatelessWidget {
       required this.b_text,
       required this.ontap});
 
-  // data.sort()
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,7 +24,6 @@ class ListData extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -87,9 +81,6 @@ class ListData extends StatelessWidget {
                     ),
                   ],
                 ),
-                // SizedBox(
-                //   width: 5,
-                // ),
               ],
             ),
           ],

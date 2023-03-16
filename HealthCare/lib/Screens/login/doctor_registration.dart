@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +14,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:path/path.dart';
-
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
 import '../../widget/Alert_Dialog.dart';
@@ -77,8 +75,6 @@ class _DocRegistrationState extends State<DocRegistration> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var file;
-
-  // var val;
 
   setSelectedgender(int val) {
     setState(() {
@@ -150,7 +146,6 @@ class _DocRegistrationState extends State<DocRegistration> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPasswordValid(String password) => password.length == 6;
     String? errorMessage;
 
     bool isEmailValid(String email) {
@@ -172,21 +167,9 @@ class _DocRegistrationState extends State<DocRegistration> {
             child: Center(
               child: Container(
                 width: size.width * 1,
-                decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    // //     image: AssetImage("assets/images/white.jpg"),
-                    //     fit: BoxFit.cover),
-                    ),
                 child: Container(
-                  // color: Colors.black26,
                   child: Column(
                     children: [
-                      /*Container(
-                        margin: EdgeInsets.only(top: size.height * 0.09),
-                        child: Image.asset("assets/images/logo.jpg",
-                            width: size.width * 0.5,
-                            height: size.height * 0.20),
-                      ),*/
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Container(
@@ -259,7 +242,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                           cursorColor: kPrimaryColor,
                           decoration: buildInputDecoration(
                               Icons.person, "Doctor Full Name"),
-                          //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
                               return "Enter Your Name";
@@ -279,7 +261,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                       //*************************************
                       Container(
                         width: container_width,
-                        //    margin: EdgeInsets.all(10),
                         child: TextFormField(
                           keyboardType: TextInputType.text,
                           cursorColor: kPrimaryColor,
@@ -316,12 +297,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                           validator: (email) {
                             if (isEmailValid(email!))
                               return null;
-                            /*if (isEmailExist) {
-                              return 'Email Address All ready Exist.';
-                            }
-                            if (errorMessage != null) {
-                              return errorMessage.toString();
-                            }*/
                             else {
                               return 'Enter a valid email address';
                             }
@@ -336,7 +311,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                       //*************************************
                       Container(
                         width: container_width,
-                        //       margin: EdgeInsets.all(10),
                         child: IntlPhoneField(
                           cursorColor: kPrimaryColor,
                           style: TextStyle(fontSize: 16),
@@ -354,27 +328,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                           },
                         ),
                       ),
-                      /*  Container(
-                        width: container_width,
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          cursorColor: kPrimaryColor,
-                          //   maxLength: 10,
-                          decoration: buildInputDecoration(
-                              Icons.phone, "Contact Number"),
-                          onChanged: (phone) {
-                            t_phone = phone;
-                          },
-                          validator: (phone) {
-                            validateMobile(phone.toString());
-                          },
 
-                          onSaved: (var phone) {
-                            t_phone = phone;
-                          },
-                        ),
-                      ),*/
                       // ************************************
                       // Date of Birth Field
                       //*************************************
@@ -394,7 +348,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  //  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
@@ -419,7 +372,6 @@ class _DocRegistrationState extends State<DocRegistration> {
                                               lastDate: DateTime.now());
 
                                           setState(() {
-                                            final now = DateTime.now();
                                             t_date = DateFormat('dd-MM-yyyy')
                                                 .format(mydate);
                                           });
@@ -966,9 +918,5 @@ class _DocRegistrationState extends State<DocRegistration> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
-    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    file = File(xfile.path);
-    setState(() {});*/
   }
 }

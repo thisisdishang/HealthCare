@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 import '../Screens/detail_page.dart';
-import '../services/shared_preferences_service.dart';
 
 class SearchList extends StatefulWidget {
   final String searchKey;
@@ -15,14 +14,12 @@ class SearchList extends StatefulWidget {
 }
 
 class _SearchListState extends State<SearchList> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _doctorName = TextEditingController();
   final CollectionReference firebase =
       FirebaseFirestore.instance.collection('doctor');
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
-  final PrefService _prefService = PrefService();
   bool isLoading = true;
   double rating = 0.0;
 
@@ -35,7 +32,7 @@ class _SearchListState extends State<SearchList> {
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('doctors')
+              .collection('doctor')
               .orderBy('name')
               .startAt(['Dr. ' + widget.searchKey]).endAt(
                   ['Dr. ' + widget.searchKey + '\uf8ff']).snapshots(),

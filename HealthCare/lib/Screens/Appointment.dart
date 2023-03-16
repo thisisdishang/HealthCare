@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
-import '../../models/doctor.dart';
-import '../../services/shared_preferences_service.dart';
-
 import '../models/patient_data.dart';
 import 'Pages/Patient/Confirm_Appointment.dart';
 import 'Pages/Patient/Patient_RecentList.dart';

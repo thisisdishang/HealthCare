@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +15,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:path/path.dart';
-
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
 import '../../widget/Alert_Dialog.dart';
@@ -31,11 +29,6 @@ class Registration extends StatefulWidget {
 late UserCredential userCredential;
 
 class _RegistrationState extends State<Registration> {
-  /* CollectionReference patient =
-      FirebaseFirestore.instance.collection("patient");*/
-
-  //final _firestore = FirebaseFirestore.instance;
-
   var t_name,
       t_lname,
       t_address,
@@ -66,8 +59,6 @@ class _RegistrationState extends State<Registration> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var file;
-
-  // var val;
 
   setSelectedgender(int val) {
     setState(() {
@@ -139,7 +130,6 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPasswordValid(String password) => password.length == 6;
     String? errorMessage;
 
     bool isEmailValid(String email) {
@@ -148,17 +138,6 @@ class _RegistrationState extends State<Registration> {
       RegExp regex = new RegExp(pattern);
       return regex.hasMatch(email);
     }
-
-    /* String validateMobile(String phone) {
-      var patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-      RegExp regex = new RegExp(patttern);
-    /*  if (value.length == 0) {
-        return 'Please enter mobile number';
-      } else if (!regExp.hasMatch(value)) {
-        return 'Please enter valid mobile number';
-      }*/
-      return regex.hasMatch(phone);
-    }*/
 
     var size = MediaQuery.of(context).size;
     var container_width = size.width * 0.9;
@@ -172,21 +151,9 @@ class _RegistrationState extends State<Registration> {
             child: Center(
               child: Container(
                 width: size.width * 1,
-                decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    // //     image: AssetImage("assets/images/white.jpg"),
-                    //     fit: BoxFit.cover),
-                    ),
                 child: Container(
-                  // color: Colors.black26,
                   child: Column(
                     children: [
-                      /*Container(
-                        margin: EdgeInsets.only(top: size.height * 0.09),
-                        child: Image.asset("assets/images/logo.jpg",
-                            width: size.width * 0.5,
-                            height: size.height * 0.20),
-                      ),*/
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Container(
@@ -301,7 +268,6 @@ class _RegistrationState extends State<Registration> {
                       //*************************************
                       Container(
                         width: container_width,
-                        //    margin: EdgeInsets.all(10),
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
@@ -338,12 +304,6 @@ class _RegistrationState extends State<Registration> {
                           validator: (email) {
                             if (isEmailValid(email!))
                               return null;
-                            /*if (isEmailExist) {
-                              return 'Email Address All ready Exist.';
-                            }
-                            if (errorMessage != null) {
-                              return errorMessage.toString();
-                            }*/
                             else {
                               return 'Enter a valid email address';
                             }
@@ -376,27 +336,7 @@ class _RegistrationState extends State<Registration> {
                           },
                         ),
                       ),
-                      /*  Container(
-                        width: container_width,
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          cursorColor: kPrimaryColor,
-                          //   maxLength: 10,
-                          decoration: buildInputDecoration(
-                              Icons.phone, "Contact Number"),
-                          onChanged: (phone) {
-                            t_phone = phone;
-                          },
-                          validator: (phone) {
-                            validateMobile(phone.toString());
-                          },
 
-                          onSaved: (var phone) {
-                            t_phone = phone;
-                          },
-                        ),
-                      ),*/
                       // ************************************
                       // Date of Birth Field
                       //*************************************
@@ -416,7 +356,6 @@ class _RegistrationState extends State<Registration> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  //  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
@@ -441,7 +380,6 @@ class _RegistrationState extends State<Registration> {
                                               lastDate: DateTime.now());
 
                                           setState(() {
-                                            final now = DateTime.now();
                                             t_date = DateFormat('dd-MM-yyyy')
                                                 .format(mydate);
                                           });
@@ -474,7 +412,6 @@ class _RegistrationState extends State<Registration> {
                           cursorColor: kPrimaryColor,
                           decoration:
                               buildInputDecoration(Icons.accessibility, "Age"),
-                          //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
                               return "Enter Your Address";
@@ -743,7 +680,6 @@ class _RegistrationState extends State<Registration> {
                                         horizontal: 40, vertical: 15),
                                     backgroundColor: kPrimaryColor),
                                 onPressed: () async {
-                                  //  signUp(t_email.text,t_password.text);
                                   if (status == false) {
                                     showDialog(
                                         context: context,
@@ -839,124 +775,7 @@ class _RegistrationState extends State<Registration> {
                                           .catchError((e) {
                                             print("+++++++++" + e);
                                           });
-                                    }
-                                    /*   if (_formKey.currentState!.validate() && t_date!=null && gender!=null && status!=null) {
-                                    try {
-                                      userCredential = await _auth.createUserWithEmailAndPassword(
-                                        email: t_email!,
-                                        password: t_password!,
-                                      );
-                                    } on FirebaseAuthException catch (error) {
-                                      print("FirebaseError: " + error.code);
-                                      switch (error.code) {
-                                        case "invalid-email":
-                                          errorMessage =
-                                              "Your email address appears to be malformed.";
-                                          break;
-                                        case "wrong-password":
-                                          errorMessage =
-                                              "Your password is wrong.";
-                                          break;
-                                        case "user-not-found":
-                                          errorMessage =
-                                              "User with this email doesn't exist.";
-                                          break;
-                                        case "user-disabled":
-                                          errorMessage =
-                                              "User with this email has been disabled.";
-                                          break;
-                                        case "too-many-requests":
-                                          errorMessage = "Too many requests";
-                                          break;
-                                        case "operation-not-allowed":
-                                          errorMessage =
-                                              "Signing in with Email and Password is not enabled.";
-                                          break;
-                                        case "email-already-in-use":
-                                          {
-                                            isEmailExist = false;
-                                            errorMessage =
-                                                "email already in use";
-                                            break;
-                                          }
-                                        default:
-                                          errorMessage =
-                                              "An undefined Error happened.";
-                                      }
-                                      Fluttertoast.showToast(msg: errorMessage!);
-                                      print(error.code);
-                                    }
-                                    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-                                    await firebaseFirestore
-                                        .collection('patient')
-                                        .doc(userCredential.user!.uid)
-                                        .set({
-                                          'uid': userCredential.user!.uid,
-                                          'name': t_name,
-                                          'last name':t_lname,
-                                          'address': t_address,
-                                          'email': userCredential.user!.email,
-                                          'age': t_age,
-                                          'dob': t_date,
-                                          'password': t_password,
-                                          'gender': gender == 1? "male" :"female",
-                                          'status': gender == 1? "unmarried" :"married",
-                                          'phone': phoneController
-                                        })
-                                        .then((value) => Fluttertoast.showToast(
-                                            msg: "Registration Successful",
-                                            toastLength: Toast.LENGTH_SHORT,
-                                            gravity: ToastGravity.BOTTOM,
-                                            timeInSecForIosWeb: 1,
-                                            backgroundColor: kPrimaryColor,
-                                            textColor: Colors.white,
-                                            fontSize: 16.0))
-                                        .then((value) => Navigator.pop(context))
-                                        .catchError((e) {
-                                          print(e);
-                                          Fluttertoast.showToast(
-                                              msg: e!.message);
-                                        });
-
-                                    //   User? user = _auth.currentUser;
-                                    /*  await /*_auth
-                                        .createUserWithEmailAndPassword(
-                                            email: t_email,
-                                            password: t_password)
-                                        .then((value) => {*/
-                                              firebaseFirestore
-                                                  .collection('patient')
-                                                  .doc(userCredential.user!.uid)
-                                                  .set({
-                                                   'uid': userCredential.user!.uid,
-                                                    'name': t_name,
-                                                    'address': t_address,
-                                                    'email': userCredential.user!.email,
-                                                    'age': t_age,
-                                                    'dob': c_date,
-                                                    'password': t_password
-                                                  }).then((value) =>
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                      "Registration Successful",
-                                                      toastLength: Toast
-                                                          .LENGTH_SHORT,
-                                                      gravity: ToastGravity
-                                                          .BOTTOM,
-                                                      timeInSecForIosWeb: 1,
-                                                      backgroundColor:
-                                                      kPrimaryColor,
-                                                      textColor:
-                                                      Colors.white,
-                                                      fontSize: 16.0))
-                                                  .then((value) => Navigator.pop(context))
-                                                  .catchError((e) {
-                                                    print(e);
-                                                Fluttertoast.showToast(msg: e!.message);
-                                    });*/
-                                  }*/
-                                    else {
+                                    } else {
                                       if (t_date == null) {
                                         c_data = true;
                                       }
@@ -1021,10 +840,5 @@ class _RegistrationState extends State<Registration> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
-    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    file = File(xfile.path);
-    setState(() {});*/
   }
 }
-

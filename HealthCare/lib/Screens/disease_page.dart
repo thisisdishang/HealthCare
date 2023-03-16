@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/constants.dart';
-
 import 'docter_page.dart';
 
 class Disease extends StatefulWidget {
@@ -29,7 +28,7 @@ class _DiseaseState extends State<Disease> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:  kPrimaryColor,
+          backgroundColor: kPrimaryColor,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -56,7 +55,6 @@ class _DiseaseState extends State<Disease> {
                 ...myImageAndCaption.map(
                   (i) => GestureDetector(
                     onTap: () {
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Docter_page()),);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -69,7 +67,6 @@ class _DiseaseState extends State<Disease> {
                         Material(
                           shape: CircleBorder(),
                           elevation: 3.0,
-                          //color: kPrimaryLightColor,
                           child: Container(
                             width: 70,
                             height: 70,
@@ -79,9 +76,6 @@ class _DiseaseState extends State<Disease> {
                             ),
                           ),
                         ),
-
-                        //   i.first, fit: BoxFit.fitWidth,
-
                         Expanded(
                           flex: 1,
                           child: Container(

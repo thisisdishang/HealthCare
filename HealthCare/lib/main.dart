@@ -18,13 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        // initialRoute: SplashRoute,
         title: 'HealthCare',
         theme: ThemeData(
             primarySwatch: Colors.indigo,
             appBarTheme: AppBarTheme(color: kPrimaryColor)),
-        home: SplashView()
-        // FirebaseAuth.instance.currentUser == null? Loginas(): number == 0 ?HomePage():,
-        );
+        home: SplashView());
   }
 }

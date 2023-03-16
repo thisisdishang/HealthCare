@@ -3,13 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
 import '../../models/doctor.dart';
 
 final _firestore = FirebaseFirestore.instance;
-//FirebaseUser currentUser = mAuth.getCurrentUser();
 
 class ChatScreen extends StatefulWidget {
   var pid;
@@ -31,7 +29,6 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
   var today = (new DateFormat.yMd().add_jms()).format(DateTime.now());
   var time = (new DateFormat.jm()).format(DateTime.now());
   static User? user = FirebaseAuth.instance.currentUser;
@@ -70,7 +67,11 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.call),
             onPressed: () async {
-              launch("tel://${widget.phone}");
+              final Uri _teleLaunchUri = Uri(
+                scheme: 'tel',
+                path: widget.phone, // your number
+              );
+              launchUrl(_teleLaunchUri);
             },
           ),
         ],
@@ -256,13 +257,6 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
-          /*  Text(
-            sender,
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.black54,
-            ),
-          ),*/
           Material(
             borderRadius: isMe
                 ? BorderRadius.only(

@@ -7,7 +7,6 @@ import 'package:hospital_appointment/models/doctor.dart';
 import 'package:intl/intl.dart';
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
-import '../../services/shared_preferences_service.dart';
 import '../../widget/DoctorDrawer.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
@@ -34,8 +33,7 @@ class _DocHomePageState extends State<DocHomePage> {
       FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
-  int _selectedIndex = 0;
-  final PrefService _prefService = PrefService();
+
   bool isLoading = true;
   late TabController tabController;
   DoctorModel loggedInUser = DoctorModel();
@@ -50,16 +48,6 @@ class _DocHomePageState extends State<DocHomePage> {
 
   Future<void> _getUser() async {
     user = _auth.currentUser;
-  }
-
-  Future _signOut() async {
-    await _auth.signOut();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   @override
@@ -78,7 +66,6 @@ class _DocHomePageState extends State<DocHomePage> {
       setState(() {
         sleep(Duration(microseconds: 10));
         isLoading = false;
-        // dialog();/*Alert(context: HomePage);*/
       });
     });
   }
@@ -110,9 +97,6 @@ class _DocHomePageState extends State<DocHomePage> {
     String _currentHour = DateFormat('kk').format(now);
     int hour = int.parse(_currentHour);
 
-    List<Widget> _pages = [
-      DocHomePage(),
-    ];
     setState(
       () {
         if (hour >= 5 && hour < 12) {
@@ -272,7 +256,8 @@ class _DocHomePageState extends State<DocHomePage> {
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 8.0,top: 4),
+                                                              left: 8.0,
+                                                              top: 4),
                                                       child: Text(
                                                         "Time: " + doc['time'],
                                                         style: TextStyle(
@@ -304,7 +289,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                               right: 10,
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  primary: kPrimarydark,
+                                                  backgroundColor: kPrimarydark,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -318,9 +303,6 @@ class _DocHomePageState extends State<DocHomePage> {
                                                       builder: (BuildContext
                                                               context) =>
                                                           confirm(id: doc.id));
-                                                  // alertdialog(doc.id);
-
-                                                  //   Navigator.pop(context);
                                                 },
                                                 child: Container(
                                                   margin: EdgeInsets.only(
@@ -346,7 +328,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                               right: 10,
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  primary: kPrimarydark,
+                                                  backgroundColor: kPrimarydark,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -361,9 +343,6 @@ class _DocHomePageState extends State<DocHomePage> {
                                                               context) =>
                                                           alertdialog(
                                                               id: doc.id));
-                                                  // alertdialog(doc.id);
-
-                                                  //   Navigator.pop(context);
                                                 },
                                                 child: Container(
                                                   margin: EdgeInsets.only(
@@ -412,7 +391,6 @@ class alertdialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Stack(
-        //overflow: Overflow.visible,
         alignment: Alignment.topCenter,
         children: [
           Container(
@@ -432,9 +410,6 @@ class alertdialog extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
-                  //child: ),
-
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Row(
@@ -451,7 +426,7 @@ class alertdialog extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -480,7 +455,7 @@ class alertdialog extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
+                              backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius
@@ -521,7 +496,6 @@ class confirm extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Stack(
-        //overflow: Overflow.visible,
         alignment: Alignment.topCenter,
         children: [
           Container(
@@ -541,9 +515,6 @@ class confirm extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
-                  //child: ),
-
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Row(
@@ -560,7 +531,7 @@ class confirm extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -591,7 +562,7 @@ class confirm extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
+                              backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius

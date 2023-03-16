@@ -1,17 +1,11 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/Screens/Profile/profile.dart';
 import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
-import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
 import 'package:hospital_appointment/Screens/FAQs.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../Screens/login/loginas.dart';
-import '../models/patient_data.dart';
-import '../newapp/userProfile.dart';
 import '../services/shared_preferences_service.dart';
 
 class DocDrawer extends StatefulWidget {
@@ -80,29 +74,15 @@ class _DocDrawerState extends State<DocDrawer> {
                   ),
                 ),
 
-                //profile
-                // CustomList(Icons.person, "Profile", () {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => DocUserProfile()));
-                // }),
-
                 // Privacy Policy
                 CustomList(Icons.announcement, "Privacy Policy", () async {
-                  if (!await launch(
-                    'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html',
-                    forceSafariVC: false,
-                    forceWebView: false,
-                    headers: <String, String>{
-                      HttpHeaders.authorizationHeader: 'my_header_value'
-                    },
-                  )) {
+                  final Uri _url = Uri.parse(
+                      'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
+                  if (!await launchUrl(_url)) {
                     throw 'Could not launch ';
                   }
                 }),
-                // CustomList(Icons.notifications_active, "Notification", () {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => NotificationList()));
-                // }),
+
                 CustomList(Icons.question_mark, "FAQs", () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => faqs()));

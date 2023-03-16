@@ -57,7 +57,7 @@ class DoctorModel {
       phone: map['phone'],
       profileImage: map['profileImage'],
       rating: map['rating'],
-      available:map['available'],
+      available: map['available'],
     );
   }
 
@@ -75,7 +75,7 @@ class DoctorModel {
       'phone': phone,
       'profileImage': profileImage,
       'rating': rating,
-      'available':available
+      'available': available
     };
   }
 }
