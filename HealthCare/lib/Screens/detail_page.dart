@@ -909,7 +909,7 @@ class _DetailPageState extends State<DetailPage> {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         buildRating(), //child: ),
                         SizedBox(
@@ -991,15 +991,21 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 Positioned(
-                    top: 10,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 50,
-                      child: Image.asset(
-                        'assets/images/account.png',
-                        fit: BoxFit.cover,
-                      ),
-                    )),
+                  top: 10,
+                  child: widget.profileImage == false
+                      ? CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/account.png'),
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                        )
+                      : CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(widget.profileImage),
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                        ),
+                ),
               ],
             ),
           ));
@@ -1027,7 +1033,7 @@ class _DetailPageState extends State<DetailPage> {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
                         RatingBar.builder(
                           itemBuilder: (context, _) => Icon(
@@ -1119,15 +1125,31 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 Positioned(
-                    top: 10,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 50,
-                      child: Image.asset(
-                        'assets/images/account.png',
-                        fit: BoxFit.cover,
-                      ),
-                    )),
+                  top: 10,
+                  child: widget.profileImage == false
+                      ? CircleAvatar(
+                    backgroundImage:
+                    AssetImage('assets/images/account.png'),
+                    backgroundColor: Colors.transparent,
+                    radius: 50,
+                  )
+                      : CircleAvatar(
+                    backgroundImage:
+                    NetworkImage(widget.profileImage),
+                    backgroundColor: Colors.transparent,
+                    radius: 50,
+                  ),
+                ),
+                // Positioned(
+                //     top: 10,
+                //     child: CircleAvatar(
+                //       backgroundColor: Colors.white,
+                //       radius: 50,
+                //       child: Image.asset(
+                //         'assets/images/account.png',
+                //         fit: BoxFit.cover,
+                //       ),
+                //     )),
               ],
             ),
           ));

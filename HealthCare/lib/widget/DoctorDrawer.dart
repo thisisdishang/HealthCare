@@ -124,6 +124,32 @@ class _DocDrawerState extends State<DocDrawer> {
                   width: 10,
                   color: kPrimaryLightColor,
                 ),
+                ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'Valid Doctor:',
+                      textScaleFactor: 1.5,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                  trailing: Switch(
+                      activeColor: Colors.grey,
+                      inactiveThumbColor: Colors.grey,
+                      value: loggedInUser.valid,
+                      onChanged: (check) {
+                        setState(() {
+                          loggedInUser.valid == check;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 1,
+                  width: 10,
+                  color: kPrimaryLightColor,
+                ),
               ],
             ),
     );

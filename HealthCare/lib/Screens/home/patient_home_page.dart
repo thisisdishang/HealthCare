@@ -408,31 +408,34 @@ class _HomePageState extends State<HomePage> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
                       final DocumentSnapshot doc = snapshot.data!.docs[index];
-                      return HDCell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  uid: doc['uid'],
-                                  name: doc['name'],
-                                  email: doc['email'],
-                                  address: doc['address'],
-                                  experience: doc['experience'],
-                                  specialist: doc['specialist'],
-                                  profileImage: doc['profileImage'],
-                                  description: doc['description'],
-                                  phone: doc['phone'],
-                                  available: doc['available'],
-                                  doctor: _doctorName,
-                                ),
-                              ));
-                        },
-                        name: doc["name"].toString(),
-                        email: doc["email"].toString(),
-                        specialist: doc["specialist"].toString(),
-                        profileImage: doc['profileImage'],
-                      );
+                      if (doc['valid'] == true) {
+                        return HDCell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    uid: doc['uid'],
+                                    name: doc['name'],
+                                    email: doc['email'],
+                                    address: doc['address'],
+                                    experience: doc['experience'],
+                                    specialist: doc['specialist'],
+                                    profileImage: doc['profileImage'],
+                                    description: doc['description'],
+                                    phone: doc['phone'],
+                                    available: doc['available'],
+                                    doctor: _doctorName,
+                                  ),
+                                ));
+                          },
+                          name: doc["name"].toString(),
+                          email: doc["email"].toString(),
+                          specialist: doc["specialist"].toString(),
+                          profileImage: doc['profileImage'],
+                          valid: doc['valid'],
+                        );
+                      }
                     },
                   );
                 }
@@ -575,37 +578,38 @@ class _HomePageState extends State<HomePage> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot doc = snapshot.data!.docs[index];
-                    return TrdCell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                uid: doc['uid'],
-                                name: doc['name'],
-                                email: doc['email'],
-                                address: doc['address'],
-                                experience: doc['experience'],
-                                specialist: doc['specialist'],
-                                profileImage: doc['profileImage'],
-                                description: doc['description'],
-                                available: doc['available'],
-                                phone: doc['phone'],
-                                doctor: null,
-                              ),
-                            ));
-                      },
-                      name: doc["name"].toString(),
-                      email: doc["email"].toString(),
-                      rating: doc["rating"],
-                      specialist: doc["specialist"].toString(),
-                      profileImage: doc['profileImage'],
-                    );
+                    if (doc['valid'] == true) {
+                      return TrdCell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                  uid: doc['uid'],
+                                  name: doc['name'],
+                                  email: doc['email'],
+                                  address: doc['address'],
+                                  experience: doc['experience'],
+                                  specialist: doc['specialist'],
+                                  profileImage: doc['profileImage'],
+                                  description: doc['description'],
+                                  available: doc['available'],
+                                  phone: doc['phone'],
+                                  doctor: null,
+                                ),
+                              ));
+                        },
+                        name: doc["name"].toString(),
+                        email: doc["email"].toString(),
+                        rating: doc["rating"],
+                        specialist: doc["specialist"].toString(),
+                        profileImage: doc['profileImage'],
+                      );
+                    }
                   },
                 );
               }
             }), // doctor
-
         SizedBox(
           height: 0,
         ),

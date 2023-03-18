@@ -74,7 +74,7 @@ class _DocRegistrationState extends State<DocRegistration> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  var file;
+  var file, file2;
 
   setSelectedgender(int val) {
     setState(() {
@@ -340,7 +340,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "Date Of Birth   ",
+                                  "Date Of Birth: ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: kPrimaryColor),
@@ -351,10 +351,14 @@ class _DocRegistrationState extends State<DocRegistration> {
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
-                                          ? Text(
-                                              "Select Date",
-                                              style: TextStyle(
-                                                  color: Colors.black54),
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20.0),
+                                              child: Text(
+                                                "Select Date",
+                                                style: TextStyle(
+                                                    color: Colors.black54),
+                                              ),
                                             )
                                           : Text(
                                               t_date,
@@ -386,7 +390,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                               ],
                             ),
                             c_data == true
-                                ? Text("*Select Data",
+                                ? Text("*Select Date",
                                     style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w400))
@@ -548,7 +552,42 @@ class _DocRegistrationState extends State<DocRegistration> {
                           ],
                         ),
                       ),
-                      // Age Field
+                      TextFieldContainer(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: <Widget>[
+                                ButtonBar(
+                                  alignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Upload A Valid Proof:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: kPrimaryColor),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 40.0),
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: kPrimaryColor,
+                                              shape: StadiumBorder()),
+                                          onPressed: () async {
+                                            chooseImage2();
+                                          },
+                                          child: Text("Select File")),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
                       //*************************************
                       Container(
                         width: container_width,
@@ -556,7 +595,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                           keyboardType: TextInputType.number,
                           cursorColor: kPrimaryColor,
                           decoration: buildInputDecoration(
-                              Icons.alarm_sharp, "Experience"),
+                              Icons.access_time_rounded, "Experience"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -753,6 +792,12 @@ class _DocRegistrationState extends State<DocRegistration> {
                                         horizontal: 40, vertical: 15),
                                     backgroundColor: kPrimaryColor),
                                 onPressed: () async {
+                                  if (file2 == null) {
+                                    Fluttertoast.showToast(
+                                        msg: "You're not select the file",
+                                        textColor: Colors.white,
+                                        backgroundColor: Colors.red);
+                                  }
                                   //  signUp(t_email.text,t_password.text);
                                   if (status == false) {
                                     showDialog(
@@ -795,11 +840,15 @@ class _DocRegistrationState extends State<DocRegistration> {
                                         setState(() {});
                                       }
 
-                                      var url;
-
+                                      var url, url2;
                                       if (file != null) {
                                         url = await uploadImage();
                                         print("URL ===== " + url.toString());
+                                        //map['profileImage'] = url;
+                                      }
+                                      if (file2 != null) {
+                                        url2 = await uploadImage2();
+                                        print("URL ===== " + url2.toString());
                                         //map['profileImage'] = url;
                                       }
 
@@ -812,7 +861,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                             'uid': userCredential1.user!.uid,
                                             'name': t_name,
                                             'specialist': dropdownvalue,
-                                            'rating': 0,
+                                            'rating': '0',
                                             'available': false,
                                             'description': t_desc,
                                             'address': t_address,
@@ -829,6 +878,9 @@ class _DocRegistrationState extends State<DocRegistration> {
                                             'phone': phoneController,
                                             'profileImage':
                                                 url == null ? false : url,
+                                            'proof':
+                                                url2 == null ? false : url2,
+                                            'valid': false
                                           })
                                           .then((value) =>
                                               Fluttertoast.showToast(
@@ -913,10 +965,29 @@ class _DocRegistrationState extends State<DocRegistration> {
     return taskSnapshot.ref.getDownloadURL();
   }
 
+  Future<String> uploadImage2() async {
+    TaskSnapshot taskSnapshot = await FirebaseStorage.instance
+        .ref()
+        .child("proof")
+        .child(
+            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file2.path))
+        .putFile(file2);
+
+    return taskSnapshot.ref.getDownloadURL();
+  }
+
   chooseImage() async {
     XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
     print("file " + xfile!.path);
     file = File(xfile.path);
+    setState(() {});
+  }
+
+  chooseImage2() async {
+    XFile? xfile2 = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print("file " + xfile2!.path);
+    file2 = File(xfile2.path);
+    Fluttertoast.showToast(msg: "File Selected:" + file2.path);
     setState(() {});
   }
 }

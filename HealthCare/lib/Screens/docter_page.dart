@@ -90,40 +90,42 @@ class _Docter_pageState extends State<Docter_page> {
                             print("Special Doc: " +
                                 snapshot.data!.docs.length.toString());
                             if (doc["specialist"].toString().isEmpty) {
-                              return Text("NO Doc Found.");
+                              return Text("No Doctor Found");
                             } else {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailPage(
-                                          uid: doc['uid'],
-                                          name: doc['name'],
-                                          email: doc['email'],
-                                          address: doc['address'],
-                                          experience: doc['experience'],
-                                          specialist: doc['specialist'],
-                                          profileImage: doc['profileImage'],
-                                          description: doc['description'],
-                                          phone: doc['phone'],
-                                          available: doc['available'],
-                                          doctor: _doctorName,
-                                        ),
-                                      ));
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: SelectCard(
-                                    name: doc["name"].toString(),
-                                    email: doc["email"].toString(),
-                                    specialist: doc["specialist"].toString(),
-                                    profileImage: doc['profileImage'],
-                                    rating: doc['rating'],
-                                    did: doc['uid'],
+                              if (doc['valid'] == true) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailPage(
+                                            uid: doc['uid'],
+                                            name: doc['name'],
+                                            email: doc['email'],
+                                            address: doc['address'],
+                                            experience: doc['experience'],
+                                            specialist: doc['specialist'],
+                                            profileImage: doc['profileImage'],
+                                            description: doc['description'],
+                                            phone: doc['phone'],
+                                            available: doc['available'],
+                                            doctor: _doctorName,
+                                          ),
+                                        ));
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 10),
+                                    child: SelectCard(
+                                      name: doc["name"].toString(),
+                                      email: doc["email"].toString(),
+                                      specialist: doc["specialist"].toString(),
+                                      profileImage: doc['profileImage'],
+                                      rating: doc['rating'],
+                                      did: doc['uid'],
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             }
                           },
                         );

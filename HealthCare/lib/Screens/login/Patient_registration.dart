@@ -348,7 +348,7 @@ class _RegistrationState extends State<Registration> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "Date Of Birth   ",
+                                  "Date Of Birth: ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: kPrimaryColor),
@@ -359,10 +359,14 @@ class _RegistrationState extends State<Registration> {
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
-                                          ? Text(
-                                              "Select Date",
-                                              style: TextStyle(
-                                                  color: Colors.black54),
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20.0),
+                                              child: Text(
+                                                "Select Date",
+                                                style: TextStyle(
+                                                    color: Colors.black54),
+                                              ),
                                             )
                                           : Text(
                                               t_date,
@@ -394,7 +398,7 @@ class _RegistrationState extends State<Registration> {
                               ],
                             ),
                             c_data == true
-                                ? Text("*Select Data",
+                                ? Text("*Select Date",
                                     style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w400))

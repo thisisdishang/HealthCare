@@ -26,6 +26,7 @@ class DoctorModel {
   String? phone;
   String? rating;
   var available;
+  var valid;
   var profileImage;
 
   DoctorModel({
@@ -40,6 +41,7 @@ class DoctorModel {
     this.phone,
     this.rating,
     this.available,
+    this.valid,
     this.profileImage,
   });
 
@@ -58,6 +60,7 @@ class DoctorModel {
       profileImage: map['profileImage'],
       rating: map['rating'],
       available: map['available'],
+      valid: map['valid'],
     );
   }
 
@@ -75,7 +78,8 @@ class DoctorModel {
       'phone': phone,
       'profileImage': profileImage,
       'rating': rating,
-      'available': available
+      'available': available,
+      'valid':valid,
     };
   }
 }

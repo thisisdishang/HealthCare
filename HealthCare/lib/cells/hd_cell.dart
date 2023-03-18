@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class HDCell extends StatefulWidget {
+  final valid;
   final name;
   final email;
   final specialist;
@@ -9,6 +10,7 @@ class HDCell extends StatefulWidget {
   final Function onTap;
 
   const HDCell({
+    required this.valid,
     required this.name,
     required this.email,
     required this.specialist,

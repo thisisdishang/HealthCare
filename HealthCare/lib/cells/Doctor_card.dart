@@ -167,7 +167,7 @@ class _SelectCardState extends State<SelectCard> {
                       ? CircleAvatar(
                           radius: 60,
                           backgroundImage:
-                              AssetImage('assets/images/account1.png'),
+                              AssetImage('assets/images/account.png'),
                         )
                       : CircleAvatar(
                           radius: 60,

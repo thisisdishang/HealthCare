@@ -462,7 +462,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                 ),
 
                 SizedBox(
-                  height: size.height * 0.25,
+                  height: size.height * 0.23,
                 ),
                 Center(
                   child: Container(
@@ -781,12 +781,13 @@ class AdvanceCustomAlert extends StatelessWidget {
               ),
             ),
             Positioned(
-                top: 15,
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 45,
-                  child: Image.asset('assets/images/account.png'),
-                )),
+              top: 15,
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                radius: 45,
+                child: Image.asset('assets/images/logo1.jpg'),
+              ),
+            )
           ],
         ));
   }
