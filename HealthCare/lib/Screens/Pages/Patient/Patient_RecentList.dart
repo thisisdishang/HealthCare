@@ -48,7 +48,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
           .where('pid', isEqualTo: loggedInUser.uid)
           .where('approve', isEqualTo: true)
           .where('date', isLessThan: today_date)
-          .where('visited', isEqualTo: true)
           .snapshots();
 
       setState(() {
@@ -141,7 +140,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                         .where('pid', isEqualTo: loggedInUser.uid)
                         .where('date', isLessThanOrEqualTo: today_date)
                         .where('date', isEqualTo: t_date)
-                        .where('status', isEqualTo: true)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -199,7 +197,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           decoration:
                                                               BoxDecoration(),
                                                           child: Text(
-                                                            "Dr." +
+                                                            "Dr. " +
                                                                 doc['doctor_name'],
                                                             style: TextStyle(
                                                                 color: Colors
@@ -252,7 +250,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                       ),
                                                       Container(
                                                         child: Text(
-                                                          "Status : Didn't Visit ",
+                                                          "Status : Not Visited",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -281,7 +279,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           decoration:
                                                               BoxDecoration(),
                                                           child: Text(
-                                                            "Dr." +
+                                                            "Dr. " +
                                                                 doc['doctor_name'],
                                                             style: TextStyle(
                                                                 color: Colors
@@ -334,7 +332,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                       ),
                                                       Container(
                                                         child: Text(
-                                                          "Status : Visited ",
+                                                          "Status : Visited",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,

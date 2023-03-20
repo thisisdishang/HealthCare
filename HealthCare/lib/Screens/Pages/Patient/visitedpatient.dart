@@ -1,44 +1,53 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/constants.dart';
 import 'package:intl/intl.dart';
 import '../../../componets/loadingindicator.dart';
-import '../../../models/patient_data.dart';
-import 'Pending.dart';
+import '../../../models/doctor.dart';
+import '../../home/doctor_home_page.dart';
 
-class Confirm_Appointment extends StatefulWidget {
-  const Confirm_Appointment({Key? key}) : super(key: key);
-
+class visited extends StatefulWidget {
   @override
-  State<Confirm_Appointment> createState() => _Confirm_AppointmentState();
+  _visitedState createState() => _visitedState();
 }
 
-class _Confirm_AppointmentState extends State<Confirm_Appointment> {
+class _visitedState extends State<visited> {
   var appointment = FirebaseFirestore.instance;
-  UserModel loggedInUser = UserModel();
-  var user = FirebaseAuth.instance.currentUser;
-  bool isLoading = true;
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
   var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  final CollectionReference firebase =
+      FirebaseFirestore.instance.collection("doctor");
+  User? user = FirebaseAuth.instance.currentUser;
+
+  bool isLoading = true;
+  late TabController tabController;
+  DoctorModel loggedInUser = DoctorModel();
+
+  Future<void> _getUser() async {
+    user = _auth.currentUser;
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _getUser();
 
-    loggedInUser = UserModel();
+    // tabController = TabController(length: 3, initialIndex: 0, vsync: this);
+    loggedInUser = DoctorModel();
     FirebaseFirestore.instance
-        .collection("patient")
+        .collection("doctor")
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
-      Future<void>.delayed(const Duration(seconds: 2), () {
-        if (mounted) {
-          // Check that the widget is still mounted
-          setState(() {
-            isLoading = false;
-          });
-        }
+      loggedInUser = DoctorModel.fromMap(value.data());
+      setState(() {
+        sleep(Duration(microseconds: 10));
+        isLoading = false;
       });
     });
   }
@@ -50,11 +59,32 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
         .collection('pending')
         .orderBy('date', descending: true)
         .orderBy('time', descending: false)
-        .where('pid', isEqualTo: loggedInUser.uid)
+        .where('did', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: true)
-        .where('date', isGreaterThanOrEqualTo: today_date)
+        .where('visited', isEqualTo: true)
+        // .where('date', isGreaterThanOrEqualTo: today_date)
         .snapshots();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        leading: IconButton(
+            splashRadius: 20,
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Text(
+          'Visited Patients',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
             stream: firebase,
@@ -118,8 +148,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                                 left: 8.0,
                                                                 top: 8.0),
                                                         child: Text(
-                                                          "Dr. " +
-                                                              doc['doctor_name'],
+                                                          doc['name'],
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -182,7 +211,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                 bottom: 5,
                                                 left: 8,
                                                 child: Text(
-                                                  "Status : Confirm",
+                                                  "Status : Visited",
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,
@@ -190,50 +219,6 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                           FontWeight.bold),
                                                 ),
                                               ),
-                                              Positioned(
-                                                bottom: 5,
-                                                right: 10,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.red,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12), // <-- Radius
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        barrierDismissible:
-                                                            false,
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            alertdialog(
-                                                                id: doc.id));
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 5, right: 5),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10.0,
-                                                              bottom: 10),
-                                                      child: Text(
-                                                        "Cancel ",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
                                             ],
                                           ),
                                         ),

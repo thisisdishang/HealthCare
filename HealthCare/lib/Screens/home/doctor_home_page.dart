@@ -147,11 +147,11 @@ class _DocHomePageState extends State<DocHomePage> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20, bottom: 10),
               child: Text(
-                "Your's Today Appointment :",
+                "Your's Today Appointments : ",
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

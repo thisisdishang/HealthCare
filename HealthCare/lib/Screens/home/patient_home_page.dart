@@ -278,7 +278,6 @@ class _HomePageState extends State<HomePage> {
                               .collection('pending')
                               .where('pid', isEqualTo: loggedInUser.uid)
                               .where('date', isEqualTo: today_date)
-                              .where('status', isEqualTo: false)
                               .orderBy('time', descending: false)
                               .snapshots(),
                           builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {

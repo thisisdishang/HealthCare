@@ -120,7 +120,7 @@ class _PendingState extends State<Pending> {
                                                                 left: 8.0,
                                                                 top: 8.0),
                                                         child: Text(
-                                                          "Dr." +
+                                                          "Dr. " +
                                                               doc['doctor_name'],
                                                           style: TextStyle(
                                                               color:
@@ -265,48 +265,27 @@ class alertdialog extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.27,
+            height: MediaQuery.of(context).size.height * 0.32,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
               child: Column(
                 children: [
-                  Text(
-                    'are you sure you want to cancel this Appointment?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 47.0),
+                    child: Text(
+                      'Are you sure you want to cancel this Appointment?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'NO',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
                         Container(
                           child: ElevatedButton(
                             onPressed: () {
@@ -319,18 +298,39 @@ class alertdialog extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 19),
                               child: Text(
-                                'YES',
+                                'Yes',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                              backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -342,11 +342,11 @@ class alertdialog extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: -50,
+              top: 5,
               child: CircleAvatar(
                 backgroundColor: Colors.grey,
                 radius: 50,
-                child: Image.asset('assets/images/logo.jpg'),
+                child: Image.asset('assets/images/logo1.jpg'),
               )),
         ],
       ),

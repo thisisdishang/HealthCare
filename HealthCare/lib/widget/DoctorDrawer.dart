@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/Screens/Pages/Patient/visitedpatient.dart';
 import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
@@ -74,30 +75,37 @@ class _DocDrawerState extends State<DocDrawer> {
                   ),
                 ),
 
-                // Privacy Policy
-                CustomList(Icons.announcement, "Privacy Policy", () async {
-                  final Uri _url = Uri.parse(
-                      'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
-                  if (!await launchUrl(_url)) {
-                    throw 'Could not launch ';
-                  }
-                }),
-
-                CustomList(Icons.question_mark, "FAQs", () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => faqs()));
-                }),
-                CustomList(Icons.lock, "Log Out", () async {
-                  await FirebaseAuth.instance.signOut();
-                  _prefService.removeCache("password");
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => doctor_page()));
-                }),
                 ListTile(
                   title: Padding(
                     padding: const EdgeInsets.only(left: 25.0),
                     child: Text(
-                      'Available:',
+                      'Verify Doctor',
+                      textScaleFactor: 1.5,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                  trailing: Switch(
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.grey,
+                      value: loggedInUser.valid,
+                      onChanged: (check) {
+                        setState(() {
+                          loggedInUser.valid == check;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 1,
+                  width: 10,
+                  color: kPrimaryLightColor,
+                ),
+                ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'Available',
                       textScaleFactor: 1.5,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
@@ -119,37 +127,37 @@ class _DocDrawerState extends State<DocDrawer> {
                         });
                       }),
                 ),
+
                 Container(
                   height: 1,
                   width: 10,
                   color: kPrimaryLightColor,
                 ),
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Text(
-                      'Valid Doctor:',
-                      textScaleFactor: 1.5,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                  trailing: Switch(
-                      activeColor: Colors.grey,
-                      inactiveThumbColor: Colors.grey,
-                      value: loggedInUser.valid,
-                      onChanged: (check) {
-                        setState(() {
-                          loggedInUser.valid == check;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 1,
-                  width: 10,
-                  color: kPrimaryLightColor,
-                ),
+                CustomList(Icons.check, "Visited Patients", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => visited()));
+                }),
+                CustomList(Icons.close, "Pending Patients", () {
+                  null;
+                }),
+                CustomList(Icons.question_mark, "FAQs", () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => faqs()));
+                }),
+                // Privacy Policy
+                CustomList(Icons.announcement, "Privacy Policy", () async {
+                  final Uri _url = Uri.parse(
+                      'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
+                  if (!await launchUrl(_url)) {
+                    throw 'Could not launch ';
+                  }
+                }),
+                CustomList(Icons.lock, "Log Out", () async {
+                  await FirebaseAuth.instance.signOut();
+                  _prefService.removeCache("password");
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => doctor_page()));
+                }),
               ],
             ),
     );

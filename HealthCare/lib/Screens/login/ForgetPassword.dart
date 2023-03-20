@@ -95,24 +95,24 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             child: Container(
               height: size.height * 1,
               width: size.width * 1,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/login_doc.jpg"),
-                    fit: BoxFit.cover),
-              ),
               child: Container(
-                color: Colors.black26,
+                color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      "assets/images/forget.png",
+                      width: 270,
+                      height: 270,
+                    ),
                     Container(
                       child: Center(
                           child: Text(
                         "Reset Password",
                         style: TextStyle(
                             fontSize: 22,
-                            color: kPrimaryLightColor,
+                            color: kPrimaryColor,
                             fontWeight: FontWeight.bold),
                       )),
                     ),
@@ -133,7 +133,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: kPrimaryColor,
                         decoration:
-                            buildInputDecoration(Icons.email, "Your Email "),
+                            buildInputDecoration(Icons.email, "Enter Your Email "),
                         onChanged: (email) {
                           t_email = email.trim();
                         },
@@ -166,16 +166,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                     AdvanceCustomAlert());
                           } else {
                             if (_formkey.currentState!.validate()) {
-                              FirebaseAuth.instance
-                                  .sendPasswordResetEmail(email: t_email);
-                              Fluttertoast.showToast(
-                                  msg: "Send E-Mail Your Account",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
-                              hideLoadingDialog(context: context);
+                              try {
+                                await FirebaseAuth.instance
+                                    .sendPasswordResetEmail(email: t_email)
+                                    .then((value) {
+                                  Fluttertoast.showToast(
+                                      backgroundColor: kPrimaryColor,
+                                      msg: "Send E-Mail To Your Account",
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                });
+                                hideLoadingDialog(context: context);
+                              } catch (e) {
+                                print(e);
+                              }
                             }
                           }
                         },
@@ -188,6 +195,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 100,
+                    )
                   ],
                 ),
               ),

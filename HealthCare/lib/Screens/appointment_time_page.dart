@@ -493,8 +493,6 @@ class _Appoin_timeState extends State<Appoin_time> {
                                     'phone': loggedInUser.phone,
                                     'doctor_name': widget.name.toString(),
                                     'visited': false,
-                                    'rating': false,
-                                    'status': false,
                                   })
                                   .then((value) => Fluttertoast.showToast(
                                       msg: "Pending Appointment",
