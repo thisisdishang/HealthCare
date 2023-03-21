@@ -712,6 +712,13 @@ class _DetailPageState extends State<DetailPage> {
 
   /// App Bar
   AppBar _buildAppBar(Size size) {
+    final Uri smsLaunchUri = Uri(
+      scheme: 'sms',
+      path: widget.phone,
+      queryParameters: <String, String>{
+        'body': Uri.encodeComponent('HelloDoctor'),
+      },
+    );
     return AppBar(
       backgroundColor: kPrimaryColor,
       elevation: 0,
@@ -741,13 +748,7 @@ class _DetailPageState extends State<DetailPage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChatScreen1(
-                          did: widget.uid,
-                          doctor_name: widget.name,
-                          phone: widget.phone)));
+              launchUrl(smsLaunchUri);
             },
           ),
         ),
@@ -903,10 +904,13 @@ class _DetailPageState extends State<DetailPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          'Doctor Rating',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Text(
+                            'Doctor Rating',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
                         ),
                         SizedBox(
                           height: 15,
@@ -1000,8 +1004,7 @@ class _DetailPageState extends State<DetailPage> {
                           radius: 50,
                         )
                       : CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(widget.profileImage),
+                          backgroundImage: NetworkImage(widget.profileImage),
                           backgroundColor: Colors.transparent,
                           radius: 50,
                         ),
@@ -1027,10 +1030,13 @@ class _DetailPageState extends State<DetailPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          'Doctor Rating',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Text(
+                            'Doctor Rating',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
                         ),
                         SizedBox(
                           height: 15,
@@ -1128,18 +1134,18 @@ class _DetailPageState extends State<DetailPage> {
                   top: 10,
                   child: widget.profileImage == false
                       ? CircleAvatar(
-                    backgroundImage:
-                    AssetImage('assets/images/account.png'),
-                    backgroundColor: Colors.transparent,
-                    radius: 50,
-                  )
+                          backgroundImage:
+                              AssetImage('assets/images/account.png'),
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                        )
                       : CircleAvatar(
-                    backgroundImage:
-                    NetworkImage(widget.profileImage),
-                    backgroundColor: Colors.transparent,
-                    radius: 50,
-                  ),
+                          backgroundImage: NetworkImage(widget.profileImage),
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                        ),
                 ),
+
                 // Positioned(
                 //     top: 10,
                 //     child: CircleAvatar(

@@ -273,7 +273,7 @@ class alertdialog extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 47.0),
                     child: Text(
-                      'Are you sure you want to cancel this Appointment?',
+                      'Are you sure you want to cancel this appointment?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -286,6 +286,27 @@ class alertdialog extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8), // <-- Radius
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
                         Container(
                           child: ElevatedButton(
                             onPressed: () {
@@ -310,27 +331,6 @@ class alertdialog extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius
                               ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'No',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),

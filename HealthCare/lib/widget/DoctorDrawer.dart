@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/Screens/Pages/Patient/notvisitedpatient.dart';
 import 'package:hospital_appointment/Screens/Pages/Patient/visitedpatient.dart';
+import 'package:hospital_appointment/Screens/about.dart';
 import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
-import 'package:hospital_appointment/Screens/FAQs.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/shared_preferences_service.dart';
 
@@ -79,7 +80,7 @@ class _DocDrawerState extends State<DocDrawer> {
                   title: Padding(
                     padding: const EdgeInsets.only(left: 25.0),
                     child: Text(
-                      'Verify Doctor',
+                      'Verified Doctor',
                       textScaleFactor: 1.5,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
@@ -137,12 +138,9 @@ class _DocDrawerState extends State<DocDrawer> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => visited()));
                 }),
-                CustomList(Icons.close, "Pending Patients", () {
-                  null;
-                }),
-                CustomList(Icons.question_mark, "FAQs", () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => faqs()));
+                CustomList(Icons.timelapse, "Pending Patients", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => notvisited()));
                 }),
                 // Privacy Policy
                 CustomList(Icons.announcement, "Privacy Policy", () async {
@@ -151,6 +149,10 @@ class _DocDrawerState extends State<DocDrawer> {
                   if (!await launchUrl(_url)) {
                     throw 'Could not launch ';
                   }
+                }),
+                CustomList(Icons.data_object, "About", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => about()));
                 }),
                 CustomList(Icons.lock, "Log Out", () async {
                   await FirebaseAuth.instance.signOut();

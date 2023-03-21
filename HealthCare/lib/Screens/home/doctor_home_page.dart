@@ -394,15 +394,15 @@ class alertdialog extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.30,
+            height: MediaQuery.of(context).size.height * 0.32,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 45),
                     child: Text(
-                      'Are you sure you want to cancel this Appointment?',
+                      'Are you sure you want to cancel this appointment?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -477,7 +477,7 @@ class alertdialog extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 50,
-                  child: Image.asset('assets/images/account.png'),
+                  child: Image.asset('assets/images/logo1.jpg'),
                 )),
           ),
         ],
@@ -499,15 +499,15 @@ class confirm extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.30,
+            height: MediaQuery.of(context).size.height * 0.32,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 45),
                     child: Text(
-                      'Are you sure you want to confirm this Appointment?',
+                      'Are you sure you want to confirm this appointment?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -584,7 +584,7 @@ class confirm extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 50,
-                  child: Image.asset('assets/images/account.png'),
+                  child: Image.asset('assets/images/logo1.jpg'),
                 )),
           ),
         ],

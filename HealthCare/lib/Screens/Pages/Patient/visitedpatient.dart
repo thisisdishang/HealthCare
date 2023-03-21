@@ -6,7 +6,6 @@ import 'package:hospital_appointment/constants.dart';
 import 'package:intl/intl.dart';
 import '../../../componets/loadingindicator.dart';
 import '../../../models/doctor.dart';
-import '../../home/doctor_home_page.dart';
 
 class visited extends StatefulWidget {
   @override
@@ -93,8 +92,7 @@ class _visitedState extends State<visited> {
               if (!snapshot.hasData) {
                 return Container(
                     height: size.height * 1,
-                    child: Center(
-                        child: Text("You Do Not Have An Appointment today.")));
+                    child: Center(child: Text("Appointment not available")));
               } else {
                 return isLoading
                     ? Container(
@@ -119,7 +117,7 @@ class _visitedState extends State<visited> {
                                 ? Center(child: Text("Doctor Not Available"))
                                 : Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 6),
+                                        horizontal: 8, vertical: 2),
                                     child: Container(
                                       height: 104,
                                       child: Card(

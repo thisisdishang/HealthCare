@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_appointment/Screens/about.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/Screens/FAQs.dart';
@@ -81,7 +82,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => UserProfile()));
                 }),
-
+                CustomList(Icons.question_mark, "FAQs", () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => faqs()));
+                }),
                 // Privacy Policy
                 CustomList(Icons.announcement, "Privacy Policy", () async {
                   final Uri _url = Uri.parse(
@@ -90,9 +94,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     throw 'Could not launch ';
                   }
                 }),
-                CustomList(Icons.question_mark, "FAQs", () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => faqs()));
+
+                CustomList(Icons.data_object, "About", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => about()));
                 }),
                 CustomList(Icons.lock, "Log Out", () async {
                   await FirebaseAuth.instance.signOut();
