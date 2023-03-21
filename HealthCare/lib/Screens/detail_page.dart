@@ -10,7 +10,6 @@ import '../componets/loadingindicator.dart';
 import '../constants.dart';
 import '../he_color.dart';
 import '../models/patient_data.dart';
-import 'Chat/chat_screen1.dart';
 import 'Rating_Review.dart';
 import 'appointment_time_page.dart';
 
