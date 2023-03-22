@@ -149,7 +149,7 @@ class _DocHomePageState extends State<DocHomePage> {
               child: Text(
                 "Your's Today Appointments : ",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 24,
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
@@ -219,7 +219,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                               left: 8.0,
                                                               top: 8.0),
                                                       child: Text(
-                                                        doc['name'],
+                                                        'Name: ' + doc['name'],
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 20,
@@ -250,6 +250,9 @@ class _DocHomePageState extends State<DocHomePage> {
                                                       ),
                                                     ) // child widget, replace with your own
                                                     ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
                                                 Container(
                                                     width: double.infinity,
                                                     decoration: BoxDecoration(),

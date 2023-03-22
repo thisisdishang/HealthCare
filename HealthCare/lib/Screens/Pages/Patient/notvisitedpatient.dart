@@ -142,7 +142,7 @@ class _notvisitedState extends State<notvisited> {
                                                       const EdgeInsets.only(
                                                           left: 8.0, top: 8.0),
                                                   child: Text(
-                                                    doc['name'],
+                                                    'Name: ' + doc['name'],
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 20,
@@ -169,6 +169,9 @@ class _notvisitedState extends State<notvisited> {
                                                   ),
                                                 ) // child widget, replace with your own
                                                 ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
                                             Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(),
@@ -204,7 +207,7 @@ class _notvisitedState extends State<notvisited> {
                                           right: 10,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: kPrimarydark,
+                                              backgroundColor: Colors.green,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -226,9 +229,9 @@ class _notvisitedState extends State<notvisited> {
                                                 padding: const EdgeInsets.only(
                                                     top: 10.0, bottom: 10),
                                                 child: Text(
-                                                  "✅",
+                                                  "Visited",
                                                   style: TextStyle(
-                                                      color: Colors.green,
+                                                      color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
@@ -241,7 +244,7 @@ class _notvisitedState extends State<notvisited> {
                                           right: 10,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: kPrimarydark,
+                                              backgroundColor: Colors.red,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -263,7 +266,7 @@ class _notvisitedState extends State<notvisited> {
                                                 padding: const EdgeInsets.only(
                                                     top: 10.0, bottom: 10),
                                                 child: Text(
-                                                  "❌",
+                                                  "Not Visited",
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:

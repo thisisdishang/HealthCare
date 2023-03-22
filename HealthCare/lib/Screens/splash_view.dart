@@ -53,6 +53,7 @@ class SplashViewState extends State<SplashView> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 200),
@@ -71,7 +72,7 @@ class SplashViewState extends State<SplashView> {
               height: 240,
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Text(
                 "Powered By Rana Corporation®",
                 style: TextStyle(

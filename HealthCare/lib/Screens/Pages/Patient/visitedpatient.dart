@@ -146,11 +146,12 @@ class _visitedState extends State<visited> {
                                                                 left: 8.0,
                                                                 top: 8.0),
                                                         child: Text(
-                                                          doc['name'],
+                                                          'Name: ' +
+                                                              doc['name'],
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                              fontSize: 20,
+                                                              fontSize: 18,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
@@ -181,6 +182,9 @@ class _visitedState extends State<visited> {
                                                         ),
                                                       ) // child widget, replace with your own
                                                       ),
+                                                  SizedBox(
+                                                    height: 4,
+                                                  ),
                                                   Container(
                                                       width: double.infinity,
                                                       decoration:

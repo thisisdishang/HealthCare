@@ -578,7 +578,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                           onPressed: () async {
                                             chooseImage2();
                                           },
-                                          child: Text("Select File")),
+                                          child: Text("Choose File")),
                                     ),
                                   ],
                                 )
@@ -794,7 +794,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                 onPressed: () async {
                                   if (file2 == null) {
                                     Fluttertoast.showToast(
-                                        msg: "You're not select the file",
+                                        msg: "No File Chosen",
                                         textColor: Colors.white,
                                         backgroundColor: Colors.red);
                                   }
@@ -987,7 +987,7 @@ class _DocRegistrationState extends State<DocRegistration> {
     XFile? xfile2 = await ImagePicker().pickImage(source: ImageSource.gallery);
     print("file " + xfile2!.path);
     file2 = File(xfile2.path);
-    Fluttertoast.showToast(msg: "File Selected:" + file2.path);
+    Fluttertoast.showToast(msg: "Chosen File:" + file2.path);
     setState(() {});
   }
 }
