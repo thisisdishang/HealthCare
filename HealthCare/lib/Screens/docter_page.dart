@@ -73,7 +73,8 @@ class _Docter_pageState extends State<Docter_page> {
             : Padding(
                 padding: EdgeInsets.all(8.0),
                 child: StreamBuilder<QuerySnapshot>(
-                    stream: firebase.snapshots(),
+                    stream:
+                        firebase.where('valid', isEqualTo: true).snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
@@ -92,40 +93,38 @@ class _Docter_pageState extends State<Docter_page> {
                             if (doc["specialist"].toString().isEmpty) {
                               return Text("No Doctor Found");
                             } else {
-                              if (doc['valid'] == true) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailPage(
-                                            uid: doc['uid'],
-                                            name: doc['name'],
-                                            email: doc['email'],
-                                            address: doc['address'],
-                                            experience: doc['experience'],
-                                            specialist: doc['specialist'],
-                                            profileImage: doc['profileImage'],
-                                            description: doc['description'],
-                                            phone: doc['phone'],
-                                            available: doc['available'],
-                                            doctor: _doctorName,
-                                          ),
-                                        ));
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: SelectCard(
-                                      name: doc["name"].toString(),
-                                      email: doc["email"].toString(),
-                                      specialist: doc["specialist"].toString(),
-                                      profileImage: doc['profileImage'],
-                                      rating: doc['rating'],
-                                      did: doc['uid'],
-                                    ),
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                          uid: doc['uid'],
+                                          name: doc['name'],
+                                          email: doc['email'],
+                                          address: doc['address'],
+                                          experience: doc['experience'],
+                                          specialist: doc['specialist'],
+                                          profileImage: doc['profileImage'],
+                                          description: doc['description'],
+                                          phone: doc['phone'],
+                                          available: doc['available'],
+                                          doctor: _doctorName,
+                                        ),
+                                      ));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: SelectCard(
+                                    name: doc["name"].toString(),
+                                    email: doc["email"].toString(),
+                                    specialist: doc["specialist"].toString(),
+                                    profileImage: doc['profileImage'],
+                                    rating: doc['rating'],
+                                    did: doc['uid'],
                                   ),
-                                );
-                              }
+                                ),
+                              );
                             }
                           },
                         );

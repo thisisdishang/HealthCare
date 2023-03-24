@@ -10,7 +10,7 @@ class about extends StatefulWidget {
 class _aboutState extends State<about> {
   final Uri emailLaunchUri = Uri(
     scheme: 'mailto',
-    path: 'dishangkumarrana@gmail.com',
+    path: 'dishangkumarrana@gmail.com,kevinprajapati2112@gmail.com,harshivrana01@gmail.com',
     query: encodeQueryParameters(<String, String>{
       'subject': 'Facing issues in HealthCare',
     }),

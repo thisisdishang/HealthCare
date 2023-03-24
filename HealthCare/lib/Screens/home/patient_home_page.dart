@@ -11,6 +11,7 @@ import 'package:hospital_appointment/cells/trd_cell.dart';
 import 'package:hospital_appointment/models/category.dart';
 import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../newapp/carouselSlider.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
@@ -395,7 +396,7 @@ class _HomePageState extends State<HomePage> {
       height: 199,
       child: Container(
           child: StreamBuilder<QuerySnapshot>(
-              stream: firebase.snapshots(),
+              stream: firebase.where('valid', isEqualTo: true).snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
@@ -407,34 +408,32 @@ class _HomePageState extends State<HomePage> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
                       final DocumentSnapshot doc = snapshot.data!.docs[index];
-                      if (doc['valid'] == true) {
-                        return HDCell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailPage(
-                                    uid: doc['uid'],
-                                    name: doc['name'],
-                                    email: doc['email'],
-                                    address: doc['address'],
-                                    experience: doc['experience'],
-                                    specialist: doc['specialist'],
-                                    profileImage: doc['profileImage'],
-                                    description: doc['description'],
-                                    phone: doc['phone'],
-                                    available: doc['available'],
-                                    doctor: _doctorName,
-                                  ),
-                                ));
-                          },
-                          name: doc["name"].toString(),
-                          email: doc["email"].toString(),
-                          specialist: doc["specialist"].toString(),
-                          profileImage: doc['profileImage'],
-                          valid: doc['valid'],
-                        );
-                      }
+                      return HDCell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                  uid: doc['uid'],
+                                  name: doc['name'],
+                                  email: doc['email'],
+                                  address: doc['address'],
+                                  experience: doc['experience'],
+                                  specialist: doc['specialist'],
+                                  profileImage: doc['profileImage'],
+                                  description: doc['description'],
+                                  phone: doc['phone'],
+                                  available: doc['available'],
+                                  doctor: _doctorName,
+                                ),
+                              ));
+                        },
+                        name: doc["name"].toString(),
+                        email: doc["email"].toString(),
+                        specialist: doc["specialist"].toString(),
+                        profileImage: doc['profileImage'],
+                        valid: doc['valid'],
+                      );
                     },
                   );
                 }
@@ -564,7 +563,10 @@ class _HomePageState extends State<HomePage> {
           height: 32,
         ),
         StreamBuilder<QuerySnapshot>(
-            stream: firebase.orderBy('rating', descending: true).snapshots(),
+            stream: firebase
+                .where('valid', isEqualTo: true)
+                .orderBy('rating', descending: true)
+                .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
@@ -577,34 +579,32 @@ class _HomePageState extends State<HomePage> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot doc = snapshot.data!.docs[index];
-                    if (doc['valid'] == true) {
-                      return TrdCell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  uid: doc['uid'],
-                                  name: doc['name'],
-                                  email: doc['email'],
-                                  address: doc['address'],
-                                  experience: doc['experience'],
-                                  specialist: doc['specialist'],
-                                  profileImage: doc['profileImage'],
-                                  description: doc['description'],
-                                  available: doc['available'],
-                                  phone: doc['phone'],
-                                  doctor: null,
-                                ),
-                              ));
-                        },
-                        name: doc["name"].toString(),
-                        email: doc["email"].toString(),
-                        rating: doc["rating"],
-                        specialist: doc["specialist"].toString(),
-                        profileImage: doc['profileImage'],
-                      );
-                    }
+                    return TrdCell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                uid: doc['uid'],
+                                name: doc['name'],
+                                email: doc['email'],
+                                address: doc['address'],
+                                experience: doc['experience'],
+                                specialist: doc['specialist'],
+                                profileImage: doc['profileImage'],
+                                description: doc['description'],
+                                available: doc['available'],
+                                phone: doc['phone'],
+                                doctor: null,
+                              ),
+                            ));
+                      },
+                      name: doc["name"].toString(),
+                      email: doc["email"].toString(),
+                      rating: doc["rating"],
+                      specialist: doc["specialist"].toString(),
+                      profileImage: doc['profileImage'],
+                    );
                   },
                 );
               }

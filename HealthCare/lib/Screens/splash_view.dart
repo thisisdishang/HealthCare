@@ -69,7 +69,7 @@ class SplashViewState extends State<SplashView> {
               ),
             ),
             SizedBox(
-              height: 240,
+              height: 250,
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 2),
