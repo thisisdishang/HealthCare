@@ -11,7 +11,6 @@ import 'package:hospital_appointment/cells/trd_cell.dart';
 import 'package:hospital_appointment/models/category.dart';
 import 'package:hospital_appointment/widget/drawer.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../newapp/carouselSlider.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
