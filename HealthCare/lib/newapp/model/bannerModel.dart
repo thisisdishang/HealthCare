@@ -24,6 +24,13 @@ List<BannerModel> bannerCards = [
       ],
       "assets/images/covid19-bg.png"),
   new BannerModel(
+      "Pathology\nLaboratory",
+      [
+        Color(0xffb6d4fa),
+        Color(0xffcfe3fc),
+      ],
+      "assets/images/lab1.png"),
+  new BannerModel(
       "Insurance",
       [
         Color(0xffb6d4fa),
