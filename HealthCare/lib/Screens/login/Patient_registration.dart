@@ -418,7 +418,7 @@ class _RegistrationState extends State<Registration> {
                               buildInputDecoration(Icons.accessibility, "Age"),
                           validator: (var value) {
                             if (value!.isEmpty) {
-                              return "Enter Your Address";
+                              return "Enter Your Age";
                             }
                             return null;
                           },
