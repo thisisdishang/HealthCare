@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import '../../newapp/carouselSlider.dart';
 import '../../constants.dart';
 import '../../models/patient_data.dart';
+import '../../newapp/searchList.dart';
 import '../Appointment.dart';
 import '../disease_page.dart';
 import '../docter_page.dart';
@@ -160,64 +161,67 @@ class _HomePageState extends State<HomePage> {
                   Container(
                       margin: EdgeInsets.only(top: 5),
                       child: _hDoctorsSection()),
+                  SizedBox(
+                    height: 20.0,
+                  ),
 
 // //Search doctor
-//                   Container(
-//                     padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
-//                     child: TextFormField(
-//                       textInputAction: TextInputAction.search,
-//                       controller: _doctorName,
-//                       decoration: InputDecoration(
-//                         contentPadding:
-//                             EdgeInsets.only(left: 20, top: 10, bottom: 10),
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.all(Radius.circular(15.0)),
-//                           borderSide: BorderSide.none,
-//                         ),
-//                         filled: true,
-//                         fillColor: Colors.grey[200],
-//                         hintText: 'Search doctor',
-//                         hintStyle: TextStyle(
-//                           color: Colors.black26,
-//                           fontSize: 18,
-//                           fontWeight: FontWeight.w800,
-//                         ),
-//                         suffixIcon: Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.blue[900]?.withOpacity(0.9),
-//                             borderRadius: BorderRadius.circular(20),
-//                           ),
-//                           child: IconButton(
-//                             iconSize: 20,
-//                             splashRadius: 20,
-//                             color: Colors.white,
-//                             icon: Icon(Icons.search),
-//                             onPressed: () {},
-//                           ),
-//                         ),
-//                       ),
-//                       style: TextStyle(
-//                         fontSize: 18,
-//                         fontWeight: FontWeight.w800,
-//                       ),
-//                       onFieldSubmitted: (String value) {
-//                         setState(
-//                           () {
-//                             value.length == 0
-//                                 ? Container()
-//                                 : Navigator.push(
-//                                     context,
-//                                     MaterialPageRoute(
-//                                       builder: (context) => SearchList(
-//                                         searchKey: value,
-//                                       ),
-//                                     ),
-//                                   );
-//                           },
-//                         );
-//                       },
-//                     ),
-//                   ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.search,
+                      controller: _doctorName,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: 'Search Doctor',
+                        hintStyle: TextStyle(
+                          color: Colors.black26,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        suffixIcon: Container(
+                          decoration: BoxDecoration(
+                            color: kPrimaryColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: IconButton(
+                            iconSize: 20,
+                            splashRadius: 20,
+                            color: Colors.white,
+                            icon: Icon(Icons.search),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      onFieldSubmitted: (String value) {
+                        setState(
+                          () {
+                            value.length == 0
+                                ? Container()
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SearchList(
+                                        searchKey: value,
+                                      ),
+                                    ),
+                                  );
+                          },
+                        );
+                      },
+                    ),
+                  ),
 
 //ads..
                   Container(
