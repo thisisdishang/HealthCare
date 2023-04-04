@@ -7,6 +7,7 @@ import 'package:hospital_appointment/models/doctor.dart';
 import 'package:intl/intl.dart';
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
+import '../../newapp/searchList2.dart';
 import '../../widget/DoctorDrawer.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
@@ -27,13 +28,12 @@ class _DocHomePageState extends State<DocHomePage> {
   var today_date = (DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
       FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
-
+  TextEditingController _patientName = TextEditingController();
   bool isLoading = true;
   late TabController tabController;
   DoctorModel loggedInUser = DoctorModel();
@@ -54,7 +54,7 @@ class _DocHomePageState extends State<DocHomePage> {
   void initState() {
     super.initState();
     _getUser();
-    _doctorName = new TextEditingController();
+    _patientName = new TextEditingController();
     // tabController = TabController(length: 3, initialIndex: 0, vsync: this);
     loggedInUser = DoctorModel();
     FirebaseFirestore.instance
@@ -72,7 +72,7 @@ class _DocHomePageState extends State<DocHomePage> {
 
   @override
   void dispose() {
-    _doctorName.dispose();
+    _patientName.dispose();
     super.dispose();
   }
 
@@ -147,8 +147,58 @@ class _DocHomePageState extends State<DocHomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 5,
+                  //Search patient
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 8, 20, 18),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.search,
+                      controller: _patientName,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: 'Search Patient',
+                        hintStyle: TextStyle(
+                          color: Colors.black26,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        suffixIcon: Container(
+                          decoration: BoxDecoration(
+                            color: kPrimaryColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: IconButton(
+                            iconSize: 20,
+                            splashRadius: 20,
+                            color: Colors.white,
+                            icon: Icon(Icons.search),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      onFieldSubmitted: (String value) {
+                        value.length == 0
+                            ? Container()
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchList2(
+                                    searchKey: value,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
                   ),
                   Container(
                     alignment: Alignment.centerLeft,

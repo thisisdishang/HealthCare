@@ -40,14 +40,11 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
         .get()
         .then((value) {
       loggedInUser = DoctorModel.fromMap(value.data());
-
       firebase = appointment
           .collection('pending')
           .orderBy('date', descending: true)
-          .orderBy('time', descending: false)
           .where('pid', isEqualTo: loggedInUser.uid)
-          .where('approve', isEqualTo: true)
-          .where('date', isLessThan: today_date)
+          .where('date', isLessThanOrEqualTo: today_date)
           .snapshots();
 
       setState(() {
@@ -60,8 +57,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
-    print("today Date" + today_date);
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -125,7 +120,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
             t_date != null
                 ? Container(
                     width: size.width * 1,
-                    margin: EdgeInsets.only(left: 25),
+                    margin: EdgeInsets.only(left: 38),
                     child: Text(
                       t_date,
                       style: TextStyle(fontSize: 18),
@@ -138,7 +133,6 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                         .collection('pending')
                         .orderBy('date', descending: true)
                         .where('pid', isEqualTo: loggedInUser.uid)
-                        .where('date', isLessThanOrEqualTo: today_date)
                         .where('date', isEqualTo: t_date)
                         .snapshots(),
                     builder: (BuildContext context,

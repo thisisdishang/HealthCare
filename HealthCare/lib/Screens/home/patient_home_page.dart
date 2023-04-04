@@ -158,16 +158,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 5),
-                      child: _hDoctorsSection()),
-                  SizedBox(
-                    height: 20.0,
-                  ),
 
-// //Search doctor
+                  //Search doctor
                   Container(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 3),
                     child: TextFormField(
                       textInputAction: TextInputAction.search,
                       controller: _doctorName,
@@ -223,9 +217,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
+                  Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: _hDoctorsSection()),
+                  SizedBox(
+                    height: 17.0,
+                  ),
+
 //ads..
                   Container(
-                    padding: EdgeInsets.only(top: 18, left: 23, bottom: 15),
+                    padding: EdgeInsets.only(left: 23, bottom: 20),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "We care for you",
@@ -510,7 +511,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         SizedBox(
-          height: 20,
+          height: 7,
         ),
         SizedBox(
           height: 105,
@@ -563,7 +564,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         SizedBox(
-          height: 32,
+          height: 20,
         ),
         StreamBuilder<QuerySnapshot>(
             stream: firebase
