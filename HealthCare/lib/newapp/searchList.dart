@@ -79,7 +79,7 @@ class _SearchListState extends State<SearchList> {
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: Card(
                             color: Colors.blue[100],
-                            elevation: 0,
+                            elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

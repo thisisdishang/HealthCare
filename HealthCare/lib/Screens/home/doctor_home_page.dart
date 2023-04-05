@@ -33,7 +33,6 @@ class _DocHomePageState extends State<DocHomePage> {
       FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
-  TextEditingController _patientName = TextEditingController();
   bool isLoading = true;
   late TabController tabController;
   DoctorModel loggedInUser = DoctorModel();
@@ -54,8 +53,6 @@ class _DocHomePageState extends State<DocHomePage> {
   void initState() {
     super.initState();
     _getUser();
-    _patientName = new TextEditingController();
-    // tabController = TabController(length: 3, initialIndex: 0, vsync: this);
     loggedInUser = DoctorModel();
     FirebaseFirestore.instance
         .collection("doctor")
@@ -70,11 +67,7 @@ class _DocHomePageState extends State<DocHomePage> {
     });
   }
 
-  @override
-  void dispose() {
-    _patientName.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +145,6 @@ class _DocHomePageState extends State<DocHomePage> {
                     padding: EdgeInsets.fromLTRB(20, 8, 20, 18),
                     child: TextFormField(
                       textInputAction: TextInputAction.search,
-                      controller: _patientName,
                       decoration: InputDecoration(
                         contentPadding:
                             EdgeInsets.only(left: 20, top: 10, bottom: 10),
@@ -184,7 +176,7 @@ class _DocHomePageState extends State<DocHomePage> {
                       ),
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                       onFieldSubmitted: (String value) {
                         value.length == 0

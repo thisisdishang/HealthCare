@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                       onFieldSubmitted: (String value) {
                         setState(

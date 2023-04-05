@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SearchList2 extends StatefulWidget {
+class SearchList3 extends StatefulWidget {
   final String searchKey;
 
-  const SearchList2({Key? key, required this.searchKey}) : super(key: key);
+  const SearchList3({Key? key, required this.searchKey}) : super(key: key);
 
   @override
-  _SearchList2State createState() => _SearchList2State();
+  _SearchList3State createState() => _SearchList3State();
 }
 
-class _SearchList2State extends State<SearchList2> {
+class _SearchList3State extends State<SearchList3> {
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection('patient');
+      FirebaseFirestore.instance.collection('pending');
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -29,7 +29,7 @@ class _SearchList2State extends State<SearchList2> {
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('patient')
+              .collection('pending')
               .orderBy('name')
               .startAt([widget.searchKey]).endAt(
                   [widget.searchKey + '\uf8ff']).snapshots(),
@@ -47,7 +47,7 @@ class _SearchList2State extends State<SearchList2> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'No Patient Found!',
+                            'No Appointment Found!',
                             style: TextStyle(
                               color: Colors.blue[800],
                               fontSize: 25,
@@ -70,7 +70,7 @@ class _SearchList2State extends State<SearchList2> {
                       shrinkWrap: true,
                       itemCount: snapshot.data!.size,
                       itemBuilder: (context, index) {
-                        DocumentSnapshot patient = snapshot.data!.docs[index];
+                        DocumentSnapshot pending = snapshot.data!.docs[index];
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: Card(
@@ -90,22 +90,6 @@ class _SearchList2State extends State<SearchList2> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    patient['profileImage'] == false
-                                        ? CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                'assets/images/account.png'),
-                                            backgroundColor: Colors.transparent,
-                                            radius: 25,
-                                          )
-                                        : CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                patient['profileImage']),
-                                            backgroundColor: Colors.transparent,
-                                            radius: 25,
-                                          ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -113,9 +97,7 @@ class _SearchList2State extends State<SearchList2> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          patient['name'] +
-                                              ' ' +
-                                              patient['last name'],
+                                          'Name: ' + pending['name'],
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17,
@@ -123,52 +105,24 @@ class _SearchList2State extends State<SearchList2> {
                                           ),
                                         ),
                                         Text(
-                                          patient['address'],
+                                          'Date: ' + pending['date'],
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54),
                                         ),
                                         Text(
-                                          patient['email'],
+                                          'Time: ' + pending['time'],
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54),
                                         ),
                                         Text(
-                                          patient['phone'],
+                                          'Status: Visited',
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54),
                                         ),
                                       ],
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.centerRight,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text('Age:'),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              patient['age'].toString(),
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
                                     ),
                                   ],
                                 ),

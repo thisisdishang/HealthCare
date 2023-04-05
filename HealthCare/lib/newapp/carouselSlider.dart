@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hospital_appointment/Screens/laboratory.dart';
 import '../Screens/disease_page.dart';
 import '../constants.dart';
 import 'diseasedetail.dart';
@@ -43,10 +44,7 @@ class Carouselslider extends StatelessWidget {
                   }));
                 }
                 if (index == 2) {
-                  Fluttertoast.showToast(
-                      msg: "Pathology Laboratory Coming Soon...",
-                      textColor: Colors.white,
-                      backgroundColor: kPrimaryColor);
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>lab()));
                 }
                 if (index == 3) {
                   Fluttertoast.showToast(

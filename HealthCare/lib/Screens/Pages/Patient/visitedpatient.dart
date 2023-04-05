@@ -7,6 +7,7 @@ import 'package:hospital_appointment/constants.dart';
 import 'package:intl/intl.dart';
 import '../../../componets/loadingindicator.dart';
 import '../../../models/doctor.dart';
+import '../../../newapp/searchList3.dart';
 
 class visited extends StatefulWidget {
   @override
@@ -92,6 +93,58 @@ class _visitedState extends State<visited> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            //Search patient
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 15, 20, 13),
+              child: TextFormField(
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  contentPadding:
+                  EdgeInsets.only(left: 20, top: 10, bottom: 5),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: 'Search Visited Patient',
+                  hintStyle: TextStyle(
+                    color: Colors.black26,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  suffixIcon: Container(
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      iconSize: 20,
+                      splashRadius: 20,
+                      color: Colors.white,
+                      icon: Icon(Icons.search),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                onFieldSubmitted: (String value) {
+                  value.length == 0
+                      ? Container()
+                      : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchList3(
+                        searchKey: value,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
             Container(
               width: size.width * 1,
               margin: EdgeInsets.only(left: 10),
