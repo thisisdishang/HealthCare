@@ -6,6 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hospital_appointment/constants.dart';
 import 'package:intl/intl.dart';
 import '../models/patient_data.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
 import 'home/patient_home_page.dart';
 
 class Appoin_time extends StatefulWidget {
@@ -55,9 +57,18 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   var timeslot;
 
+  int totalAmount = 250;
+  late Razorpay _razorpay;
+
   @override
   void initState() {
     super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    print("Init ....");
+
     loggedInUser = UserModel();
     FirebaseFirestore.instance
         .collection("patient")
@@ -70,6 +81,63 @@ class _Appoin_timeState extends State<Appoin_time> {
 
       print("++++++++++++++++++++++++++++++++++++++++++" + user!.uid);
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  void launchPayment() async {
+    var options = {
+      'key': 'rzp_test_avNsy3tB1x5rTf',
+      //<-- your razorpay api key/test or live mode goes here.
+      'amount': totalAmount * 100,
+      'name': 'Appointment Payment',
+      'description': 'Test payment from Flutter app',
+      'prefill': {'contact': '', 'email': ''},
+      'external': {'wallets': []}
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: 'Error ' + response.code.toString() + ' ' + response.message!,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 10,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: 'Payment Success ' + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 10,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: 'Wallet Name ' + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 10,
+        backgroundColor: Colors.green,
+        textColor: Colors.black,
+        fontSize: 16.0);
   }
 
   @override
@@ -194,7 +262,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                           if (today_app1 < 2) {
                             if (c_date == null) {
                               Fluttertoast.showToast(
-                                  msg: " Please Select Date First");
+                                  msg: " Please Select Date First",
+                                  backgroundColor: kPrimaryColor,
+                                  textColor: Colors.white);
                             } else {
                               time = morining[0];
                               timeslot = 1;
@@ -210,7 +280,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                         if (today_app2 < 2) {
                           if (c_date == null) {
                             Fluttertoast.showToast(
-                                msg: " Please Select Date First");
+                                msg: " Please Select Date First",
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white);
                           } else {
                             time = morining[1];
                             isEnabled1 = true;
@@ -268,7 +340,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                         if (today_app3 < 2) {
                           if (c_date == null) {
                             Fluttertoast.showToast(
-                                msg: " Please Select Date First");
+                                msg: " Please Select Date First",
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white);
                           } else {
                             time = afternoon[0];
                             timeslot = 3;
@@ -302,7 +376,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                         if (today_app4 < 2) {
                           if (c_date == null) {
                             Fluttertoast.showToast(
-                                msg: " Please Select Date First");
+                                msg: " Please Select Date First",
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white);
                           } else {
                             time = afternoon[1];
                             timeslot = 4;
@@ -340,7 +416,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                       if (today_app5 < 2) {
                         if (c_date == null) {
                           Fluttertoast.showToast(
-                              msg: " Please Select Date First");
+                              msg: " Please Select Date First",
+                              backgroundColor: kPrimaryColor,
+                              textColor: Colors.white);
                         } else {
                           time = afternoon[2];
                           timeslot = 5;
@@ -396,7 +474,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                         if (today_app6 < 2) {
                           if (c_date == null) {
                             Fluttertoast.showToast(
-                                msg: " Please Select Date First");
+                                msg: " Please Select Date First",
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white);
                           } else {
                             time = evening[0];
                             timeslot = 6;
@@ -430,7 +510,9 @@ class _Appoin_timeState extends State<Appoin_time> {
                         if (today_app7 < 2) {
                           if (c_date == null) {
                             Fluttertoast.showToast(
-                                msg: " Please Select Date First");
+                                msg: " Please Select Date First",
+                                backgroundColor: kPrimaryColor,
+                                textColor: Colors.white);
                           } else {
                             time = evening[1];
                             timeslot = 7;
@@ -724,6 +806,7 @@ class _Appoin_timeState extends State<Appoin_time> {
 
 class AdvanceCustomAlert extends StatelessWidget {
   var name;
+  late _Appoin_timeState a1 = new _Appoin_timeState();
 
   AdvanceCustomAlert(String name) {
     this.name = name;
@@ -761,6 +844,8 @@ class AdvanceCustomAlert extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        a1.initState();
+                        a1.launchPayment();
                         Navigator.pushAndRemoveUntil<dynamic>(
                             context,
                             MaterialPageRoute<dynamic>(

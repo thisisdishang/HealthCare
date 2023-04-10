@@ -62,6 +62,7 @@ dependencies:
   typicons_flutter: ^0.5.0
   quick_actions: ^1.0.1
   introduction_screen: ^3.1.1
+  razorpay_flutter: ^1.2.5
 
 
 
