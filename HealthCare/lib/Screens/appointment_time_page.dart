@@ -95,7 +95,7 @@ class _Appoin_timeState extends State<Appoin_time> {
       //<-- your razorpay api key/test or live mode goes here.
       'amount': totalAmount * 100,
       'name': 'Appointment Payment',
-      'description': 'Test payment from Flutter app',
+      'description': 'Payment For Book The Appointment',
       'prefill': {'contact': '', 'email': ''},
       'external': {'wallets': []}
     };
@@ -575,21 +575,15 @@ class _Appoin_timeState extends State<Appoin_time> {
                                     'phone': loggedInUser.phone,
                                     'doctor_name': widget.name.toString(),
                                     'visited': false,
+                                    'payment': true,
                                   })
-                                  .then((value) => Fluttertoast.showToast(
-                                      msg: "Pending Appointment",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: kPrimaryColor,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0))
                                   .then((value) => showDialog(
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (BuildContext context) =>
                                           AdvanceCustomAlert(
-                                              widget.name.toString())))
+                                              name: widget.name,
+                                              pid: value.id)))
                                   .catchError((e) {
                                     print('Error Data2' + e.toString());
                                   });
@@ -805,12 +799,10 @@ class _Appoin_timeState extends State<Appoin_time> {
 }
 
 class AdvanceCustomAlert extends StatelessWidget {
-  var name;
+  var name, pid;
   late _Appoin_timeState a1 = new _Appoin_timeState();
 
-  AdvanceCustomAlert(String name) {
-    this.name = name;
-  }
+  AdvanceCustomAlert({required this.name, required this.pid});
 
   @override
   Widget build(BuildContext context) {
@@ -832,7 +824,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Text(
                       'Pending till doctor confirm this appointment request.',
@@ -840,23 +832,54 @@ class AdvanceCustomAlert extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        a1.initState();
-                        a1.launchPayment();
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                            context,
-                            MaterialPageRoute<dynamic>(
-                                builder: (BuildContext context) => HomePage()),
-                            (route) => false);
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kPrimaryColor),
-                      child: Text(
-                        'Okay',
-                        style: TextStyle(color: Colors.white),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              a1.initState();
+                              a1.launchPayment();
+                              Navigator.pushAndRemoveUntil<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                      builder: (BuildContext context) =>
+                                          HomePage()),
+                                  (route) => false);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                            ),
+                            child: Text(
+                              'Pay',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              FirebaseFirestore.instance
+                                  .collection('pending')
+                                  .doc(pid)
+                                  .delete();
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 19),
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   ],
