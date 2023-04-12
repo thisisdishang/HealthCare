@@ -83,7 +83,7 @@ class _SearchList3State extends State<SearchList3> {
                               padding:
                                   EdgeInsets.only(left: 10, right: 10, top: 0),
                               width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height / 8,
+                              height: MediaQuery.of(context).size.height / 7,
                               child: TextButton(
                                 onPressed: () {},
                                 child: Row(
@@ -104,18 +104,21 @@ class _SearchList3State extends State<SearchList3> {
                                             color: Colors.black87,
                                           ),
                                         ),
+                                        SizedBox(height: 2),
                                         Text(
                                           'Date: ' + pending['date'],
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54),
                                         ),
+                                        SizedBox(height: 2),
                                         Text(
                                           'Time: ' + pending['time'],
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54),
                                         ),
+                                        SizedBox(height: 2),
                                         Text(
                                           'Status: Visited',
                                           style: TextStyle(

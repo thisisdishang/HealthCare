@@ -202,6 +202,9 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                                         .bold),
                                                           ) // child widget, replace with your own
                                                           ),
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -222,6 +225,9 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                                         .w500),
                                                           ) // child widget, replace with your own
                                                           ),
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -240,7 +246,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           ) // child widget, replace with your own
                                                           ),
                                                       SizedBox(
-                                                        height: 10,
+                                                        height: 2,
                                                       ),
                                                       Container(
                                                         child: Text(
@@ -248,10 +254,10 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                              fontSize: 16,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold),
+                                                                      .w500),
                                                         ),
                                                       ),
                                                     ],
@@ -284,6 +290,9 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                                         .bold),
                                                           ) // child widget, replace with your own
                                                           ),
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -304,6 +313,9 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                                         .w500),
                                                           ) // child widget, replace with your own
                                                           ),
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -322,7 +334,7 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           ) // child widget, replace with your own
                                                           ),
                                                       SizedBox(
-                                                        height: 10,
+                                                        height: 2,
                                                       ),
                                                       Container(
                                                         child: Text(
@@ -330,10 +342,10 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                              fontSize: 16,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold),
+                                                                      .w500),
                                                         ),
                                                       ),
                                                     ],

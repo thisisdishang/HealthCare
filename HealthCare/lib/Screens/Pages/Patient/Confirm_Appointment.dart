@@ -91,7 +91,7 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 6),
                                     child: Container(
-                                      height: 104,
+                                      height: 122,
                                       child: Card(
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
@@ -154,6 +154,9 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                         ),
                                                       ) // child widget, replace with your own
                                                       ),
+                                                  SizedBox(
+                                                    height: 2,
+                                                  ),
                                                   Container(
                                                       width: double.infinity,
                                                       decoration:
@@ -176,22 +179,58 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                         ),
                                                       ) // child widget, replace with your own
                                                       ),
+                                                  SizedBox(
+                                                    height: 2,
+                                                  ),
+                                                  Container(
+                                                      width: double.infinity,
+                                                      decoration:
+                                                          BoxDecoration(),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 8.0),
+                                                        child: Text(
+                                                          "Status: Confirm",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ) // child widget, replace with your own
+                                                      ),
+                                                  SizedBox(
+                                                    height: 2,
+                                                  ),
+                                                  Container(
+                                                      width: double.infinity,
+                                                      decoration:
+                                                          BoxDecoration(),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 8.0),
+                                                        child: Text(
+                                                          "Payment: Success",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ) // child widget, replace with your own
+                                                      ),
                                                 ],
                                               ),
                                               Positioned(
-                                                bottom: 5,
-                                                left: 8,
-                                                child: Text(
-                                                  "Status : Confirm",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                bottom: 5,
+                                                bottom: 10,
                                                 right: 10,
                                                 child: ElevatedButton(
                                                   style:

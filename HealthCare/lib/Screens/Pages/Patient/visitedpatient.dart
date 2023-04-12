@@ -99,8 +99,7 @@ class _visitedState extends State<visited> {
               child: TextFormField(
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
-                  contentPadding:
-                  EdgeInsets.only(left: 20, top: 10, bottom: 5),
+                  contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 5),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide.none,
@@ -135,13 +134,13 @@ class _visitedState extends State<visited> {
                   value.length == 0
                       ? Container()
                       : Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SearchList3(
-                        searchKey: value,
-                      ),
-                    ),
-                  );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchList3(
+                              searchKey: value,
+                            ),
+                          ),
+                        );
                 },
               ),
             ),
@@ -294,6 +293,7 @@ class _visitedState extends State<visited> {
                                                                 ),
                                                               ) // child widget, replace with your own
                                                               ),
+                                                          SizedBox(height: 2),
                                                           Container(
                                                               width: double
                                                                   .infinity,
@@ -321,9 +321,7 @@ class _visitedState extends State<visited> {
                                                                 ),
                                                               ) // child widget, replace with your own
                                                               ),
-                                                          SizedBox(
-                                                            height: 4,
-                                                          ),
+                                                          SizedBox(height: 2),
                                                           Container(
                                                               width: double
                                                                   .infinity,
@@ -349,21 +347,32 @@ class _visitedState extends State<visited> {
                                                                 ),
                                                               ) // child widget, replace with your own
                                                               ),
+                                                          SizedBox(height: 2),
+                                                          Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            8.0),
+                                                                child: Text(
+                                                                  "Status: Visited",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              ) // child widget, replace with your own
+                                                              ),
                                                         ],
-                                                      ),
-                                                      Positioned(
-                                                        bottom: 5,
-                                                        left: 8,
-                                                        child: Text(
-                                                          "Status : Visited",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
                                                       ),
                                                     ],
                                                   ),

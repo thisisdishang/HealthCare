@@ -119,7 +119,7 @@ class _notvisitedState extends State<notvisited> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 3),
                               child: Container(
-                                height: 108,
+                                height: 122,
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
@@ -169,9 +169,7 @@ class _notvisitedState extends State<notvisited> {
                                                   ),
                                                 ) // child widget, replace with your own
                                                 ),
-                                            SizedBox(
-                                              height: 4,
-                                            ),
+
                                             Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(),
@@ -189,21 +187,45 @@ class _notvisitedState extends State<notvisited> {
                                                   ),
                                                 ) // child widget, replace with your own
                                                 ),
+                                            Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(),
+                                                child: Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      left: 8.0, top: 4),
+                                                  child: Text(
+                                                    "Status : Pending",
+                                                    style: TextStyle(
+                                                        color: Colors.black87,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                        FontWeight.w500),
+                                                  ),
+                                                ) // child widget, replace with your own
+                                            ),
+                                            Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(),
+                                                child: Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      left: 8.0, top: 4),
+                                                  child: Text(
+                                                    "Payment : Success",
+                                                    style: TextStyle(
+                                                        color: Colors.black87,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                        FontWeight.w500),
+                                                  ),
+                                                ) // child widget, replace with your own
+                                            ),
                                           ],
                                         ),
+
                                         Positioned(
-                                          bottom: 5,
-                                          left: 8,
-                                          child: Text(
-                                            "Status : Pending",
-                                            style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 4,
+                                          top: 8,
                                           right: 10,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
@@ -240,7 +262,7 @@ class _notvisitedState extends State<notvisited> {
                                           ),
                                         ),
                                         Positioned(
-                                          bottom: 4,
+                                          bottom: 8,
                                           right: 10,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(

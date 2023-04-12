@@ -842,6 +842,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                             onPressed: () {
                               a1.initState();
                               a1.launchPayment();
+
                               Navigator.pushAndRemoveUntil<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(

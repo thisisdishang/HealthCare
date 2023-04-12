@@ -67,8 +67,6 @@ class _DocHomePageState extends State<DocHomePage> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     var firebase = appointment
@@ -245,7 +243,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8, vertical: 3),
                                         child: Container(
-                                          height: 108,
+                                          height: 122,
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
@@ -311,9 +309,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                             ),
                                                           ) // child widget, replace with your own
                                                           ),
-                                                      SizedBox(
-                                                        height: 4,
-                                                      ),
+
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -338,22 +334,58 @@ class _DocHomePageState extends State<DocHomePage> {
                                                             ),
                                                           ) // child widget, replace with your own
                                                           ),
+                                                      Container(
+                                                          width:
+                                                          double.infinity,
+                                                          decoration:
+                                                          BoxDecoration(),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 8.0,
+                                                                top: 4),
+                                                            child: Text(
+                                                              "Status: Pending",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black87,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                            ),
+                                                          ) // child widget, replace with your own
+                                                      ),
+
+                                                      Container(
+                                                          width:
+                                                          double.infinity,
+                                                          decoration:
+                                                          BoxDecoration(),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 8.0,
+                                                                top: 4),
+                                                            child: Text(
+                                                              "Payment: Success",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black87,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                            ),
+                                                          ) // child widget, replace with your own
+                                                      ),
                                                     ],
                                                   ),
+
                                                   Positioned(
-                                                    bottom: 5,
-                                                    left: 8,
-                                                    child: Text(
-                                                      "Status : Pending",
-                                                      style: TextStyle(
-                                                          color: Colors.black87,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    top: 4,
+                                                    top: 8,
                                                     right: 10,
                                                     child: ElevatedButton(
                                                       style: ElevatedButton
@@ -401,7 +433,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                     ),
                                                   ),
                                                   Positioned(
-                                                    bottom: 4,
+                                                    bottom: 8,
                                                     right: 10,
                                                     child: ElevatedButton(
                                                       style: ElevatedButton
