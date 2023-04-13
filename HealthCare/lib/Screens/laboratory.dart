@@ -88,41 +88,43 @@ class _labState extends State<lab> {
                                     return Stack(
                                       children: [
                                         InkWell(
-                                          child: Card(
-                                            elevation: 6.0,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Container(
-                                              height: 270.0,
-                                              width: 400,
-                                              padding: EdgeInsets.all(10.0),
+                                          child: Center(
+                                            child: Card(
+                                              elevation: 6.0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
                                               child: Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 5.0,
-                                                  bottom: 60.0,
-                                                ),
-                                                width: 450.0,
-                                                height: 200.0,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.network(
-                                                    "${finallab[index]["photo"].toString()}",
-                                                    fit: BoxFit.fitWidth,
+                                                height: 270.0,
+                                                width: 400,
+                                                padding: EdgeInsets.all(10.0),
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 5.0,
+                                                    bottom: 60.0,
+                                                  ),
+                                                  width: 450.0,
+                                                  height: 200.0,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    child: Image.network(
+                                                      "${finallab[index]["photo"].toString()}",
+                                                      fit: BoxFit.fitWidth,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
+                                              semanticContainer: true,
+                                              clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                              margin: EdgeInsets.all(10.0),
+                                              color: Colors.white,
+                                              shadowColor: Colors.grey[800],
+                                              borderOnForeground: true,
                                             ),
-                                            semanticContainer: true,
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            margin: EdgeInsets.all(10.0),
-                                            color: Colors.white,
-                                            shadowColor: Colors.grey[800],
-                                            borderOnForeground: true,
                                           ),
                                           onTap: () async {
                                             final Uri _url = Uri.parse(

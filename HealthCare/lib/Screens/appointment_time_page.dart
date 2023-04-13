@@ -23,6 +23,9 @@ class Appoin_time extends StatefulWidget {
   _Appoin_timeState createState() => _Appoin_timeState();
 }
 
+FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+DocumentReference docRef = firebaseFirestore.collection('pending').doc();
+
 class _Appoin_timeState extends State<Appoin_time> {
   final morining = [
     "09:00AM - 10:00AM",
@@ -109,13 +112,16 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(
-        msg: 'Error ' + response.code.toString() + ' ' + response.message!,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 10,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+            msg: 'Error ' + response.code.toString() + ' ' + response.message!,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 10,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0)
+        .whenComplete(() {
+      FirebaseFirestore.instance.collection('pending').doc(docRef.id).delete();
+    });
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -559,17 +565,15 @@ class _Appoin_timeState extends State<Appoin_time> {
                       ),
                       onPressed: isEnabled1
                           ? () {
-                              FirebaseFirestore firebaseFirestore =
-                                  FirebaseFirestore.instance;
-                              firebaseFirestore
-                                  .collection('pending')
-                                  .add({
+                              docRef
+                                  .set({
                                     'pid': loggedInUser.uid.toString(),
                                     'name': loggedInUser.name.toString() +
                                         " " +
                                         loggedInUser.last_name.toString(),
                                     'date': c_date,
                                     'time': time,
+                                    'appointmentId': docRef.id,
                                     'approve': false,
                                     'did': widget.uid,
                                     'phone': loggedInUser.phone,
@@ -583,7 +587,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                                       builder: (BuildContext context) =>
                                           AdvanceCustomAlert(
                                               name: widget.name,
-                                              pid: value.id)))
+                                              pid: docRef.id)))
                                   .catchError((e) {
                                     print('Error Data2' + e.toString());
                                   });
