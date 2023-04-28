@@ -76,6 +76,7 @@ class _DocHomePageState extends State<DocHomePage> {
         .where('did', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: false)
         .where('date', isGreaterThanOrEqualTo: today_date)
+        .where('payment', isEqualTo: true)
         .snapshots();
 
     var size = MediaQuery.of(context).size;
