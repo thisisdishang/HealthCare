@@ -244,7 +244,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8, vertical: 3),
                                         child: Container(
-                                          height: 122,
+                                          height: 145,
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
@@ -277,7 +277,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize: 20,
+                                                                  fontSize: 18,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -310,7 +310,6 @@ class _DocHomePageState extends State<DocHomePage> {
                                                             ),
                                                           ) // child widget, replace with your own
                                                           ),
-
                                                       Container(
                                                           width:
                                                               double.infinity,
@@ -337,15 +336,15 @@ class _DocHomePageState extends State<DocHomePage> {
                                                           ),
                                                       Container(
                                                           width:
-                                                          double.infinity,
+                                                              double.infinity,
                                                           decoration:
-                                                          BoxDecoration(),
+                                                              BoxDecoration(),
                                                           child: Padding(
                                                             padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 8.0,
-                                                                top: 4),
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 8.0,
+                                                                    top: 4),
                                                             child: Text(
                                                               "Status: Pending",
                                                               style: TextStyle(
@@ -353,23 +352,22 @@ class _DocHomePageState extends State<DocHomePage> {
                                                                       .black87,
                                                                   fontSize: 14,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                                      FontWeight
+                                                                          .w500),
                                                             ),
                                                           ) // child widget, replace with your own
-                                                      ),
-
+                                                          ),
                                                       Container(
                                                           width:
-                                                          double.infinity,
+                                                              double.infinity,
                                                           decoration:
-                                                          BoxDecoration(),
+                                                              BoxDecoration(),
                                                           child: Padding(
                                                             padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 8.0,
-                                                                top: 4),
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 8.0,
+                                                                    top: 4),
                                                             child: Text(
                                                               "Payment: Success",
                                                               style: TextStyle(
@@ -377,16 +375,39 @@ class _DocHomePageState extends State<DocHomePage> {
                                                                       .black87,
                                                                   fontSize: 14,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                                      FontWeight
+                                                                          .w500),
                                                             ),
                                                           ) // child widget, replace with your own
-                                                      ),
+                                                          ),
+                                                      Container(
+                                                          width:
+                                                              double.infinity,
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 8.0,
+                                                                    top: 4),
+                                                            child: Text(
+                                                              "Details: " +
+                                                                  doc['diseasedetails'],
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black87,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                          ) // child widget, replace with your own
+                                                          ),
                                                     ],
                                                   ),
-
                                                   Positioned(
-                                                    top: 8,
+                                                    top: 15,
                                                     right: 10,
                                                     child: ElevatedButton(
                                                       style: ElevatedButton
@@ -434,7 +455,7 @@ class _DocHomePageState extends State<DocHomePage> {
                                                     ),
                                                   ),
                                                   Positioned(
-                                                    bottom: 8,
+                                                    bottom: 15,
                                                     right: 10,
                                                     child: ElevatedButton(
                                                       style: ElevatedButton

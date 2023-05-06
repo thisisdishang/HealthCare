@@ -62,6 +62,7 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   int totalAmount = 250;
   late Razorpay _razorpay;
+  var disease;
 
   @override
   void initState() {
@@ -88,8 +89,8 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   @override
   void dispose() {
-    super.dispose();
     _razorpay.clear();
+    super.dispose();
   }
 
   void launchPayment() async {
@@ -548,10 +549,27 @@ class _Appoin_timeState extends State<Appoin_time> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Disease Details',
+                      hintText: 'Are You Suffer From?',
+                    ),
+                    onChanged: (var name) {
+                      disease = name.trim();
+                    },
+                  ),
+                ),
 
                 SizedBox(
-                  height: size.height * 0.23,
+                  height: size.height * 0.08,
                 ),
+
                 Center(
                   child: Container(
                     width: size.width * 0.8,
@@ -565,32 +583,37 @@ class _Appoin_timeState extends State<Appoin_time> {
                       ),
                       onPressed: isEnabled1
                           ? () {
-                              docRef
-                                  .set({
-                                    'pid': loggedInUser.uid.toString(),
-                                    'name': loggedInUser.name.toString() +
-                                        " " +
-                                        loggedInUser.last_name.toString(),
-                                    'date': c_date,
-                                    'time': time,
-                                    'appointmentId': docRef.id,
-                                    'approve': false,
-                                    'did': widget.uid,
-                                    'phone': loggedInUser.phone,
-                                    'doctor_name': widget.name.toString(),
-                                    'visited': false,
-                                    'payment': true,
-                                  })
-                                  .then((value) => showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) =>
-                                          AdvanceCustomAlert(
-                                              name: widget.name,
-                                              pid: docRef.id)))
-                                  .catchError((e) {
-                                    print('Error Data2' + e.toString());
-                                  });
+                              if (disease != null && disease != "") {
+                                docRef
+                                    .set({
+                                      'pid': loggedInUser.uid.toString(),
+                                      'name': loggedInUser.name.toString() +
+                                          " " +
+                                          loggedInUser.last_name.toString(),
+                                      'date': c_date,
+                                      'time': time,
+                                      'appointmentId': docRef.id,
+                                      'approve': false,
+                                      'did': widget.uid,
+                                      'phone': loggedInUser.phone,
+                                      'doctor_name': widget.name.toString(),
+                                      'visited': false,
+                                      'payment': true,
+                                      'diseasedetails': disease,
+                                    })
+                                    .then((value) => showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (BuildContext context) =>
+                                            AdvanceCustomAlert(
+                                                name: widget.name,
+                                                pid: docRef.id)))
+                                    .catchError((e) {
+                                      print('Error Data2' + e.toString());
+                                    });
+                              } else {
+                                _displayTextInputDialog(context);
+                              }
                             }
                           : null,
                       child: Text(
@@ -800,6 +823,26 @@ class _Appoin_timeState extends State<Appoin_time> {
         )) // child widget, replace with your own
         );
   }
+}
+
+Future<void> _displayTextInputDialog(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Please enter disease details for further communication'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.green, foregroundColor: Colors.white),
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      });
 }
 
 class AdvanceCustomAlert extends StatelessWidget {
