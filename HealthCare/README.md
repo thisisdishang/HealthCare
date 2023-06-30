@@ -1,6 +1,6 @@
-# hospital_appointment
+# HealthCare
 
-A new Flutter project.
+A new Flutter project about online appointment booking with doctos.
 
 ## Getting Started
 
