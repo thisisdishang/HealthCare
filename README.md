@@ -33,43 +33,49 @@ git clone https://github.com/HarshPanchal18/HealthCare.git
 
 ## Screenshot📸
 
-<div style="text-align: center">
+<!--<div style="text-align: center">
 <table>
   <tr>
     <td style="text-align: center">
-      <img width="300" alt="1" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/1.png">
+      <img width="300" alt="1" src="/App%20Screenshot/1.png">
     </td>
      <td style="text-align: center">
-      <img width="300" alt="2" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/2.png">
+      <img width="300" alt="2" src="/App%20Screenshot/2.png">
     </td>
      <td style="text-align: center">
-      <img width="300" alt="3" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/3.png">
+      <img width="300" alt="3" src="/App%20Screenshot/3.png">
     </td>
   </tr>
   <tr>
     <td style="text-align: center">
-      <img width="300" alt="4" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/4.png">
+      <img width="300" alt="4" src="/App%20Screenshot/4.png">
     </td>
      <td style="text-align: center">
-      <img width="300" alt="5" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/5.png">
+      <img width="300" alt="5" src="/App%20Screenshot/5.png">
     </td>
      <td style="text-align: center">
-      <img width="300" alt="6" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/6.png">
+      <img width="300" alt="6" src="/App%20Screenshot/6.png">
     </td>
   </tr>
     <tr>
     <td style="text-align: center">
-      <img width="300" alt="7" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/7.png">
+      <img width="300" alt="7" src="/App%20Screenshot/7.png">
+    </td>
+     <td>
+      <p align="center"><img width="300" alt="8" src="/App%20Screenshot/8.png"></p>
     </td>
      <td style="text-align: center">
-      <img width="300" alt="8" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/8.png">
-    </td>
-     <td style="text-align: center">
-      <img width="300" alt="9" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/9.png">
+      <img width="300" alt="9" src="/App%20Screenshot/9.png">
     </td>
   </tr>
 </table>
-</div>
+</div>-->
+
+| - | - | - |
+|---|---|---|
+| ![](/App%20Screenshot/1.png) | ![](/App%20Screenshot/2.png) | ![](/App%20Screenshot/3.png) |
+| ![](/App%20Screenshot/4.png) | ![](/App%20Screenshot/5.png) | ![](/App%20Screenshot/6.png) |
+| ![](/App%20Screenshot/7.png) | ![](/App%20Screenshot/8.png) | ![](/App%20Screenshot/9.png) |
 
 ## Contact📞
 * If you have any questions or feedback, please feel free to contact me:
