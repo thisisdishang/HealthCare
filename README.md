@@ -1,16 +1,77 @@
-# HealthCare
+# HealthCare🩺
 
-A new Flutter project about online appointment booking with doctos.
+#### This is a cross platform app which run on Android, iOS & Web. HealthCare is both side app means that it run on doctor side as well as patient side. This app have so many exclusive feature and the UI is user friendly.  
 
-## Getting Started
+## Features For Patient💊
 
-This project is a starting point for a Flutter application.
+* Book appoinment with specialist doctor at any time
+* Check  all the history of appointment
+* Check all nearby pathology laboratory
+* See all category wise doctors
+* Search a doctor and check their details
+* Call or SMS the doctors directly
 
-A few resources to get you started if this is your first Flutter project:
+## Features For Doctors👨🏻‍⚕️
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Get verified tag in app
+* Doctor can choose available or unavailable easily
+* Confirm appoinment of patient
+* Check all visited and unvisited patient
+* Search a patient and check their details
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Getting Started🧬
+
+* Clone the repo:
+```
+git clone https://github.com/HarshPanchal18/HealthCare.git
+```
+* Use code with caution. Learn more
+* Open the project in Android Studio or Visual Studio Code.
+* First check you have download flutter sdk or not.
+* Next get the dependencies of flutter use command pub get.
+* Run the app on an Android device or emulator.
+
+## Screenshot📸
+
+<div style="text-align: center">
+<table>
+  <tr>
+    <td style="text-align: center">
+      <img width="300" alt="1" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/1.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="2" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/2.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="3" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/3.png">
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center">
+      <img width="300" alt="4" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/4.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="5" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/5.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="6" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/6.png">
+    </td>
+  </tr>
+    <tr>
+    <td style="text-align: center">
+      <img width="300" alt="7" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/7.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="8" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/8.png">
+    </td>
+     <td style="text-align: center">
+      <img width="300" alt="9" src="https://github.com/thisisdishang/HealthCare/blob/main/App%20Screenshot/9.png">
+    </td>
+  </tr>
+</table>
+</div>
+
+## Contact📞
+* If you have any questions or feedback, please feel free to contact me:
+* [Email](mailto:dishangkumararana@gmail.com)
+* [GitHub](https://github.com/thisisdishang)
