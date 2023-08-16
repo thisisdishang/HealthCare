@@ -1,5 +1,7 @@
 # HealthCare🩺
 
+[![License](https://img.shields.io/badge/License-GNU_General_Public_License_v3.0-darkgreen)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 #### This is a cross platform app which run on Android, iOS & Web. HealthCare is both side app means that it run on doctor side as well as patient side. This app have so many exclusive feature and the UI is user friendly.  
 
 ## Features For Patient💊
@@ -23,13 +25,15 @@
 
 * Clone the repo:
 ```
-git clone https://github.com/HarshPanchal18/HealthCare.git
+git clone https://github.com/thisisdishang/HealthCare.git
 ```
 * Use code with caution. Learn more
 * Open the project in Android Studio or Visual Studio Code.
 * First check you have download flutter sdk or not.
-* Next get the dependencies of flutter use command pub get.
+* Next get the dependencies of flutter use command `pub get`.
 * Run the app on an Android device or emulator.
+* For help getting started with Flutter, view our online [documentation](http://flutter.io/).
+* For help on editing plugin code, view the [documentation](https://flutter.io/platform-plugins/#edit-code).
 
 ## Screenshot📸
 
@@ -76,6 +80,8 @@ git clone https://github.com/HarshPanchal18/HealthCare.git
 | ![](/App%20Screenshot/1.png) | ![](/App%20Screenshot/2.png) | ![](/App%20Screenshot/3.png) |
 | ![](/App%20Screenshot/4.png) | ![](/App%20Screenshot/5.png) | ![](/App%20Screenshot/6.png) |
 | ![](/App%20Screenshot/7.png) | ![](/App%20Screenshot/8.png) | ![](/App%20Screenshot/9.png) |
+| ![](/App%20Screenshot/10.png) | ![](/App%20Screenshot/11.png) | ![](/App%20Screenshot/12.png) |
+| ![](/App%20Screenshot/13.png) | ![](/App%20Screenshot/14.png) | ![](/App%20Screenshot/15.png) |
 
 ## Contact📞
 * If you have any questions or feedback, please feel free to contact me:
