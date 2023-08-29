@@ -77,11 +77,11 @@ git clone https://github.com/thisisdishang/HealthCare.git
 
 | - | - | - |
 |---|---|---|
-| ![](/App%20Screenshot/1.png) | ![](/App%20Screenshot/2.png) | ![](/App%20Screenshot/3.png) |
-| ![](/App%20Screenshot/4.png) | ![](/App%20Screenshot/5.png) | ![](/App%20Screenshot/6.png) |
-| ![](/App%20Screenshot/7.png) | ![](/App%20Screenshot/8.png) | ![](/App%20Screenshot/9.png) |
-| ![](/App%20Screenshot/10.png) | ![](/App%20Screenshot/11.png) | ![](/App%20Screenshot/12.png) |
-| ![](/App%20Screenshot/13.png) | ![](/App%20Screenshot/14.png) | ![](/App%20Screenshot/15.png) |
+| ![](/screenshot/1.png) | ![](/screenshot/2.png) | ![](/screenshot/3.png) |
+| ![](/screenshot/4.png) | ![](/screenshot/5.png) | ![](/screenshot/6.png) |
+| ![](/screenshot/7.png) | ![](/screenshot/8.png) | ![](/screenshot/9.png) |
+| ![](/screenshot/10.png) | ![](/screenshot/11.png) | ![](/screenshot/12.png) |
+| ![](/screenshot/13.png) | ![](/screenshot/14.png) | ![](/screenshot/15.png) |
 
 ## Contact📞
 * If you have any questions or feedback, please feel free to contact me:
