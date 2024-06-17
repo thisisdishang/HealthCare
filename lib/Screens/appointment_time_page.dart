@@ -95,7 +95,7 @@ class _Appoin_timeState extends State<Appoin_time> {
 
   void launchPayment() async {
     var options = {
-      'key': 'rzp_test_avNsy3tB1x5rTf',
+      'key': 'rzp_test_n0DJmoIX4oultb',
       //<-- your razorpay api key/test or live mode goes here.
       'amount': totalAmount * 100,
       'name': 'Appointment Payment',
