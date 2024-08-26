@@ -12,7 +12,7 @@ class lab extends StatefulWidget {
 
 class _labState extends State<lab> {
   Stream<QuerySnapshot> lab =
-      FirebaseFirestore.instance.collection('lab').snapshots();
+  FirebaseFirestore.instance.collection('lab').snapshots();
   bool isloading = true;
 
   void initState() {
@@ -79,114 +79,116 @@ class _labState extends State<lab> {
                   return filterlabdata.isEmpty
                       ? Center(child: Loading())
                       : isloading
-                          ? Center(child: Container(child: Loading()))
-                          : Container(
-                              color: Colors.deepPurple.withOpacity(0.5),
-                              child: ListView.builder(
-                                  itemCount: finallab.length,
-                                  itemBuilder: (context, index) {
-                                    return Stack(
+                      ? Center(child: Container(child: Loading()))
+                      : Container(
+                    color: Colors.deepPurple.withOpacity(0.5),
+                    child: ListView.builder(
+                        itemCount: finallab.length,
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              InkWell(
+                                child: Card(
+                                  elevation: 6.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                    height: 280.0,
+                                    //width: 400,
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Container(
+
+                                      margin: EdgeInsets.only(
+                                        top: 5.0,
+                                        bottom: 60.0,
+                                      ),
+                                      // width: 450.0,
+                                      height: 0.0,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            10.0),
+                                        child: Image.network(
+                                          "${finallab[index]["photo"].toString()}",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  semanticContainer: true,
+                                  clipBehavior:
+                                  Clip.antiAliasWithSaveLayer,
+                                  margin: EdgeInsets.all(10.0),
+                                  color: Colors.white,
+                                  shadowColor: Colors.grey[800],
+                                  borderOnForeground: true,
+                                ),
+                                onTap: () async {
+                                  final Uri _url = Uri.parse(
+                                      "${finallab[index]["website"].toString()}");
+                                  if (!await launchUrl(_url)) {
+                                    throw 'Could not launch ';
+                                  }
+                                },
+                              ),
+                              Positioned(
+                                top: 215.0,
+                                child: Container(
+                                    height: 200,
+                                    width: MediaQuery.of(context).size.width,
+                                    //width: 350,
+                                    padding:  EdgeInsets.only(bottom: 10,top: 7,
+                                        left: 35.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       children: [
-                                        InkWell(
-                                          child: Center(
-                                            child: Card(
-                                              elevation: 6.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                height: 270.0,
-                                                width: 400,
-                                                padding: EdgeInsets.all(10.0),
-                                                child: Container(
-                                                  margin: EdgeInsets.only(
-                                                    top: 5.0,
-                                                    bottom: 60.0,
-                                                  ),
-                                                  width: 450.0,
-                                                  height: 200.0,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    child: Image.network(
-                                                      "${finallab[index]["photo"].toString()}",
-                                                      fit: BoxFit.fitWidth,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              semanticContainer: true,
-                                              clipBehavior:
-                                                  Clip.antiAliasWithSaveLayer,
-                                              margin: EdgeInsets.all(10.0),
-                                              color: Colors.white,
-                                              shadowColor: Colors.grey[800],
-                                              borderOnForeground: true,
-                                            ),
+                                        Text(
+                                          "${finallab[index]["name"]}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize: 18.0,
                                           ),
-                                          onTap: () async {
-                                            final Uri _url = Uri.parse(
-                                                "${finallab[index]["website"].toString()}");
-                                            if (!await launchUrl(_url)) {
-                                              throw 'Could not launch ';
-                                            }
-                                          },
                                         ),
-                                        Positioned(
-                                          top: 215.0,
-                                          child: Container(
-                                              width: 300,
-                                              padding: const EdgeInsets.only(
-                                                  left: 35.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "${finallab[index]["name"]}",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18.0,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 3.0,
-                                                  ),
-                                                  Text(
-                                                    " ${finallab[index]["address"]} ",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14.0,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 3.0,
-                                                  ),
-                                                  Text(
-                                                    "${finallab[index]["phone"]} ",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14.0,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 3.0,
-                                                  ),
-                                                ],
-                                              )),
+                                        SizedBox(
+                                          height: 3.0,
                                         ),
+                                        Text(
+                                          " ${finallab[index]["address"]} ",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize: 14.0,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 3.0,
+                                        ),
+                                        Text(
+                                          "${finallab[index]["phone"]} ",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize: 14.0,
+                                          ),
+                                        ),
+                                        // Container(
+                                        //   height: 10.0,
+                                        // ),
                                       ],
-                                    );
-                                  }),
-                            );
+                                    )),
+                              ),
+                            ],
+                          );
+                        }),
+                  );
                 })));
   }
 }

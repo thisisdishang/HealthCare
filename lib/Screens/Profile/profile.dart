@@ -102,7 +102,7 @@ class _Profile_pageState extends State<Profile_page> {
         });
       }
     } as void Function(List<ConnectivityResult> event)? );
-        loggedInUser = UserModel();
+    loggedInUser = UserModel();
     FirebaseFirestore.instance
         .collection("patient")
         .doc(user!.uid)

@@ -56,34 +56,34 @@ class _Patient_ListState extends State<Patient_List> {
             } else {
               return isLoading
                   ? Container(
-                      margin: EdgeInsets.only(top: size.height * 0.4),
-                      child: Center(
-                        child: Loading(),
-                      ),
-                    )
+                margin: EdgeInsets.only(top: size.height * 0.4),
+                child: Center(
+                  child: Loading(),
+                ),
+              )
                   : SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final DocumentSnapshot doc =
-                              snapshot.data!.docs[index];
-                          Future.delayed(Duration(seconds: 3));
-                          return snapshot.hasError
-                              ? Center(child: Text("patient Not Available"))
-                              : CustomCard(
-                                  pid: doc['uid'],
-                                  did: loggedInUser.uid,
-                                  p_name: doc['name'],
-                                  last_name: doc['last name'],
-                                  phone: doc[
-                                      'phone']); // child widget, replace with your own
-                        },
-                      ),
-                    );
+                physics: BouncingScrollPhysics(),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final DocumentSnapshot doc =
+                    snapshot.data!.docs[index];
+                    Future.delayed(Duration(seconds: 3));
+                    return snapshot.hasError
+                        ? Center(child: Text("patient Not Available"))
+                        : CustomCard(
+                        pid: doc['uid'],
+                        did: loggedInUser.uid,
+                        p_name: doc['name'],
+                        last_name: doc['last name'],
+                        phone: doc[
+                        'phone']); // child widget, replace with your own
+                  },
+                ),
+              );
             }
           }),
     );
@@ -99,10 +99,10 @@ class CustomCard extends StatelessWidget {
 
   CustomCard(
       {required this.did,
-      required this.pid,
-      required this.p_name,
-      required this.last_name,
-      required this.phone});
+        required this.pid,
+        required this.p_name,
+        required this.last_name,
+        required this.phone});
 
   // CustomCard({});
 

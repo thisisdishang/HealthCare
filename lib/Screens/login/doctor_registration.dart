@@ -175,12 +175,12 @@ class _DocRegistrationState extends State<DocRegistration> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            "Doctor Registration",
-                            style: TextStyle(
-                                fontSize: 32,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          )),
+                                "Doctor Registration",
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ),
                       ),
                       SizedBox(
@@ -203,19 +203,19 @@ class _DocRegistrationState extends State<DocRegistration> {
                             padding: const EdgeInsets.all(3.0),
                             child: file == null
                                 ? InkWell(
-                                    onTap: () {
-                                      chooseImage();
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 50.00,
-                                      backgroundImage: AssetImage(
-                                          "assets/images/account.png"),
-                                    ),
-                                  )
+                              onTap: () {
+                                chooseImage();
+                              },
+                              child: CircleAvatar(
+                                radius: 50.00,
+                                backgroundImage: AssetImage(
+                                    "assets/images/account.png"),
+                              ),
+                            )
                                 : CircleAvatar(
-                                    radius: 50.00,
-                                    backgroundImage: FileImage(file),
-                                  ),
+                              radius: 50.00,
+                              backgroundImage: FileImage(file),
+                            ),
                           ),
                         ),
                         Positioned(
@@ -318,7 +318,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                           textAlignVertical: TextAlignVertical.center,
                           dropdownTextStyle: TextStyle(fontSize: 16),
                           dropdownIcon:
-                              Icon(Icons.arrow_drop_down, color: kPrimaryColor),
+                          Icon(Icons.arrow_drop_down, color: kPrimaryColor),
                           decoration: buildInputDecoration(
                               Icons.phone, "Contact Number"),
                           initialCountryCode: 'IN',
@@ -347,25 +347,25 @@ class _DocRegistrationState extends State<DocRegistration> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20.0),
-                                              child: Text(
-                                                "Select Date",
-                                                style: TextStyle(
-                                                    color: Colors.black54),
-                                              ),
-                                            )
+                                        padding: const EdgeInsets.only(
+                                            left: 20.0),
+                                        child: Text(
+                                          "Select Date",
+                                          style: TextStyle(
+                                              color: Colors.black54),
+                                        ),
+                                      )
                                           : Text(
-                                              t_date,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                        t_date,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     IconButton(
                                         onPressed: () async {
@@ -391,9 +391,9 @@ class _DocRegistrationState extends State<DocRegistration> {
                             ),
                             c_data == true
                                 ? Text("*Select Date",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -439,9 +439,9 @@ class _DocRegistrationState extends State<DocRegistration> {
                             ),
                             c_gender == true
                                 ? Text("*Select Gender",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -490,9 +490,9 @@ class _DocRegistrationState extends State<DocRegistration> {
                             ),
                             c_status == true
                                 ? Text("*Select status",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -545,9 +545,9 @@ class _DocRegistrationState extends State<DocRegistration> {
                             ),
                             c_status == true
                                 ? Text("*Select Category",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -570,7 +570,7 @@ class _DocRegistrationState extends State<DocRegistration> {
                                     ),
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(left: 40.0),
+                                      const EdgeInsets.only(left: 40.0),
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: kPrimaryColor,
@@ -677,11 +677,11 @@ class _DocRegistrationState extends State<DocRegistration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -744,11 +744,11 @@ class _DocRegistrationState extends State<DocRegistration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -821,11 +821,11 @@ class _DocRegistrationState extends State<DocRegistration> {
                                         print("FirebaseError: " + error.code);
                                         if (error.code == "invalid-email") {
                                           errorMessage =
-                                              "Your email address appears to be malformed.";
+                                          "Your email address appears to be malformed.";
                                         } else if (error.code ==
                                             "user-disabled") {
                                           errorMessage =
-                                              "User with this email has been disabled.";
+                                          "User with this email has been disabled.";
                                         } else if (error.code ==
                                             "too-many-requests") {
                                           errorMessage = "Too many requests";
@@ -858,52 +858,52 @@ class _DocRegistrationState extends State<DocRegistration> {
                                           .collection('doctor')
                                           .doc(userCredential1.user!.uid)
                                           .set({
-                                            'uid': userCredential1.user!.uid,
-                                            'name': t_name,
-                                            'specialist': dropdownvalue,
-                                            'rating': '0',
-                                            'available': false,
-                                            'description': t_desc,
-                                            'address': t_address,
-                                            'email':
-                                                userCredential1.user!.email,
-                                            'experience': t_exp,
-                                            'dob': t_date,
-                                            'password': t_password,
-                                            'gender':
-                                                gender == 1 ? "male" : "female",
-                                            'status': gender == 1
-                                                ? "unmarried"
-                                                : "married",
-                                            'phone': phoneController,
-                                            'profileImage':
-                                                url == null ? '' : url,
-                                            'proof': url2 == null ? '' : url2,
-                                            'valid': false
-                                          })
+                                        'uid': userCredential1.user!.uid,
+                                        'name': t_name,
+                                        'specialist': dropdownvalue,
+                                        'rating': '0',
+                                        'available': false,
+                                        'description': t_desc,
+                                        'address': t_address,
+                                        'email':
+                                        userCredential1.user!.email,
+                                        'experience': t_exp,
+                                        'dob': t_date,
+                                        'password': t_password,
+                                        'gender':
+                                        gender == 1 ? "male" : "female",
+                                        'status': gender == 1
+                                            ? "unmarried"
+                                            : "married",
+                                        'phone': phoneController,
+                                        'profileImage':
+                                        url == null ? '' : url,
+                                        'proof': url2 == null ? '' : url2,
+                                        'valid': false
+                                      })
                                           .then((value) =>
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Registration Successful",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.BOTTOM,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor:
-                                                      kPrimaryColor,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0))
+                                          Fluttertoast.showToast(
+                                              msg:
+                                              "Registration Successful",
+                                              toastLength:
+                                              Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor:
+                                              kPrimaryColor,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0))
                                           .then((value) => Navigator
-                                              .pushAndRemoveUntil<dynamic>(
-                                                  context,
-                                                  MaterialPageRoute<dynamic>(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          doctor_page()),
-                                                  (route) => false))
+                                          .pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext
+                                              context) =>
+                                                  doctor_page()),
+                                              (route) => false))
                                           .catchError((e) {
-                                            print("+++++++++" + e);
-                                          });
+                                        print("+++++++++" + e);
+                                      });
                                     } else {
                                       if (t_date == null) {
                                         c_data = true;
@@ -969,7 +969,7 @@ class _DocRegistrationState extends State<DocRegistration> {
         .ref()
         .child("proof")
         .child(
-            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file2.path))
+        FirebaseAuth.instance.currentUser!.uid + "_" + basename(file2.path))
         .putFile(file2);
 
     return taskSnapshot.ref.getDownloadURL();
@@ -980,7 +980,7 @@ class _DocRegistrationState extends State<DocRegistration> {
         .ref()
         .child("profile")
         .child(
-            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
+        FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
         .putFile(file);
 
     return taskSnapshot.ref.getDownloadURL();

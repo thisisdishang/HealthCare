@@ -20,7 +20,7 @@ class _notvisitedState extends State<notvisited> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection("doctor");
+  FirebaseFirestore.instance.collection("doctor");
   User? user = FirebaseAuth.instance.currentUser;
 
   bool isLoading = true;
@@ -61,7 +61,7 @@ class _notvisitedState extends State<notvisited> {
         .where('did', isEqualTo: loggedInUser.uid)
         .where('approve', isEqualTo: true)
         .where('visited', isEqualTo: false)
-        // .where('date', isGreaterThanOrEqualTo: today_date)
+    // .where('date', isGreaterThanOrEqualTo: today_date)
         .snapshots();
     return Scaffold(
       appBar: AppBar(
@@ -99,214 +99,214 @@ class _notvisitedState extends State<notvisited> {
               } else {
                 return isLoading
                     ? Container(
-                        margin: EdgeInsets.only(top: size.height * 0.4),
-                        child: Center(
-                          child: Loading(),
-                        ),
-                      )
+                  margin: EdgeInsets.only(top: size.height * 0.4),
+                  child: Center(
+                    child: Loading(),
+                  ),
+                )
                     : SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final DocumentSnapshot doc =
-                                snapshot.data!.docs[index];
+                  physics: BouncingScrollPhysics(),
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final DocumentSnapshot doc =
+                      snapshot.data!.docs[index];
 
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 3),
-                              child: Container(
-                                height: 122,
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0)),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: kPrimaryLightColor,
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Container(
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0, top: 8.0),
-                                                  child: Text(
-                                                    'Name: ' + doc['name'],
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ) // child widget, replace with your own
-                                                ),
-                                            Container(
-                                                width: double.infinity,
-                                                margin: EdgeInsets.only(top: 3),
-                                                decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text(
-                                                    "Date: " + doc['date'],
-                                                    style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ) // child widget, replace with your own
-                                                ),
-
-                                            Container(
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0, top: 4),
-                                                  child: Text(
-                                                    "Time: " + doc['time'],
-                                                    style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ) // child widget, replace with your own
-                                                ),
-                                            Container(
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      left: 8.0, top: 4),
-                                                  child: Text(
-                                                    "Status : Pending",
-                                                    style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                ) // child widget, replace with your own
-                                            ),
-                                            Container(
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      left: 8.0, top: 4),
-                                                  child: Text(
-                                                    "Payment : Success",
-                                                    style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                ) // child widget, replace with your own
-                                            ),
-                                          ],
-                                        ),
-
-                                        Positioned(
-                                          top: 8,
-                                          right: 10,
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.green,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        12), // <-- Radius
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  barrierDismissible: false,
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          confirm(id: doc.id));
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10.0, bottom: 10),
-                                                child: Text(
-                                                  "Visited",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 8,
-                                          right: 10,
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.red,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        12), // <-- Radius
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  barrierDismissible: false,
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      alertdialog(id: doc.id));
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10.0, bottom: 10),
-                                                child: Text(
-                                                  "Not Visited",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        child: Container(
+                          height: 122,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(8.0)),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: kPrimaryLightColor,
                               ),
-                            );
-                          },
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 8.0, top: 8.0),
+                                            child: Text(
+                                              'Name: ' + doc['name'],
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight:
+                                                  FontWeight.bold),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                      Container(
+                                          width: double.infinity,
+                                          margin: EdgeInsets.only(top: 3),
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text(
+                                              "Date: " + doc['date'],
+                                              style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+
+                                      Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 8.0, top: 4),
+                                            child: Text(
+                                              "Time: " + doc['time'],
+                                              style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                      Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 8.0, top: 4),
+                                            child: Text(
+                                              "Status : Pending",
+                                              style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                      Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 8.0, top: 4),
+                                            child: Text(
+                                              "Payment : Success",
+                                              style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                    ],
+                                  ),
+
+                                  Positioned(
+                                    top: 8,
+                                    right: 10,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.green,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              12), // <-- Radius
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder:
+                                                (BuildContext context) =>
+                                                confirm(id: doc.id));
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            left: 5, right: 5),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10.0, bottom: 10),
+                                          child: Text(
+                                            "Visited",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight:
+                                                FontWeight.w600),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 8,
+                                    right: 10,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.red,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              12), // <-- Radius
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext
+                                            context) =>
+                                                alertdialog(id: doc.id));
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            left: 5, right: 5),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10.0, bottom: 10),
+                                          child: Text(
+                                            "Not Visited",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight:
+                                                FontWeight.w600),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       );
+                    },
+                  ),
+                );
               }
             }),
       ),
@@ -362,7 +362,7 @@ class alertdialog extends StatelessWidget {
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
+                              BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -391,7 +391,7 @@ class alertdialog extends StatelessWidget {
                               backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
+                                BorderRadius.circular(8), // <-- Radius
                               ),
                             ),
                           ),
@@ -467,7 +467,7 @@ class confirm extends StatelessWidget {
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
+                              BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -498,7 +498,7 @@ class confirm extends StatelessWidget {
                               backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
+                                BorderRadius.circular(8), // <-- Radius
                               ),
                             ),
                           ),

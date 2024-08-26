@@ -50,63 +50,63 @@ class _MyDrawerState extends State<MyDrawer> {
       child: isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView(
-              children: <Widget>[
-                UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        kPrimaryColor,
-                        kPrimaryLightColor,
-                      ],
-                    ),
-                  ),
-                  accountName: Text(loggedInUser.name.toString()),
-                  accountEmail: Text(loggedInUser.email.toString()),
-                  currentAccountPicture: Container(
-                    child: loggedInUser.profileImage == false
-                        ? CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/account.png'),
-                            radius: 50,
-                          )
-                        : CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(loggedInUser.profileImage),
-                            backgroundColor: Colors.grey,
-                          ),
-                  ),
-                ),
-
-                //profile
-                CustomList(Icons.person, "Profile", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UserProfile()));
-                }),
-                CustomList(Icons.question_mark, "FAQs", () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => faqs()));
-                }),
-                // Privacy Policy
-                CustomList(Icons.announcement, "Privacy Policy", () async {
-                  final Uri _url = Uri.parse(
-                      'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
-                  if (!await launchUrl(_url)) {
-                    throw 'Could not launch ';
-                  }
-                }),
-
-                CustomList(Icons.data_object, "About", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => about()));
-                }),
-                CustomList(Icons.lock, "Log Out", () async {
-                  await FirebaseAuth.instance.signOut();
-                  _prefService.removeCache("password");
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => login_page()));
-                }),
-              ],
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  kPrimaryColor,
+                  kPrimaryLightColor,
+                ],
+              ),
             ),
+            accountName: Text(loggedInUser.name.toString()),
+            accountEmail: Text(loggedInUser.email.toString()),
+            currentAccountPicture: Container(
+              child: loggedInUser.profileImage == false
+                  ? CircleAvatar(
+                backgroundImage:
+                AssetImage('assets/images/account.png'),
+                radius: 50,
+              )
+                  : CircleAvatar(
+                backgroundImage:
+                NetworkImage(loggedInUser.profileImage),
+                backgroundColor: Colors.grey,
+              ),
+            ),
+          ),
+
+          //profile
+          CustomList(Icons.person, "Profile", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => UserProfile()));
+          }),
+          CustomList(Icons.question_mark, "FAQs", () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => faqs()));
+          }),
+          // Privacy Policy
+          CustomList(Icons.announcement, "Privacy Policy", () async {
+            final Uri _url = Uri.parse(
+                'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
+            if (!await launchUrl(_url)) {
+              throw 'Could not launch ';
+            }
+          }),
+
+          CustomList(Icons.data_object, "About", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => about()));
+          }),
+          CustomList(Icons.lock, "Log Out", () async {
+            await FirebaseAuth.instance.signOut();
+            _prefService.removeCache("password");
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => login_page()));
+          }),
+        ],
+      ),
     );
   }
 }

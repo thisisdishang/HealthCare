@@ -26,17 +26,17 @@ class SplashViewState extends State<SplashView> {
             MaterialPageRoute<dynamic>(
               builder: (BuildContext context) => HomePage(),
             ),
-            (route) => false, //if you want to disable back feature set to false
+                (route) => false, //if you want to disable back feature set to false
           );
         });
       } else if (value == 2) {
         return Timer(
           Duration(seconds: 2),
-          () => Navigator.pushAndRemoveUntil<dynamic>(
+              () => Navigator.pushAndRemoveUntil<dynamic>(
               context,
               MaterialPageRoute<dynamic>(
                   builder: (BuildContext context) => HomePage()),
-              (route) => false),
+                  (route) => false),
         );
       } else {
         return Timer(Duration(seconds: 2), () {
@@ -58,36 +58,36 @@ class SplashViewState extends State<SplashView> {
       backgroundColor: Colors.white,
       body: Center(
           child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // SizedBox(
-          //   height: 200,
-          // ),
-          Center(
-              child: Image.asset("assets/images/Splash.png",
-                  width: 250, height: 250)),
-          Text(
-            "HealthCare",
-            style: TextStyle(
-              fontSize: 31,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // SizedBox(
-          //   height: 230,
-          //  ),
-          // Text(
-          //   "Powered By Rana Corporation®",
-          //   style: TextStyle(
-          //     fontSize: 16,
-          //     color: kPrimaryColor,
-          //     fontWeight: FontWeight.bold
-          //   ),
-          // ),
-        ],
-      )),
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   height: 200,
+              // ),
+              Center(
+                  child: Image.asset("assets/images/Splash.png",
+                      width: 250, height: 250)),
+              Text(
+                "HealthCare",
+                style: TextStyle(
+                  fontSize: 31,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              // SizedBox(
+              //   height: 230,
+              //  ),
+              // Text(
+              //   "Powered By Rana Corporation®",
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     color: kPrimaryColor,
+              //     fontWeight: FontWeight.bold
+              //   ),
+              // ),
+            ],
+          )),
     );
   }
 }

@@ -51,10 +51,10 @@ class _Rating_ReviewState extends State<Rating_Review> {
                             margin: EdgeInsets.only(bottom: 5),
                             decoration: BoxDecoration(
                               border:
-                                  Border.all(width: 1.0, color: Colors.grey),
+                              Border.all(width: 1.0, color: Colors.grey),
                               borderRadius: BorderRadius.all(Radius.circular(
-                                      10.0) //                 <--- border radius here
-                                  ),
+                                  10.0) //                 <--- border radius here
+                              ),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -73,7 +73,7 @@ class _Rating_ReviewState extends State<Rating_Review> {
                                   Row(
                                       children: new List.generate(
                                           5,
-                                          (index) => buildStar(context, index,
+                                              (index) => buildStar(context, index,
                                               double.parse(doc['rating_s'])))),
                                   Container(
                                       margin: EdgeInsets.only(top: 5),

@@ -66,71 +66,71 @@ class _Docter_pageState extends State<Docter_page> {
         ),
         body: isLoading
             ? Column(
-                children: [
-                  Loading(),
-                ],
-              )
+          children: [
+            Loading(),
+          ],
+        )
             : Padding(
-                padding: EdgeInsets.all(8.0),
-                child: StreamBuilder<QuerySnapshot>(
-                    stream:
-                        firebase.where('valid', isEqualTo: true).snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(child: Text("Doctor Not Available"));
+          padding: EdgeInsets.all(8.0),
+          child: StreamBuilder<QuerySnapshot>(
+              stream:
+              firebase.where('valid', isEqualTo: true).snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: Text("Doctor Not Available"));
+                } else {
+                  return ListView.builder(
+                    controller: ScrollController(keepScrollOffset: false),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final DocumentSnapshot doc =
+                      snapshot.data!.docs[index];
+                      print("Special Doc: " +
+                          snapshot.data!.docs.length.toString());
+                      if (doc["specialist"].toString().isEmpty) {
+                        return Text("No Doctor Found");
                       } else {
-                        return ListView.builder(
-                          controller: ScrollController(keepScrollOffset: false),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final DocumentSnapshot doc =
-                                snapshot.data!.docs[index];
-                            print("Special Doc: " +
-                                snapshot.data!.docs.length.toString());
-                            if (doc["specialist"].toString().isEmpty) {
-                              return Text("No Doctor Found");
-                            } else {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailPage(
-                                          uid: doc['uid'],
-                                          name: doc['name'],
-                                          email: doc['email'],
-                                          address: doc['address'],
-                                          experience: doc['experience'],
-                                          specialist: doc['specialist'],
-                                          profileImage: doc['profileImage'],
-                                          description: doc['description'],
-                                          phone: doc['phone'],
-                                          available: doc['available'],
-                                          doctor: _doctorName,
-                                        ),
-                                      ));
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: SelectCard(
-                                    name: doc["name"].toString(),
-                                    email: doc["email"].toString(),
-                                    specialist: doc["specialist"].toString(),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    uid: doc['uid'],
+                                    name: doc['name'],
+                                    email: doc['email'],
+                                    address: doc['address'],
+                                    experience: doc['experience'],
+                                    specialist: doc['specialist'],
                                     profileImage: doc['profileImage'],
-                                    rating: doc['rating'],
-                                    did: doc['uid'],
+                                    description: doc['description'],
+                                    phone: doc['phone'],
+                                    available: doc['available'],
+                                    doctor: _doctorName,
                                   ),
-                                ),
-                              );
-                            }
+                                ));
                           },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: SelectCard(
+                              name: doc["name"].toString(),
+                              email: doc["email"].toString(),
+                              specialist: doc["specialist"].toString(),
+                              profileImage: doc['profileImage'],
+                              rating: doc['rating'],
+                              did: doc['uid'],
+                            ),
+                          ),
                         );
                       }
-                    }),
-              ),
+                    },
+                  );
+                }
+              }),
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class _AppointmentState extends State<Appointment>
     with SingleTickerProviderStateMixin {
   UserModel loggedInUser = UserModel();
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection('doctor');
+  FirebaseFirestore.instance.collection('doctor');
   var appointment = FirebaseFirestore.instance;
 
   User? user = FirebaseAuth.instance.currentUser;
@@ -71,9 +71,12 @@ class _AppointmentState extends State<Appointment>
         ),
         actions: <Widget>[],
         bottom: TabBar(
+
           controller: tabController,
           labelStyle: TextStyle(fontSize: 18),
           indicatorColor: Colors.white,
+          labelColor: Colors.white,
+          unselectedLabelStyle: TextStyle(color: Colors.black),
           tabs: [
             Tab(
               text: 'Confirm',

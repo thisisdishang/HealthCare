@@ -139,7 +139,7 @@ class _aboutState extends State<about> {
                             onPressed: () {
                               launchUrl(emailLaunchUri);
                             },
-                            child: Text("SEND MAIL TO DEVELOPER"))),
+                            child: Text("SEND MAIL TO DEVELOPER",style: TextStyle(color: Colors.white),))),
                     SizedBox(
                       height: 5,
                     )

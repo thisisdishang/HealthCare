@@ -7,10 +7,10 @@ class CardModel {
   var cardIcon;
 
   CardModel(
-    this.doctor,
-    this.cardBackground,
-    this.cardIcon,
-  );
+      this.doctor,
+      this.cardBackground,
+      this.cardIcon,
+      );
 }
 
 List<CardModel> cards = [

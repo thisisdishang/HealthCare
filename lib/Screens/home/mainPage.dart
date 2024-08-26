@@ -134,7 +134,7 @@ class _MainPageState extends State<MainPage> {
           child: SafeArea(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
               child: GNav(
                 curve: Curves.easeOutExpo,
                 rippleColor: Colors.grey,
@@ -153,7 +153,7 @@ class _MainPageState extends State<MainPage> {
                   GButton(
                     iconSize: _selectedIndex != 0 ? 28 : 25,
                     icon:
-                        _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
+                    _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
                     text: 'Home',
                   ),
                   GButton(

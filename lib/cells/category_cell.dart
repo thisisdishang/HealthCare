@@ -29,10 +29,10 @@ class CategoryCell extends StatelessWidget {
             children: [
               Center(
                   child: Image.asset(
-                category?.icon,
-                height: size.height * 0.09,
-                width: size.width * 0.09,
-              )),
+                    category?.icon,
+                    height: size.height * 0.09,
+                    width: size.width * 0.09,
+                  )),
               Center(
                 child: Text(
                   category?.title,

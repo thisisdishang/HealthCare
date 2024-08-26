@@ -119,7 +119,7 @@ class _RegistrationState extends State<Registration> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   // getConnectivity();
+    // getConnectivity();
     // subscription = Connectivity()
     //     .onConnectivityChanged
     //     .listen((ConnectivityResult result) {
@@ -182,7 +182,7 @@ class _RegistrationState extends State<Registration> {
               child: Container(
                 width: size.width * 1,
                 decoration: BoxDecoration(
-                    ),
+                ),
                 child: Container(
 
                   child: Column(
@@ -192,12 +192,12 @@ class _RegistrationState extends State<Registration> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            "Registration",
-                            style: TextStyle(
-                                fontSize: 32,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          )),
+                                "Registration",
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ),
                       ),
                       SizedBox(
@@ -220,19 +220,19 @@ class _RegistrationState extends State<Registration> {
                             padding: const EdgeInsets.all(3.0),
                             child: file == null
                                 ? InkWell(
-                                    onTap: () {
-                                      chooseImage();
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 50.00,
-                                      backgroundImage: AssetImage(
-                                          "assets/images/account.png"),
-                                    ),
-                                  )
+                              onTap: () {
+                                chooseImage();
+                              },
+                              child: CircleAvatar(
+                                radius: 50.00,
+                                backgroundImage: AssetImage(
+                                    "assets/images/account.png"),
+                              ),
+                            )
                                 : CircleAvatar(
-                                    radius: 50.00,
-                                    backgroundImage: FileImage(file),
-                                  ),
+                              radius: 50.00,
+                              backgroundImage: FileImage(file),
+                            ),
                           ),
                         ),
                         Positioned(
@@ -258,7 +258,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.person, "First Name"),
+                          buildInputDecoration(Icons.person, "First Name"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -280,7 +280,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.person, "Last Name"),
+                          buildInputDecoration(Icons.person, "Last Name"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -330,7 +330,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.email, "Your Email "),
+                          buildInputDecoration(Icons.email, "Your Email "),
                           onChanged: (email) {
                             t_email = email.trim();
                             print("Email: " + t_email + ":");
@@ -354,7 +354,7 @@ class _RegistrationState extends State<Registration> {
                           textAlignVertical: TextAlignVertical.center,
                           dropdownTextStyle: TextStyle(fontSize: 16),
                           dropdownIcon:
-                              Icon(Icons.arrow_drop_down, color: kPrimaryColor),
+                          Icon(Icons.arrow_drop_down, color: kPrimaryColor),
                           decoration: buildInputDecoration(
                               Icons.phone, "Contact Number"),
                           initialCountryCode: 'IN',
@@ -382,22 +382,22 @@ class _RegistrationState extends State<Registration> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   //  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
                                           ? Text(
-                                              "Select Date",
-                                              style: TextStyle(
-                                                  color: Colors.black54),
-                                            )
+                                        "Select Date",
+                                        style: TextStyle(
+                                            color: Colors.black54),
+                                      )
                                           : Text(
-                                              t_date,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                        t_date,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     IconButton(
                                         onPressed: () async {
@@ -424,9 +424,9 @@ class _RegistrationState extends State<Registration> {
                             ),
                             c_data == true
                                 ? Text("*Select Data",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -440,7 +440,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.number,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.accessibility, "Age"),
+                          buildInputDecoration(Icons.accessibility, "Age"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -497,9 +497,9 @@ class _RegistrationState extends State<Registration> {
                             ),
                             c_gender == true
                                 ? Text("*Select Gender",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -548,9 +548,9 @@ class _RegistrationState extends State<Registration> {
                             ),
                             c_status == true
                                 ? Text("*Select status",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -595,11 +595,11 @@ class _RegistrationState extends State<Registration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -654,11 +654,11 @@ class _RegistrationState extends State<Registration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -725,11 +725,11 @@ class _RegistrationState extends State<Registration> {
                                         print("FirebaseError: " + error.code);
                                         if (error.code == "invalid-email") {
                                           errorMessage =
-                                              "Your email address appears to be malformed.";
+                                          "Your email address appears to be malformed.";
                                         } else if (error.code ==
                                             "user-disabled") {
                                           errorMessage =
-                                              "User with this email has been disabled.";
+                                          "User with this email has been disabled.";
                                         } else if (error.code ==
                                             "too-many-requests") {
                                           errorMessage = "Too many requests";
@@ -758,46 +758,46 @@ class _RegistrationState extends State<Registration> {
                                           .collection('patient')
                                           .doc(userCredential.user!.uid)
                                           .set({
-                                            'uid': userCredential.user!.uid,
-                                            'name': t_name,
-                                            'last name': t_lname,
-                                            'address': t_address,
-                                            'email': userCredential.user!.email,
-                                            'age': t_age,
-                                            'dob': t_date,
-                                            'password': t_password,
-                                            'gender':
-                                                gender == 1 ? "male" : "female",
-                                            'status': gender == 1
-                                                ? "unmarried"
-                                                : "married",
-                                            'phone': phoneController,
-                                            'profileImage':
-                                                url == null ? '' : url,
-                                          })
+                                        'uid': userCredential.user!.uid,
+                                        'name': t_name,
+                                        'last name': t_lname,
+                                        'address': t_address,
+                                        'email': userCredential.user!.email,
+                                        'age': t_age,
+                                        'dob': t_date,
+                                        'password': t_password,
+                                        'gender':
+                                        gender == 1 ? "male" : "female",
+                                        'status': gender == 1
+                                            ? "unmarried"
+                                            : "married",
+                                        'phone': phoneController,
+                                        'profileImage':
+                                        url == null ? '' : url,
+                                      })
                                           .then((value) =>
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Registration Successful",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.BOTTOM,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor:
-                                                      kPrimaryColor,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0))
+                                          Fluttertoast.showToast(
+                                              msg:
+                                              "Registration Successful",
+                                              toastLength:
+                                              Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor:
+                                              kPrimaryColor,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0))
                                           .then((value) => Navigator
-                                              .pushAndRemoveUntil<dynamic>(
-                                                  context,
-                                                  MaterialPageRoute<dynamic>(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          login_page()),
-                                                  (route) => false))
+                                          .pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext
+                                              context) =>
+                                                  login_page()),
+                                              (route) => false))
                                           .catchError((e) {
-                                            print("+++++++++" + e);
-                                          });
+                                        print("+++++++++" + e);
+                                      });
                                     } else {
                                       if (t_date == null) {
                                         c_data = true;
@@ -852,7 +852,7 @@ class _RegistrationState extends State<Registration> {
         .ref()
         .child("profile")
         .child(
-            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
+        FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
         .putFile(file);
 
     return taskSnapshot.ref.getDownloadURL();

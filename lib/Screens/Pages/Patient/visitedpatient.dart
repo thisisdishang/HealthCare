@@ -22,7 +22,7 @@ class _visitedState extends State<visited> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection("doctor");
+  FirebaseFirestore.instance.collection("doctor");
   User? user = FirebaseAuth.instance.currentUser;
 
   bool isLoading = true;
@@ -134,13 +134,13 @@ class _visitedState extends State<visited> {
                   value.length == 0
                       ? Container()
                       : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchList3(
-                              searchKey: value,
-                            ),
-                          ),
-                        );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchList3(
+                        searchKey: value,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -150,21 +150,21 @@ class _visitedState extends State<visited> {
               child: DropdownButton2(
                 isExpanded: true,
                 value: dropdownValue,
-                icon: Icon(Icons.arrow_drop_down),
-                iconSize: 24,
-                iconEnabledColor: kPrimaryColor,
-                buttonHeight: 50,
-                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                buttonElevation: 2,
-                itemHeight: 40,
-                itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                dropdownMaxHeight: 200,
-                dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                scrollbarRadius: const Radius.circular(40),
-                scrollbarThickness: 6,
-                scrollbarAlwaysShow: true,
+                // icon: Icon(Icons.arrow_drop_down),
+                // iconSize: 24,
+                // iconEnabledColor: kPrimaryColor,
+                // buttonHeight: 50,
+                // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                // buttonElevation: 2,
+                // itemHeight: 40,
+                // itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                // dropdownMaxHeight: 200,
+                // dropdownDecoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(14),
+                // ),
+                // scrollbarRadius: const Radius.circular(40),
+                // scrollbarThickness: 6,
+                // scrollbarAlwaysShow: true,
                 style: TextStyle(color: Colors.black, fontSize: 18),
                 onChanged: (data) async {
                   setState(() {
@@ -201,12 +201,12 @@ class _visitedState extends State<visited> {
             ),
             t_date != null
                 ? Container(
-                    width: size.width * 1,
-                    margin: EdgeInsets.only(left: 38),
-                    child: Text(
-                      t_date,
-                      style: TextStyle(fontSize: 18),
-                    ))
+                width: size.width * 1,
+                margin: EdgeInsets.only(left: 38),
+                child: Text(
+                  t_date,
+                  style: TextStyle(fontSize: 18),
+                ))
                 : SizedBox(),
             Container(
               child: SingleChildScrollView(
@@ -222,167 +222,167 @@ class _visitedState extends State<visited> {
                       } else {
                         return isLoading
                             ? Container(
-                                margin: EdgeInsets.only(top: size.height * 0.4),
-                                child: Center(
-                                  child: Loading(),
-                                ),
-                              )
+                          margin: EdgeInsets.only(top: size.height * 0.4),
+                          child: Center(
+                            child: Loading(),
+                          ),
+                        )
                             : SingleChildScrollView(
-                                physics: BouncingScrollPhysics(),
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final DocumentSnapshot doc =
-                                        snapshot.data!.docs[index];
-                                    Future.delayed(Duration(seconds: 3));
-                                    return snapshot.hasData == null
-                                        ? Center(
-                                            child: Text(
-                                                "Appointment Not Available"))
-                                        : Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 2),
-                                            child: Container(
-                                              height: 104,
-                                              child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(8.0)),
-                                                ),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    color:
-                                                        Colors.green.shade400,
-                                                  ),
-                                                  child: Stack(
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Container(
-                                                              width: double
-                                                                  .infinity,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            8.0,
-                                                                        top:
-                                                                            8.0),
-                                                                child: Text(
-                                                                  'Name: ' +
-                                                                      doc['name'],
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          18,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ) // child widget, replace with your own
-                                                              ),
-                                                          SizedBox(height: 2),
-                                                          Container(
-                                                              width: double
-                                                                  .infinity,
-                                                              margin: EdgeInsets
-                                                                  .only(top: 3),
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            8.0),
-                                                                child: Text(
-                                                                  "Date: " +
-                                                                      doc['date'],
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                                ),
-                                                              ) // child widget, replace with your own
-                                                              ),
-                                                          SizedBox(height: 2),
-                                                          Container(
-                                                              width: double
-                                                                  .infinity,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            8.0),
-                                                                child: Text(
-                                                                  "Time: " +
-                                                                      doc['time'],
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                                ),
-                                                              ) // child widget, replace with your own
-                                                              ),
-                                                          SizedBox(height: 2),
-                                                          Container(
-                                                              width: double
-                                                                  .infinity,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            8.0),
-                                                                child: Text(
-                                                                  "Status: Visited",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                                ),
-                                                              ) // child widget, replace with your own
-                                                              ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                          physics: BouncingScrollPhysics(),
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              final DocumentSnapshot doc =
+                              snapshot.data!.docs[index];
+                              Future.delayed(Duration(seconds: 3));
+                              return snapshot.hasData == null
+                                  ? Center(
+                                  child: Text(
+                                      "Appointment Not Available"))
+                                  : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 2),
+                                child: Container(
+                                  height: 104,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.all(
+                                          Radius.circular(8.0)),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            8.0),
+                                        color:
+                                        Colors.green.shade400,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Container(
+                                                  width: double
+                                                      .infinity,
+                                                  decoration:
+                                                  BoxDecoration(),
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        left:
+                                                        8.0,
+                                                        top:
+                                                        8.0),
+                                                    child: Text(
+                                                      'Name: ' +
+                                                          doc['name'],
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize:
+                                                          18,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold),
+                                                    ),
+                                                  ) // child widget, replace with your own
                                               ),
-                                            ),
-                                          );
-                                  },
+                                              SizedBox(height: 2),
+                                              Container(
+                                                  width: double
+                                                      .infinity,
+                                                  margin: EdgeInsets
+                                                      .only(top: 3),
+                                                  decoration:
+                                                  BoxDecoration(),
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        left:
+                                                        8.0),
+                                                    child: Text(
+                                                      "Date: " +
+                                                          doc['date'],
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize:
+                                                          14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500),
+                                                    ),
+                                                  ) // child widget, replace with your own
+                                              ),
+                                              SizedBox(height: 2),
+                                              Container(
+                                                  width: double
+                                                      .infinity,
+                                                  decoration:
+                                                  BoxDecoration(),
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        left:
+                                                        8.0),
+                                                    child: Text(
+                                                      "Time: " +
+                                                          doc['time'],
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize:
+                                                          14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500),
+                                                    ),
+                                                  ) // child widget, replace with your own
+                                              ),
+                                              SizedBox(height: 2),
+                                              Container(
+                                                  width: double
+                                                      .infinity,
+                                                  decoration:
+                                                  BoxDecoration(),
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        left:
+                                                        8.0),
+                                                    child: Text(
+                                                      "Status: Visited",
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize:
+                                                          14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500),
+                                                    ),
+                                                  ) // child widget, replace with your own
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               );
+                            },
+                          ),
+                        );
                       }
                     }),
               ),

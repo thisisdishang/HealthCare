@@ -45,17 +45,17 @@ class _Disease1State extends State<Disease1> {
                       decoration: BoxDecoration(
                           border: Border(
                               bottom: BorderSide(
-                        color: Colors.black87,
-                        width: 0.2,
-                      ))),
+                                color: Colors.black87,
+                                width: 0.2,
+                              ))),
                       child: TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => DiseaseDetail(
-                                      disease: document['Name'],
-                                    )),
+                                  disease: document['Name'],
+                                )),
                           );
                         },
                         child: Row(

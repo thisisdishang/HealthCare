@@ -34,17 +34,17 @@ class Carouselslider extends StatelessWidget {
                 if (index == 0) {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return Disease();
-                  }));
+                        return Disease();
+                      }));
                 }
                 if (index == 1) {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return DiseaseDetail(disease: 'Covid-19');
-                  }));
+                        return DiseaseDetail(disease: 'Covid-19');
+                      }));
                 }
                 if (index == 2) {
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=>lab()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>lab()));
                 }
                 if (index == 3) {
                   Fluttertoast.showToast(

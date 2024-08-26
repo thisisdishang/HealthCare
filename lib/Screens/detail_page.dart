@@ -37,7 +37,7 @@ class DetailPage extends StatefulWidget {
     required this.profileImage,
     required this.description,
     required this.phone,
-    required doctor,
+    required doctor, required available,
   });
 
   @override
@@ -104,89 +104,89 @@ class _DetailPageState extends State<DetailPage> {
     setState(() {});
     SizedBox(
         child: FutureBuilder(
-      future: FirebaseFirestore.instance
-          .collection('doctor')
-          .doc(widget.uid)
-          .collection('rating')
-          .where('pid', isEqualTo: loggedInUser.uid)
-          .get()
-          .then((myDocuments) {
-        setState(() {
-          rating_len = myDocuments.docs.length;
-        });
-        print("${"lenght rating_len = " + myDocuments.docs.length.toString()}");
-        return myDocuments;
-      }),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return SizedBox();
-        }
+          future: FirebaseFirestore.instance
+              .collection('doctor')
+              .doc(widget.uid)
+              .collection('rating')
+              .where('pid', isEqualTo: loggedInUser.uid)
+              .get()
+              .then((myDocuments) {
+            setState(() {
+              rating_len = myDocuments.docs.length;
+            });
+            print("${"lenght rating_len = " + myDocuments.docs.length.toString()}");
+            return myDocuments;
+          }),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return SizedBox();
+            }
 
-        return SizedBox();
+            return SizedBox();
 
-        /*Text(rating.toString());*/
-      },
-    ));
+            /*Text(rating.toString());*/
+          },
+        ));
     return Scaffold(
       appBar: _buildAppBar(size),
       body: isLoading == true
           ? Center(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Loading(),
-                    SizedBox(
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('doctor/' + widget.uid + '/rating')
-                              /*.doc(widget.uid)
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Loading(),
+              SizedBox(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('doctor/' + widget.uid + '/rating')
+                    /*.doc(widget.uid)
                             .collection('/rating')*/
-                              .snapshots(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (!snapshot.hasData) {
-                              return SizedBox();
-                            } else {
-                              today_app2 = snapshot.data!.docs.length;
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return SizedBox();
+                      } else {
+                        today_app2 = snapshot.data!.docs.length;
 
-                              print("snapshot: " + snapshot.hasData.toString());
-                              snapshot.data?.docs.asMap().forEach((index, doc) {
-                                //  sum = sum + int.parse(doc["rating"]);
-                                if (today_app2 > index) {
-                                  rating_no.add(double.parse(doc['rating_s']));
-                                }
-                              });
-                              sum = 0;
-                              rating_no.asMap().forEach((index, element) {
-                                if (index < today_app2) {
-                                  sum = sum + element.toDouble();
-                                  print("element = " + element.toString());
-                                  print("rating_no" +
-                                      rating_no.length.toString());
-                                }
-                              });
+                        print("snapshot: " + snapshot.hasData.toString());
+                        snapshot.data?.docs.asMap().forEach((index, doc) {
+                          //  sum = sum + int.parse(doc["rating"]);
+                          if (today_app2 > index) {
+                            rating_no.add(double.parse(doc['rating_s']));
+                          }
+                        });
+                        sum = 0;
+                        rating_no.asMap().forEach((index, element) {
+                          if (index < today_app2) {
+                            sum = sum + element.toDouble();
+                            print("element = " + element.toString());
+                            print("rating_no" +
+                                rating_no.length.toString());
+                          }
+                        });
 
-                              print(
-                                  "=========================================");
-                              print("Sum=" + sum.toString());
-                              rating = sum / today_app2;
-                              print("rating=" + rating.toString());
-                              FirebaseFirestore.instance
-                                  .collection("doctor")
-                                  .doc(widget.uid)
-                                  .update({
-                                'rating': rating != null
-                                    ? rating.toStringAsFixed(1).toString()
-                                    : "0.0"
-                              });
-                              return SizedBox();
-                            }
-                          }),
-                    ),
-                    /*SizedBox(
+                        print(
+                            "=========================================");
+                        print("Sum=" + sum.toString());
+                        rating = sum / today_app2;
+                        print("rating=" + rating.toString());
+                        FirebaseFirestore.instance
+                            .collection("doctor")
+                            .doc(widget.uid)
+                            .update({
+                          'rating': rating != null
+                              ? rating.toStringAsFixed(1).toString()
+                              : "0.0"
+                        });
+                        return SizedBox();
+                      }
+                    }),
+              ),
+              /*SizedBox(
                         child: FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection('doctor/' + widget.uid + '/rating')
@@ -238,7 +238,7 @@ class _DetailPageState extends State<DetailPage> {
                       },
                     )),*/
 
-                    /*    SizedBox(
+              /*    SizedBox(
                         child: FutureBuilder(
                       future: FirebaseFirestore.instance
                           .collection('doctor')
@@ -266,112 +266,112 @@ class _DetailPageState extends State<DetailPage> {
                       },
                     )
                     ),*/
-                    SizedBox(
-                        child: FutureBuilder(
-                      future: FirebaseFirestore.instance
-                          .collection('pending')
-                          .where('did', isEqualTo: widget.uid)
-                          .get()
-                          .then((myDocuments) {
-                        setState(() {
-                          patient_count = myDocuments.docs.length;
-                          isLoading = false;
-                        });
-                        print(
-                            "${"lenght = " + myDocuments.docs.length.toString()}");
-                        print("rating count = " + rating_len);
-                        return myDocuments;
-                      }),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          return SizedBox();
-                        }
-
+              SizedBox(
+                  child: FutureBuilder(
+                    future: FirebaseFirestore.instance
+                        .collection('pending')
+                        .where('did', isEqualTo: widget.uid)
+                        .get()
+                        .then((myDocuments) {
+                      setState(() {
+                        patient_count = myDocuments.docs.length;
+                        isLoading = false;
+                      });
+                      print(
+                          "${"lenght = " + myDocuments.docs.length.toString()}");
+                      print("rating count = " + rating_len);
+                      return myDocuments;
+                    }),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
                         return SizedBox();
+                      }
 
-                        /*Text(rating.toString());*/
-                      },
-                    )),
-                  ],
-                ),
-              ),
-            )
+                      return SizedBox();
+
+                      /*Text(rating.toString());*/
+                    },
+                  )),
+            ],
+          ),
+        ),
+      )
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.only(bottom: 32),
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.only(bottom: 32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // sleep(Duration(seconds:  1)),
+
+            _titleSection(size),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // sleep(Duration(seconds:  1)),
-
-                  _titleSection(size),
+                  Text(
+                    'Dr.' + widget.name,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   SizedBox(
                     height: 8,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Dr.' + widget.name,
+                  Container(
+                    margin: EdgeInsets.only(left: 8),
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: HexColor('#FFF9EA'),
+                      border: Border.all(
+                          color: HexColor('#FFEDBE'), width: 1),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      widget.specialist + ' Specialist',
+                      style: TextStyle(
+                        color: HexColor('#FFBF11'),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.chevron_left_sharp,
+                        color: Colors.indigo,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Flexible(
+                        child: Text(
+                          widget.address,
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
+                            color: kPrimaryhinttext,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.fade,
                           ),
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 8),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: HexColor('#FFF9EA'),
-                            border: Border.all(
-                                color: HexColor('#FFEDBE'), width: 1),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            widget.specialist + ' Specialist',
-                            style: TextStyle(
-                              color: HexColor('#FFBF11'),
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.chevron_left_sharp,
-                              color: Colors.indigo,
-                              size: 30,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Flexible(
-                              child: Text(
-                                widget.address,
-                                style: TextStyle(
-                                  color: kPrimaryhinttext,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  overflow: TextOverflow.fade,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      ),
+                    ],
+                  ),
 
-                        /* Container(
+                  /* Container(
                           padding:
                               EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                           decoration: BoxDecoration(
@@ -390,13 +390,13 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),*/
 
-                        //    buildRating(),
-                        /*   IconTheme(data: IconThemeData(
+                  //    buildRating(),
+                  /*   IconTheme(data: IconThemeData(
                     color: Colors.amber,
                     size: 48,
                   ), child: StarDisplay(value: 3.5),),*/
 
-                        /*    RatingBar.builder(
+                  /*    RatingBar.builder(
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
                       color: Colors.amber,
@@ -409,390 +409,390 @@ class _DetailPageState extends State<DetailPage> {
                     },
                     maxRating: 1,
                   ),*/
-                        SizedBox(
-                          height: 10,
+                  SizedBox(
+                    height: 10,
+                  ),
+                  rating_len == 0
+                      ? InkWell(
+                    onTap: () {
+                      dialog();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1.0, color: Colors.grey),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(
+                                10.0) //                 <--- border radius here
                         ),
-                        rating_len == 0
-                            ? InkWell(
-                                onTap: () {
-                                  dialog();
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(bottom: 5),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 1.0, color: Colors.grey),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            10.0) //                 <--- border radius here
-                                        ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Write a Review",
-                                          style: TextStyle(color: Colors.green),
-                                        ),
-                                        Row(
-                                          children: [
-                                            for (int i = 0; i < 5; i++)
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0,
-                                                    top: 8.0,
-                                                    bottom: 8.0),
-                                                child: Icon(
-                                                  Icons.star,
-                                                  color: Colors.grey,
-                                                  size: 30,
-                                                ),
-                                              ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Text(
-                                'Update Review',
-                                style: TextStyle(color: Colors.green),
-                              ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          child: StreamBuilder<QuerySnapshot>(
-                              stream: appointment
-                                  .collection(
-                                      'doctor/' + widget.uid + '/rating')
-                                  .where('pid', isEqualTo: loggedInUser.uid)
-                                  .snapshots(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                                if (!snapshot.hasData) {
-                                  return SizedBox();
-                                } else {
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    // shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: snapshot.data?.docs.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      final DocumentSnapshot doc =
-                                          snapshot.data!.docs[index];
-                                      return SingleChildScrollView(
-                                        child: InkWell(
-                                          onTap: () {
-                                            updatedialog(
-                                                doc.id,
-                                                double.parse(doc['rating_s']),
-                                                doc['review']);
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(bottom: 5),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 1.0,
-                                                  color: Colors.grey),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      10.0) //                 <--- border radius here
-                                                  ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 5),
-                                                      child: Text(
-                                                        doc['name'],
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Colors.black),
-                                                      )),
-                                                  Row(
-                                                      children: new List
-                                                          .generate(
-                                                          5,
-                                                          (index) => buildStar(
-                                                              context,
-                                                              index,
-                                                              double.parse(doc[
-                                                                  'rating_s'])))),
-                                                  Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 5),
-                                                      child: Text(
-                                                        doc['review'],
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Colors.black38),
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }
-                              }),
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Rating & Review',
-                              style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
+                              "Write a Review",
+                              style: TextStyle(color: Colors.green),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Rating_Review(did: widget.uid)),
-                                );
-                              },
-                              child: Text(
-                                'More..',
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                            Row(
+                              children: [
+                                for (int i = 0; i < 5; i++)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0,
+                                        top: 8.0,
+                                        bottom: 8.0),
+                                    child: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: 30,
+                                    ),
+                                  ),
+                              ],
                             )
                           ],
                         ),
+                      ),
+                    ),
+                  )
+                      : Text(
+                    'Update Review',
+                    style: TextStyle(color: Colors.green),
+                  ),
 
-                        Container(
-                          child: StreamBuilder<QuerySnapshot>(
-                              stream: appointment
-                                  .collection(
-                                      'doctor/' + widget.uid + '/rating')
-                                  .snapshots(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                                if (!snapshot.hasData) {
-                                  return new Text("There is no expense");
-                                } else {
-                                  ub() {
-                                    if (snapshot.data?.docs.length == 0) {
-                                      return 0;
-                                    } else if (snapshot.data?.docs.length ==
-                                        1) {
-                                      return 1;
-                                    } else if (snapshot.data?.docs.length ==
-                                        2) {
-                                      return 2;
-                                    } else {
-                                      return 3;
-                                    }
-                                  }
-
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    // shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: ub(),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      final DocumentSnapshot doc =
-                                          snapshot.data!.docs[index];
-                                      return SingleChildScrollView(
-                                        child: Container(
-                                          margin: EdgeInsets.only(bottom: 5),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1.0, color: Colors.grey),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(
-                                                    10.0) //                 <--- border radius here
-                                                ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                    margin:
-                                                        EdgeInsets.only(top: 5),
-                                                    child: Text(
-                                                      doc['name'],
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
-                                                    )),
-                                                Row(
-                                                    children: new List.generate(
-                                                        5,
-                                                        (index) => buildStar(
-                                                            context,
-                                                            index,
-                                                            double.parse(doc[
-                                                                'rating_s'])))),
-                                                Container(
-                                                    margin:
-                                                        EdgeInsets.only(top: 5),
-                                                    child: Text(
-                                                      doc['review'],
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color:
-                                                              Colors.black38),
-                                                    ))
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: StreamBuilder<QuerySnapshot>(
+                        stream: appointment
+                            .collection(
+                            'doctor/' + widget.uid + '/rating')
+                            .where('pid', isEqualTo: loggedInUser.uid)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (!snapshot.hasData) {
+                            return SizedBox();
+                          } else {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              // shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data?.docs.length,
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                final DocumentSnapshot doc =
+                                snapshot.data!.docs[index];
+                                return SingleChildScrollView(
+                                  child: InkWell(
+                                    onTap: () {
+                                      updatedialog(
+                                          doc.id,
+                                          double.parse(doc['rating_s']),
+                                          doc['review']);
                                     },
-                                  );
-                                }
-                              }),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          widget.description,
-                          style: TextStyle(
-                            color: kPrimaryhinttext,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.justify,
-                        ),
-                        SizedBox(
-                          height: 32,
-                        ),
-                        SizedBox(
-                          height: 91,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              DetailCell(
-                                  title: patient_count.toString(),
-                                  subTitle: 'Patients'),
-                              DetailCell(
-                                  title: widget.experience + '+',
-                                  subTitle: 'Exp. Years'),
-                              DetailCell(
-                                  title: today_app2.toString(),
-                                  subTitle: 'Rating'),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 32,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  //primary: Color(0xFFFFBB23),
-                                  backgroundColor: Color(0xFFFFBB23),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushAndRemoveUntil<dynamic>(
-                                      context,
-                                      MaterialPageRoute<dynamic>(
-                                          builder: (BuildContext context) =>
-                                              HomePage()),
-                                      (route) => false);
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 5, right: 5),
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Text(
-                                    "Cancel",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kPrimaryColor,
-                                  //primary: kPrimaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(12), // <-- Radius
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Appoin_time(
-                                              uid: widget.uid,
-                                              name: widget.name,
-                                            )),
-                                  );
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 5, right: 5),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "Appointment",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 5),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1.0,
+                                            color: Colors.grey),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                10.0) //                 <--- border radius here
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text(
+                                                  doc['name'],
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                      color:
+                                                      Colors.black),
+                                                )),
+                                            Row(
+                                                children: new List
+                                                    .generate(
+                                                    5,
+                                                        (index) => buildStar(
+                                                        context,
+                                                        index,
+                                                        double.parse(doc[
+                                                        'rating_s'])))),
+                                            Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text(
+                                                  doc['review'],
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                      color:
+                                                      Colors.black38),
+                                                ))
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                );
+                              },
+                            );
+                          }
+                        }),
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Rating & Review',
+                        style: TextStyle(
+                          color: kPrimaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Rating_Review(did: widget.uid)),
+                          );
+                        },
+                        child: Text(
+                          'More..',
+                          style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+
+                  Container(
+                    child: StreamBuilder<QuerySnapshot>(
+                        stream: appointment
+                            .collection(
+                            'doctor/' + widget.uid + '/rating')
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (!snapshot.hasData) {
+                            return new Text("There is no expense");
+                          } else {
+                            ub() {
+                              if (snapshot.data?.docs.length == 0) {
+                                return 0;
+                              } else if (snapshot.data?.docs.length ==
+                                  1) {
+                                return 1;
+                              } else if (snapshot.data?.docs.length ==
+                                  2) {
+                                return 2;
+                              } else {
+                                return 3;
+                              }
+                            }
+
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              // shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemCount: ub(),
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                final DocumentSnapshot doc =
+                                snapshot.data!.docs[index];
+                                return SingleChildScrollView(
+                                  child: Container(
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1.0, color: Colors.grey),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              10.0) //                 <--- border radius here
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              margin:
+                                              EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                doc['name'],
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                    color: Colors.black),
+                                              )),
+                                          Row(
+                                              children: new List.generate(
+                                                  5,
+                                                      (index) => buildStar(
+                                                      context,
+                                                      index,
+                                                      double.parse(doc[
+                                                      'rating_s'])))),
+                                          Container(
+                                              margin:
+                                              EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                doc['review'],
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                    color:
+                                                    Colors.black38),
+                                              ))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        }),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    widget.description,
+                    style: TextStyle(
+                      color: kPrimaryhinttext,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  SizedBox(
+                    height: 91,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DetailCell(
+                            title: patient_count.toString(),
+                            subTitle: 'Patients'),
+                        DetailCell(
+                            title: widget.experience + '+',
+                            subTitle: 'Exp. Years'),
+                        DetailCell(
+                            title: today_app2.toString(),
+                            subTitle: 'Rating'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            //primary: Color(0xFFFFBB23),
+                            backgroundColor: Color(0xFFFFBB23),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                          ),
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil<dynamic>(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (BuildContext context) =>
+                                        HomePage()),
+                                    (route) => false);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: kPrimaryColor,
+                            //primary: kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Appoin_time(
+                                    uid: widget.uid,
+                                    name: widget.name,
+                                  )),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                "Appointment",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
-                          ],
-                        )
-                        /*
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                  /*
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
 
@@ -820,12 +820,12 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   )*/
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -940,21 +940,21 @@ class _DetailPageState extends State<DetailPage> {
                       backgroundColor: Colors.white,
                       child: widget.profileImage == false
                           ? CircleAvatar(
-                              radius: 80,
-                              backgroundImage:
-                                  AssetImage('assets/images/account.png'),
-                            )
+                        radius: 80,
+                        backgroundImage:
+                        AssetImage('assets/images/account.png'),
+                      )
                           : CircleAvatar(
-                              radius: 80,
-                              backgroundImage:
-                                  NetworkImage(widget.profileImage),
-                            ),
+                        radius: 80,
+                        backgroundImage:
+                        NetworkImage(widget.profileImage),
+                      ),
                     ) /*Image(
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.fitHeight,
                     image: NetworkImage(profileImage),
                   ),*/
-                    ),
+                ),
               ),
             ),
           ),
@@ -1042,21 +1042,21 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Widget buildRating() => RatingBar.builder(
-        itemBuilder: (context, _) => Icon(
-          Icons.star,
-          color: Colors.amber,
-        ),
-        initialRating: rating1,
-        itemSize: 40,
-        itemPadding: EdgeInsets.symmetric(horizontal: 4),
-        updateOnDrag: true,
-        onRatingUpdate: (velue) {
-          setState(() {
-            rating1 = velue;
-          });
-        },
-        maxRating: 1,
-      );
+    itemBuilder: (context, _) => Icon(
+      Icons.star,
+      color: Colors.amber,
+    ),
+    initialRating: rating1,
+    itemSize: 40,
+    itemPadding: EdgeInsets.symmetric(horizontal: 4),
+    updateOnDrag: true,
+    onRatingUpdate: (velue) {
+      setState(() {
+        rating1 = velue;
+      });
+    },
+    maxRating: 1,
+  );
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
     return showDialog(
@@ -1086,246 +1086,246 @@ class _DetailPageState extends State<DetailPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0)),
-            child: Stack(
-              //overflow: Overflow.visible,
-              alignment: Alignment.topCenter,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.50,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 90, 10, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Doctor Rating',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        buildRating(), //child: ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(15),
-                          child: TextField(
-                            // controller: reviewController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Review',
-                              hintText: 'Review',
-                              errorText: _validate ? 'Enter Review' : null,
-                            ),
-                            onChanged: (var name) {
-                              reviewController = name.trim();
-                            },
-                          ),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.only(top: 1, left: 20, right: 20),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red),
-                                  child: Text(
-                                    'CANCEL',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (rating1 != 0.0 &&
-                                        reviewController != null) {
-                                      FirebaseFirestore.instance
-                                          .collection('doctor/' +
-                                              widget.uid +
-                                              '/rating')
-                                          .add({
-                                        'rating_s': rating1.toString(),
-                                        'review': reviewController,
-                                        'name': loggedInUser.name.toString() +
-                                            ' ' +
-                                            loggedInUser.last_name.toString(),
-                                        'pid': loggedInUser.uid
-                                      });
-                                      isLoading = true;
-                                      Navigator.of(context).pop();
-                                    } else {
-                                      _displayTextInputDialog(context);
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kPrimaryColor),
-                                  child: Text(
-                                    'Ok',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0)),
+        child: Stack(
+          //overflow: Overflow.visible,
+          alignment: Alignment.topCenter,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.50,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 90, 10, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Doctor Rating',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    buildRating(), //child: ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: TextField(
+                        // controller: reviewController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Review',
+                          hintText: 'Review',
+                          errorText: _validate ? 'Enter Review' : null,
+                        ),
+                        onChanged: (var name) {
+                          reviewController = name.trim();
+                        },
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.only(top: 1, left: 20, right: 20),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red),
+                              child: Text(
+                                'CANCEL',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (rating1 != 0.0 &&
+                                    reviewController != null) {
+                                  FirebaseFirestore.instance
+                                      .collection('doctor/' +
+                                      widget.uid +
+                                      '/rating')
+                                      .add({
+                                    'rating_s': rating1.toString(),
+                                    'review': reviewController,
+                                    'name': loggedInUser.name.toString() +
+                                        ' ' +
+                                        loggedInUser.last_name.toString(),
+                                    'pid': loggedInUser.uid
+                                  });
+                                  isLoading = true;
+                                  Navigator.of(context).pop();
+                                } else {
+                                  _displayTextInputDialog(context);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kPrimaryColor),
+                              child: Text(
+                                'Ok',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Positioned(
-                    top: 10,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 50,
-                      child: Image.asset('assets/images/logo.jpg'),
-                      // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
-                    )),
-              ],
+              ),
             ),
-          ));
+            Positioned(
+                top: 10,
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  radius: 50,
+                  child: Image.asset('assets/images/logo1.jpg'),
+                  // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
+                )),
+          ],
+        ),
+      ));
 
   void updatedialog(var id, double rating_s, var review) => showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0)),
-            child: Stack(
-              //   overflow: Overflow.visible,
-              alignment: Alignment.topCenter,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.45,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Doctor Rating',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RatingBar.builder(
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          initialRating: rating_s,
-                          itemSize: 40,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                          updateOnDrag: true,
-                          onRatingUpdate: (velue) {
-                            setState(() {
-                              rating_s = velue;
-                            });
-                          },
-                          maxRating: 1,
-                        ), //child: ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(15),
-                          child: TextField(
-                            //  controller: reviewController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Review',
-                              hintText: 'Review',
-                              errorText: _validate ? 'Enter Review' : null,
-                            ),
-                            onChanged: (var name) {
-                              reviewController = name.trim();
-                            },
-                          ),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red),
-                                  child: Text(
-                                    'CANCEL',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (rating_s != 0.0 &&
-                                        reviewController != null) {
-                                      FirebaseFirestore.instance
-                                          .collection('doctor/' +
-                                              widget.uid +
-                                              '/rating')
-                                          .doc(id)
-                                          .update({
-                                        'rating_s': rating_s.toString(),
-                                        'review': reviewController,
-                                      });
-                                      Navigator.of(context).pop();
-                                    } else {
-                                      _displayTextInputDialog(context);
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kPrimaryColor),
-                                  child: Text(
-                                    'Ok',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0)),
+        child: Stack(
+          //   overflow: Overflow.visible,
+          alignment: Alignment.topCenter,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.45,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Doctor Rating',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RatingBar.builder(
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      initialRating: rating_s,
+                      itemSize: 40,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                      updateOnDrag: true,
+                      onRatingUpdate: (velue) {
+                        setState(() {
+                          rating_s = velue;
+                        });
+                      },
+                      maxRating: 1,
+                    ), //child: ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: TextField(
+                        //  controller: reviewController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Review',
+                          hintText: 'Review',
+                          errorText: _validate ? 'Enter Review' : null,
+                        ),
+                        onChanged: (var name) {
+                          reviewController = name.trim();
+                        },
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red),
+                              child: Text(
+                                'CANCEL',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (rating_s != 0.0 &&
+                                    reviewController != null) {
+                                  FirebaseFirestore.instance
+                                      .collection('doctor/' +
+                                      widget.uid +
+                                      '/rating')
+                                      .doc(id)
+                                      .update({
+                                    'rating_s': rating_s.toString(),
+                                    'review': reviewController,
+                                  });
+                                  Navigator.of(context).pop();
+                                } else {
+                                  _displayTextInputDialog(context);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kPrimaryColor),
+                              child: Text(
+                                'Ok',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Positioned(
-                    top: -50,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 50,
-                      child: Image.asset('assets/images/logo.jpg'),
-                      // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
-                    )),
-              ],
+              ),
             ),
-          ));
+            Positioned(
+                top: -50,
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  radius: 50,
+                  child: Image.asset('assets/images/logo1.jpg'),
+                  // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
+                )),
+          ],
+        ),
+      ));
 
   Widget buildStar(BuildContext context, int index, double doc) {
     var icon;

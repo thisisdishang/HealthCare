@@ -117,7 +117,7 @@ class _Appoin_timeState extends State<Appoin_time> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                       // primary: kPrimaryColor,
+                      // primary: kPrimaryColor,
                         backgroundColor: kPrimaryColor,
                         fixedSize: Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
@@ -863,13 +863,14 @@ class AdvanceCustomAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Stack(
           // overflow: Overflow.visible,
           alignment: Alignment.topCenter,
           children: [
             Container(
-              height: 280,
+              height: MediaQuery.of(context).size.height / 2.5,
+              //height: 280,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 120, 10, 10),
                 child: Column(
@@ -915,7 +916,7 @@ class AdvanceCustomAlert extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 45,
-                  child: Image.asset('assets/images/logo.jpg'),
+                  child: Image.asset('assets/images/logo1.jpg'),
                   // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                 )),
           ],

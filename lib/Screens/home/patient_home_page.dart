@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _doctorName = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection('doctor');
+  FirebaseFirestore.instance.collection('doctor');
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     context1 = context;
     var today_date =
-        (new DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
+    (new DateFormat('dd-MM-yyyy')).format(DateTime.now()).toString();
 
     sleep(Duration(seconds: 1));
     var _message;
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
     int hour = int.parse(_currentHour);
 
     setState(
-      () {
+          () {
         if (hour >= 5 && hour < 12) {
           _message = 'Good Morning';
         } else if (hour >= 12 && hour <= 17) {
@@ -122,276 +122,276 @@ class _HomePageState extends State<HomePage> {
       ),
       body: loggedInUser.uid == null
           ? Center(
-              child: Text("Wait for few seconds"),
-            )
+        child: Text("Wait for few seconds"),
+      )
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
 // Hello
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 20, bottom: 10),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(
+                "Hello " + loggedInUser.name.toString() + " " + _message,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+// les's find doctor
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 20, bottom: 15),
+              child: Text(
+                "Let's Find Your\nDoctor",
+                style: TextStyle(
+                  fontSize: 35,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            //Search doctor
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 3),
+              child: TextFormField(
+                textInputAction: TextInputAction.search,
+                controller: _doctorName,
+                decoration: InputDecoration(
+                  contentPadding:
+                  EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: 'Search Doctor',
+                  hintStyle: TextStyle(
+                    color: Colors.black26,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  suffixIcon: Container(
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      iconSize: 20,
+                      splashRadius: 20,
+                      color: Colors.white,
+                      icon: Icon(Icons.search),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                onFieldSubmitted: (String value) {
+                  setState(
+                        () {
+                      value.length == 0
+                          ? Container()
+                          : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SearchList(
+                            searchKey: value,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+
+            Container(
+                margin: EdgeInsets.only(top: 20),
+                child: _hDoctorsSection()),
+            SizedBox(
+              height: 17.0,
+            ),
+
+//ads..
+            Container(
+              padding: EdgeInsets.only(left: 23, bottom: 20),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "We care for you",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Carouselslider(),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Appointment',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Appointment()),
+                      );
+                    },
                     child: Text(
-                      "Hello " + loggedInUser.name.toString() + " " + _message,
+                      'More..',
                       style: TextStyle(
-                        fontSize: 18,
                         color: kPrimaryColor,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                  ),
-// les's find doctor
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 20, bottom: 15),
-                    child: Text(
-                      "Let's Find Your\nDoctor",
-                      style: TextStyle(
-                        fontSize: 35,
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-
-                  //Search doctor
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 3),
-                    child: TextFormField(
-                      textInputAction: TextInputAction.search,
-                      controller: _doctorName,
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        hintText: 'Search Doctor',
-                        hintStyle: TextStyle(
-                          color: Colors.black26,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                        ),
-                        suffixIcon: Container(
-                          decoration: BoxDecoration(
-                            color: kPrimaryColor.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: IconButton(
-                            iconSize: 20,
-                            splashRadius: 20,
-                            color: Colors.white,
-                            icon: Icon(Icons.search),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      onFieldSubmitted: (String value) {
-                        setState(
-                          () {
-                            value.length == 0
-                                ? Container()
-                                : Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SearchList(
-                                        searchKey: value,
-                                      ),
-                                    ),
-                                  );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: _hDoctorsSection()),
-                  SizedBox(
-                    height: 17.0,
-                  ),
-
-//ads..
-                  Container(
-                    padding: EdgeInsets.only(left: 23, bottom: 20),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "We care for you",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Carouselslider(),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Appointment',
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Appointment()),
-                            );
-                          },
-                          child: Text(
-                            'More..',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: appointment
-                              .collection('pending')
-                              .where('pid', isEqualTo: loggedInUser.uid)
-                              .where('date', isEqualTo: today_date)
-                              .orderBy('time', descending: false)
-                              .snapshots(),
-                          builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (!snapshot.hasData) {
-                              print("snapshot =" + snapshot.toString());
-                              return Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Text("Appointment not Available"));
-                            } else {
-                              ub() {
-                                if (snapshot.data?.docs.length == 0) {
-                                  return 0;
-                                } else if (snapshot.data?.docs.length == 1) {
-                                  return 1;
-                                } else {
-                                  return 2;
-                                }
-                              }
-
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                // shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                itemCount: ub(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  final DocumentSnapshot doc =
-                                      snapshot.data!.docs[index];
-                                  return SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                            width: double.infinity,
-                                            margin: EdgeInsets.all(3),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: doc['approve'] == false
-                                                    ? Colors.orangeAccent
-                                                    : Colors
-                                                        .green //kPrimaryColor,
-                                                ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Center(
-                                                child: doc['approve'] == false
-                                                    ? Text(
-                                                        "Your appointment with Dr. " +
-                                                            doc['doctor_name'] +
-                                                            " is Pending at  " +
-                                                            doc['date'] +
-                                                            " and  " +
-                                                            doc['time']
-                                                                .toString(),
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )
-                                                    : Text(
-                                                        " Your confirm appointment with Dr. " +
-                                                            doc['doctor_name'] +
-                                                            " is Confirmed at " +
-                                                            doc['date'] +
-                                                            " and  " +
-                                                            doc['time']
-                                                                .toString(),
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                              ),
-                                            ) // child widget, replace with your own
-                                            ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            }
-                          }),
-                    ),
-                  ),
-                  //*************************************
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _categorySection(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          child: _trDoctorsSection(),
-                        )
-                      ],
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: appointment
+                        .collection('pending')
+                        .where('pid', isEqualTo: loggedInUser.uid)
+                        .where('date', isEqualTo: today_date)
+                        .orderBy('time', descending: false)
+                        .snapshots(),
+                    builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        print("snapshot =" + snapshot.toString());
+                        return Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: Text("Appointment not Available"));
+                      } else {
+                        ub() {
+                          if (snapshot.data?.docs.length == 0) {
+                            return 0;
+                          } else if (snapshot.data?.docs.length == 1) {
+                            return 1;
+                          } else {
+                            return 2;
+                          }
+                        }
+
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          // shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: ub(),
+                          itemBuilder: (BuildContext context, int index) {
+                            final DocumentSnapshot doc =
+                            snapshot.data!.docs[index];
+                            return SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: double.infinity,
+                                      margin: EdgeInsets.all(3),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(8.0),
+                                          color: doc['approve'] == false
+                                              ? Colors.orangeAccent
+                                              : Colors
+                                              .green //kPrimaryColor,
+                                      ),
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(10.0),
+                                        child: Center(
+                                          child: doc['approve'] == false
+                                              ? Text(
+                                            "Your appointment with Dr. " +
+                                                doc['doctor_name'] +
+                                                " is Pending at  " +
+                                                doc['date'] +
+                                                " and  " +
+                                                doc['time']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight:
+                                                FontWeight
+                                                    .bold),
+                                          )
+                                              : Text(
+                                            " Your confirm appointment with Dr. " +
+                                                doc['doctor_name'] +
+                                                " is Confirmed at " +
+                                                doc['date'] +
+                                                " and  " +
+                                                doc['time']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight:
+                                                FontWeight
+                                                    .bold),
+                                          ),
+                                        ),
+                                      ) // child widget, replace with your own
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    }),
+              ),
+            ),
+            //*************************************
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _categorySection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: _trDoctorsSection(),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -448,14 +448,14 @@ class _HomePageState extends State<HomePage> {
   getExpenseItems(AsyncSnapshot<QuerySnapshot> snapshot, BuildContext context) {
     return snapshot.data!.docs
         .map((doc) => Container(
-            width: double.infinity,
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: kPrimaryColor,
-            ),
-            child: Center(
-                child: Text(
+        width: double.infinity,
+        margin: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          color: kPrimaryColor,
+        ),
+        child: Center(
+            child: Text(
               "Mr." +
                   loggedInUser.name.toString() +
                   " confirm appointmentpon with Dr." +
@@ -466,7 +466,7 @@ class _HomePageState extends State<HomePage> {
                   doc['time'].toString(),
               style: TextStyle(color: Colors.white),
             )) // child widget, replace with your own
-            ))
+    ))
         .toList();
   }
 
@@ -536,8 +536,8 @@ class _HomePageState extends State<HomePage> {
                       child: CategoryCell(category: _categories[index])),
                 );
               }
-              //  ,
-              ),
+            //  ,
+          ),
         ),
       ],
     );
@@ -624,39 +624,39 @@ class _HomePageState extends State<HomePage> {
       AsyncSnapshot<QuerySnapshot<Object?>> snapshot, BuildContext context) {
     return snapshot.data!.docs
         .map((doc) => TrdCell(
-              onTap: () {
-                if (doc['available'].toString() == false) {
-                  Fluttertoast.showToast(
-                      msg: "Dr. " +
-                          doc['name'] +
-                          " is not available...Visit later",
-                      textColor: Colors.white,
-                      backgroundColor: kPrimaryColor);
-                }
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailPage(
-                        uid: doc['uid'],
-                        name: doc['name'],
-                        email: doc['email'],
-                        address: doc['address'],
-                        experience: doc['experience'],
-                        specialist: doc['specialist'],
-                        profileImage: doc['profileImage'],
-                        description: doc['description'],
-                        phone: doc['phone'],
-                        available: doc['available'],
-                        doctor: _doctorName,
-                      ),
-                    ));
-              },
-              name: doc["name"].toString(),
-              email: doc["email"].toString(),
-              profileImage: doc['profileImage'],
-              rating: doc['rating'].toString(),
-              specialist: doc["specialist"].toString(),
-            ))
+      onTap: () {
+        if (doc['available'].toString() == false) {
+          Fluttertoast.showToast(
+              msg: "Dr. " +
+                  doc['name'] +
+                  " is not available...Visit later",
+              textColor: Colors.white,
+              backgroundColor: kPrimaryColor);
+        }
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailPage(
+                uid: doc['uid'],
+                name: doc['name'],
+                email: doc['email'],
+                address: doc['address'],
+                experience: doc['experience'],
+                specialist: doc['specialist'],
+                profileImage: doc['profileImage'],
+                description: doc['description'],
+                phone: doc['phone'],
+                available: doc['available'],
+                doctor: _doctorName,
+              ),
+            ));
+      },
+      name: doc["name"].toString(),
+      email: doc["email"].toString(),
+      profileImage: doc['profileImage'],
+      rating: doc['rating'].toString(),
+      specialist: doc["specialist"].toString(),
+    ))
         .toList();
   }
 
@@ -721,60 +721,60 @@ dialog(BuildContext context) => showDialog(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) => Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.27,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Doctor Rating',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      // buildRating(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: kPrimaryColor),
-                        child: Text(
-                          'Okay',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
+      shape:
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.27,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+              child: Column(
+                children: [
+                  Text(
+                    'Doctor Rating',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  // buildRating(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: kPrimaryColor),
+                    child: Text(
+                      'Okay',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
               ),
-              Positioned(
-                child: loggedInUser.profileImage == false
-                    ? CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/account1.png'),
-                        backgroundColor: Colors.transparent,
-                        radius: 30,
-                      )
-                    : CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(loggedInUser.profileImage),
-                        backgroundColor: Colors.transparent,
-                        radius: 30,
-                      ),
-              ),
-            ],
+            ),
           ),
-        ));
+          Positioned(
+            child: loggedInUser.profileImage == false
+                ? CircleAvatar(
+              backgroundImage:
+              AssetImage('assets/images/account1.png'),
+              backgroundColor: Colors.transparent,
+              radius: 30,
+            )
+                : CircleAvatar(
+              backgroundImage:
+              NetworkImage(loggedInUser.profileImage),
+              backgroundColor: Colors.transparent,
+              radius: 30,
+            ),
+          ),
+        ],
+      ),
+    ));
