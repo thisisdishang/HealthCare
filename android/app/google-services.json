@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "424428117958",
+    "firebase_url": "https://healthcare-3743a-default-rtdb.firebaseio.com",
+    "project_id": "healthcare-3743a",
+    "storage_bucket": "healthcare-3743a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424428117958:android:13b5369e3529b6d4f9dcc7",
+        "android_client_info": {
+          "package_name": "com.example.app21"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqIqbjEQk5fIgW75k8tyuR0MDwEIODPQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "424428117958-4ud3r7hrf5o9bdeirpageikaq17p3ceh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hospitalAppointment"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424428117958:android:2dd695db41c1ddd4f9dcc7",
+        "android_client_info": {
+          "package_name": "com.example.hospital_appointment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqIqbjEQk5fIgW75k8tyuR0MDwEIODPQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "424428117958-4ud3r7hrf5o9bdeirpageikaq17p3ceh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hospitalAppointment"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424428117958:android:d880f3946a9b6f89f9dcc7",
+        "android_client_info": {
+          "package_name": "com.example.medi21"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqIqbjEQk5fIgW75k8tyuR0MDwEIODPQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424428117958-4ar9qlhe48prou2pbq8gc3g7dp7mq03u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "424428117958-4ud3r7hrf5o9bdeirpageikaq17p3ceh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hospitalAppointment"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
