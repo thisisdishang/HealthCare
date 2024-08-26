@@ -43,7 +43,7 @@ class SplashViewState extends State<SplashView> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => login_page()));
+                  builder: (BuildContext context) => Loginas()));
           //  Navigator.pop(context);
           //  Duration(seconds: 2);
         });
@@ -58,12 +58,15 @@ class SplashViewState extends State<SplashView> {
       backgroundColor: Colors.white,
       body: Center(
           child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 200,
-          ),
-          Image.asset("assets/images/Splash.png", width: 250, height: 250),
+          // SizedBox(
+          //   height: 200,
+          // ),
+          Center(
+              child: Image.asset("assets/images/Splash.png",
+                  width: 250, height: 250)),
           Text(
             "HealthCare",
             style: TextStyle(
@@ -72,17 +75,17 @@ class SplashViewState extends State<SplashView> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
-            height: 230,
-          ),
-          Text(
-            "Powered By Rana Corporation®",
-            style: TextStyle(
-              fontSize: 16,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold
-            ),
-          )
+          // SizedBox(
+          //   height: 230,
+          //  ),
+          // Text(
+          //   "Powered By Rana Corporation®",
+          //   style: TextStyle(
+          //     fontSize: 16,
+          //     color: kPrimaryColor,
+          //     fontWeight: FontWeight.bold
+          //   ),
+          // ),
         ],
       )),
     );

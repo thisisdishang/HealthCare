@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:hospital_appointment/componets/text_field_container.dart';
 import 'package:hospital_appointment/widget/inputdecoration.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,32 +14,41 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:path/path.dart';
-
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
-import '../../utills/validate.dart';
 import '../../widget/Alert_Dialog.dart';
+import 'doctor_login.dart';
 
-class Registration extends StatefulWidget {
-  const Registration({Key? key}) : super(key: key);
+class DocRegistration extends StatefulWidget {
+  const DocRegistration({Key? key}) : super(key: key);
 
   @override
-  _RegistrationState createState() => _RegistrationState();
+  _DocRegistrationState createState() => _DocRegistrationState();
 }
 
-late UserCredential userCredential;
+late UserCredential userCredential1;
 
-class _RegistrationState extends State<Registration> {
-  /* CollectionReference patient =
-      FirebaseFirestore.instance.collection("patient");*/
-
-  //final _firestore = FirebaseFirestore.instance;
+class _DocRegistrationState extends State<DocRegistration> {
+  String dropdownvalue = 'Select Your Category';
+  var items = [
+    'Select Your Category',
+    'Neuro',
+    'Ear',
+    'Eyes',
+    'Hair',
+    'Kidney',
+    'Skin',
+    'Thyroid',
+    'Tooth',
+    'Ortho',
+    'Covid-19',
+  ];
 
   var t_name,
-      t_lname,
+      t_desc,
       t_address,
       t_email,
-      t_age,
+      t_exp,
       t_phone,
       t_password,
       tc_password;
@@ -57,6 +64,7 @@ class _RegistrationState extends State<Registration> {
   var c_data = false;
   var c_gender = false;
   var c_status = false;
+  var rating;
 
   DateTime selectedDate = DateTime.now();
 
@@ -66,9 +74,7 @@ class _RegistrationState extends State<Registration> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  var file;
-
-  // var val;
+  var file, file2;
 
   setSelectedgender(int val) {
     setState(() {
@@ -82,20 +88,6 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
-  /* List<Widget> createRadioListUsers() {
-    List<Widget> widgets = [];
-    for (User user in users) {
-      widgets.add(
-        RadioListTile(
-          value: user,
-          groupValue: user,
-          title: Text(user.gender),
-          onChanged: (value) {},
-        ),
-      );
-    }
-    return widgets;
-  }*/
   var result;
   var subscription;
   bool status = true;
@@ -115,25 +107,25 @@ class _RegistrationState extends State<Registration> {
 //     }
 //   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-   // getConnectivity();
-    // subscription = Connectivity()
-    //     .onConnectivityChanged
-    //     .listen((ConnectivityResult result) {
-    //   if (result == ConnectivityResult.none) {
-    //     setState(() {
-    //       status = false;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       status = true;
-    //     });
-    //   }
-    // } as void Function(List<ConnectivityResult> event)?);
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getConnectivity();
+  //   subscription = Connectivity()
+  //       .onConnectivityChanged
+  //       .listen((ConnectivityResult result) {
+  //     if (result == ConnectivityResult.none) {
+  //       setState(() {
+  //         status = false;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         status = true;
+  //       });
+  //     }
+  //   });
+  // }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
     result = await InternetConnectionChecker().hasConnection;
@@ -145,29 +137,23 @@ class _RegistrationState extends State<Registration> {
     return result;
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   //subscription.cancel();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     String? errorMessage;
 
-
-    /* String validateMobile(String phone) {
-      var patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-      RegExp regex = new RegExp(patttern);
-    /*  if (value.length == 0) {
-        return 'Please enter mobile number';
-      } else if (!regExp.hasMatch(value)) {
-        return 'Please enter valid mobile number';
-      }*/
-      return regex.hasMatch(phone);
-    }*/
+    bool isEmailValid(String email) {
+      var pattern =
+          r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+      RegExp regex = new RegExp(pattern);
+      return regex.hasMatch(email);
+    }
 
     var size = MediaQuery.of(context).size;
     var container_width = size.width * 0.9;
@@ -181,10 +167,7 @@ class _RegistrationState extends State<Registration> {
             child: Center(
               child: Container(
                 width: size.width * 1,
-                decoration: BoxDecoration(
-                    ),
                 child: Container(
-
                   child: Column(
                     children: [
                       Padding(
@@ -192,7 +175,7 @@ class _RegistrationState extends State<Registration> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            "Registration",
+                            "Doctor Registration",
                             style: TextStyle(
                                 fontSize: 32,
                                 color: Colors.black,
@@ -255,14 +238,13 @@ class _RegistrationState extends State<Registration> {
                       Container(
                         width: container_width,
                         child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.name,
                           cursorColor: kPrimaryColor,
-                          decoration:
-                              buildInputDecoration(Icons.person, "First Name"),
-                          //onChanged: (){},
+                          decoration: buildInputDecoration(
+                              Icons.person, "Doctor Full Name"),
                           validator: (var value) {
                             if (value!.isEmpty) {
-                              return "Enter Your First Name";
+                              return "Enter Your Name";
                             }
                             return null;
                           },
@@ -274,39 +256,16 @@ class _RegistrationState extends State<Registration> {
                           },
                         ),
                       ),
-                      Container(
-                        width: container_width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          cursorColor: kPrimaryColor,
-                          decoration:
-                              buildInputDecoration(Icons.person, "Last Name"),
-                          //onChanged: (){},
-                          validator: (var value) {
-                            if (value!.isEmpty) {
-                              return "Enter Your Last Name";
-                            }
-                            return null;
-                          },
-                          onSaved: (name) {
-                            t_lname = name.toString().trim();
-                          },
-                          onChanged: (var name) {
-                            t_lname = name.trim();
-                          },
-                        ),
-                      ),
                       // ************************************
                       // Address Field
                       //*************************************
                       Container(
                         width: container_width,
-                        //    margin: EdgeInsets.all(10),
                         child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.text,
                           cursorColor: kPrimaryColor,
-                          decoration: buildInputDecoration(
-                              Icons.add_location, "Address"),
+                          decoration: buildInputDecoration(Icons.add_location,
+                              "Hospital or Clinic Name & Address"),
                           onChanged: (address) {
                             t_address = address;
                           },
@@ -329,13 +288,19 @@ class _RegistrationState extends State<Registration> {
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
-                          decoration:
-                              buildInputDecoration(Icons.email, "Your Email "),
+                          decoration: buildInputDecoration(
+                              Icons.email, "Doctor Email "),
                           onChanged: (email) {
                             t_email = email.trim();
                             print("Email: " + t_email + ":");
                           },
-                          validator: (value) => TValidator.validateEmail(value),
+                          validator: (email) {
+                            if (isEmailValid(email!))
+                              return null;
+                            else {
+                              return 'Enter a valid email address';
+                            }
+                          },
                           onSaved: (var email) {
                             t_email = email.toString().trim();
                           },
@@ -346,7 +311,6 @@ class _RegistrationState extends State<Registration> {
                       //*************************************
                       Container(
                         width: container_width,
-                        //       margin: EdgeInsets.all(10),
                         child: IntlPhoneField(
                           cursorColor: kPrimaryColor,
                           style: TextStyle(fontSize: 16),
@@ -364,6 +328,7 @@ class _RegistrationState extends State<Registration> {
                           },
                         ),
                       ),
+
                       // ************************************
                       // Date of Birth Field
                       //*************************************
@@ -375,7 +340,7 @@ class _RegistrationState extends State<Registration> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "Date Of Birth   ",
+                                  "Date Of Birth: ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: kPrimaryColor),
@@ -383,14 +348,17 @@ class _RegistrationState extends State<Registration> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  //  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
-                                          ? Text(
-                                              "Select Date",
-                                              style: TextStyle(
-                                                  color: Colors.black54),
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20.0),
+                                              child: Text(
+                                                "Select Date",
+                                                style: TextStyle(
+                                                    color: Colors.black54),
+                                              ),
                                             )
                                           : Text(
                                               t_date,
@@ -408,7 +376,6 @@ class _RegistrationState extends State<Registration> {
                                               lastDate: DateTime.now());
 
                                           setState(() {
-                                            final now = DateTime.now();
                                             t_date = DateFormat('dd-MM-yyyy')
                                                 .format(mydate);
                                           });
@@ -423,37 +390,12 @@ class _RegistrationState extends State<Registration> {
                               ],
                             ),
                             c_data == true
-                                ? Text("*Select Data",
+                                ? Text("*Select Date",
                                     style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
-                        ),
-                      ),
-                      // ************************************
-                      // Age Field
-                      //*************************************
-                      Container(
-                        width: container_width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          cursorColor: kPrimaryColor,
-                          decoration:
-                              buildInputDecoration(Icons.accessibility, "Age"),
-                          //onChanged: (){},
-                          validator: (var value) {
-                            if (value!.isEmpty) {
-                              return "Enter Your Address";
-                            }
-                            return null;
-                          },
-                          onChanged: (age) {
-                            t_age = age;
-                          },
-                          onSaved: (var age) {
-                            t_age = age;
-                          },
                         ),
                       ),
                       // ************************************
@@ -520,7 +462,7 @@ class _RegistrationState extends State<Registration> {
                                   alignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Status:",
+                                      "Marital\nStatus:",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: kPrimaryColor),
@@ -553,6 +495,146 @@ class _RegistrationState extends State<Registration> {
                                         fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
+                        ),
+                      ),
+                      TextFieldContainer(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                ButtonBar(
+                                  alignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Category:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: kPrimaryColor),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: DropdownButton(
+                                        hint: Text('Select Your Category'),
+                                        value: dropdownvalue,
+
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: items.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            dropdownvalue = newValue!;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            c_status == true
+                                ? Text("*Select Category",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w400))
+                                : SizedBox(),
+                          ],
+                        ),
+                      ),
+                      TextFieldContainer(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: <Widget>[
+                                ButtonBar(
+                                  alignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Upload A Valid Proof:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: kPrimaryColor),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 40.0),
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: kPrimaryColor,
+                                              shape: StadiumBorder()),
+                                          onPressed: () async {
+                                            chooseImage2();
+                                          },
+                                          child: Text("Choose File")),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //*************************************
+                      Container(
+                        width: container_width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          cursorColor: kPrimaryColor,
+                          decoration: buildInputDecoration(
+                              Icons.access_time_rounded, "Experience"),
+                          //onChanged: (){},
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Experince";
+                            } else if (value.length > 2) {
+                              return "Experience must be in two digit";
+                            }
+                            return null;
+                          },
+                          onChanged: (exp) {
+                            t_exp = exp;
+                          },
+                          onSaved: (var exp) {
+                            t_exp = exp;
+                          },
+                        ),
+                      ),
+                      // ************************************
+
+                      Container(
+                        width: container_width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          cursorColor: kPrimaryColor,
+                          decoration: buildInputDecoration(
+                              Icons.accessibility, "Doctor Description"),
+                          //onChanged: (){},
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Description";
+                            }
+                            return null;
+                          },
+                          onSaved: (desc) {
+                            t_desc = desc.toString().trim();
+                          },
+                          onChanged: (var desc) {
+                            t_desc = desc.trim();
+                          },
                         ),
                       ),
 
@@ -609,7 +691,15 @@ class _RegistrationState extends State<Registration> {
                                 ),
                               ),
                               hintText: "Password"),
-                          validator: (value) => TValidator.validatePassword(value),
+                          validator: (value) {
+                            RegExp regex = new RegExp(r'^.{6,}$');
+                            if (value!.isEmpty) {
+                              return ("Password is required for login");
+                            }
+                            if (!regex.hasMatch(value)) {
+                              return ("Enter Valid Password(Min. 6 Character)");
+                            }
+                          },
                           onChanged: (password) {
                             t_password = password;
                           },
@@ -702,6 +792,12 @@ class _RegistrationState extends State<Registration> {
                                         horizontal: 40, vertical: 15),
                                     backgroundColor: kPrimaryColor),
                                 onPressed: () async {
+                                  if (file2 == null) {
+                                    Fluttertoast.showToast(
+                                        msg: "No File Chosen",
+                                        textColor: Colors.white,
+                                        backgroundColor: Colors.red);
+                                  }
                                   //  signUp(t_email.text,t_password.text);
                                   if (status == false) {
                                     showDialog(
@@ -715,7 +811,7 @@ class _RegistrationState extends State<Registration> {
                                         gender != null &&
                                         m_status != null) {
                                       try {
-                                        userCredential = await _auth
+                                        userCredential1 = await _auth
                                             .createUserWithEmailAndPassword(
                                           email: t_email!,
                                           password: t_password!,
@@ -744,26 +840,34 @@ class _RegistrationState extends State<Registration> {
                                         setState(() {});
                                       }
 
-                                      var url;
-
+                                      var url, url2;
                                       if (file != null) {
                                         url = await uploadImage();
                                         print("URL ===== " + url.toString());
+
+                                      }
+                                      if (file2 != null) {
+                                        url2 = await uploadImage2();
+                                        print("URL ===== " + url2.toString());
                                         //map['profileImage'] = url;
                                       }
 
                                       FirebaseFirestore firebaseFirestore =
                                           FirebaseFirestore.instance;
                                       firebaseFirestore
-                                          .collection('patient')
-                                          .doc(userCredential.user!.uid)
+                                          .collection('doctor')
+                                          .doc(userCredential1.user!.uid)
                                           .set({
-                                            'uid': userCredential.user!.uid,
+                                            'uid': userCredential1.user!.uid,
                                             'name': t_name,
-                                            'last name': t_lname,
+                                            'specialist': dropdownvalue,
+                                            'rating': '0',
+                                            'available': false,
+                                            'description': t_desc,
                                             'address': t_address,
-                                            'email': userCredential.user!.email,
-                                            'age': t_age,
+                                            'email':
+                                                userCredential1.user!.email,
+                                            'experience': t_exp,
                                             'dob': t_date,
                                             'password': t_password,
                                             'gender':
@@ -774,6 +878,8 @@ class _RegistrationState extends State<Registration> {
                                             'phone': phoneController,
                                             'profileImage':
                                                 url == null ? '' : url,
+                                            'proof': url2 == null ? '' : url2,
+                                            'valid': false
                                           })
                                           .then((value) =>
                                               Fluttertoast.showToast(
@@ -793,7 +899,7 @@ class _RegistrationState extends State<Registration> {
                                                   MaterialPageRoute<dynamic>(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          login_page()),
+                                                          doctor_page()),
                                                   (route) => false))
                                           .catchError((e) {
                                             print("+++++++++" + e);
@@ -847,6 +953,28 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
+  // Future<String> uploadImage() async {
+  //   TaskSnapshot taskSnapshot = await FirebaseStorage.instance
+  //       .ref()
+  //       .child("profile")
+  //       .child(
+  //       FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
+  //       .putFile(file);
+  //
+  //   return taskSnapshot.ref.getDownloadURL();
+  // }
+
+  Future<String> uploadImage2() async {
+    TaskSnapshot taskSnapshot = await FirebaseStorage.instance
+        .ref()
+        .child("proof")
+        .child(
+            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file2.path))
+        .putFile(file2);
+
+    return taskSnapshot.ref.getDownloadURL();
+  }
+
   Future<String> uploadImage() async {
     TaskSnapshot taskSnapshot = await FirebaseStorage.instance
         .ref()
@@ -863,130 +991,13 @@ class _RegistrationState extends State<Registration> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
-    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  }
 
-    file = File(xfile.path);
-    setState(() {});*/
+  chooseImage2() async {
+    XFile? xfile2 = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print("file " + xfile2!.path);
+    file2 = File(xfile2.path);
+    Fluttertoast.showToast(msg: "Chosen File:" + file2.path);
+    setState(() {});
   }
 }
-/*
-  void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore()})
-            .catchError((e) {
-         // Fluttertoast.showToast(msg: e!.message);
-        });
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "Your email address appears to be malformed.";
-            break;
-          case "wrong-password":
-            errorMessage = "Your password is wrong.";
-            break;
-          case "user-not-found":
-            errorMessage = "User with this email doesn't exist.";
-            break;
-          case "user-disabled":
-            errorMessage = "User with this email has been disabled.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Too many requests";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Signing in with Email and Password is not enabled.";
-            break;
-          default:
-            errorMessage = "An undefined Error happened.";
-        }
-        //Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
-      }
-    }
-  }
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-
-    UserModel userModel = UserModel();
-
-    // writing all the values
-    userModel.email = user!.email;
-    userModel.uid = user.uid;
-    userModel.name = t_name.text;
-    userModel.address = t_address.text;
-
-    await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap());
-  //  Fluttertoast.showToast(msg: "Account created successfully :) ");
-
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => login_page()),
-            (route) => false);
-  }*/
-/* static Future<bool?> signup(
-      {@required BuildContext? context,
-        @required String? name,
-        @required String? email,
-        @required String? phone,
-        @required String? password,
-        bool isTop = false}) async {
-    debugPrint("Start signup function");
-    bool? isSuccess = false;
-    DateTime todayDate = DateTime.now();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-    final CollectionReference _mainCollection = _fireStore.collection("patient");
-    UserCredential userCredential;
-
-    DocumentReference? documentId;
-    DocumentReference passwordToken =
-    _mainCollection.doc(documentId?.id);
-
-    try {
-      debugPrint("Start creating user to auth");
-      userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email!,
-        password: password!,
-      );
-
-      debugPrint("end creating user to auth");
-      if (userCredential.user != null) {
-        debugPrint("Start creating user to collection");
-        debugPrint("User crated successfully");
-        debugPrint("userCredential.user!.uid -- ${userCredential.user!.uid}");
-        DocumentReference documentReference = _mainCollection.doc(userCredential.user!.uid);
-
-        Map<String, dynamic> data = <String, dynamic>{
-          "userId": userCredential.user!.uid,
-          "email": userCredential.user?.email,
-          'name': t_name,
-          'address': t_address,
-          'email': t_email,
-          'age': t_age,
-          'dob': c_date,
-          'password': t_password
-        };
-
-
-        await documentReference.set(data).catchError((onError) {
-          debugPrint("error to set data to collection.");
-          isSuccess = false;
-        });
-        debugPrint("End creating user to Collection");
-      }
-    }  catch (e) {
-      debugPrint("Error --- $e");
-    }
-    return isSuccess;
-  }*/

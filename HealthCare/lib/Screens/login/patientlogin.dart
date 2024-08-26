@@ -89,41 +89,42 @@ class _login_pageState extends State<login_page> {
 
   var result;
   var subscription;
-  bool status = false;
+  bool status = true;
+//
+//   getConnectivity() async {
+//     var connectivityResult = await (Connectivity().checkConnectivity());
+//     if (connectivityResult == ConnectivityResult.mobile) {
+// // I am connected to a mobile network.
+//       status = true;
+//       print("Mobile Data Connected !");
+//     } else if (connectivityResult == ConnectivityResult.wifi) {
+//       print("Wifi Connected !");
+//       status = true;
+// // I am connected to a wifi network.
+//     } else {
+//       print("No Internet !");
+//     }
+//   }
 
-  getConnectivity() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-// I am connected to a mobile network.
-      status = true;
-      print("Mobile Data Connected !");
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      print("Wifi Connected !");
-      status = true;
-// I am connected to a wifi network.
-    } else {
-      print("No Internet !");
-    }
-  }
 
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
+    super.initState();//
+   // getConnectivity();
+    // subscription = Connectivity()
+    //     .onConnectivityChanged
+    //     .listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     setState(() {
+    //       status = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       status = true;
+    //     });
+    //   }
+    // } as void Function(List<ConnectivityResult> event)?);
   }
 
   Future<bool> getInternetUsingInternetConnectivity() async {

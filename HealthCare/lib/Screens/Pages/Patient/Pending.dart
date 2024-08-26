@@ -213,7 +213,8 @@ class _PendingState extends State<Pending> {
                                                 child: ElevatedButton(
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: Colors.red,
+                                                   // primary: Colors.red,
+                                                    backgroundColor: Colors.red,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -318,7 +319,8 @@ class alertdialog extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            backgroundColor: Colors.green,
+                            //primary: Colors.green,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(8), // <-- Radius
@@ -347,7 +349,8 @@ class alertdialog extends StatelessWidget {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              //primary: Colors.red,
+                              backgroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(8), // <-- Radius

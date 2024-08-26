@@ -4,10 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import '../../constants.dart';
-import '../../widget/Alert_Dialog.dart';
 import '../home/patient_home_page.dart';
-import 'Patient_registration.dart';
+import 'doctor_login.dart';
 
 class Loginas extends StatefulWidget {
   const Loginas({Key? key}) : super(key: key);
@@ -17,9 +15,6 @@ class Loginas extends StatefulWidget {
 }
 
 class _LoginasState extends State<Loginas> {
-  var _isObscure = false;
-
-  // var t_email, t_password;
   var user = FirebaseFirestore.instance.collection("patient").snapshots();
 
   var auth = FirebaseAuth.instance;
@@ -42,25 +37,25 @@ class _LoginasState extends State<Loginas> {
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getConnectivity();
+  //   subscription = Connectivity()
+  //       .onConnectivityChanged
+  //       .listen((ConnectivityResult result) {
+  //     if (result == ConnectivityResult.none) {
+  //       setState(() {
+  //         status = false;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         status = true;
+  //       });
+  //     }
+  //   });
+  // }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
     result = await InternetConnectionChecker().hasConnection;
@@ -75,8 +70,6 @@ class _LoginasState extends State<Loginas> {
   @override
   void dispose() {
     // TODO: implement dispose
-    // t_password.dispose();
-    // t_email.dispose();
     subscription.cancel();
     super.dispose();
   }
@@ -85,56 +78,38 @@ class _LoginasState extends State<Loginas> {
 
   @override
   Widget build(BuildContext context) {
-    bool isEmailValid(String email) {
-      var pattern =
-          r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-      RegExp regex = new RegExp(pattern);
-      return regex.hasMatch(email);
-    }
-
-    var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/1.jpeg",
+          Padding(
+            padding: const EdgeInsets.only(top: 140),
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/2.jpeg",
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
           ),
-          // SafeArea(
-          //   child: Align(
-          //     alignment: Alignment.topCenter,
-          //     child: Container(
-          //       alignment: Alignment.topLeft,
-          //       padding: EdgeInsets.only(top: 280.0, left: 25),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Text(
-          //             'HELLO',
-          //             style: TextStyle(
-          //                 color: Colors.black,
-          //                 fontSize: 50,
-          //                 fontWeight: FontWeight.w700),
-          //           ),
-          //           Text(
-          //             'Welcome to DocsApp!',
-          //             style: TextStyle(
-          //                 color: Colors.indigo[800],
-          //                 fontSize: 17,
-          //                 fontWeight: FontWeight.w400),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: Center(
+                  child: Text(
+                    "Select What You Are?",
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+            ),
+          ),
           SafeArea(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -158,7 +133,7 @@ class _LoginasState extends State<Loginas> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Sign in",
+                                "Doctor",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18.0,
@@ -169,12 +144,12 @@ class _LoginasState extends State<Loginas> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (contex) => login_page()));
+                                        builder: (contex) => doctor_page()));
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
-                                primary: Colors.deepPurple[600],
-                                onPrimary: Colors.deepPurple[600],
+                                backgroundColor: Colors.deepPurple[600],
+                                foregroundColor: Colors.deepPurple[600],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),
@@ -191,9 +166,9 @@ class _LoginasState extends State<Loginas> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Create an Account",
+                                "Patient",
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -202,12 +177,12 @@ class _LoginasState extends State<Loginas> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (contex) => Registration()));
+                                        builder: (contex) => login_page()));
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 2,
-                                primary: Colors.white,
-                                onPrimary: Colors.white,
+                                backgroundColor: Colors.deepPurple[600],
+                                foregroundColor: Colors.deepPurple[600],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),
@@ -217,30 +192,6 @@ class _LoginasState extends State<Loginas> {
                           padding: const EdgeInsets.all(16),
                           alignment: Alignment.center,
                         ),
-                        // Container(
-                        //   width: MediaQuery.of(context).size.width / 1.1,
-                        //   child: ButtonTheme(
-                        //     minWidth: double.infinity,
-                        //     height: 50.0,
-                        //     child: RaisedButton(
-                        //       color: Colors.indigo[800],
-                        //       child: Text(
-                        //         "Create an account",
-                        //         style: GoogleFonts.lato(
-                        //           color: Colors.white,
-                        //           fontSize: 18.0,
-                        //           fontWeight: FontWeight.bold,
-                        //         ),
-                        //       ),
-                        //       onPressed: () => _pushPage(context, Register()),
-                        //     ),
-                        //     shape: RoundedRectangleBorder(
-                        //       borderRadius: new BorderRadius.circular(25),
-                        //     ),
-                        //   ),
-                        //   padding: const EdgeInsets.all(16),
-                        //   alignment: Alignment.center,
-                        // ),
                       ],
                     ),
                   ),
@@ -254,12 +205,6 @@ class _LoginasState extends State<Loginas> {
         ],
       ),
     );
-
-    void _pushPage(BuildContext context, Widget page) {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (_) => page),
-      );
-    }
   }
 
   void sigin(var email, var password) async {
@@ -267,12 +212,12 @@ class _LoginasState extends State<Loginas> {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                print("Login Successful"),
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                ),
-              })
+        print("Login Successful"),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        ),
+      })
           .catchError((e) {
         print(e);
       });

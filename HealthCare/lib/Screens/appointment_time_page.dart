@@ -117,7 +117,8 @@ class _Appoin_timeState extends State<Appoin_time> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: kPrimaryColor,
+                       // primary: kPrimaryColor,
+                        backgroundColor: kPrimaryColor,
                         fixedSize: Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),

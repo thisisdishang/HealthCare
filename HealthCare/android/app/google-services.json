@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "103258888586",
-    "project_id": "healthcare-f6529",
-    "storage_bucket": "healthcare-f6529.appspot.com"
+    "project_number": "421488173832",
+    "project_id": "health-care-f42a8",
+    "storage_bucket": "health-care-f42a8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:103258888586:android:8841b2f47378d3500b9073",
+        "mobilesdk_app_id": "1:421488173832:android:3600be7dbc1e722e7e42bd",
         "android_client_info": {
           "package_name": "com.example.hospital_appointment"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "103258888586-mke3jn3pv423jjuucq56retfub4dfbv3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAnl6CmlLAo0LgZuOw3dVqSlxQWP7I7XkI"
+          "current_key": "AIzaSyDlJQCRnFfWvFCw-aaweCdRlJMD7QNbD4g"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "103258888586-mke3jn3pv423jjuucq56retfub4dfbv3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

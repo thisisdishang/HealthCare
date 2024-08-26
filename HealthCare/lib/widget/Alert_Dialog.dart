@@ -35,7 +35,8 @@ class AdvanceCustomAlert extends StatelessWidget {
                           child: Text("Okay", style: TextStyle(fontSize: 18)),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
+                         // primary: Colors.red,
+                          backgroundColor: Colors.red,
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(12), // <-- Radius

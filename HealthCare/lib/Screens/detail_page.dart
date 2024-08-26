@@ -531,7 +531,7 @@ class _DetailPageState extends State<DetailPage> {
                                                       )),
                                                   Row(
                                                       children: new List
-                                                              .generate(
+                                                          .generate(
                                                           5,
                                                           (index) => buildStar(
                                                               context,
@@ -729,7 +729,8 @@ class _DetailPageState extends State<DetailPage> {
                               padding: EdgeInsets.all(10),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFFFBB23),
+                                  //primary: Color(0xFFFFBB23),
+                                  backgroundColor: Color(0xFFFFBB23),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12)),
                                 ),
@@ -758,7 +759,8 @@ class _DetailPageState extends State<DetailPage> {
                                   horizontal: 16, vertical: 8),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: kPrimaryColor,
+                                  backgroundColor: kPrimaryColor,
+                                  //primary: kPrimaryColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.circular(12), // <-- Radius
@@ -836,7 +838,7 @@ class _DetailPageState extends State<DetailPage> {
     return AppBar(
       backgroundColor: kPrimaryColor,
       elevation: 0,
-      brightness: Brightness.dark,
+      //brightness: Brightness.dark,
       iconTheme: IconThemeData(color: Colors.white),
       leading: IconButton(
         icon: Icon(Icons.arrow_back, size: 25),
@@ -1065,7 +1067,9 @@ class _DetailPageState extends State<DetailPage> {
             actions: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.green, primary: Colors.white),
+                  foregroundColor: Colors.white, backgroundColor: Colors.green,
+                  //primary: Colors.white
+                ),
                 child: Text('OK'),
                 onPressed: () {
                   setState(() {

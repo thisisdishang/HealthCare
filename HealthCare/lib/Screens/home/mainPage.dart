@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> {
           status = true;
         });
       }
-    });
+    } as void Function(List<ConnectivityResult> event)? );
     loggedInUser = UserModel();
     FirebaseFirestore.instance
         .collection("patient")

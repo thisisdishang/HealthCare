@@ -1,16 +1,16 @@
 class Doctor {
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String type;
-  final double rating;
+  String? firstName;
+  String? lastName;
+  String? image;
+  String? type;
+  double? rating;
 
   Doctor({
-    required this.firstName,
-    required this.lastName,
-    required this.image,
-    required this.type,
-    required this.rating,
+    this.firstName,
+    this.lastName,
+    this.image,
+    this.type,
+    this.rating,
   });
 }
 
@@ -25,6 +25,8 @@ class DoctorModel {
   String? description;
   String? phone;
   String? rating;
+  var available;
+  var valid;
   var profileImage;
 
   DoctorModel({
@@ -38,6 +40,8 @@ class DoctorModel {
     this.description,
     this.phone,
     this.rating,
+    this.available,
+    this.valid,
     this.profileImage,
   });
 
@@ -55,6 +59,8 @@ class DoctorModel {
       phone: map['phone'],
       profileImage: map['profileImage'],
       rating: map['rating'],
+      available: map['available'],
+      valid: map['valid'],
     );
   }
 
@@ -72,6 +78,8 @@ class DoctorModel {
       'phone': phone,
       'profileImage': profileImage,
       'rating': rating,
+      'available': available,
+      'valid':valid,
     };
   }
 }

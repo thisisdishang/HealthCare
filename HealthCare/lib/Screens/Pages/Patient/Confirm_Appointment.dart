@@ -198,7 +198,8 @@ class _Confirm_AppointmentState extends State<Confirm_Appointment> {
                                                 child: ElevatedButton(
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: Colors.red,
+                                                    //primary: Colors.red,
+                                                        backgroundColor: Colors.red,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
