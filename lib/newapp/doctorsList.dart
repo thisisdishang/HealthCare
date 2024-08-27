@@ -41,7 +41,7 @@ class _DoctorsListState extends State<DoctorsList> {
                 controller: _textController,
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 20, top: 10, bottom: 10),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
@@ -63,22 +63,22 @@ class _DoctorsListState extends State<DoctorsList> {
                   ),
                   suffixIcon: _textController.text.length != 0
                       ? TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _textController.clear();
-                              _length = search.length;
-                            });
-                          },
-                          child: Icon(
-                            Icons.close_rounded,
-                            size: 20,
-                          ),
-                        )
+                    onPressed: () {
+                      setState(() {
+                        _textController.clear();
+                        _length = search.length;
+                      });
+                    },
+                    child: Icon(
+                      Icons.close_rounded,
+                      size: 20,
+                    ),
+                  )
                       : SizedBox(),
                 ),
                 onChanged: (String _searchKey) {
                   setState(
-                    () {
+                        () {
                       print('>>>' + _searchKey);
                       search = _searchKey;
                       _length = search.length;
@@ -100,36 +100,36 @@ class _DoctorsListState extends State<DoctorsList> {
         padding: EdgeInsets.all(10),
         child: _length == 0
             ? Center(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Disease()),
-                          );
-                          setState(() {
-                            _length = 1;
-                          });
-                        },
-                        child: Text(
-                          'Show All',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Image(image: AssetImage('assets/images/search-bg.png')),
-                    ],
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Disease()),
+                    );
+                    setState(() {
+                      _length = 1;
+                    });
+                  },
+                  child: Text(
+                    'Show All',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              )
+                Image(image: AssetImage('assets/images/search-bg.png')),
+              ],
+            ),
+          ),
+        )
             : SearchList(
-                searchKey: search,
-              ),
+          searchKey: search,
+        ),
       ),
     );
   }

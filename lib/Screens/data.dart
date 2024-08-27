@@ -4,7 +4,7 @@ import '../constants.dart';
 
 class Dataclass extends StatelessWidget {
   CollectionReference patient =
-      FirebaseFirestore.instance.collection("patient");
+  FirebaseFirestore.instance.collection("patient");
 
   @override
   Widget build(BuildContext context) {

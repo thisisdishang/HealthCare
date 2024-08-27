@@ -44,19 +44,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     // TODO: implement initState
     super.initState();
     getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
+    // subscription = Connectivity()
+    //     .onConnectivityChanged
+    //     .listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     setState(() {
+    //       status = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       status = true;
+    //     });
+    //   }
+    // } as void Function(List<ConnectivityResult> event)? );
   }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
@@ -109,12 +109,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Container(
                       child: Center(
                           child: Text(
-                        "Reset Password",
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: kPrimaryColor,
-                            fontWeight: FontWeight.bold),
-                      )),
+                            "Reset Password",
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -133,7 +133,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: kPrimaryColor,
                         decoration:
-                            buildInputDecoration(Icons.email, "Enter Your Email "),
+                        buildInputDecoration(Icons.email, "Enter Your Email "),
                         onChanged: (email) {
                           t_email = email.trim();
                         },

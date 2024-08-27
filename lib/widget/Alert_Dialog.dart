@@ -5,8 +5,9 @@ class AdvanceCustomAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Stack(
+          //overflow: Overflow.visible,
           alignment: Alignment.topCenter,
           children: [
             Container(
@@ -16,12 +17,12 @@ class AdvanceCustomAlert extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 15,
+                      height: 5,
                     ),
                     Text(
                       'Turn on Internet Connection.',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -34,10 +35,11 @@ class AdvanceCustomAlert extends StatelessWidget {
                           child: Text("Okay", style: TextStyle(fontSize: 18)),
                         ),
                         style: ElevatedButton.styleFrom(
+                          // primary: Colors.red,
                           backgroundColor: Colors.red,
                           shape: RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.circular(12), // <-- Radius
+                            BorderRadius.circular(12), // <-- Radius
                           ),
                         ),
                         onPressed: () {
@@ -48,11 +50,12 @@ class AdvanceCustomAlert extends StatelessWidget {
               ),
             ),
             Positioned(
-                top: -15,
+                top: -40,
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 50,
                   child: Image.asset('assets/images/network.png'),
+                  // Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
                 )),
           ],
         ));

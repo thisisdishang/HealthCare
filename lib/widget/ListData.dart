@@ -11,11 +11,11 @@ class ListData extends StatelessWidget {
 
   ListData(
       {required this.name,
-      required this.time,
-      required this.size,
-      required this.doc,
-      required this.b_text,
-      required this.ontap});
+        required this.time,
+        required this.size,
+        required this.doc,
+        required this.b_text,
+        required this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class ListData extends StatelessWidget {
               child: Image(
                   width: 75,
                   height: 75,
-                  image: AssetImage('assets/images/logo.jpg')),
+                  image: AssetImage('assets/images/logo1.jpg')),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -72,11 +72,11 @@ class ListData extends StatelessWidget {
                             ),
                             child: Center(
                                 child: Text(
-                              b_text,
-                              style:
+                                  b_text,
+                                  style:
                                   TextStyle(fontSize: 16, color: Colors.white),
-                            )) // child widget, replace with your own
-                            ),
+                                )) // child widget, replace with your own
+                        ),
                       ),
                     ),
                   ],

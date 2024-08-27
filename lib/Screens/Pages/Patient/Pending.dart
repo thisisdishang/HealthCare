@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../../componets/loadingindicator.dart';
 import '../../../constants.dart';
 import '../../../models/patient_data.dart';
@@ -45,6 +46,12 @@ class _PendingState extends State<Pending> {
     });
   }
 
+  // Stream<QuerySnapshot> pt = FirebaseFirestore.instance
+  //     .collection('pending')
+  //     .where("pid",
+  //         isEqualTo: /*user!.uid.toString()*/ "SZlIi4DRdyaFNT9G54ZMKBSCpzD2")
+  //     .snapshots();
+
   @override
   Widget build(BuildContext context) {
     var firebase = appointment
@@ -63,6 +70,14 @@ class _PendingState extends State<Pending> {
             stream: firebase,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              // final List ptdata = [];
+              // snapshot.data!.docs.map((DocumentSnapshot document) {
+              //   Map a = document.data() as Map<String, dynamic>;
+              //   ptdata.add(a);
+              //   print(ptdata);
+              //   print(pt);
+              // });
+
               if (!snapshot.hasData) {
                 return Container(
                     height: size.height * 1,
@@ -71,222 +86,184 @@ class _PendingState extends State<Pending> {
               } else {
                 return isLoading
                     ? Container(
-                        margin: EdgeInsets.only(top: size.height * 0.4),
-                        child: Center(
-                          child: Loading(),
-                        ),
-                      )
+                  margin: EdgeInsets.only(top: size.height * 0.4),
+                  child: Center(
+                    child: Loading(),
+                  ),
+                )
                     : SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final DocumentSnapshot doc =
-                                snapshot.data!.docs[index];
+                  physics: BouncingScrollPhysics(),
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final DocumentSnapshot doc =
+                      snapshot.data!.docs[index];
 
-                            return snapshot.hasError
-                                ? Center(child: Text("Doctor Not Available"))
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 6),
-                                    child: Container(
-                                      height: 122,
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0)),
+                      return snapshot.hasError
+                          ? Center(child: Text("Doctor Not Available"))
+                          : Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 6),
+                        child: Container(
+                          height: 120,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(8.0)),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(8.0),
+                                color: kPrimaryLightColor,
+                              ),
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                          width: double.infinity,
+                                          decoration:
+                                          BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets
+                                                .only(
+                                                left: 8.0,
+                                                top: 8.0),
+                                            child: Text(
+                                              "Dr." +
+                                                  doc['doctor_name'],
+                                              style: TextStyle(
+                                                  color:
+                                                  Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                      Container(
+                                          width: double.infinity,
+                                          margin: EdgeInsets.only(
+                                              top: 3),
+                                          decoration:
+                                          BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets
+                                                .only(
+                                                left: 8.0),
+                                            child: Text(
+                                              "Date: " +
+                                                  doc['date'],
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                      Container(
+                                          width: double.infinity,
+                                          decoration:
+                                          BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets
+                                                .only(
+                                                left: 8.0),
+                                            child: Text(
+                                              "Time: " +
+                                                  doc['time'],
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .black87,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w500),
+                                            ),
+                                          ) // child widget, replace with your own
+                                      ),
+                                    ],
+                                  ),
+                                  Positioned(
+                                    bottom: 5,
+                                    left: 8,
+                                    child: Text(
+                                      "Status : Pending",
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 16,
+                                          fontWeight:
+                                          FontWeight.w500),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 5,
+                                    right: 10,
+                                    child: ElevatedButton(
+                                      style:
+                                      ElevatedButton.styleFrom(
+                                        // primary: Colors.red,
+                                        backgroundColor: Colors.red,
+                                        shape:
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              12), // <-- Radius
                                         ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            color: kPrimaryLightColor,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                      width: double.infinity,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0,
-                                                                top: 8.0),
-                                                        child: Text(
-                                                          "Dr. " +
-                                                              doc['doctor_name'],
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ) // child widget, replace with your own
-                                                      ),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  Container(
-                                                      width: double.infinity,
-                                                      margin: EdgeInsets.only(
-                                                          top: 3),
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Text(
-                                                          "Date: " +
-                                                              doc['date'],
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black87,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ) // child widget, replace with your own
-                                                      ),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  Container(
-                                                      width: double.infinity,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Text(
-                                                          "Time: " +
-                                                              doc['time'],
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black87,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ) // child widget, replace with your own
-                                                      ),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  Container(
-                                                      width: double.infinity,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Text(
-                                                          "Status: Pending",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black87,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ) // child widget, replace with your own
-                                                      ),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  Container(
-                                                      width: double.infinity,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Text(
-                                                          "Payment: Success",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black87,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ) // child widget, replace with your own
-                                                      ),
-                                                ],
-                                              ),
-                                              Positioned(
-                                                bottom: 10,
-                                                right: 10,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.red,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12), // <-- Radius
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        barrierDismissible:
-                                                            false,
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            alertdialog(
-                                                                id: doc.id));
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 5, right: 5),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10.0,
-                                                              bottom: 10),
-                                                      child: Text(
-                                                        "Cancel ",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            barrierDismissible:
+                                            false,
+                                            builder: (BuildContext
+                                            context) =>
+                                                alertdialog(
+                                                    id: doc.id));
+                                        // alertdialog(doc.id);
+
+                                        //   Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            left: 5, right: 5),
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                              top: 10.0,
+                                              bottom: 10),
+                                          child: Text(
+                                            "Cancel ",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight:
+                                                FontWeight
+                                                    .w600),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  );
-                          },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       );
+                    },
+                  ),
+                );
               }
             }),
       ),
@@ -304,25 +281,28 @@ class alertdialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Stack(
+        //overflow: Overflow.visible,
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.32,
+            height: MediaQuery.of(context).size.height / 2.5,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 120, 10, 10),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 47.0),
-                    child: Text(
-                      'Are you sure you want to cancel this appointment?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                      textAlign: TextAlign.center,
+                  Text(
+                    'are you sure you want to cancel this Appointment?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
+                    textAlign: TextAlign.center,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //child: ),
+
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Row(
@@ -333,16 +313,17 @@ class alertdialog extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                           child: Text(
-                            'No',
+                            'NO',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.green,
+                            //primary: Colors.green,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
+                              BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -361,17 +342,18 @@ class alertdialog extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 19),
                               child: Text(
-                                'Yes',
+                                'YES',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
+                              //primary: Colors.red,
+                              backgroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
+                                BorderRadius.circular(8), // <-- Radius
                               ),
                             ),
                           ),
@@ -384,7 +366,7 @@ class alertdialog extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 5,
+              top: 15,
               child: CircleAvatar(
                 backgroundColor: Colors.grey,
                 radius: 50,

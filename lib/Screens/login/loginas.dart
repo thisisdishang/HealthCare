@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
 import 'package:hospital_appointment/Screens/login/patientlogin.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../home/patient_home_page.dart';
+import 'doctor_login.dart';
 
 class Loginas extends StatefulWidget {
   const Loginas({Key? key}) : super(key: key);
@@ -37,25 +37,25 @@ class _LoginasState extends State<Loginas> {
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getConnectivity();
+  //   subscription = Connectivity()
+  //       .onConnectivityChanged
+  //       .listen((ConnectivityResult result) {
+  //     if (result == ConnectivityResult.none) {
+  //       setState(() {
+  //         status = false;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         status = true;
+  //       });
+  //     }
+  //   });
+  // }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
     result = await InternetConnectionChecker().hasConnection;
@@ -101,13 +101,13 @@ class _LoginasState extends State<Loginas> {
               padding: const EdgeInsets.only(top: 80),
               child: Center(
                   child: Text(
-                "Select What You Are?",
-                style: TextStyle(
-                  fontSize: 23,
-                  color: Colors.deepPurple,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+                    "Select What You Are?",
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
             ),
           ),
           SafeArea(
@@ -212,12 +212,12 @@ class _LoginasState extends State<Loginas> {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                print("Login Successful"),
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                ),
-              })
+        print("Login Successful"),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        ),
+      })
           .catchError((e) {
         print(e);
       });

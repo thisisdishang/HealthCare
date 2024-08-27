@@ -1,3 +1,4 @@
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,10 +8,12 @@ import 'package:hospital_appointment/models/doctor.dart';
 import 'package:intl/intl.dart';
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
-import '../../newapp/searchList2.dart';
-import '../../widget/DoctorDrawer.dart';
+
 import 'dart:ui';
 import 'package:flutter/painting.dart';
+
+import '../../newapp/searchList2.dart';
+import '../../widget/DoctorDrawer.dart';
 
 late BuildContext context1;
 var uid;
@@ -30,7 +33,7 @@ class _DocHomePageState extends State<DocHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference firebase =
-      FirebaseFirestore.instance.collection("doctor");
+  FirebaseFirestore.instance.collection("doctor");
   var appointment = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   bool isLoading = true;
@@ -90,7 +93,7 @@ class _DocHomePageState extends State<DocHomePage> {
     int hour = int.parse(_currentHour);
 
     setState(
-      () {
+          () {
         if (hour >= 5 && hour < 12) {
           _message = 'Good Morning';
         } else if (hour >= 12 && hour <= 17) {
@@ -113,409 +116,409 @@ class _DocHomePageState extends State<DocHomePage> {
       ),
       body: loggedInUser.uid == null
           ? Center(
-              child: Text("Wait for few seconds"),
-            )
+        child: Text("Wait for few seconds"),
+      )
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 30,
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            // Hello
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(
+                "Hello \nDr. " +
+                    loggedInUser.name.toString() +
+                    "\n" +
+                    _message,
+                style: TextStyle(
+                  fontSize: 32,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            //Search patient
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 8, 20, 18),
+              child: TextFormField(
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  contentPadding:
+                  EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide.none,
                   ),
-                  // Hello
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 20, bottom: 10),
-                    child: Text(
-                      "Hello \nDr. " +
-                          loggedInUser.name.toString() +
-                          "\n" +
-                          _message,
-                      style: TextStyle(
-                        fontSize: 32,
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: 'Search Patient',
+                  hintStyle: TextStyle(
+                    color: Colors.black26,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  suffixIcon: Container(
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      iconSize: 20,
+                      splashRadius: 20,
+                      color: Colors.white,
+                      icon: Icon(Icons.search),
+                      onPressed: () {},
                     ),
                   ),
-                  //Search patient
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 8, 20, 18),
-                    child: TextFormField(
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        hintText: 'Search Patient',
-                        hintStyle: TextStyle(
-                          color: Colors.black26,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                        ),
-                        suffixIcon: Container(
-                          decoration: BoxDecoration(
-                            color: kPrimaryColor.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: IconButton(
-                            iconSize: 20,
-                            splashRadius: 20,
-                            color: Colors.white,
-                            icon: Icon(Icons.search),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      onFieldSubmitted: (String value) {
-                        value.length == 0
-                            ? Container()
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SearchList2(
-                                    searchKey: value,
-                                  ),
-                                ),
-                              );
-                      },
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 20, bottom: 10),
-                    child: Text(
-                      "Your's Today Appointments : ",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                ),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                onFieldSubmitted: (String value) {
+                  value.length == 0
+                      ? Container()
+                      : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchList2(
+                        searchKey: value,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  StreamBuilder<QuerySnapshot>(
-                      stream: firebase,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Container(
-                              height: size.height * 1,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 300),
-                                child: Center(
-                                    child: Text(
-                                        "You Do Not Have An Appointment today.")),
-                              ));
-                        } else {
-                          return isLoading
-                              ? Container(
-                                  margin:
-                                      EdgeInsets.only(top: size.height * 0.4),
-                                  child: Center(
-                                    child: Loading(),
-                                  ),
-                                )
-                              : SingleChildScrollView(
-                                  physics: BouncingScrollPhysics(),
-                                  child: ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      final DocumentSnapshot doc =
-                                          snapshot.data!.docs[index];
+                  );
+                },
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(
+                "Your's Today Appointments : ",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            StreamBuilder<QuerySnapshot>(
+                stream: firebase,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                        height: size.height * 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 300),
+                          child: Center(
+                              child: Text(
+                                  "You Do Not Have An Appointment today.")),
+                        ));
+                  } else {
+                    return isLoading
+                        ? Container(
+                      margin:
+                      EdgeInsets.only(top: size.height * 0.4),
+                      child: Center(
+                        child: Loading(),
+                      ),
+                    )
+                        : SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder:
+                            (BuildContext context, int index) {
+                          final DocumentSnapshot doc =
+                          snapshot.data!.docs[index];
 
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 3),
-                                        child: Container(
-                                          height: 145,
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(8.0)),
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            child: Container(
+                              height: 145,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0)),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(8.0),
+                                    color: kPrimaryLightColor,
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0,
+                                                    top: 8.0),
+                                                child: Text(
+                                                  'Name: ' +
+                                                      doc['name'],
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .bold),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              margin:
+                                              EdgeInsets.only(
+                                                  top: 3),
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0),
+                                                child: Text(
+                                                  "Date: " +
+                                                      doc['date'],
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black87,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0,
+                                                    top: 4),
+                                                child: Text(
+                                                  "Time: " +
+                                                      doc['time'],
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black87,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0,
+                                                    top: 4),
+                                                child: Text(
+                                                  "Status: Pending",
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black87,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0,
+                                                    top: 4),
+                                                child: Text(
+                                                  "Payment: Success",
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black87,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .only(
+                                                    left: 8.0,
+                                                    top: 4),
+                                                child: Text(
+                                                  "Details: " +
+                                                      doc['diseasedetails'],
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .black87,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                ),
+                                              ) // child widget, replace with your own
+                                          ),
+                                        ],
+                                      ),
+                                      Positioned(
+                                        top: 15,
+                                        right: 10,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton
+                                              .styleFrom(
+                                            backgroundColor:
+                                            kPrimarydark,
+                                            shape:
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  12), // <-- Radius
                                             ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: kPrimaryLightColor,
-                                              ),
-                                              child: Stack(
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0,
-                                                                    top: 8.0),
-                                                            child: Text(
-                                                              'Name: ' +
-                                                                  doc['name'],
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 3),
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0),
-                                                            child: Text(
-                                                              "Date: " +
-                                                                  doc['date'],
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0,
-                                                                    top: 4),
-                                                            child: Text(
-                                                              "Time: " +
-                                                                  doc['time'],
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0,
-                                                                    top: 4),
-                                                            child: Text(
-                                                              "Status: Pending",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0,
-                                                                    top: 4),
-                                                            child: Text(
-                                                              "Payment: Success",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 8.0,
-                                                                    top: 4),
-                                                            child: Text(
-                                                              "Details: " +
-                                                                  doc['diseasedetails'],
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                    ],
-                                                  ),
-                                                  Positioned(
-                                                    top: 15,
-                                                    right: 10,
-                                                    child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            kPrimarydark,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  12), // <-- Radius
-                                                        ),
-                                                      ),
-                                                      onPressed: () {
-                                                        showDialog(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false,
-                                                            builder: (BuildContext
-                                                                    context) =>
-                                                                confirm(
-                                                                    id: doc
-                                                                        .id));
-                                                      },
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 5, right: 5),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 10.0,
-                                                                  bottom: 10),
-                                                          child: Text(
-                                                            "✅",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .green,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    bottom: 15,
-                                                    right: 10,
-                                                    child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            kPrimarydark,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  12), // <-- Radius
-                                                        ),
-                                                      ),
-                                                      onPressed: () {
-                                                        showDialog(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false,
-                                                            builder: (BuildContext
-                                                                    context) =>
-                                                                alertdialog(
-                                                                    id: doc
-                                                                        .id));
-                                                      },
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 5, right: 5),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 10.0,
-                                                                  bottom: 10),
-                                                          child: Text(
-                                                            "❌",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                          ),
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                barrierDismissible:
+                                                false,
+                                                builder: (BuildContext
+                                                context) =>
+                                                    confirm(
+                                                        id: doc
+                                                            .id));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 5, right: 5),
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets
+                                                  .only(
+                                                  top: 10.0,
+                                                  bottom: 10),
+                                              child: Text(
+                                                "✅",
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .green,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
+                                      ),
+                                      Positioned(
+                                        bottom: 15,
+                                        right: 10,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton
+                                              .styleFrom(
+                                            backgroundColor:
+                                            kPrimarydark,
+                                            shape:
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  12), // <-- Radius
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                barrierDismissible:
+                                                false,
+                                                builder: (BuildContext
+                                                context) =>
+                                                    alertdialog(
+                                                        id: doc
+                                                            .id));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 5, right: 5),
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets
+                                                  .only(
+                                                  top: 10.0,
+                                                  bottom: 10),
+                                              child: Text(
+                                                "❌",
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                        }
-                      }),
-                ],
-              ),
-            ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                }),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -568,7 +571,7 @@ class alertdialog extends StatelessWidget {
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
+                              BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -597,7 +600,7 @@ class alertdialog extends StatelessWidget {
                               backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
+                                BorderRadius.circular(8), // <-- Radius
                               ),
                             ),
                           ),
@@ -673,7 +676,7 @@ class confirm extends StatelessWidget {
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(8), // <-- Radius
+                              BorderRadius.circular(8), // <-- Radius
                             ),
                           ),
                         ),
@@ -704,7 +707,7 @@ class confirm extends StatelessWidget {
                               backgroundColor: Colors.green,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
+                                BorderRadius.circular(8), // <-- Radius
                               ),
                             ),
                           ),

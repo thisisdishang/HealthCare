@@ -89,30 +89,30 @@ class _ChatScreen1State extends State<ChatScreen1> {
                   TextButton(
                     onPressed: messageText != null
                         ? () {
-                            messageTextController.clear();
-                            _firestore
-                                .collection('messages/' + widget.did + '/text')
-                                .add({
-                              'text': messageText,
-                              'sender': loggedInUser.uid,
-                              'date': DateTime.now(),
-                              'time': time,
-                              'receiver': loggedInUser.uid
-                            });
-                            setState(() {
-                              messageText = null;
-                            });
-                          }
+                      messageTextController.clear();
+                      _firestore
+                          .collection('messages/' + widget.did + '/text')
+                          .add({
+                        'text': messageText,
+                        'sender': loggedInUser.uid,
+                        'date': DateTime.now(),
+                        'time': time,
+                        'receiver': loggedInUser.uid
+                      });
+                      setState(() {
+                        messageText = null;
+                      });
+                    }
                         : null,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration:
-                            BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                        BoxDecoration(shape: BoxShape.circle, boxShadow: [
                           BoxShadow(
                               color: kPrimaryColor, //edite
                               blurRadius: 6 //edited
-                              )
+                          )
                         ]),
                         child: ClipOval(
                           child: Material(
@@ -201,9 +201,9 @@ class MessagesStream extends StatelessWidget {
 class MessageBubble extends StatelessWidget {
   MessageBubble(
       {required this.sender,
-      required this.text,
-      required this.isMe,
-      required this.time});
+        required this.text,
+        required this.isMe,
+        required this.time});
 
   final String sender;
   final String text;
@@ -216,19 +216,19 @@ class MessageBubble extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment:
-            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Material(
             borderRadius: isMe
                 ? BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0))
+                topLeft: Radius.circular(30.0),
+                bottomLeft: Radius.circular(30.0),
+                bottomRight: Radius.circular(30.0))
                 : BorderRadius.only(
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
             elevation: 5.0,
             color: isMe ? kPrimaryColor : Colors.white,
             child: ConstrainedBox(

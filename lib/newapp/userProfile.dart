@@ -81,19 +81,19 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     super.initState();
     getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
+    // subscription = Connectivity()
+    //     .onConnectivityChanged
+    //     .listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     setState(() {
+    //       status = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       status = true;
+    //     });
+    //   }
+    // } as void Function(List<ConnectivityResult> event)?);
     loggedInUser = UserModel();
     FirebaseFirestore.instance
         .collection("patient")

@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hospital_appointment/Screens/Pages/Patient/notvisitedpatient.dart';
-import 'package:hospital_appointment/Screens/Pages/Patient/visitedpatient.dart';
+
+
 import 'package:hospital_appointment/Screens/about.dart';
-import 'package:hospital_appointment/Screens/login/doctorlogin.dart';
+
 import 'package:hospital_appointment/constants.dart';
 import 'package:hospital_appointment/models/doctor.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Screens/Pages/Patient/novisitedpatient.dart';
+import '../Screens/Pages/Patient/vistedpatient.dart';
+import '../Screens/login/doctor_login.dart';
 import '../services/shared_preferences_service.dart';
 
 class DocDrawer extends StatefulWidget {
@@ -49,119 +52,119 @@ class _DocDrawerState extends State<DocDrawer> {
       child: isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView(
-              children: <Widget>[
-                UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        kPrimaryColor,
-                        kPrimaryLightColor,
-                      ],
-                    ),
-                  ),
-                  accountName: Text(loggedInUser.name.toString()),
-                  accountEmail: Text(loggedInUser.email.toString()),
-                  currentAccountPicture: Container(
-                    child: loggedInUser.profileImage == false
-                        ? CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/account.png'),
-                            radius: 50,
-                          )
-                        : CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(loggedInUser.profileImage),
-                            backgroundColor: Colors.grey,
-                          ),
-                  ),
-                ),
-
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Text(
-                      'Verified Doctor',
-                      textScaleFactor: 1.5,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                  trailing: Switch(
-                      activeColor: Colors.green,
-                      inactiveThumbColor: Colors.grey,
-                      value: loggedInUser.valid,
-                      onChanged: (check) {
-                        setState(() {
-                          loggedInUser.valid == check;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 1,
-                  width: 10,
-                  color: kPrimaryLightColor,
-                ),
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Text(
-                      'Available',
-                      textScaleFactor: 1.5,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                  trailing: Switch(
-                      activeColor: kPrimaryColor,
-                      value: loggedInUser.available,
-                      onChanged: (check) {
-                        FirebaseFirestore.instance
-                            .collection('doctor')
-                            .doc(user!.uid)
-                            .update({
-                          'available': check,
-                        });
-                        setState(() {
-                          loggedInUser.available = check;
-                        });
-                      }),
-                ),
-
-                Container(
-                  height: 1,
-                  width: 10,
-                  color: kPrimaryLightColor,
-                ),
-                CustomList(Icons.check, "Visited Patients", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => visited()));
-                }),
-                CustomList(Icons.timelapse, "Pending Patients", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => notvisited()));
-                }),
-                // Privacy Policy
-                CustomList(Icons.announcement, "Privacy Policy", () async {
-                  final Uri _url = Uri.parse(
-                      'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
-                  if (!await launchUrl(_url)) {
-                    throw 'Could not launch ';
-                  }
-                }),
-                CustomList(Icons.data_object, "About", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => about()));
-                }),
-                CustomList(Icons.lock, "Log Out", () async {
-                  await FirebaseAuth.instance.signOut();
-                  _prefService.removeCache("password");
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => doctor_page()));
-                }),
-              ],
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  kPrimaryColor,
+                  kPrimaryLightColor,
+                ],
+              ),
             ),
+            accountName: Text(loggedInUser.name.toString()),
+            accountEmail: Text(loggedInUser.email.toString()),
+            currentAccountPicture: Container(
+              child: loggedInUser.profileImage == false
+                  ? CircleAvatar(
+                backgroundImage:
+                AssetImage('assets/images/account.png'),
+                radius: 50,
+              )
+                  : CircleAvatar(
+                backgroundImage:
+                NetworkImage(loggedInUser.profileImage),
+                backgroundColor: Colors.grey,
+              ),
+            ),
+          ),
+
+          ListTile(
+            title: Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: Text(
+                'Verified Doctor',
+                textScaleFactor: 1.5,
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            trailing: Switch(
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.grey,
+                value: loggedInUser.valid,
+                onChanged: (check) {
+                  setState(() {
+                    loggedInUser.valid == check;
+                  });
+                }),
+          ),
+          Container(
+            height: 1,
+            width: 10,
+            color: kPrimaryLightColor,
+          ),
+          ListTile(
+            title: Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: Text(
+                'Available',
+                textScaleFactor: 1.5,
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            trailing: Switch(
+                activeColor: kPrimaryColor,
+                value: loggedInUser.available,
+                onChanged: (check) {
+                  FirebaseFirestore.instance
+                      .collection('doctor')
+                      .doc(user!.uid)
+                      .update({
+                    'available': check,
+                  });
+                  setState(() {
+                    loggedInUser.available = check;
+                  });
+                }),
+          ),
+
+          Container(
+            height: 1,
+            width: 10,
+            color: kPrimaryLightColor,
+          ),
+          CustomList(Icons.check, "Visited Patients", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => visited()));
+          }),
+          CustomList(Icons.timelapse, "Pending Patients", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => notvisited()));
+          }),
+          // Privacy Policy
+          CustomList(Icons.announcement, "Privacy Policy", () async {
+            final Uri _url = Uri.parse(
+                'https://nik-jordan-privacy-policy.blogspot.com/2021/08/privacy-policy.html');
+            if (!await launchUrl(_url)) {
+              throw 'Could not launch ';
+            }
+          }),
+          CustomList(Icons.data_object, "About", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => about()));
+          }),
+          CustomList(Icons.lock, "Log Out", () async {
+            await FirebaseAuth.instance.signOut();
+            _prefService.removeCache("password");
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => doctor_page()));
+          }),
+        ],
+      ),
     );
   }
 }

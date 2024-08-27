@@ -18,10 +18,10 @@ class ChatScreen extends StatefulWidget {
 
   ChatScreen(
       {required this.pid,
-      required this.p_name,
-      required this.last_name,
-      required this.did,
-      required this.phone});
+        required this.p_name,
+        required this.last_name,
+        required this.did,
+        required this.phone});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -82,96 +82,96 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: isLoading == true
           ? Center(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Loading(),
-                  ],
-                ),
-              ),
-            )
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Loading(),
+            ],
+          ),
+        ),
+      )
           : SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            MessagesStream(
+                widget.pid, widget.did /*loggedInUser.uid.toString()*/),
+            Container(
+              decoration: kMessageContainerDecoration,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  MessagesStream(
-                      widget.pid, widget.did /*loggedInUser.uid.toString()*/),
-                  Container(
-                    decoration: kMessageContainerDecoration,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            controller: messageTextController,
-                            onChanged: (value) {
-                              setState(() {});
-                              messageText = value;
-                            },
-                            decoration: kMessageTextFieldDecoration,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: messageText != null
-                              ? () {
-                                  print("Doctor Uid = " +
-                                      loggedInUser.uid.toString());
-                                  messageTextController.clear();
-                                  _firestore
-                                      .collection('messages/' +
-                                          widget
-                                              .did /*loggedInUser.uid.toString()*/ +
-                                          '/text')
-                                      .add({
-                                    'text': messageText,
-                                    'sender': widget.did, //loggedInUser.uid,
-                                    'date': DateTime.now(),
-                                    'time': time,
-                                    'receiver': widget.pid
-                                  });
-                                  setState(() {
-                                    messageText = null;
-                                  });
-                                }
-                              : null,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              //     width: MediaQuery.of(context).size.width*0.2,
+                  Expanded(
+                    child: TextField(
+                      controller: messageTextController,
+                      onChanged: (value) {
+                        setState(() {});
+                        messageText = value;
+                      },
+                      decoration: kMessageTextFieldDecoration,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: messageText != null
+                        ? () {
+                      print("Doctor Uid = " +
+                          loggedInUser.uid.toString());
+                      messageTextController.clear();
+                      _firestore
+                          .collection('messages/' +
+                          widget
+                              .did /*loggedInUser.uid.toString()*/ +
+                          '/text')
+                          .add({
+                        'text': messageText,
+                        'sender': widget.did, //loggedInUser.uid,
+                        'date': DateTime.now(),
+                        'time': time,
+                        'receiver': widget.pid
+                      });
+                      setState(() {
+                        messageText = null;
+                      });
+                    }
+                        : null,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        //     width: MediaQuery.of(context).size.width*0.2,
 
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: kPrimaryColor, //edite
-                                        blurRadius: 6 //edited
-                                        )
-                                  ]),
-                              child: ClipOval(
-                                child: Material(
-                                  color: kPrimaryColor, // Button color
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.send,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: kPrimaryColor, //edite
+                                  blurRadius: 6 //edited
+                              )
+                            ]),
+                        child: ClipOval(
+                          child: Material(
+                            color: kPrimaryColor, // Button color
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.send,
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -189,12 +189,12 @@ class MessagesStream extends StatelessWidget {
           .collection('messages')
           .doc(did)
           .collection('text')
-          // .where('sender', isEqualTo:  [Demo.user!.uid, pid])
+      // .where('sender', isEqualTo:  [Demo.user!.uid, pid])
           .where('receiver', isEqualTo: pid)
-          // .where('receiver', isEqualTo: [loggedInUser.uid, pid] )
-          //where('sender', isEqualTo: pid)
-          // .where('receiver', whereIn:  [loggedInUser.uid, pid])
-          // .where('receiver', isEqualTo: pid)
+      // .where('receiver', isEqualTo: [loggedInUser.uid, pid] )
+      //where('sender', isEqualTo: pid)
+      // .where('receiver', whereIn:  [loggedInUser.uid, pid])
+      // .where('receiver', isEqualTo: pid)
           .orderBy('date', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -240,9 +240,9 @@ class MessagesStream extends StatelessWidget {
 class MessageBubble extends StatelessWidget {
   MessageBubble(
       {required this.sender,
-      required this.text,
-      required this.isMe,
-      required this.time});
+        required this.text,
+        required this.isMe,
+        required this.time});
 
   final String sender;
   final String text;
@@ -255,19 +255,19 @@ class MessageBubble extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment:
-            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Material(
             borderRadius: isMe
                 ? BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0))
+                topLeft: Radius.circular(30.0),
+                bottomLeft: Radius.circular(30.0),
+                bottomRight: Radius.circular(30.0))
                 : BorderRadius.only(
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
             elevation: 5.0,
             color: isMe ? kPrimaryColor : Colors.white,
             child: ConstrainedBox(

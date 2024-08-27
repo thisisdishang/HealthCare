@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,8 +16,10 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:path/path.dart';
+
 import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
+import '../../utills/validate.dart';
 import '../../widget/Alert_Dialog.dart';
 
 class Registration extends StatefulWidget {
@@ -29,6 +32,11 @@ class Registration extends StatefulWidget {
 late UserCredential userCredential;
 
 class _RegistrationState extends State<Registration> {
+  /* CollectionReference patient =
+      FirebaseFirestore.instance.collection("patient");*/
+
+  //final _firestore = FirebaseFirestore.instance;
+
   var t_name,
       t_lname,
       t_address,
@@ -60,6 +68,8 @@ class _RegistrationState extends State<Registration> {
 
   var file;
 
+  // var val;
+
   setSelectedgender(int val) {
     setState(() {
       gender = val;
@@ -72,43 +82,57 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
+  /* List<Widget> createRadioListUsers() {
+    List<Widget> widgets = [];
+    for (User user in users) {
+      widgets.add(
+        RadioListTile(
+          value: user,
+          groupValue: user,
+          title: Text(user.gender),
+          onChanged: (value) {},
+        ),
+      );
+    }
+    return widgets;
+  }*/
   var result;
   var subscription;
-  bool status = false;
+  bool status = true;
 
-  getConnectivity() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-// I am connected to a mobile network.
-      status = true;
-      print("Mobile Data Connected !");
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      print("Wifi Connected !");
-      status = true;
-// I am connected to a wifi network.
-    } else {
-      print("No Internet !");
-    }
-  }
+//   getConnectivity() async {
+//     var connectivityResult = await (Connectivity().checkConnectivity());
+//     if (connectivityResult == ConnectivityResult.mobile) {
+// // I am connected to a mobile network.
+//       status = true;
+//       print("Mobile Data Connected !");
+//     } else if (connectivityResult == ConnectivityResult.wifi) {
+//       print("Wifi Connected !");
+//       status = true;
+// // I am connected to a wifi network.
+//     } else {
+//       print("No Internet !");
+//     }
+//   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getConnectivity();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        setState(() {
-          status = false;
-        });
-      } else {
-        setState(() {
-          status = true;
-        });
-      }
-    });
+    // getConnectivity();
+    // subscription = Connectivity()
+    //     .onConnectivityChanged
+    //     .listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     setState(() {
+    //       status = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       status = true;
+    //     });
+    //   }
+    // } as void Function(List<ConnectivityResult> event)?);
   }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
@@ -121,23 +145,29 @@ class _RegistrationState extends State<Registration> {
     return result;
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    subscription.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   //subscription.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+
     String? errorMessage;
 
-    bool isEmailValid(String email) {
-      var pattern =
-          r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-      RegExp regex = new RegExp(pattern);
-      return regex.hasMatch(email);
-    }
+
+    /* String validateMobile(String phone) {
+      var patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+      RegExp regex = new RegExp(patttern);
+    /*  if (value.length == 0) {
+        return 'Please enter mobile number';
+      } else if (!regExp.hasMatch(value)) {
+        return 'Please enter valid mobile number';
+      }*/
+      return regex.hasMatch(phone);
+    }*/
 
     var size = MediaQuery.of(context).size;
     var container_width = size.width * 0.9;
@@ -151,7 +181,10 @@ class _RegistrationState extends State<Registration> {
             child: Center(
               child: Container(
                 width: size.width * 1,
+                decoration: BoxDecoration(
+                ),
                 child: Container(
+
                   child: Column(
                     children: [
                       Padding(
@@ -159,12 +192,12 @@ class _RegistrationState extends State<Registration> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            "Patient Registration",
-                            style: TextStyle(
-                                fontSize: 32,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          )),
+                                "Registration",
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ),
                       ),
                       SizedBox(
@@ -187,19 +220,19 @@ class _RegistrationState extends State<Registration> {
                             padding: const EdgeInsets.all(3.0),
                             child: file == null
                                 ? InkWell(
-                                    onTap: () {
-                                      chooseImage();
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 50.00,
-                                      backgroundImage: AssetImage(
-                                          "assets/images/account.png"),
-                                    ),
-                                  )
+                              onTap: () {
+                                chooseImage();
+                              },
+                              child: CircleAvatar(
+                                radius: 50.00,
+                                backgroundImage: AssetImage(
+                                    "assets/images/account.png"),
+                              ),
+                            )
                                 : CircleAvatar(
-                                    radius: 50.00,
-                                    backgroundImage: FileImage(file),
-                                  ),
+                              radius: 50.00,
+                              backgroundImage: FileImage(file),
+                            ),
                           ),
                         ),
                         Positioned(
@@ -225,7 +258,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.person, "First Name"),
+                          buildInputDecoration(Icons.person, "First Name"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -247,7 +280,7 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.person, "Last Name"),
+                          buildInputDecoration(Icons.person, "Last Name"),
                           //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
@@ -268,6 +301,7 @@ class _RegistrationState extends State<Registration> {
                       //*************************************
                       Container(
                         width: container_width,
+                        //    margin: EdgeInsets.all(10),
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
@@ -296,18 +330,12 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.email, "Your Email "),
+                          buildInputDecoration(Icons.email, "Your Email "),
                           onChanged: (email) {
                             t_email = email.trim();
                             print("Email: " + t_email + ":");
                           },
-                          validator: (email) {
-                            if (isEmailValid(email!))
-                              return null;
-                            else {
-                              return 'Enter a valid email address';
-                            }
-                          },
+                          validator: (value) => TValidator.validateEmail(value),
                           onSaved: (var email) {
                             t_email = email.toString().trim();
                           },
@@ -326,7 +354,7 @@ class _RegistrationState extends State<Registration> {
                           textAlignVertical: TextAlignVertical.center,
                           dropdownTextStyle: TextStyle(fontSize: 16),
                           dropdownIcon:
-                              Icon(Icons.arrow_drop_down, color: kPrimaryColor),
+                          Icon(Icons.arrow_drop_down, color: kPrimaryColor),
                           decoration: buildInputDecoration(
                               Icons.phone, "Contact Number"),
                           initialCountryCode: 'IN',
@@ -336,7 +364,6 @@ class _RegistrationState extends State<Registration> {
                           },
                         ),
                       ),
-
                       // ************************************
                       // Date of Birth Field
                       //*************************************
@@ -348,32 +375,29 @@ class _RegistrationState extends State<Registration> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "Date Of Birth: ",
+                                  "Date Of Birth   ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: kPrimaryColor),
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
+                                  //  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Center(
                                       child: t_date == null
-                                          ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20.0),
-                                              child: Text(
-                                                "Select Date",
-                                                style: TextStyle(
-                                                    color: Colors.black54),
-                                              ),
-                                            )
+                                          ? Text(
+                                        "Select Date",
+                                        style: TextStyle(
+                                            color: Colors.black54),
+                                      )
                                           : Text(
-                                              t_date,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                        t_date,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     IconButton(
                                         onPressed: () async {
@@ -384,6 +408,7 @@ class _RegistrationState extends State<Registration> {
                                               lastDate: DateTime.now());
 
                                           setState(() {
+                                            final now = DateTime.now();
                                             t_date = DateFormat('dd-MM-yyyy')
                                                 .format(mydate);
                                           });
@@ -398,10 +423,10 @@ class _RegistrationState extends State<Registration> {
                               ],
                             ),
                             c_data == true
-                                ? Text("*Select Date",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                ? Text("*Select Data",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -415,10 +440,11 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.number,
                           cursorColor: kPrimaryColor,
                           decoration:
-                              buildInputDecoration(Icons.accessibility, "Age"),
+                          buildInputDecoration(Icons.accessibility, "Age"),
+                          //onChanged: (){},
                           validator: (var value) {
                             if (value!.isEmpty) {
-                              return "Enter Your Age";
+                              return "Enter Your Address";
                             }
                             return null;
                           },
@@ -471,9 +497,9 @@ class _RegistrationState extends State<Registration> {
                             ),
                             c_gender == true
                                 ? Text("*Select Gender",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -494,7 +520,7 @@ class _RegistrationState extends State<Registration> {
                                   alignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Marital\nStatus:",
+                                      "Status:",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: kPrimaryColor),
@@ -522,9 +548,9 @@ class _RegistrationState extends State<Registration> {
                             ),
                             c_status == true
                                 ? Text("*Select status",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w400))
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400))
                                 : SizedBox(),
                           ],
                         ),
@@ -569,11 +595,11 @@ class _RegistrationState extends State<Registration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -583,15 +609,7 @@ class _RegistrationState extends State<Registration> {
                                 ),
                               ),
                               hintText: "Password"),
-                          validator: (value) {
-                            RegExp regex = new RegExp(r'^.{6,}$');
-                            if (value!.isEmpty) {
-                              return ("Password is required for login");
-                            }
-                            if (!regex.hasMatch(value)) {
-                              return ("Enter Valid Password(Min. 6 Character)");
-                            }
-                          },
+                          validator: (value) => TValidator.validatePassword(value),
                           onChanged: (password) {
                             t_password = password;
                           },
@@ -636,11 +654,11 @@ class _RegistrationState extends State<Registration> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
                                   borderSide:
-                                      BorderSide(color: Colors.red, width: 2)),
+                                  BorderSide(color: Colors.red, width: 2)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide:
-                                    BorderSide(color: kPrimaryColor, width: 2),
+                                BorderSide(color: kPrimaryColor, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
@@ -684,6 +702,7 @@ class _RegistrationState extends State<Registration> {
                                         horizontal: 40, vertical: 15),
                                     backgroundColor: kPrimaryColor),
                                 onPressed: () async {
+                                  //  signUp(t_email.text,t_password.text);
                                   if (status == false) {
                                     showDialog(
                                         context: context,
@@ -706,11 +725,11 @@ class _RegistrationState extends State<Registration> {
                                         print("FirebaseError: " + error.code);
                                         if (error.code == "invalid-email") {
                                           errorMessage =
-                                              "Your email address appears to be malformed.";
+                                          "Your email address appears to be malformed.";
                                         } else if (error.code ==
                                             "user-disabled") {
                                           errorMessage =
-                                              "User with this email has been disabled.";
+                                          "User with this email has been disabled.";
                                         } else if (error.code ==
                                             "too-many-requests") {
                                           errorMessage = "Too many requests";
@@ -739,46 +758,46 @@ class _RegistrationState extends State<Registration> {
                                           .collection('patient')
                                           .doc(userCredential.user!.uid)
                                           .set({
-                                            'uid': userCredential.user!.uid,
-                                            'name': t_name,
-                                            'last name': t_lname,
-                                            'address': t_address,
-                                            'email': userCredential.user!.email,
-                                            'age': t_age,
-                                            'dob': t_date,
-                                            'password': t_password,
-                                            'gender':
-                                                gender == 1 ? "male" : "female",
-                                            'status': gender == 1
-                                                ? "unmarried"
-                                                : "married",
-                                            'phone': phoneController,
-                                            'profileImage':
-                                                url == null ? false : url,
-                                          })
+                                        'uid': userCredential.user!.uid,
+                                        'name': t_name,
+                                        'last name': t_lname,
+                                        'address': t_address,
+                                        'email': userCredential.user!.email,
+                                        'age': t_age,
+                                        'dob': t_date,
+                                        'password': t_password,
+                                        'gender':
+                                        gender == 1 ? "male" : "female",
+                                        'status': gender == 1
+                                            ? "unmarried"
+                                            : "married",
+                                        'phone': phoneController,
+                                        'profileImage':
+                                        url == null ? '' : url,
+                                      })
                                           .then((value) =>
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Registration Successful",
-                                                  toastLength:
-                                                      Toast.LENGTH_SHORT,
-                                                  gravity: ToastGravity.BOTTOM,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor:
-                                                      kPrimaryColor,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0))
+                                          Fluttertoast.showToast(
+                                              msg:
+                                              "Registration Successful",
+                                              toastLength:
+                                              Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor:
+                                              kPrimaryColor,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0))
                                           .then((value) => Navigator
-                                              .pushAndRemoveUntil<dynamic>(
-                                                  context,
-                                                  MaterialPageRoute<dynamic>(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          login_page()),
-                                                  (route) => false))
+                                          .pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext
+                                              context) =>
+                                                  login_page()),
+                                              (route) => false))
                                           .catchError((e) {
-                                            print("+++++++++" + e);
-                                          });
+                                        print("+++++++++" + e);
+                                      });
                                     } else {
                                       if (t_date == null) {
                                         c_data = true;
@@ -833,7 +852,7 @@ class _RegistrationState extends State<Registration> {
         .ref()
         .child("profile")
         .child(
-            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
+        FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
         .putFile(file);
 
     return taskSnapshot.ref.getDownloadURL();
@@ -844,5 +863,130 @@ class _RegistrationState extends State<Registration> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
+    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    file = File(xfile.path);
+    setState(() {});*/
   }
 }
+/*
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+         // Fluttertoast.showToast(msg: e!.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        //Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
+  }
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    // writing all the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.name = t_name.text;
+    userModel.address = t_address.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+  //  Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => login_page()),
+            (route) => false);
+  }*/
+/* static Future<bool?> signup(
+      {@required BuildContext? context,
+        @required String? name,
+        @required String? email,
+        @required String? phone,
+        @required String? password,
+        bool isTop = false}) async {
+    debugPrint("Start signup function");
+    bool? isSuccess = false;
+    DateTime todayDate = DateTime.now();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+    final CollectionReference _mainCollection = _fireStore.collection("patient");
+    UserCredential userCredential;
+
+    DocumentReference? documentId;
+    DocumentReference passwordToken =
+    _mainCollection.doc(documentId?.id);
+
+    try {
+      debugPrint("Start creating user to auth");
+      userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email!,
+        password: password!,
+      );
+
+      debugPrint("end creating user to auth");
+      if (userCredential.user != null) {
+        debugPrint("Start creating user to collection");
+        debugPrint("User crated successfully");
+        debugPrint("userCredential.user!.uid -- ${userCredential.user!.uid}");
+        DocumentReference documentReference = _mainCollection.doc(userCredential.user!.uid);
+
+        Map<String, dynamic> data = <String, dynamic>{
+          "userId": userCredential.user!.uid,
+          "email": userCredential.user?.email,
+          'name': t_name,
+          'address': t_address,
+          'email': t_email,
+          'age': t_age,
+          'dob': c_date,
+          'password': t_password
+        };
+
+
+        await documentReference.set(data).catchError((onError) {
+          debugPrint("error to set data to collection.");
+          isSuccess = false;
+        });
+        debugPrint("End creating user to Collection");
+      }
+    }  catch (e) {
+      debugPrint("Error --- $e");
+    }
+    return isSuccess;
+  }*/

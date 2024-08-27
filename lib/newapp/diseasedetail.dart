@@ -32,7 +32,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
               .collection('disease')
               .orderBy('Name')
               .startAt([widget.disease]).endAt(
-                  [widget.disease + '\uf8ff']).snapshots(),
+              [widget.disease + '\uf8ff']).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {

@@ -94,7 +94,7 @@ class _HDCellState extends State<HDCell> {
                 decoration: BoxDecoration(
                   color: kPrimarydark,
                   borderRadius:
-                      BorderRadius.only(topRight: Radius.circular(32)),
+                  BorderRadius.only(topRight: Radius.circular(32)),
                 ),
                 child: Icon(
                   Icons.arrow_forward,
@@ -113,14 +113,14 @@ class _HDCellState extends State<HDCell> {
                   backgroundColor: Colors.white,
                   child: widget.profileImage == false
                       ? CircleAvatar(
-                          radius: 60,
-                          backgroundImage:
-                              AssetImage('assets/images/account.png'),
-                        )
+                    radius: 60,
+                    backgroundImage:
+                    AssetImage('assets/images/account.png'),
+                  )
                       : CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(widget.profileImage),
-                        ),
+                    radius: 60,
+                    backgroundImage: NetworkImage(widget.profileImage),
+                  ),
                 ),
               ),
             ),

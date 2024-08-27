@@ -53,7 +53,7 @@ class _DiseaseState extends State<Disease> {
               crossAxisCount: 3,
               children: [
                 ...myImageAndCaption.map(
-                  (i) => GestureDetector(
+                      (i) => GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,

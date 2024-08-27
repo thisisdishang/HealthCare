@@ -139,7 +139,7 @@ class _aboutState extends State<about> {
                             onPressed: () {
                               launchUrl(emailLaunchUri);
                             },
-                            child: Text("SEND MAIL TO DEVELOPER"))),
+                            child: Text("SEND MAIL TO DEVELOPER",style: TextStyle(color: Colors.white),))),
                     SizedBox(
                       height: 5,
                     )
@@ -152,9 +152,9 @@ class _aboutState extends State<about> {
               padding: const EdgeInsets.only(bottom: 5.0),
               child: Center(
                   child: Text(
-                "© 2023 Rana Corporation, Inc.",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-              )),
+                    "© 2023 Rana Corporation, Inc.",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                  )),
             ),
           ],
         ),
@@ -165,7 +165,7 @@ class _aboutState extends State<about> {
   static encodeQueryParameters(Map<String, String> map) {
     return map.entries
         .map((MapEntry<String, String> e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
   }
 }

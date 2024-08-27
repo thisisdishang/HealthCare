@@ -80,12 +80,12 @@ class _TrdCellState extends State<TrdCell> {
             borderRadius: BorderRadius.circular(50),
             image: widget.profileImage == false
                 ? DecorationImage(
-                    image: AssetImage('assets/images/account.png'),
-                    fit: BoxFit.fill)
+                image: AssetImage('assets/images/account.png'),
+                fit: BoxFit.fill)
                 : DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(widget.profileImage),
-                  ),
+              fit: BoxFit.fill,
+              image: NetworkImage(widget.profileImage),
+            ),
           ),
         ),
       ),

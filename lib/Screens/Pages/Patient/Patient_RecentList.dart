@@ -68,21 +68,21 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
               child: DropdownButton2(
                 isExpanded: true,
                 value: dropdownValue,
-                icon: Icon(Icons.arrow_drop_down),
-                iconSize: 24,
-                iconEnabledColor: kPrimaryColor,
-                buttonHeight: 50,
-                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                buttonElevation: 2,
-                itemHeight: 40,
-                itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                dropdownMaxHeight: 200,
-                dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                scrollbarRadius: const Radius.circular(40),
-                scrollbarThickness: 6,
-                scrollbarAlwaysShow: true,
+                // icon: Icon(Icons.arrow_drop_down),
+                // iconSize: 24,
+                // iconEnabledColor: kPrimaryColor,
+                // buttonHeight: 50,
+                // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                // buttonElevation: 2,
+                // itemHeight: 40,
+                // itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                // dropdownMaxHeight: 200,
+                // dropdownDecoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(14),
+                // ),
+                // scrollbarRadius: const Radius.circular(40),
+                // scrollbarThickness: 6,
+                // scrollbarAlwaysShow: true,
                 style: TextStyle(color: Colors.black, fontSize: 18),
                 onChanged: (data) async {
                   setState(() {
@@ -119,12 +119,12 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
             ),
             t_date != null
                 ? Container(
-                    width: size.width * 1,
-                    margin: EdgeInsets.only(left: 38),
-                    child: Text(
-                      t_date,
-                      style: TextStyle(fontSize: 18),
-                    ))
+                width: size.width * 1,
+                margin: EdgeInsets.only(left: 38),
+                child: Text(
+                  t_date,
+                  style: TextStyle(fontSize: 18),
+                ))
                 : SizedBox(),
             Container(
               child: SingleChildScrollView(
@@ -146,216 +146,216 @@ class _Patient_RecentListState extends State<Patient_RecentList> {
                       } else {
                         return isLoading
                             ? Container(
-                                margin: EdgeInsets.only(top: size.height * 0.4),
-                                child: Center(
-                                  child: Loading(),
-                                ),
-                              )
+                          margin: EdgeInsets.only(top: size.height * 0.4),
+                          child: Center(
+                            child: Loading(),
+                          ),
+                        )
                             : SingleChildScrollView(
-                                physics: BouncingScrollPhysics(),
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final DocumentSnapshot doc =
-                                        snapshot.data!.docs[index];
+                          physics: BouncingScrollPhysics(),
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              final DocumentSnapshot doc =
+                              snapshot.data!.docs[index];
 
-                                    return Container(
-                                        width: double.infinity,
-                                        margin: EdgeInsets.all(3),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            color: doc['visited'] == false
-                                                ? Colors.orangeAccent
-                                                : Colors.green //kPrimaryColor,
+                              return Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(8.0),
+                                      color: doc['visited'] == false
+                                          ? Colors.orangeAccent
+                                          : Colors.green //kPrimaryColor,
+                                  ),
+                                  child: Center(
+                                    child: doc['visited'] == false
+                                        ? Padding(
+                                      padding:
+                                      const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .start,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Dr. " +
+                                                    doc['doctor_name'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              margin:
+                                              EdgeInsets.only(
+                                                  top: 3),
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Date: " +
+                                                    doc['date'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w500),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Time: " +
+                                                    doc['time'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w500),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "Status : Not Visited",
+                                              style: TextStyle(
+                                                  color:
+                                                  Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w500),
                                             ),
-                                        child: Center(
-                                          child: doc['visited'] == false
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Dr. " +
-                                                                doc['doctor_name'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 3),
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Date: " +
-                                                                doc['date'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Time: " +
-                                                                doc['time'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                        child: Text(
-                                                          "Status : Not Visited",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              : Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Dr. " +
-                                                                doc['doctor_name'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 3),
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Date: " +
-                                                                doc['date'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Text(
-                                                            "Time: " +
-                                                                doc['time'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ) // child widget, replace with your own
-                                                          ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
-                                                      Container(
-                                                        child: Text(
-                                                          "Status : Visited",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                        ) // child widget, replace with your own
-                                        );
-                                  },
-                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                        : Padding(
+                                      padding:
+                                      const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .start,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Dr. " +
+                                                    doc['doctor_name'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              margin:
+                                              EdgeInsets.only(
+                                                  top: 3),
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Date: " +
+                                                    doc['date'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w500),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                              width:
+                                              double.infinity,
+                                              decoration:
+                                              BoxDecoration(),
+                                              child: Text(
+                                                "Time: " +
+                                                    doc['time'],
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w500),
+                                              ) // child widget, replace with your own
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "Status : Visited",
+                                              style: TextStyle(
+                                                  color:
+                                                  Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w500),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ) // child widget, replace with your own
                               );
+                            },
+                          ),
+                        );
                       }
                     }),
               ),

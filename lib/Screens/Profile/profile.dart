@@ -79,6 +79,8 @@ class _Profile_pageState extends State<Profile_page> {
   @override
   void dispose() {
     // TODO: implement dispose
+    // t_password.dispose();
+    // t_email.dispose();
     subscription.cancel();
     super.dispose();
   }
@@ -99,7 +101,7 @@ class _Profile_pageState extends State<Profile_page> {
           status = true;
         });
       }
-    });
+    } as void Function(List<ConnectivityResult> event)? );
     loggedInUser = UserModel();
     FirebaseFirestore.instance
         .collection("patient")
@@ -118,7 +120,9 @@ class _Profile_pageState extends State<Profile_page> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     var margin_left = size.width * 0.07;
     var margin_top = size.width * 0.03;
     var margin_right = size.width * 0.07;
@@ -142,552 +146,620 @@ class _Profile_pageState extends State<Profile_page> {
         body: isLoading
             ? Loading()
             : SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                /*  Container(
                         margin: EdgeInsets.only(top: size.height * 0.01),
                         child: Center(
                           child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(width: 3, color: Colors.black12),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 3, color: Colors.black12),
+                            ),
+                            child:loggedInUser.profileImage== false?CircleAvatar(
+                              backgroundImage:AssetImage('assets/images/account.png'),
+                              radius: 50,
+                            ):Container(
+                              child: InkWell(
+                                onTap: () {
+                                  chooseImage();
+                                },
+                                child:file == null? CircleAvatar(
+                                  backgroundImage: NetworkImage(loggedInUser.profileImage),
+                                  backgroundColor: Colors.grey,
+                                  radius: 50,
+                                ) : CircleAvatar(
+                                  radius: 50.00,
+                                  backgroundImage: FileImage(file),
+                                ),
                               ),
-                              child: Stack(
-                                children: [
-                                  loggedInUser.profileImage == false
-                                      ? CircleAvatar(
-                                          backgroundImage: AssetImage(
-                                              'assets/images/account.png'),
-                                          radius: 50,
-                                        )
-                                      : Container(
-                                          child: InkWell(
-                                            onTap: () {
-                                              chooseImage();
-                                            },
-                                            child: file == null
-                                                ? CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                            loggedInUser
-                                                                .profileImage),
-                                                    backgroundColor:
-                                                        Colors.grey,
-                                                    radius: 50,
-                                                  )
-                                                : CircleAvatar(
-                                                    radius: 50.00,
-                                                    backgroundImage:
-                                                        FileImage(file),
-                                                  ),
-                                          ),
-                                        ),
-                                  Positioned(
-                                      right: 0,
-                                      bottom: 5,
-                                      child: Container(
-                                          width: 30,
-                                          height: 30,
-                                          child: Image.asset(
-                                            "assets/images/camera.png",
-                                          )))
-                                ],
-                              )),
+                            )
+                          ),
                         ),
+                      ),*/
+                Container(
+                  margin: EdgeInsets.only(top: size.height * 0.01),
+                  child: Center(
+                    child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border:
+                          Border.all(width: 3, color: Colors.black12),
+                        ),
+                        child: Stack(
+                          children: [
+                            loggedInUser.profileImage == false
+                                ? CircleAvatar(
+                              backgroundImage: AssetImage(
+                                  'assets/images/account.png'),
+                              radius: 50,
+                            )
+                                : Container(
+                              child: InkWell(
+                                onTap: () {
+                                  chooseImage();
+                                },
+                                child: file == null
+                                    ? CircleAvatar(
+                                  backgroundImage:
+                                  NetworkImage(
+                                      loggedInUser
+                                          .profileImage),
+                                  backgroundColor:
+                                  Colors.grey,
+                                  radius: 50,
+                                )
+                                    : CircleAvatar(
+                                  radius: 50.00,
+                                  backgroundImage:
+                                  FileImage(file),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                right: 0,
+                                bottom: 5,
+                                child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    child: Image.asset(
+                                      "assets/images/camera.png",
+                                    )))
+                          ],
+                        )),
+                  ),
+                ),
+                // ************************************
+                // Name Field
+                //*************************************
+                /*    Container(
+                        margin: EdgeInsets.only(top: size.height * 0.01),
+                        child: Text(
+                          "${loggedInUser.name.toString() + " " + loggedInUser.last_name.toString()}"
+                              .toString()
+                              .toUpperCase(),
+                          style: TextStyle(
+                              color: kPrimaryColor, fontWeight: FontWeight.bold),
+                        ),
+                      ),*/
+                Container(
+                  margin: EdgeInsets.only(
+                      left: size.width * 0.06, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "First Name",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
                       ),
-                      // ************************************
-                      // Name Field
-                      //*************************************
                       Container(
                         margin: EdgeInsets.only(
-                            left: size.width * 0.06, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "First Name",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                cursorColor: kPrimaryColor,
-                                initialValue: loggedInUser.name,
-                                onChanged: (name) {
-                                  name = name;
-                                },
-                                validator: (var value) {
-                                  if (value!.isEmpty) {
-                                    return "Enter Your First Name";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (var name) {
-                                  name = name;
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Last Name",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                cursorColor: kPrimaryColor,
-                                initialValue: loggedInUser.last_name,
-                                onChanged: (last_name) {
-                                  last_name = last_name;
-                                },
-                                validator: (var value) {
-                                  if (value!.isEmpty) {
-                                    return "Enter Your last name";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (var last_name) {
-                                  last_name = last_name;
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      // ************************************
-                      // Email Field
-                      //*************************************
-
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Email",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Text("${loggedInUser.email}".toString()),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      //*************************************
-                      //address
-                      //*************************************
-
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "address",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                cursorColor: kPrimaryColor,
-                                initialValue: loggedInUser.address,
-                                onChanged: (address) {
-                                  t_address = address;
-                                },
-                                validator: (var value) {
-                                  if (value!.isEmpty) {
-                                    return "Enter Your Address";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (var address) {
-                                  t_address = address;
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      // ************************************
-                      // Date of Birth Field
-                      //*************************************
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Date Of Birth",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                //  crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Center(
-                                    child: t_date == null
-                                        ? Text(
-                                            loggedInUser.dob.toString(),
-                                            style: TextStyle(
-                                                color: Colors.black54),
-                                          )
-                                        : Text(
-                                            t_date,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                  ),
-                                  IconButton(
-                                      onPressed: () async {
-                                        mydate = await showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(1950),
-                                            lastDate: DateTime.now());
-
-                                        setState(() {
-                                          t_date = DateFormat('dd-MM-yyyy')
-                                              .format(mydate);
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.calendar_today,
-                                        color: kPrimaryColor,
-                                        size: 16,
-                                      ))
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      // ************************************
-                      // Age Field
-                      //*************************************
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Age",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                cursorColor: kPrimaryColor,
-                                initialValue: loggedInUser.age,
-                                onChanged: (age) {
-                                  t_age = age;
-                                },
-                                validator: (var value) {
-                                  if (value!.isEmpty) {
-                                    return "Enter Your Age";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (var age) {
-                                  t_age = age;
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      // ************************************
-                      // Gender Field
-                      //*************************************
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Gender",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Text("${loggedInUser.gender}"),
-                            )
-                          ],
-                        ),
-                      ),
-                      // ************************************
-                      // Countact Number
-                      //*************************************
-
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Contact No",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)
-                                        //  <--- border radius here
-                                        ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: IntlPhoneField(
-                                cursorColor: kPrimaryColor,
-                                style: TextStyle(fontSize: 16),
-                                disableLengthCheck: false,
-                                initialValue: loggedInUser.phone?.substring(3),
-                                textAlignVertical: TextAlignVertical.center,
-                                dropdownTextStyle: TextStyle(fontSize: 16),
-                                dropdownIcon: Icon(Icons.arrow_drop_down,
-                                    color: kPrimaryColor),
-                                initialCountryCode: 'IN',
-                                onChanged: (phone) {
-                                  print(phone.completeNumber);
-                                  phoneController =
-                                      phone.completeNumber.toString();
-                                },
-                              ),
-                              //  child: Text("${loggedInUser.phone}"),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: margin_left, top: margin_top),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "status",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: margin_left, right: margin_right),
-                              width: boder,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black12),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0)
-                                    //                 <--- border radius here
-                                    ),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Text("${loggedInUser.status}"),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      Container(
-                        width: size.width * 0.8,
-                        margin: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 15),
-                            backgroundColor: kPrimaryColor,
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
                           ),
-                          onPressed: () async {
-                            var url;
-                            if (status == false) {
-                              showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (BuildContext context) =>
-                                      AdvanceCustomAlert());
-                            } else {
-                              showLoadingDialog(context: context);
-                              if (file != null) {
-                                url = await uploadImage();
-                                print("URL ===== " + url.toString());
-                              }
-                              if (_formKey.currentState!.validate()) {
-                                print("Done");
-                                FirebaseFirestore firebaseFirestore =
-                                    FirebaseFirestore.instance;
-                                firebaseFirestore
-                                    .collection('patient')
-                                    .doc(loggedInUser.uid)
-                                    .update({
-                                      'name': name == null
-                                          ? loggedInUser.name
-                                          : name,
-                                      'last name': last_name == null
-                                          ? loggedInUser.last_name
-                                          : last_name,
-                                      'address': t_address == null
-                                          ? loggedInUser.address
-                                          : t_address,
-                                      'age': t_age == null
-                                          ? loggedInUser.age
-                                          : t_age,
-                                      'dob': t_date == null
-                                          ? loggedInUser.dob
-                                          : t_date,
-                                      'phone': phoneController == null
-                                          ? loggedInUser.phone
-                                          : phoneController,
-                                      'profileImage': url == null
-                                          ? loggedInUser.profileImage
-                                          : url,
-                                    })
-                                    .then((value) => Loading())
-                                    .then((value) =>
-                                        Navigator.pushAndRemoveUntil<dynamic>(
-                                            context,
-                                            MaterialPageRoute<dynamic>(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        HomePage()),
-                                            (route) => false));
-                              }
-                            }
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          cursorColor: kPrimaryColor,
+                          initialValue: loggedInUser.name,
+                          onChanged: (name) {
+                            name = name;
                           },
-                          child: Text(
-                            'Update Profile',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your First Name";
+                            }
+                            return null;
+                          },
+                          onSaved: (var name) {
+                            name = name;
+                          },
                         ),
-                      ),
+                        //  child: Text("${loggedInUser.address}".toString()),
+                      )
                     ],
                   ),
                 ),
-              ),
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Last Name",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          cursorColor: kPrimaryColor,
+                          initialValue: loggedInUser.last_name,
+                          onChanged: (last_name) {
+                            last_name = last_name;
+                          },
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your last name";
+                            }
+                            return null;
+                          },
+                          onSaved: (var last_name) {
+                            last_name = last_name;
+                          },
+                        ),
+                        //  child: Text("${loggedInUser.address}".toString()),
+                      )
+                    ],
+                  ),
+                ),
+                // ************************************
+                // Email Field
+                //*************************************
+
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Email",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Text("${loggedInUser.email}".toString()),
+                      )
+                    ],
+                  ),
+                ),
+
+                //*************************************
+                //address
+                //*************************************
+
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "address",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          cursorColor: kPrimaryColor,
+                          initialValue: loggedInUser.address,
+                          onChanged: (address) {
+                            t_address = address;
+                          },
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Address";
+                            }
+                            return null;
+                          },
+                          onSaved: (var address) {
+                            t_address = address;
+                          },
+                        ),
+                        //  child: Text("${loggedInUser.address}".toString()),
+                      )
+                    ],
+                  ),
+                ),
+
+                /*   Container(
+                        width: container_width,
+                        //    margin: EdgeInsets.all(10),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          cursorColor: kPrimaryColor,
+                          decoration: buildInputDecoration(
+                              Icons.add_location, "Address"),
+                          onChanged: (address) {
+                            t_address = address;
+                          },
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Address";
+                            }
+                            return null;
+                          },
+                          onSaved: (var address) {
+                            t_address = address;
+                          },
+                        ),
+                      ),*/
+                // ************************************
+                // Date of Birth Field
+                //*************************************
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Date Of Birth",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          //  crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: t_date == null
+                                  ? Text(
+                                loggedInUser.dob.toString(),
+                                style: TextStyle(
+                                    color: Colors.black54),
+                              )
+                                  : Text(
+                                t_date,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  mydate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1950),
+                                      lastDate: DateTime.now());
+
+                                  setState(() {
+                                    final now = DateTime.now();
+                                    t_date = DateFormat('dd-MM-yyyy')
+                                        .format(mydate);
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.calendar_today,
+                                  color: kPrimaryColor,
+                                  size: 16,
+                                ))
+                          ],
+                        ),
+                        // child: Text("${loggedInUser.dob}".toString()),
+                      )
+                    ],
+                  ),
+                ),
+                // ************************************
+                // Age Field
+                //*************************************
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Age",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          cursorColor: kPrimaryColor,
+                          initialValue: loggedInUser.age,
+                          onChanged: (age) {
+                            t_age = age;
+                          },
+                          validator: (var value) {
+                            if (value!.isEmpty) {
+                              return "Enter Your Age";
+                            }
+                            return null;
+                          },
+                          onSaved: (var age) {
+                            t_age = age;
+                          },
+                        ),
+                        //   child: Text("${loggedInUser.age}".toString()),
+                      )
+                    ],
+                  ),
+                ),
+                // ************************************
+                // Gender Field
+                //*************************************
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Gender",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Text("${loggedInUser.gender}"),
+                      )
+                    ],
+                  ),
+                ),
+                // ************************************
+                // Countact Number
+                //*************************************
+
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Contact No",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(5.0)
+                            //  <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: IntlPhoneField(
+                          cursorColor: kPrimaryColor,
+                          style: TextStyle(fontSize: 16),
+                          disableLengthCheck: false,
+                          initialValue: loggedInUser.phone?.substring(3),
+                          textAlignVertical: TextAlignVertical.center,
+                          dropdownTextStyle: TextStyle(fontSize: 16),
+                          dropdownIcon: Icon(Icons.arrow_drop_down,
+                              color: kPrimaryColor),
+                          initialCountryCode: 'IN',
+                          onChanged: (phone) {
+                            print(phone.completeNumber);
+                            phoneController =
+                                phone.completeNumber.toString();
+                          },
+                        ),
+                        //  child: Text("${loggedInUser.phone}"),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin:
+                  EdgeInsets.only(left: margin_left, top: margin_top),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "status",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: margin_left, right: margin_right),
+                        width: boder,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5.0)
+                            //                 <--- border radius here
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Text("${loggedInUser.status}"),
+                      )
+                    ],
+                  ),
+                ),
+
+                Container(
+                  width: size.width * 0.8,
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      backgroundColor: kPrimaryColor,
+                    ),
+                    onPressed: () async {
+                      var url;
+                      if (status == false) {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) =>
+                                AdvanceCustomAlert());
+                      } else {
+                        showLoadingDialog(context: context);
+                        if (file != null) {
+                          url = await uploadImage();
+                          print("URL ===== " + url.toString());
+                          //map['profileImage'] = url;
+                        }
+                        if (_formKey.currentState!.validate()) {
+                          print("Done");
+                          FirebaseFirestore firebaseFirestore =
+                              FirebaseFirestore.instance;
+                          firebaseFirestore
+                              .collection('patient')
+                              .doc(loggedInUser.uid)
+                              .update({
+                            'name': name == null
+                                ? loggedInUser.name
+                                : name,
+                            'last name': last_name == null
+                                ? loggedInUser.last_name
+                                : last_name,
+                            'address': t_address == null
+                                ? loggedInUser.address
+                                : t_address,
+                            'age': t_age == null
+                                ? loggedInUser.age
+                                : t_age,
+                            'dob': t_date == null
+                                ? loggedInUser.dob
+                                : t_date,
+                            'phone': phoneController == null
+                                ? loggedInUser.phone
+                                : phoneController,
+                            'profileImage': url == null
+                                ? loggedInUser.profileImage
+                                : url,
+                          })
+                              .then((value) => Loading())
+                              .then((value) =>
+                              Navigator.pushAndRemoveUntil<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                      builder:
+                                          (BuildContext context) =>
+                                          HomePage()),
+                                      (route) => false));
+                        }
+                      }
+                    },
+                    child: Text(
+                      'Update Profile',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -697,16 +769,26 @@ class _Profile_pageState extends State<Profile_page> {
     print("file " + xfile!.path);
     file = File(xfile.path);
     setState(() {});
+    /*XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    file = File(xfile.path);
+    setState(() {});*/
   }
 
   updateProfile(BuildContext context) async {
     var url;
-
+    Map<String, dynamic> map = Map();
     if (file != null) {
       url = await uploadImage();
       print("URL ===== " + url.toString());
+      //map['profileImage'] = url;
     }
     print("uid =====" + user!.uid.toString());
+    /*await FirebaseFirestore.instance
+        .collection("patient")
+        .doc(user?.uid)
+        .set({'profileImage': url});
+    Navigator.pop(context);*/
   }
 
   Future<String> uploadImage() async {
@@ -714,7 +796,7 @@ class _Profile_pageState extends State<Profile_page> {
         .ref()
         .child("profile")
         .child(
-            FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
+        FirebaseAuth.instance.currentUser!.uid + "_" + basename(file.path))
         .putFile(file);
 
     return taskSnapshot.ref.getDownloadURL();

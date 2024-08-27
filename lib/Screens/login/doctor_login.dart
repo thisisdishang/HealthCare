@@ -1,10 +1,11 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hospital_appointment/Screens/home/doctor_home_page.dart';
+
 import 'package:hospital_appointment/Screens/login/doctor_registration.dart';
 import 'package:hospital_appointment/widget/inputdecoration.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -12,6 +13,7 @@ import '../../componets/loadingindicator.dart';
 import '../../constants.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../widget/Alert_Dialog.dart';
+import '../home/doctor_home_page.dart';
 import 'ForgetPassword.dart';
 
 class doctor_page extends StatefulWidget {
@@ -35,7 +37,7 @@ class _doctor_pageState extends State<doctor_page> {
   var result;
   var subscription;
   bool status = true;
-
+//
 //   getConnectivity() async {
 //     var connectivityResult = await (Connectivity().checkConnectivity());
 //     if (connectivityResult == ConnectivityResult.mobile) {
@@ -51,25 +53,25 @@ class _doctor_pageState extends State<doctor_page> {
 //     }
 //   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // getConnectivity();
-    // subscription = Connectivity()
-    //     .onConnectivityChanged
-    //     .listen((ConnectivityResult result) {
-    //   if (result == ConnectivityResult.none) {
-    //     setState(() {
-    //       status = false;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       status = true;
-    //     });
-    //   }
-    // });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getConnectivity();
+  //   subscription = Connectivity()
+  //       .onConnectivityChanged
+  //       .listen((ConnectivityResult result) {
+  //     if (result == ConnectivityResult.none) {
+  //       setState(() {
+  //         status = false;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         status = true;
+  //       });
+  //     }
+  //   });
+  // }
 
   Future<bool> getInternetUsingInternetConnectivity() async {
     result = await InternetConnectionChecker().hasConnection;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "421488173832",
+    "project_id": "health-care-f42a8",
+    "storage_bucket": "health-care-f42a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421488173832:android:3600be7dbc1e722e7e42bd",
+        "android_client_info": {
+          "package_name": "com.example.hospital_appointment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlJQCRnFfWvFCw-aaweCdRlJMD7QNbD4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
