@@ -1,0 +1,2 @@
+C:/Users/Pratham/Desktop/HealthCare/android/app/.cxx/Debug/582b5u29/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Pratham/Desktop/HealthCare/android/app/.cxx/Debug/582b5u29/x86_64/CMakeFiles/rebuild_cache.dir
