@@ -75,17 +75,17 @@ class SplashViewState extends State<SplashView> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // SizedBox(
-              //   height: 230,
-              //  ),
-              // Text(
-              //   "Powered By Rana Corporation®",
-              //   style: TextStyle(
-              //     fontSize: 16,
-              //     color: kPrimaryColor,
-              //     fontWeight: FontWeight.bold
-              //   ),
-              // ),
+              SizedBox(
+                height: 230,
+               ),
+              Text(
+                "Powered By Rana Corporation®",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
             ],
           )),
     );
